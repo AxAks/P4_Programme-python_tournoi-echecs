@@ -1,25 +1,29 @@
+# coding=utf-8
+
 from datetime import date
 from typing import Union
 from enum import Enum
+import re
+import json
 
 
 class Player:
     """
-    blabla docstring
+    This is the class for the Python Object: Player
     """
     class Gender(Enum):
         """
-        Intermediate class for gender : only accept the strings "Male" and "Female"
+        Intermediate class for the Player's gender : only accept the strings "Male" and "Female"
         """
         MALE = "Male"
         FEMALE = "Female"
 
-    def __init__(self, last_name: str, first_name: str, birthdate: str, gender: Gender, rank: int):
+    def __init__(self, last_name: str, first_name: str, birthdate: str, gender: Gender, ranking: int):
         self.last_name = last_name
         self.first_name = first_name
         self.birthdate = birthdate
         self.gender = gender
-        self.rank = rank
+        self.ranking = ranking
 
     @property
     def last_name(self) -> str:
@@ -27,8 +31,19 @@ class Player:
 
     @last_name.setter
     def last_name(self, value: str):
-        self.__last_name = value.title()
-
+        """
+        Verification of entered characters for last name using regex
+        ASCII table and a few special characters
+        The list of authorized characters is to be completed !
+        :param value:
+        :return:
+        """
+        #  à factoriser ? : doublon avec first_name
+        authorized_characters = re.compile("^[A-Za-z\ -]+$")
+        if re.match(authorized_characters, value):
+            self.__last_name = value.title()
+        else:
+            raise Exception("Last name contains not allowed characters")
 
     @property
     def first_name(self) -> str:
@@ -36,8 +51,19 @@ class Player:
 
     @first_name.setter
     def first_name(self, value: str):
-        self.__first_name = value.title()
-
+        """
+        Verification of entered characters for first name using regex
+        ASCII table and a few special characters
+        The list of authorized characters is to be completed !
+        :param value:
+        :return:
+        """
+        #  à factoriser ? : doublon avec last_name
+        authorized_characters = re.compile("^[A-Za-z\ -]+$")
+        if re.match(authorized_characters, value):
+            self.__first_name = value.title()
+        else:
+            raise Exception("First name contains not allowed characters")
 
     @property
     def gender(self) -> Gender:
@@ -45,7 +71,7 @@ class Player:
 
     @gender.setter
     def gender(self, value: Gender):
-        self.__gender = value()
+        self.__gender = value.title()
 
 
     @property
@@ -55,25 +81,33 @@ class Player:
     @first_name.setter
     def birthdate(self, value: Union[str, date]):
         if date.now - value > 18:
-            self.__birthdate = value()
+            self.__birthdate = value
 
 
     @property
-    def rank(self) -> int:
-        return self.__rank
+    def ranking(self) -> int:
+        return self.__ranking
 
-    @rank.setter
-    def rank(self, value: int):
+    @ranking.setter
+    def ranking(self, value: int):
         if type(value) == int:
             if value > 0:
-                self.__rank = value
+                self.__ranking = value
             else:
                 raise Exception("Rank must be positive")
         else:
             raise Exception("Rank must be an integer")
 
 
+    def serialize_player(self):
+        """
+        This method convert a python objet Player into a dictionary
+        """
+
+
 """
+# à supprimer c'etait un test !
+
 player1 = Player('richard', 'Bor', 4, '01/03/1982')
 
 print(player1.first_name)
