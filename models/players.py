@@ -39,7 +39,7 @@ class Player:
         :return:
         """
         #  à factoriser ? : doublon avec first_name
-        authorized_characters = re.compile("^[A-Za-z\ -]+$")
+        authorized_characters = re.compile("^[A-ZÉÈÇÀa-zéèçà\ -]+$")
         if re.match(authorized_characters, value):
             self.__last_name = value.title()
         else:
