@@ -152,14 +152,17 @@ players = [player1, player2, player3, player4, player5, player6, player7, player
 
 
 def serialize_players(players):
-    serialized_players = [PlayerEncoder().encode(player) for player in players]
+    serialized_players = [PlayerEncoder(player).default(player) for player in players]
     [print(serialized_player) for serialized_player in serialized_players]
 
 
 def serialize_one_player(player):
-    serialized_player = PlayerEncoder(player)
+    serialized_player = PlayerEncoder(player).default(player)
     print(serialized_player)
 
+
+serialize_one_player(player1)
+print("---")
 serialize_players(players)
 
 """
