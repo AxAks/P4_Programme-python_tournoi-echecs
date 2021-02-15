@@ -1,24 +1,23 @@
 # coding=utf-8
 
+import re
+import json
+
 from datetime import date
 from typing import Union
 from enum import Enum
-import re
-import json
+
+from constants import MALE, FEMALE
 
 
 class Player:
     """
     This is the class for the Python Object: Player
+    Gender is an sub-class for the Player's gender : only accept the strings "Male" and "Female".
     """
-    class Gender(Enum):
-        """
-        Intermediate class for the Player's gender : only accept the strings "Male" and "Female"
-        """
-        MALE = "Male"
-        FEMALE = "Female"
+    Gender = Enum(MALE, FEMALE)
 
-    def __init__(self, last_name: str, first_name: str, birthdate: str, gender: Gender, ranking: int):
+    def __init__(self, last_name: str, first_name: str, birthdate: date, gender: Gender, ranking: int):
         self.last_name = last_name
         self.first_name = first_name
         self.birthdate = birthdate
@@ -73,16 +72,16 @@ class Player:
     def gender(self, value: Gender):
         self.__gender = value.title()
 
-
     @property
     def birthdate(self) -> date:
         return self.__birthdate
 
-    @first_name.setter
-    def birthdate(self, value: Union[str, date]):
+    @birthdate.setter
+    def birthdate(self, value: date):
         if date.now - value > 18:
             self.__birthdate = value
-
+        else:
+            raise Exception("Player must be over 18")
 
     @property
     def ranking(self) -> int:
@@ -98,10 +97,10 @@ class Player:
         else:
             raise Exception("Rank must be an integer")
 
-
     def serialize_player(self):
         """
-        This method convert a python objet Player into a dictionary
+        This method convert a python objet Player into a JSon dictionary
+        in order to save it to the database
         """
 
 
