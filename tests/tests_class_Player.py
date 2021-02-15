@@ -34,23 +34,39 @@ def test_serialize_one_player(player: dict):
     print(PlayerEncoder(player).serialize_one_player(player))
 
 
-def test_save_serialized_player(player: dict):
-    PlayerEncoder(player).save_serialized_player(player)
+def test_dump_serialized_player(player: dict):
+    print(PlayerEncoder(player).dump_serialized_player(player))
 
 
-def test_serialize_players(players : list):
+def test_save_serialized_player_to_file(player: dict):
+    PlayerEncoder(player).save_serialized_player_to_file(player)
+
+
+def test_serialize_players(players: list):
     print(PlayerEncoder(players).serialize_players(players))
 
 
-def test_save_list_of_serialized_players(players: list):
-    PlayerEncoder(players).save_list_of_serialized_players(players)
+def test_dump_list_of_serialized_players(players: list):
+    print(PlayerEncoder(players).dump_list_of_serialized_players(players))
+
+
+def test_save_list_of_serialized_players_to_file(players: list):
+    PlayerEncoder(players).save_list_of_serialized_players_to_file(players)
 
 
 test_serialize_one_player(player2)
-test_save_serialized_player(player2)
+test_dump_serialized_player(player2)
+test_save_serialized_player_to_file(player2)
 test_serialize_players(players)
-test_save_list_of_serialized_players(players)
-
+test_dump_list_of_serialized_players(players)
+test_save_list_of_serialized_players_to_file(players)
 
 # Tests Deserialization
 # (...)
+
+
+def test_load_player(input_file):
+    PlayerDecoder.load_player(input_file)
+
+
+print(test_load_player(input_file='serialized_player.json'))

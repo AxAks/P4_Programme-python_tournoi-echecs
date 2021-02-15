@@ -126,11 +126,14 @@ class PlayerEncoder(JSONEncoder):
         """
         return PlayerEncoder(player).default(player)
 
-    def save_serialized_player(self, player: dict):
+    def dump_serialized_player(self, player: dict):
+        serialized_player = self.serialize_one_player(player)
+        return json.dumps(serialized_player, indent=4)
+
+    def save_serialized_player_to_file(self, player: dict):
         serialized_player = self.serialize_one_player(player)
         with open('serialized_player.json', 'w') as file:
-            json.dump(serialized_player, file, indent=4, ensure_ascii=False)
-
+            json.dump(serialized_player,file, indent=4, ensure_ascii=False)
 
     def serialize_players(self, players: list):
         """
@@ -139,10 +142,14 @@ class PlayerEncoder(JSONEncoder):
         """
         return [PlayerEncoder(player).default(player) for player in players]
 
-    def save_list_of_serialized_players(self, players: list):
+    def dump_list_of_serialized_players(self, players: list):
         serialized_players = self.serialize_players(players)
-        with open('serialized_players.json', 'w') as file:
-            json.dump(serialized_players, file, indent=4, ensure_ascii=False)
+        return json.dumps(serialized_players, indent=4)
+
+    def save_list_of_serialized_players_to_file(self, players: list):
+        serialized_players = self.serialize_players(players)
+        with open('serialized_players.json', 'w') as output_file:
+            json.dump(serialized_players, output_file, indent=4, ensure_ascii=False)
 
 
 class PlayerDecoder(JSONDecoder):
@@ -163,11 +170,13 @@ class PlayerDecoder(JSONDecoder):
         """
         return PlayerDecoder(player).decode(player)
 
-    def load_player(self, json_file: str):
-        json_file = 'serialized_player.json'
-        with open(json_file , 'w'):
-            deserialized_player = self.deserialize_one_player(player)
-            json.loads(deserialized_player)
+    def load_player(self, input_file: str):
+        input_file = 'serialized_player.json'
+        with open(input_file, 'r') as input_file:
+            deserialized_player = json.load(input_file)
+            print(deserialized_player.last_name)
+            # self.deserialize_one_player(player)
+            # json.loads(deserialized_player)
 
     def deserialize_players(self, players: list):
         """
