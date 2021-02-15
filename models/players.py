@@ -110,28 +110,25 @@ class PlayerEncoder(JSONEncoder):
     This subclass  contains methods to convert instances of the Python Objet Player into a JSon dictionary
     in order to save it into a TinyDB database.
     """
-    def __init__(self, player):
+    def __init__(self, player: dict):
         self.player = player
 
-    def default(self, player):
+    def default(self, player: dict):
         if isinstance(player, Player):
             return player.__dict__
         else:
             return JSONEncoder.default(self, player)
 
-    def serialize_players(players):
-        """
-        This method enables to serialize a list of players.
-        :return:
-        """
-        return [PlayerEncoder(player).default(player) for player in players]
-
-    def serialize_one_player(player):
+    def serialize_one_player(self, player: dict):
         """
         This method enables to serialize a single player.
         :return:
         """
         return PlayerEncoder(player).default(player)
 
-
-
+    def serialize_players(self, players: list):
+        """
+        This method enables to serialize a list of players.
+        :return:
+        """
+        return [PlayerEncoder(player).default(player) for player in players]

@@ -29,25 +29,16 @@ players = [
 ]
 
 
-# Test __init__
-def test_print(player):
-    print(player.first_name)
-
-    player.first_name = 'Pierre'
-    print(player.first_name)
-
-
 # Tests Serialization
-def test_serialize_players(players):
-        print(PlayerEncoder.serialize_players(players))
-
-
 def test_serialize_one_player(player):
-    print(PlayerEncoder.serialize_one_player(player))
+    print(PlayerEncoder(player).serialize_one_player(player))
 
 
-test_print(player1)
-test_serialize_one_player(player1)
+def test_serialize_players(players):
+    print(PlayerEncoder(players).serialize_players(players))
+
+
+test_serialize_one_player(player2)
 test_serialize_players(players)
 
 """
