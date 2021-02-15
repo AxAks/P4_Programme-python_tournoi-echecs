@@ -6,7 +6,7 @@ import json
 from datetime import date, datetime
 from typing import Union
 from enum import Enum
-from json import JSONEncoder
+from json import JSONEncoder, JSONDecoder
 
 from constants import MALE, FEMALE
 
@@ -107,7 +107,7 @@ class Player:
 
 class PlayerEncoder(JSONEncoder):
     """
-    This subclass  contains methods to convert instances of the Python Objet Player into a JSon dictionary
+    This subclass contains methods to convert instances of the Python Object Player into a JSon dictionary
     in order to save it into a TinyDB database.
     """
     def __init__(self, player: dict):
@@ -121,14 +121,61 @@ class PlayerEncoder(JSONEncoder):
 
     def serialize_one_player(self, player: dict):
         """
-        This method enables to serialize a single player.
+        This method enables to serialize a single player: from a Python Object to Json.
         :return:
         """
         return PlayerEncoder(player).default(player)
 
+    def save_serialized_player(self, player: dict):
+        serialized_player = self.serialize_one_player(player)
+        with open('serialized_player.json', 'w') as file:
+            json.dump(serialized_player, file, indent=4, ensure_ascii=False)
+
+
     def serialize_players(self, players: list):
         """
-        This method enables to serialize a list of players.
+        This method enables to serialize a list of players: from Python Objects to Json.
         :return:
         """
         return [PlayerEncoder(player).default(player) for player in players]
+
+    def save_list_of_serialized_players(self, players: list):
+        serialized_players = self.serialize_players(players)
+        with open('serialized_players.json', 'w') as file:
+            json.dump(serialized_players, file, indent=4, ensure_ascii=False)
+
+
+class PlayerDecoder(JSONDecoder):
+    """
+    This subclass contains methods to convert a JSON dictionary to instances of the Python Object Player
+    in order to load it from a TinyDB database.
+    """
+    def __init__(self, player: str):
+        self.player = player
+
+    def decode(self, player: str):
+        pass
+
+    def deserialize_one_player(self, player: str):
+        """
+        This method enables to deserialize a single player: from Json to a Python Object.
+        :return:
+        """
+        return PlayerDecoder(player).decode(player)
+
+    def load_player(self, json_file: str):
+        json_file = 'serialized_player.json'
+        with open(json_file , 'w'):
+            deserialized_player = self.deserialize_one_player(player)
+            json.loads(deserialized_player)
+
+    def deserialize_players(self, players: list):
+        """
+        This method enables to deserialize a list of players: from Json to Python Objects.
+        :return:
+        """
+        return [PlayerDecoder(player).decode(player) for player in players]
+
+    def load_list_of_serialized_players(self, players:list):
+        deserialized_players = self.deserialize_players(players)
+        json.loads(deserialized_players)

@@ -1,4 +1,4 @@
-from models.players import Player, PlayerEncoder
+from models.players import Player, PlayerEncoder, PlayerDecoder
 
 from constants import MALE, FEMALE
 
@@ -6,9 +6,9 @@ from constants import MALE, FEMALE
 File for differents tests on the features of the project
 """
 
-# Class Player
+#  Class Player
 
-# Sample Values
+#  Sample Values
 player1 = Player('Akondé', 'Axel', '02/05/1896', MALE, 1)
 player2 = Player('Berd', 'Bernard', '01/03/1982', MALE, 3)
 player3 = Player('CERAS', 'Cédric', '26/04/1978', MALE, 2)
@@ -30,28 +30,27 @@ players = [
 
 
 # Tests Serialization
-def test_serialize_one_player(player):
+def test_serialize_one_player(player: dict):
     print(PlayerEncoder(player).serialize_one_player(player))
 
 
-def test_serialize_players(players):
+def test_save_serialized_player(player: dict):
+    PlayerEncoder(player).save_serialized_player(player)
+
+
+def test_serialize_players(players : list):
     print(PlayerEncoder(players).serialize_players(players))
 
 
+def test_save_list_of_serialized_players(players: list):
+    PlayerEncoder(players).save_list_of_serialized_players(players)
+
+
 test_serialize_one_player(player2)
+test_save_serialized_player(player2)
 test_serialize_players(players)
+test_save_list_of_serialized_players(players)
 
-"""
+
 # Tests Deserialization
-
-player1 = {}
-player2 = {}
-player3 = {}
-player4 = {}
-player5 = {}
-player6 = {}
-player7 = {}
-player8 = {}
-player9 = {}
-player10 = {}
-"""
+# (...)
