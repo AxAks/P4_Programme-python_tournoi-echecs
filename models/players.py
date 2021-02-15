@@ -104,28 +104,12 @@ class Player:
         else:
             raise Exception("Rank must be an integer")
 
-    def player_to_json(self):
-        """
-        This method convert a python objet Player into a JSon dictionary
-        in order to save it to the database
-        """
-        JSONEncoder
-
-
-"""
-# à supprimer c'etait un test !
-
-player1 = Player('richard', 'Bor', 4, '01/03/1982')
-
-print(player1.first_name)
-
-player1.first_name = 'Pierre'
-
-print(player1.first_name)
-"""
-
 
 class PlayerEncoder(JSONEncoder):
+    """
+    This subclass  contains methods to convert instances of the Python Objet Player into a JSon dictionary
+    in order to save it into a TinyDB database.
+    """
     def __init__(self, player):
         self.player = player
 
@@ -135,47 +119,19 @@ class PlayerEncoder(JSONEncoder):
         else:
             return JSONEncoder.default(self, player)
 
+    def serialize_players(players):
+        """
+        This method enables to serialize a list of players.
+        :return:
+        """
+        return [PlayerEncoder(player).default(player) for player in players]
 
-# Tests Serialization
-player1 = Player('Akondé', 'Axel', '02/05/1896', MALE, 1)
-player2 = Player('Berd', 'Bernard', '01/03/1982', MALE, 3)
-player3 = Player('CERAS', 'Cédric', '26/04/1978', MALE, 2)
-player4 = Player('Deflar', 'Didier', '21/12/1991', MALE, 4)
-player5 = Player('Edourd', 'Emilie', '01/05/1922', FEMALE, 10)
-player6 = Player('Ferrat', 'Fanny', '12/09/1985', FEMALE, 9)
-player7 = Player('GRAND', 'Gérard', '01/03/1982', MALE, 7)
-player8 = Player('Harry', 'Henriette', '21/11/1972', FEMALE, 8)
-player9 = Player('Isidore', 'Isabelle', '01/03/1984', FEMALE, 6)
-player10 = Player('Junot', 'Juliette', '01/03/1982', FEMALE, 5)
-
-players = [player1, player2, player3, player4, player5, player6, player7, player8, player9, player10]
-
-
-def serialize_players(players):
-    serialized_players = [PlayerEncoder(player).default(player) for player in players]
-    [print(serialized_player) for serialized_player in serialized_players]
+    def serialize_one_player(player):
+        """
+        This method enables to serialize a single player.
+        :return:
+        """
+        return PlayerEncoder(player).default(player)
 
 
-def serialize_one_player(player):
-    serialized_player = PlayerEncoder(player).default(player)
-    print(serialized_player)
 
-
-serialize_one_player(player1)
-print("---")
-serialize_players(players)
-
-"""
-# Tests Deserialization
-
-player1 = {}
-player2 = {}
-player3 = {}
-player4 = {}
-player5 = {}
-player6 = {}
-player7 = {}
-player8 = {}
-player9 = {}
-player10 = {}
-"""
