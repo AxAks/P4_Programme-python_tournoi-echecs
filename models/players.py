@@ -127,7 +127,7 @@ class Player(Serializable):
     @ranking.setter
     def ranking(self, value: int):
         if type(value) == int:
-            if value > 0:
+            if  0 < value < 3000:
                 self.__ranking = value
             else:
                 raise AttributeError()
