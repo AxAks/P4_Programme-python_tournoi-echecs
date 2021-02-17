@@ -34,64 +34,7 @@ players = [
     player9, player10
 ]
 
-
-
-
-
-
-
-"""
 # Tests Serialization
-def test_serialize_one_player(player: dict):
-    assert str(PlayerEncoder(player).serialize_one_player(player)) == "{'_Player__last_name': 'Berd', '_Player__first_name': 'Bernard', '_Player__birthdate': '01/03/1982', '_Player__gender': 'Male', '_Player__ranking': 3}"
-
-def test_dump_serialized_player(player: dict):
-    print(PlayerEncoder(player).dump_serialized_player(player))
-
-
-def test_save_serialized_player_to_file(player: dict):
-    PlayerEncoder(player).save_serialized_player_to_file(player)
-
-
-def test_serialize_players(players: list):
-    print(PlayerEncoder(players).serialize_players(players))
-
-
-def test_dump_list_of_serialized_players(players: list):
-    print(PlayerEncoder(players).dump_list_of_serialized_players(players))
-
-
-def test_save_list_of_serialized_players_to_file(players: list):
-    PlayerEncoder(players).save_list_of_serialized_players_to_file(players)
-
-
-test_serialize_one_player(player2)
-test_dump_serialized_player(player2)
-test_save_serialized_player_to_file(player2)
-test_serialize_players(players)
-test_dump_list_of_serialized_players(players)
-test_save_list_of_serialized_players_to_file(players)
 
 
 # Tests Deserialization
-# (...)
-
-
-def test_load_player(player_string):
-    PlayerDecoder.load_player(player_string)
-
-
-def test_deserialize_one_player(input_file):
-    input_file = 'serialized_player.json'
-    PlayerDecoder.deserialize_one_player(input_file)
-
-
-player2_string = '{"_Player__last_name": "Berd",' \
-                 ' "_Player__first_name": "Bernard",' \
-                 ' "_Player__birthdate": "01/03/1982",' \
-                 ' "_Player__gender": "Male",' \
-                 ' "_Player__ranking": 3}'
-
-print(test_load_player(player2_string))
-# print(test_deserialize_one_player(input_file='serialized_player.json'))
-"""
