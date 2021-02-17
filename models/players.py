@@ -1,29 +1,49 @@
 # coding=utf-8
 
 import re
-import json
+import json # ne sera pas utilisé
 
-from datetime import date, datetime
+from datetime import date, datetime, timedelta
 from typing import Union
 from enum import Enum
-from json import JSONEncoder, JSONDecoder
+from json import JSONEncoder, JSONDecoder # ne sera pas utilisé
 
-from constants import MALE, FEMALE
+from models.serializable import Serializable
 
 
-class Player:
+class Player(Serializable):
     """
     This is the class for the Python Object: Player
     Gender is an sub-class for the Player's gender : only accept the strings "Male" and "Female".
     """
-    Gender = Enum("Gender", "MALE, FEMALE")
+    Gender = Enum("Gender", "MALE FEMALE")
 
-    def __init__(self, last_name: str, first_name: str, birthdate: str, gender: Gender, ranking: int):
-        self.last_name = last_name
-        self.first_name = first_name
-        self.birthdate = birthdate
-        self.gender = gender
-        self.ranking = ranking
+    def __init__(self, last_name: str, first_name: str, birthdate: Union[str, date],
+                 gender: Union[str, Gender], ranking: int):
+        errors = []
+        try:
+            self.last_name = last_name
+        except AttributeError:
+            errors.append('Last name')
+        try:
+            self.first_name = first_name
+        except AttributeError:
+            errors.append('First name')
+        try:
+            self.birthdate = birthdate
+        except AttributeError:
+            errors.append('Birthdate')
+        try:
+            self.gender = gender
+        except AttributeError:
+            errors.append('Gender')
+        try:
+            self.ranking = ranking
+        except AttributeError:
+            errors.append('Ranking')
+
+        if errors:
+            raise Exception(", ".join(errors))
 
     @property
     def last_name(self) -> str:
@@ -43,7 +63,7 @@ class Player:
         if re.match(authorized_characters, value):
             self.__last_name = value.title()
         else:
-            raise Exception("Last name contains not allowed characters")
+            raise AttributeError()
 
     @property
     def first_name(self) -> str:
@@ -63,32 +83,42 @@ class Player:
         if re.match(authorized_characters, value):
             self.__first_name = value.title()
         else:
-            raise Exception("First name contains not allowed characters")
+            raise AttributeError()
 
     @property
     def gender(self) -> Gender:
         return self.__gender
+
+    @property
+    def gender_pod(self) -> str:
+        return self.__gender.value()
 
     @gender.setter
     def gender(self, value: Gender):
         self.__gender = value.title()
 
     @property
-    def birthdate(self) -> date:
+    def birthdate(self) -> Union[str, date]:
         return self.__birthdate
+
+    @property
+    def birthdate_pod(self) -> str:
+        return self.__birthdate.isoformat()
 
     @birthdate.setter
     def birthdate(self, value: Union[str, date]):
-        self.__birthdate = value
-        """
-        if type(value) != date:
-            value = date(value)  # très faux !! l'idée est de forcer le format date
-        
-        if date.now - value > 18:
+        if isinstance(value, str):
+            value = datetime.strptime(value, '%Y/%m/%d').date()  # l'idée est de forcer le format date, a retravailler, bon que si on entre une date au format YYYY/MM/DD
             self.__birthdate = value
+            """
+            if date.today() - value >= date.age(12): # limite d'age, ne fonctionne pas ... timedelta >= int pas accepté
+                self.__birthdate = value
+            else:
+                raise AttributeError()
+            self.__birthdate = value
+            """
         else:
-            raise Exception("Player must be over 18")
-        """
+            self.__birthdate = value
 
     @property
     def ranking(self) -> int:
@@ -100,9 +130,9 @@ class Player:
             if value > 0:
                 self.__ranking = value
             else:
-                raise Exception("Rank must be positive")
+                raise AttributeError()
         else:
-            raise Exception("Rank must be an integer")
+            raise AttributeError()
 
 
 class PlayerEncoder(JSONEncoder):
@@ -126,14 +156,14 @@ class PlayerEncoder(JSONEncoder):
         """
         return PlayerEncoder(player).default(player)
 
-    def dump_serialized_player(self, player: dict):
+    def dump_serialized_player(self, player: dict) -> str:
         serialized_player = self.serialize_one_player(player)
         return json.dumps(serialized_player, indent=4)
 
     def save_serialized_player_to_file(self, player: dict):
         serialized_player = self.serialize_one_player(player)
-        with open('serialized_player.json', 'w') as file:
-            json.dump(serialized_player,file, indent=4, ensure_ascii=False)
+        with open('serialized_player.json', 'w') as output_file:
+            json.dump(serialized_player, output_file, indent=4, ensure_ascii=False)
 
     def serialize_players(self, players: list):
         """
@@ -152,39 +182,57 @@ class PlayerEncoder(JSONEncoder):
             json.dump(serialized_players, output_file, indent=4, ensure_ascii=False)
 
 
+
+
+
+
+
+
+
+
+
+"""
 class PlayerDecoder(JSONDecoder):
-    """
+    
     This subclass contains methods to convert a JSON dictionary to instances of the Python Object Player
     in order to load it from a TinyDB database.
-    """
-    def __init__(self, player: str):
-        self.player = player
+    
+    def __init__(self, player_string: str):
+        self.player_string = player_string
 
-    def decode(self, player: str):
+    def decode(self, player_string: str):
         pass
 
-    def deserialize_one_player(self, player: str):
-        """
+    def deserialize_one_player(self, player_string: str):
+        
         This method enables to deserialize a single player: from Json to a Python Object.
         :return:
-        """
-        return PlayerDecoder(player).decode(player)
+        
+        print(PlayerDecoder(player_string).decode(player_string))
 
-    def load_player(self, input_file: str):
-        input_file = 'serialized_player.json'
-        with open(input_file, 'r') as input_file:
-            deserialized_player = json.load(input_file)
-            print(deserialized_player.last_name)
-            # self.deserialize_one_player(player)
-            # json.loads(deserialized_player)
+    def load_player(self, player_string: str):
+        # deserialized_player = \
+        json.loads(player_string)
+        # self.deserialize_one_player(player)
+        # json.loads(deserialized_player)
 
     def deserialize_players(self, players: list):
-        """
+        
         This method enables to deserialize a list of players: from Json to Python Objects.
         :return:
-        """
+        
         return [PlayerDecoder(player).decode(player) for player in players]
 
     def load_list_of_serialized_players(self, players:list):
         deserialized_players = self.deserialize_players(players)
         json.loads(deserialized_players)
+
+
+
+# test
+player2_string = '{"_Player__last_name": "Berd",' \
+                 ' "_Player__first_name": "Bernard",' \
+                 ' "_Player__birthdate": "01/03/1982",' \
+                 ' "_Player__gender": "Male",' \
+                 ' "_Player__ranking": 3}'
+"""
