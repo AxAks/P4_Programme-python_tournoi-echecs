@@ -3,8 +3,10 @@
 from datetime import date
 from enum import Enum
 
+from models.serializable import Serializable
 
-class Tournament:
+
+class Tournament(Serializable):
     """
     This is the class for the Python Object: Tournament
     """
