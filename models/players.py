@@ -93,7 +93,10 @@ class Player(Serializable):
 
     @gender.setter
     def gender(self, value: Gender):
-        self.__gender = value.title()
+        if value in self.Gender:
+            self.__gender = value.title()
+        else:
+            raise AttributeError()
 
     @property
     def birthdate(self) -> Union[str, date]:
