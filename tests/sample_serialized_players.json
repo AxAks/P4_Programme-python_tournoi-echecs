@@ -1,72 +1,72 @@
 [
     {
-        "_Player__last_name": "Akondé",
-        "_Player__first_name": "Axel",
-        "_Player__birthdate": "02/05/1896",
-        "_Player__gender": "Male",
-        "_Player__ranking": 1
+        "last_name": "Akondé",
+        "first_name": "Axel",
+        "birthdate": "1986/05/02",
+        "gender": "Male",
+        "ranking": 1
     },
     {
-        "_Player__last_name": "Berd",
-        "_Player__first_name": "Bernard",
-        "_Player__birthdate": "01/03/1982",
-        "_Player__gender": "Male",
-        "_Player__ranking": 3
+        "last_name": "Berd",
+        "first_name": "Bernard",
+        "birthdate": "1982/03/01",
+        "gender": "Male",
+        "ranking": 3
     },
     {
-        "_Player__last_name": "Ceras",
-        "_Player__first_name": "Cédric",
-        "_Player__birthdate": "26/04/1978",
-        "_Player__gender": "Male",
-        "_Player__ranking": 2
+        "last_name": "Ceras",
+        "first_name": "Cédric",
+        "birthdate": "1978/04/26",
+        "gender": "Male",
+        "ranking": 2
     },
     {
-        "_Player__last_name": "Deflar",
-        "_Player__first_name": "Didier",
-        "_Player__birthdate": "21/12/1991",
-        "_Player__gender": "Male",
-        "_Player__ranking": 4
+        "last_name": "Deflar",
+        "first_name": "Didier",
+        "birthdate": "1991/12/21",
+        "gender": "Male",
+        "ranking": 4
     },
     {
-        "_Player__last_name": "Edourd",
-        "_Player__first_name": "Emilie",
-        "_Player__birthdate": "01/05/1922",
-        "_Player__gender": "Female",
-        "_Player__ranking": 10
+        "last_name": "Edourd",
+        "first_name": "Emilie",
+        "birthdate": "1922/05/01",
+        "gender": "Female",
+        "ranking": 10
     },
     {
-        "_Player__last_name": "Ferrat",
-        "_Player__first_name": "Fanny",
-        "_Player__birthdate": "12/09/1985",
-        "_Player__gender": "Female",
-        "_Player__ranking": 9
+        "last_name": "Ferrat",
+        "first_name": "Fanny",
+        "birthdate": "1985/09/12",
+        "gender": "Female",
+        "ranking": 9
     },
     {
-        "_Player__last_name": "Grand",
-        "_Player__first_name": "Gérard",
-        "_Player__birthdate": "01/03/1982",
-        "_Player__gender": "Male",
-        "_Player__ranking": 7
+        "last_name": "Grand",
+        "first_name": "Gérard",
+        "birthdate": "1982/03/01",
+        "gender": "Male",
+        "ranking": 7
     },
     {
-        "_Player__last_name": "Harry",
-        "_Player__first_name": "Henriette",
-        "_Player__birthdate": "21/11/1972",
-        "_Player__gender": "Female",
-        "_Player__ranking": 8
+        "last_name": "Harry",
+        "first_name": "Henriette",
+        "birthdate": "1972/11/21",
+        "gender": "Female",
+        "ranking": 8
     },
     {
-        "_Player__last_name": "Isidore",
-        "_Player__first_name": "Isabelle",
-        "_Player__birthdate": "01/03/1984",
-        "_Player__gender": "Female",
-        "_Player__ranking": 6
+        "last_name": "Isidore",
+        "first_name": "Isabelle",
+        "birthdate": "1984/03/01",
+        "gender": "Female",
+        "ranking": 6
     },
     {
-        "_Player__last_name": "Junot",
-        "_Player__first_name": "Juliette",
-        "_Player__birthdate": "01/03/1982",
-        "_Player__gender": "Female",
-        "_Player__ranking": 5
+        "last_name": "Junot",
+        "first_name": "Juliette",
+        "birthdate": "1982/03/01",
+        "gender": "Female",
+        "ranking": 5
     }
 ]

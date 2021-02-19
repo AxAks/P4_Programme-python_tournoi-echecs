@@ -5,8 +5,13 @@ class Serializable:
     """
     This class enables to serialize Python Object to simple types handled by TinyDB
     """
-    def __init__(self, python_object):
-        self.python_object = python_object
 
     def serialize(self):
-        pass
+        attr_dict = {}
+        for attribute in self.__dict__.keys():
+            cleaned_attribute_name = attribute.replace(f"_{self.__class__.__name__}__", '')
+            try:
+                attr_dict[cleaned_attribute_name] = getattr(self, cleaned_attribute_name + '_pod')()
+            except AttributeError:
+                attr_dict[cleaned_attribute_name] = getattr(self, cleaned_attribute_name)
+        print(attr_dict)

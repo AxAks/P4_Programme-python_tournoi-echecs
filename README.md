@@ -14,6 +14,6 @@ for the organization of chess tournaments using the swiss-system.
 
 
 ## penser à WINDOWS MAC et LINUX !!!
-## Informations claires sur Comment executer/lancer le programme, l'utiliser, générer un fichier flake8-html de verification du code
+## Informations claires sur Comment executer/lancer le programme, l'utiliser, générer un fichier flake8-html de verification du code
 
 ## voir mise en page de P2 !!

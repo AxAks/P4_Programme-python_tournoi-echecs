@@ -12,7 +12,7 @@ class Tournament(Serializable):
     """
     This is the class for the Python Object: Tournament
     """
-    #     Time_control = Enum("Time_control", "BULLET BLITZ RAPIDE")  # vérifier comment ca marche !
+    #     Time_control = Enum("Time_control", "BULLET BLITZ RAPIDE")  # vérifier comment ca marche !
     class Time_control(Enum):
         """
         Intermediate class for the tournaments's time control :

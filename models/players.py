@@ -2,7 +2,7 @@
 
 import re
 
-from datetime import date, datetime
+from datetime import date, datetime, timedelta
 from typing import Union
 from enum import Enum
 
@@ -15,6 +15,7 @@ class Player(Serializable):
     Gender is an sub-class for the Player's gender : only accept the strings "Male" and "Female".
     """
     Gender = Enum("Gender", "MALE FEMALE")
+    attributes = Enum("attributes", "last_name first_name birthdate gender ranking")
 
     def __init__(self, last_name: str, first_name: str, birthdate: Union[str, date],
                  gender: Union[str, Gender], ranking: int):
@@ -41,7 +42,7 @@ class Player(Serializable):
             errors.append('Ranking')
 
         if errors:
-            raise Exception(", ".join(errors))
+            raise Exception(f'Error detected in the following fields: {", ".join(errors)}')
 
     @property
     def last_name(self) -> str:
@@ -87,14 +88,18 @@ class Player(Serializable):
     def gender(self) -> Gender:
         return self.__gender
 
-    @property
     def gender_pod(self) -> str:
-        return self.__gender.value()
+        return self.__gender.name
 
     @gender.setter
-    def gender(self, value: Gender):
-        if value in self.Gender:
-            self.__gender = value.title()
+    def gender(self, value: Union[str, Gender]):
+        if isinstance(value, str):
+            try:
+                self.__gender = self.Gender[value]
+            except KeyError:
+                raise AttributeError()
+        elif isinstance(value, self.Gender):
+            self.__gender = value
         else:
             raise AttributeError()
 
@@ -102,24 +107,22 @@ class Player(Serializable):
     def birthdate(self) -> Union[str, date]:
         return self.__birthdate
 
-    @property
     def birthdate_pod(self) -> str:
         return self.__birthdate.isoformat()
 
     @birthdate.setter
     def birthdate(self, value: Union[str, date]):
         if isinstance(value, str):
-            value = datetime.strptime(value, '%Y/%m/%d').date()  # l'idée est de forcer le format date, a retravailler, bon que si on entre une date au format YYYY/MM/DD
-            self.__birthdate = value
-            """
-            if date.today() - value >= date.age(12): # limite d'age, ne fonctionne pas ... timedelta >= int pas accepté
-                self.__birthdate = value
-            else:
+            try:
+                value = datetime.strptime(value, '%Y/%m/%d').date()  # l'idée est de forcer le format date, a retravailler, bon que si on entre une date au format YYYY/MM/DD
+            except ValueError:
                 raise AttributeError()
-            self.__birthdate = value
-            """
-        else:
-            self.__birthdate = value
+        elif not isinstance(value, date):
+            raise AttributeError()
+        if date.today() - value < timedelta(days=12*365):  # limite d'age, ne fonctionne pas ... timedelta >= int pas accepté , timedelta ou int
+            raise AttributeError()
+
+        self.__birthdate = value
 
     @property
     def ranking(self) -> int:
@@ -134,3 +137,4 @@ class Player(Serializable):
                 raise AttributeError()
         else:
             raise AttributeError()
+
