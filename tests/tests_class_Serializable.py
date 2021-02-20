@@ -32,6 +32,7 @@ players_dicts = [
 # Test Serialization / Deserialization
 # Works in both directions
 
+
 def test_serialize(_obj):
     return Serializable.serialize(_obj)
 
