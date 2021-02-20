@@ -58,7 +58,7 @@ class Player(Serializable):
         :return:
         """
         #  à factoriser ? : doublon avec first_name
-        authorized_characters = re.compile("^[A-ZÉÈÇÀa-zéèçà\ -]+$")
+        authorized_characters = re.compile("^[A-ZÉÈÇÀa-zéèçà\-]+$")
         if re.match(authorized_characters, value):
             self.__last_name = value.title()
         else:
@@ -78,7 +78,7 @@ class Player(Serializable):
         :return:
         """
         #  à factoriser ? : doublon avec last_name
-        authorized_characters = re.compile("^[A-ZÉÈÇÀa-zéèçà\ -]+$")
+        authorized_characters = re.compile("^[A-ZÉÈÇÀa-zéèçà\-]+$")
         if re.match(authorized_characters, value):
             self.__first_name = value.title()
         else:
@@ -113,10 +113,16 @@ class Player(Serializable):
     @birthdate.setter
     def birthdate(self, value: Union[str, date]):
         if isinstance(value, str):
-            try:
-                value = datetime.strptime(value, '%Y/%m/%d').date()  # l'idée est de forcer le format date, a retravailler, bon que si on entre une date au format YYYY/MM/DD
-            except ValueError:
+            regex_iso8601 = "^(-?(?:[1-9][0-9]*)?[0-9]{4})-(1[0-2]|0[1-9])-(3[01]|0[1-9]|[12][0-9])$"
+            check_iso8601_format = re.compile(regex_iso8601)
+            if re.match(check_iso8601_format, value):
+                try:
+                    value = datetime.strptime(value, '%Y-%m-%d').date()  # transforme la string en format date
+                except ValueError:
+                    raise AttributeError()
+            else:
                 raise AttributeError()
+
         elif not isinstance(value, date):
             raise AttributeError()
         if date.today() - value < timedelta(days=12*365):  # limite d'age, ne fonctionne pas ... timedelta >= int pas accepté , timedelta ou int
@@ -137,4 +143,3 @@ class Player(Serializable):
                 raise AttributeError()
         else:
             raise AttributeError()
-
