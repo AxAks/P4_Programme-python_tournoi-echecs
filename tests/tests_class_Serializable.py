@@ -29,38 +29,8 @@ players_dicts = [
 ]
 
 # Class Serializable
-# Test Serialization / Deserialization
-
-"""
-# A lot of back and forth processing to test
-player1 = Player('Dupont', 'Jean', '1985-02-02', 'MALE', 2)
-print("1ere instance de Player 1 objet")
-print(f"Objet Player 1 : {player1.__dict__}")
-print("...")
-
-serialized_player1 = player1.serialize()
-print(f"Serialized Player 1: {serialized_player1}")
-print("...")
-
-print(f"On reset le Player 1 en tant que dict (résultat obtenu)")
-print("...")
-
-player1_dict = {'last_name': 'Dupont', 'first_name': 'Jean', 'birthdate': '1985-02-02', 'gender': 'MALE', 'ranking': 2}
-player1_obj = Player(**player1_dict)
-print(f"Deserialized Player 1: {player1_obj.__dict__}")
-print("...")
-
-print("On re-serialise le Player 1 à partir de Player1_obj (Deserialized Player 1)")
-serialized_player1_second = player1_obj.serialize()
-print(f"2eme serialisation de player 1: {serialized_player1_second}")
-print("...")
-
-print("On re-deserialise le Player 1 à partir de Player1_obj (Deserialized Player 1)")
-player1_dict_second = {'last_name': 'Dupont', 'first_name': 'Jean', 'birthdate': '1985-02-02', 'gender': 'MALE', 'ranking': 2}
-player1_obj_2 = Player(**player1_dict_second)
-print(f"2eme deserialisation de player 1: {player1_obj_2.__dict__}")
-"""
-
+# Test Serialization / Deserialization
+# Works in both directions
 
 def test_serialize(_obj):
     return Serializable.serialize(_obj)
@@ -70,17 +40,20 @@ def test_deserialize(attributes_dict):
     _obj = Player(**attributes_dict)
     return _obj
 
-
-def test_serialize_list_of_objects(_obj_dict_list):
-    return Serializable.serialize_list_of_objects(_obj_dict_list)
-
+print(" Test Serialization")
 
 serialized_player1 = test_serialize(player1)
 print(type(test_serialize(player1)))
 print(test_serialize(player1))
 
+print("Test Deserialization")
 print(test_deserialize(serialized_player1))
 print(test_deserialize(serialized_player1).__dict__)
+
+
+
+def test_serialize_list_of_objects(_obj_dict_list):
+    return Serializable.serialize_list_of_objects(_obj_dict_list)
 
 
 print(test_serialize_list_of_objects(players_dicts))
