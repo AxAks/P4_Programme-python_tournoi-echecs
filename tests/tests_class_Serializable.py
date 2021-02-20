@@ -1,11 +1,9 @@
+"""
+File for different tests on the features of the class Serializable
+"""
+
 from models.serializable import Serializable
 from models.players import Player
-
-
-"""
-File for different tests on the features of the project
-"""
-
 
 # Sample Values
 

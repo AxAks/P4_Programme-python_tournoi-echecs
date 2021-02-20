@@ -125,7 +125,7 @@ class Player(Serializable):
 
         elif not isinstance(value, date):
             raise AttributeError()
-        if date.today() - value < timedelta(days=12*365):  # limite d'age, ne fonctionne pas ... timedelta >= int pas accepté , timedelta ou int
+        if date.today() - value < timedelta(days=12*365):
             raise AttributeError()
 
         self.__birthdate = value

@@ -1,9 +1,10 @@
+"""
+File for different tests on the features of the class Player
+"""
+
 from models.players import Player
 
 
-"""
-File for different tests on the features of the project
-"""
 
 # Class Player
 
@@ -31,12 +32,8 @@ players = [
     player7, player8,
     player9, player10
 ]
-
-player28 = Player({'last_name': 'Dupont', 'first_name': 'Jean',
-                   'birthdate': '1985-02-02', 'gender': 'MALE', 'ranking': 2})
-print(player28)
+player28_details = {'last_name': 'Dupont', 'first_name': 'Jean',
+                   'birthdate': '1985-02-02', 'gender': 'MALE', 'ranking': 2}
+player28 = Player(**player28_details)
+print(player28.__dict__)
 print(player2)
-# Tests Serialization
-
-
-# Tests Deserialization
