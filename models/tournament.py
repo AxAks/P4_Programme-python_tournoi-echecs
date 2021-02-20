@@ -11,16 +11,10 @@ from models.serializable import Serializable
 class Tournament(Serializable):
     """
     This is the class for the Python Object: Tournament
+    Time_control is an intermediate class for the tournaments's time control
+    that only accept the strings "Bullet", " Blitz"  and "Coup rapide".
     """
-    #     Time_control = Enum("Time_control", "BULLET BLITZ RAPIDE")  # vérifier comment ca marche !
-    class Time_control(Enum):
-        """
-        Intermediate class for the tournaments's time control :
-        only accept the strings "Bullet", " Blitz"  and "Coup rapide".
-        """
-        BULLET = "Bullet"
-        BLITZ = "Blitz"
-        RAPIDE = "Coup rapide"
+    Time_control = Enum("Time_control", "BULLET BLITZ RAPIDE")  # vérifier comment ca marche !
 
     def __init__(self, name: str, location: str, date: date, rounds_count: int,
                  rounds: list, players: list, time_control: Time_control, description: str):
@@ -58,6 +52,8 @@ class Tournament(Serializable):
         except AttributeError:
             errors.append('Description')
 
+        if errors:
+            raise Exception(f'Error detected in the following fields: {", ".join(errors)}')
     @property
     def name(self) -> str:
         return self.__name
@@ -72,7 +68,7 @@ class Tournament(Serializable):
         :return:
         """
         #  à factoriser ? : doublon avec first_name
-        authorized_characters = re.compile("^[A-ZÉÈÇÀa-zéèçà\ -]+$")
+        authorized_characters = re.compile("^[A-ZÉÈÇÀa-zéèçà\-]+$")
         if re.match(authorized_characters, value):
             self.__name = value.title()
         else:

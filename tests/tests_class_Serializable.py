@@ -41,6 +41,7 @@ def test_deserialize(attributes_dict):
     _obj = Player(**attributes_dict)
     return _obj
 
+
 print(" Test Serialization")
 
 serialized_player1 = test_serialize(player1)
@@ -50,7 +51,6 @@ print(test_serialize(player1))
 print("Test Deserialization")
 print(test_deserialize(serialized_player1))
 print(test_deserialize(serialized_player1).__dict__)
-
 
 
 def test_serialize_list_of_objects(_obj_dict_list):
