@@ -17,8 +17,8 @@ class Tournament(Serializable):
     """
     Time_control = Enum("Time_control", "BULLET BLITZ RAPIDE")
 
-    def __init__(self, name: str, location: str, date: Union[str, date], rounds_count: int,
-                 rounds: int, players: list, time_control: Time_control, description: str):
+    def __init__(self, name: str, location: str, date: Union[str, date], players: list,
+                 time_control: Union[str, Time_control], description: str, rounds_count: int, rounds: int = 4):
         errors = []
         try:
             self.name = name
@@ -33,14 +33,6 @@ class Tournament(Serializable):
         except AttributeError:
             errors.append('Date')
         try:
-            self.rounds_count = rounds_count
-        except AttributeError:
-            errors.append('Rounds Count')
-        try:
-            self.rounds = rounds
-        except AttributeError:
-            errors.append('Rounds')
-        try:
             self.players = players
         except AttributeError:
             errors.append('Players')
@@ -52,6 +44,14 @@ class Tournament(Serializable):
             self.description = description
         except AttributeError:
             errors.append('Description')
+        try:
+            self.rounds_count = rounds_count
+        except AttributeError:
+            errors.append('Rounds Count')
+        try:
+            self.rounds = rounds
+        except AttributeError:
+            errors.append('Rounds')
 
         if errors:
             raise Exception(f'Error detected in the following fields: {", ".join(errors)}')
@@ -90,17 +90,16 @@ class Tournament(Serializable):
         :return:
         """
         #  à factoriser ? : doublon avec Player last_name et first_name etc ... (les attributs strings)
-        authorized_characters = re.compile("^[A-ZÉÈÇÀa-zéèçà\-]+$")
+        authorized_characters = re.compile("^[A-ZÉÈÇÀa-zéèçà\- ]+$")
         if re.match(authorized_characters, value):
             self.__location = value.title()
         else:
             raise AttributeError()
 
     @property
-    def date(self) -> date:
+    def date(self) -> Union[str, date]:
         return self.__date
 
-    @property
     def date_pod(self) -> str:
         return self.__date.isoformat()
 
@@ -123,41 +122,70 @@ class Tournament(Serializable):
         self.__date = value
 
     @property
-    def rounds_count(self) -> int:
-        return self.__rounds_count
-
-    @rounds_count.setter
-    def rounds_count(self, value):
-        self.__rounds_count = value
-
-    @property
-    def rounds(self):
-        return self.__rounds
-
-    @rounds.setter
-    def rounds(self, value):
-        self.__rounds = value
-
-    @property
-    def players(self) -> object:
+    def players(self) -> list:
         return self.__players
 
     @players.setter
-    def players(self, value):
-        self.__players = value
+    def players(self, value: list):
+        if isinstance(value, list):
+            self.__players = value
+        else:
+            raise AttributeError()
 
     @property
     def time_control(self) -> Time_control:
         return self.__time_control
 
+    def time_control_pod(self) -> str:
+        return self.__time_control
+
     @time_control.setter
-    def time_control(self, value):
-        self.__time_control = value
+    def time_control(self, value: Union[str, Time_control]):
+        if isinstance(value, str):
+            try:
+                self.__time_control = self.Time_control[value]
+            except KeyError:
+                raise AttributeError()
+        elif isinstance(value, self.Time_control):
+            self.__time_control = value
+        else:
+            raise AttributeError()
 
     @property
-    def description(self):
+    def description(self) -> str:
         return self.__description
 
     @description.setter
-    def description(self, value):
-        self.__description = value
+    def description(self, value: str):
+        if isinstance(value, str):
+            self.__description = value
+        else:
+            raise AttributeError()
+
+    @property
+    def rounds_count(self) -> int:
+        return self.__rounds_count
+
+    @rounds_count.setter
+    def rounds_count(self, value: int):
+        if type(value) == int:
+            if value >= 0:
+                self.__rounds_count = value
+            else:
+                raise AttributeError()
+        else:
+            raise AttributeError()
+
+    @property
+    def rounds(self) -> int:
+        return self.__rounds
+
+    @rounds.setter
+    def rounds(self, value: int):
+        if type(value) == int:
+            if value > 0:
+                self.__rounds = value
+            else:
+                raise AttributeError()
+        else:
+            raise AttributeError()

@@ -3,7 +3,8 @@
 
 class Serializable:
     """
-    This class enables to serialize Python Object to simple types handled by TinyDB
+    This class enables to serialize Python Objects to simple types handled by TinyDB
+    It uses introspection to access the object's attributes and methods.
     """
 
     def serialize(self):
@@ -16,10 +17,13 @@ class Serializable:
                 attributes_dict[cleaned_attribute_name] = getattr(self, cleaned_attribute_name)
         return attributes_dict
 
-    def serialize_list_of_objects(self, _obj_dict_list): # foireux, à corriger
+"""
+# attempt to serialize a list of objects 
+    def serialize_list_of_objects(self, _objs_list): # foireux, à corriger
         # [self.serialize() for _obj_dict in _obj_dict_list]
         serialized_objs_list = []
-        for _obj_dict in _obj_dict_list:
-            serialized_obj = self.serialize(_obj_dict)
+        for _obj in _objs_list:
+            serialized_obj = self.serialize(_obj)
             serialized_objs_list.append(serialized_obj)
         return serialized_objs_list
+"""

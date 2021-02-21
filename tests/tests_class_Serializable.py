@@ -4,8 +4,12 @@ File for different tests on the features of the class Serializable
 
 from models.serializable import Serializable
 from models.players import Player
+from models.tournaments import Tournament
+import sys
 
 # Sample Values
+
+# Player
 
 player1 = Player('aKONdé', 'Axel', '1986-05-02', Player.Gender.MALE, 1)
 player2 = Player('Berd', 'Bernard', '1982-03-01', 'FEMALE', 3)
@@ -18,41 +22,56 @@ player8 = Player('Harry', 'Henriette', '1972-11-21', 'FEMALE', 8)
 player9 = Player('Isidore', 'Isabelle', '1984-03-01', 'FEMALE', 6)
 player10 = Player('Junot', 'Juliette', '1982-03-01', 'FEMALE', 5)
 
-players_dicts = [
-    player1.__dict__, player2.__dict__,
-    player3.__dict__, player4.__dict__,
-    player5.__dict__, player6.__dict__,
-    player7.__dict__, player8.__dict__,
-    player9.__dict__, player10.__dict__
+players_list = [
+    player1, player2,
+    player3, player4,
+    player5, player6,
+    player7, player8,
+    player9, player10
 ]
 
+# Tournament
+
+name = 'Best Tournament Ever'
+location = 'Geneve'
+date = '1987-02-28'
+players = [player1, player2, player3, player4]
+time_control = 'BULLET'
+description = 'a very nice tournament with a lot a good players'
+rounds_count = 0
+rounds = 3
+
+
+tournament23 = Tournament(name, location, date, players, time_control, description, rounds_count, rounds)
+
+
 # Class Serializable
-# Test Serialization / Deserialization
+# Test Serialization / Deserialization General
 # Works in both directions
 
 
-def test_serialize(_obj):
+def test_serialize_global(_obj):
     return Serializable.serialize(_obj)
 
 
-def test_deserialize(attributes_dict):
-    _obj = Player(**attributes_dict)
+def test_deserialize_global(_obj_class, attributes_dict):
+    _obj = _obj_class(**attributes_dict)
     return _obj
 
 
-print(" Test Serialization")
-
-serialized_player1 = test_serialize(player1)
-print(type(test_serialize(player1)))
-print(test_serialize(player1))
-
-print("Test Deserialization")
-print(test_deserialize(serialized_player1))
-print(test_deserialize(serialized_player1).__dict__)
+print("Start: Test Serialization/Deserialization Global")
+print("No AssertionError returned means the test passed")
+serialized_tournament23 = test_serialize_global(tournament23)
+deserialized_tournament23 = test_deserialize_global(Tournament, serialized_tournament23)
+assert tournament23.__dict__ == deserialized_tournament23.__dict__  # pb possible avec le stockage des players ? c'esst l'object player qui est stocké et non les infos du player
+print("End: Test Serialization/Deserialization Global")
 
 
-def test_serialize_list_of_objects(_obj_dict_list):
-    return Serializable.serialize_list_of_objects(_obj_dict_list)
+"""
+# attempt to serialize a list of objects 
+def test_serialize_list_of_objects(_objs_list):
+    return Serializable.serialize_list_of_objects(_objs_list)
 
 
-print(test_serialize_list_of_objects(players_dicts))
+print(test_serialize_list_of_objects(players_list))
+"""

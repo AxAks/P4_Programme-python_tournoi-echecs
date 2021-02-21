@@ -4,11 +4,9 @@ File for different tests on the features of the class Player
 
 from models.players import Player
 
-
+from models.serializable import Serializable
 
 # Class Player
-
-
 
 # Sample Values
 # Tests Player Objects Instantiation
@@ -32,8 +30,23 @@ players = [
     player7, player8,
     player9, player10
 ]
-player28_details = {'last_name': 'Dupont', 'first_name': 'Jean',
-                   'birthdate': '1985-02-02', 'gender': 'MALE', 'ranking': 2}
-player28 = Player(**player28_details)
-print(player28.__dict__)
-print(player2)
+
+
+# Tests Serialization/Deserialization
+def test_serialize_player(player_object):
+    return Serializable.serialize(player_object)
+
+
+def test_deserialize_player(attributes_dict):
+    _obj = Player(**attributes_dict)
+    return _obj
+
+
+print("Start: Test Serialization/Deserialization Player")
+print("No AssertionError returned means the test passed")
+serialized_player2 = test_serialize_player(player2)
+deserialized_player2 = test_deserialize_player(serialized_player2)
+assert player2.__dict__ == deserialized_player2.__dict__
+print("End: Test Serialization/Deserialization Player")
+
+

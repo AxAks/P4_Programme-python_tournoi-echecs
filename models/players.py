@@ -122,7 +122,6 @@ class Player(Serializable):
                     raise AttributeError()
             else:
                 raise AttributeError()
-
         elif not isinstance(value, date):
             raise AttributeError()
         if date.today() - value < timedelta(days=12*365):
