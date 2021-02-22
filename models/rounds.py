@@ -12,13 +12,17 @@ class Round(Serializable):
     """
     This is the class for the Python Object: Round
     """
-    def __init__(self, name: str, matches: list,
+    def __init__(self, name: str, tournament: object, matches: list,
                  end_time: datetime, start_time: datetime = datetime.now()):
         errors = []
         try:
             self.name = name
         except AttributeError:
             errors.append('Name')
+        try:
+            self.tournament = tournament
+        except AttributeError:
+            errors.append('Tournament')
         try:
             self.matches = matches
         except AttributeError:
@@ -54,6 +58,18 @@ class Round(Serializable):
             self.__name = value.title()
         else:
             raise AttributeError()
+
+    @property
+    def tournament(self) -> object:
+        return self.tournament
+
+    @property
+    def tournament_pod(self) -> str:
+        return self.tournament
+
+    @tournament.setter
+    def tournament(self, value: object):
+        self.__tournament = value
 
     @property
     def matches(self) -> list:
