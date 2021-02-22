@@ -34,7 +34,7 @@ tournament24 = Tournament(name, location, date, players, time_control, descripti
 
 # Tests Serialization/Deserialization Tournament
 def test_serialize_tournament(tournament_object):
-    return Serializable.serialize(tournament_object)
+    return Tournament.serialize(tournament_object)
 
 
 def test_deserialize_tournament(attributes_dict):
@@ -46,5 +46,7 @@ print("Start: Test Serialization/Deserialization Tournament")
 print("No AssertionError returned means the test passed\nA problem returns an Assertion Error")
 serialized_tournament24 = test_serialize_tournament(tournament24)
 deserialized_tournament24 = test_deserialize_tournament(serialized_tournament24)
+print(tournament24.__dict__)
+print(deserialized_tournament24.__dict__)
 assert tournament24.__dict__ == deserialized_tournament24.__dict__
 print("End: Test Serialization/Deserialization Tournament")

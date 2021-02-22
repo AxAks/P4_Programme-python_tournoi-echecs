@@ -190,3 +190,19 @@ class Tournament(Serializable):
         else:
             raise AttributeError()
 
+    def serialize(self) -> dict:
+        # Serializable.serialize() mais qui gere la serialisation des players de la liste players  en tant qu'attribut ? (surcharge/substitution)
+        # Serializable.serialize() + cas spécifique de la liste de joueurs
+        attributes_dict = {}
+        for attribute in self.__dict__.keys():
+            cleaned_attribute_name = attribute.replace(f"_{self.__class__.__name__}__", '')
+            if cleaned_attribute_name == "players":
+                player_dicts_list = [Serializable.serialize(player_obj) for player_obj in self.players]
+                players = player_dicts_list
+                attributes_dict[cleaned_attribute_name] = players
+                continue
+            try:
+                attributes_dict[cleaned_attribute_name] = getattr(self, cleaned_attribute_name + '_pod')()
+            except AttributeError:
+                attributes_dict[cleaned_attribute_name] = getattr(self, cleaned_attribute_name)
+        return attributes_dict

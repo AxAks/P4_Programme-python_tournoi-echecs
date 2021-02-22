@@ -54,7 +54,6 @@ class Round(Serializable):
         :param value:
         :return:
         """
-        # à factoriser ? : doublon avec Player last_name et first_name
         authorized_characters = re.compile("^[A-ZÉÈÇÀa-zéèçà1-9_\- ]+$")
         if re.match(authorized_characters, value):
             self.__name = value.title()
@@ -103,3 +102,7 @@ class Round(Serializable):
     def end_time(self,
                  value: datetime):  #  doit etre automatiquement enregisté lors de la fin de saisie des infos du round
         self.__end_time = value
+
+    def serialize(self):
+        # Serializable.serialize() mais qui prend en compte la serialisation de Tournament en tant qu'attribut ? (surcharge/substitution)
+        Serializable.serialize()
