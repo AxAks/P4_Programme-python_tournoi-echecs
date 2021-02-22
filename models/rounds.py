@@ -53,11 +53,11 @@ class Round(Serializable):
         :return:
         """
         #  à factoriser ? : doublon avec Player last_name et first_name
-        authorized_characters = re.compile("^[A-ZÉÈÇÀa-zéèçà\- ]+$")
-        if re.match(authorized_characters, value):
-            self.__name = value.title()
-        else:
-            raise AttributeError()
+        # authorized_characters = re.compile("^[A-ZÉÈÇÀa-zéèçà\- ]+$")
+        #if re.match(authorized_characters, value):
+        self.__name = value.title()
+        #else:
+        #    raise AttributeError()
 
     @property
     def tournament(self) -> object:
