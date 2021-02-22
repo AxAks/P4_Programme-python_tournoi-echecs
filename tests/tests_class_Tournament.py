@@ -1,10 +1,13 @@
+# coding=utf-8
+
 """
 File for different tests on the features of the class Tournament
 """
 
+from models.serializable import Serializable
 from models.tournaments import Tournament
 from models.players import Player
-from models.serializable import Serializable
+
 
 # Sample Values
 
@@ -40,7 +43,7 @@ def test_deserialize_tournament(attributes_dict):
 
 
 print("Start: Test Serialization/Deserialization Tournament")
-print("No AssertionError returned means the test passed")
+print("No AssertionError returned means the test passed\nA problem returns an Assertion Error")
 serialized_tournament24 = test_serialize_tournament(tournament24)
 deserialized_tournament24 = test_deserialize_tournament(serialized_tournament24)
 assert tournament24.__dict__ == deserialized_tournament24.__dict__

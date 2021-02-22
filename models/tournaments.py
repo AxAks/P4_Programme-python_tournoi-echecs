@@ -18,7 +18,7 @@ class Tournament(Serializable):
     Time_control = Enum("Time_control", "BULLET BLITZ RAPIDE")
 
     def __init__(self, name: str, location: str, date: Union[str, date], players: list,
-                 time_control: Union[str, Time_control], description: str, rounds_count: int, rounds: int = 4):
+                 time_control: Union[str, Time_control], description: str, rounds_list: list, rounds: int = 4):
         errors = []
         try:
             self.name = name
@@ -45,7 +45,7 @@ class Tournament(Serializable):
         except AttributeError:
             errors.append('Description')
         try:
-            self.rounds_count = rounds_count
+            self.rounds_list = rounds_list
         except AttributeError:
             errors.append('Rounds Count')
         try:
@@ -163,14 +163,14 @@ class Tournament(Serializable):
             raise AttributeError()
 
     @property
-    def rounds_count(self) -> int:
-        return self.__rounds_count
+    def rounds_list(self) -> list:
+        return self.__rounds_list
 
-    @rounds_count.setter
-    def rounds_count(self, value: int):
+    @rounds_list.setter
+    def rounds_list(self, value: list):
         if type(value) == int:
             if value >= 0:
-                self.__rounds_count = value
+                self.__rounds_list = value
             else:
                 raise AttributeError()
         else:

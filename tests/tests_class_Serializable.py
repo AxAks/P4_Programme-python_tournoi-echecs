@@ -1,3 +1,5 @@
+# coding=utf-8
+
 """
 File for different tests on the features of the class Serializable
 """
@@ -60,7 +62,7 @@ def test_deserialize_global(_obj_class, attributes_dict):
 
 
 print("Start: Test Serialization/Deserialization Global")
-print("No AssertionError returned means the test passed")
+print("No AssertionError returned means the test passed\nA problem returns an Assertion Error")
 serialized_tournament23 = test_serialize_global(tournament23)
 deserialized_tournament23 = test_deserialize_global(Tournament, serialized_tournament23)
 assert tournament23.__dict__ == deserialized_tournament23.__dict__  # pb possible avec le stockage des players ? c'esst l'object player qui est stocké et non les infos du player

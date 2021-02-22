@@ -1,10 +1,13 @@
+# coding=utf-8
+
 """
 File for different tests on the features of the class Player
 """
 
+from models.serializable import Serializable
 from models.players import Player
 
-from models.serializable import Serializable
+
 
 # Class Player
 
@@ -43,7 +46,7 @@ def test_deserialize_player(attributes_dict):
 
 
 print("Start: Test Serialization/Deserialization Player")
-print("No AssertionError returned means the test passed")
+print("No AssertionError returned means the test passed\nA problem returns an Assertion Error")
 serialized_player2 = test_serialize_player(player2)
 deserialized_player2 = test_deserialize_player(serialized_player2)
 assert player2.__dict__ == deserialized_player2.__dict__
