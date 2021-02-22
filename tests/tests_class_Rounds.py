@@ -38,9 +38,9 @@ tournament24 = Tournament(name, location, date, players, time_control, descripti
 
 # Round
 
-round1 = Round("Round1", tournament24, matches=[], end_time=datetime.now())
-round2 = Round("Round2", tournament24, matches=[], end_time=datetime.now())
-round3 = Round("Round3", tournament24, matches=[], end_time=datetime.now())
+round1 = Round('Round 1', tournament24, matches=[], end_time=datetime.now())
+round2 = Round('Round 2', tournament24, matches=[], end_time=datetime.now())
+round3 = Round('Round 3', tournament24, matches=[], end_time=datetime.now())
 
 print(round1)
 print(round1.__dict__)
@@ -48,3 +48,26 @@ print(round2)
 print(round2.__dict__)
 print(round3)
 print(round3.__dict__)
+
+
+# Serialization / Deserialization
+def test_serialize_round(round_object):
+    return Serializable.serialize(round_object)
+
+
+def test_deserialize_round(attributes_dict):
+    _obj = Round(**attributes_dict)
+    return _obj
+
+
+print("Start: Test Serialization/Deserialization Round")
+print("No AssertionError returned means the test passed\nA problem returns an Assertion Error")
+serialized_round1 = test_serialize_round(round1)
+deserialized_round1 = test_deserialize_round(serialized_round1)
+print(round1)
+print(round1.__dict__)
+print(deserialized_round1.__dict__)
+
+assert round1.__dict__ == deserialized_round1.__dict__
+
+print("End: Test Serialization/Deserialization Round")

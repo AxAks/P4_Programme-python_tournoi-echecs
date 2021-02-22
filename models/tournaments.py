@@ -189,3 +189,4 @@ class Tournament(Serializable):
                 raise AttributeError()
         else:
             raise AttributeError()
+

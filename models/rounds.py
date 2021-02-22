@@ -6,12 +6,14 @@ from typing import Union
 from datetime import datetime
 
 from models.serializable import Serializable
+from models.tournaments import Tournament
 
 
 class Round(Serializable):
     """
     This is the class for the Python Object: Round
     """
+
     def __init__(self, name: str, tournament: object, matches: list,
                  end_time: datetime, start_time: datetime = datetime.now()):
         errors = []
@@ -52,20 +54,20 @@ class Round(Serializable):
         :param value:
         :return:
         """
-        #  à factoriser ? : doublon avec Player last_name et first_name
-        # authorized_characters = re.compile("^[A-ZÉÈÇÀa-zéèçà\- ]+$")
-        #if re.match(authorized_characters, value):
-        self.__name = value.title()
-        #else:
-        #    raise AttributeError()
+        # à factoriser ? : doublon avec Player last_name et first_name
+        authorized_characters = re.compile("^[A-ZÉÈÇÀa-zéèçà1-9_\- ]+$")
+        if re.match(authorized_characters, value):
+            self.__name = value.title()
+        else:
+            raise AttributeError()
 
     @property
     def tournament(self) -> object:
-        return self.tournament
+        return self.__tournament
 
     @property
     def tournament_pod(self) -> str:
-        return self.tournament
+        return self.__tournament
 
     @tournament.setter
     def tournament(self, value: object):
@@ -87,7 +89,7 @@ class Round(Serializable):
         return self.__start_time.isoformat()
 
     @start_time.setter
-    def start_time(self, value: datetime): # doit etre automatiquement enregisté lors de l'instanciation du round
+    def start_time(self, value: datetime):  #  doit etre automatiquement enregisté lors de l'instanciation du round
         self.__start_time = value
 
     @property
@@ -98,5 +100,6 @@ class Round(Serializable):
         return self.__end_time.isoformat()
 
     @end_time.setter
-    def end_time(self, value: datetime): # doit etre automatiquement enregisté lors de la fin de saisie des infos du round
+    def end_time(self,
+                 value: datetime):  #  doit etre automatiquement enregisté lors de la fin de saisie des infos du round
         self.__end_time = value
