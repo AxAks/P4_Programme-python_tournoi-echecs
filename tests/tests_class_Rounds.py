@@ -38,7 +38,7 @@ tournament24 = Tournament(name, location, date, players, time_control, descripti
 
 # Round
 
-round1 = Round('Round 1', tournament24, matches=[], end_time=datetime.now())
+round1 = Round('Round 1', tournament=None, matches=[], end_time=datetime.now())
 round2 = Round('Round 2', tournament24, matches=[], end_time=datetime.now())
 round3 = Round('Round 3', tournament24, matches=[], end_time=datetime.now())
 

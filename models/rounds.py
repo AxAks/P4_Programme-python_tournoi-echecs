@@ -113,9 +113,12 @@ class Round(Serializable):
         for attribute in self.__dict__.keys():
             cleaned_attribute_name = attribute.replace(f"_{self.__class__.__name__}__", '')
             if cleaned_attribute_name == "tournament":
-                tournament_infos_dict = Serializable.serialize(self.__dict__[attribute])
-                attributes_dict[cleaned_attribute_name] = tournament_infos_dict
-                continue
+                try:
+                    tournament_infos_dict = Serializable.serialize(self.__dict__[attribute])
+                    attributes_dict[cleaned_attribute_name] = tournament_infos_dict
+                    continue
+                except AttributeError:
+                    raise Exception(f'Error in the serialization of the attribute: {cleaned_attribute_name}')
             try:
                 attributes_dict[cleaned_attribute_name] = getattr(self, cleaned_attribute_name + '_pod')()
             except AttributeError:

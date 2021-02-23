@@ -199,10 +199,13 @@ class Tournament(Serializable):
         for attribute in self.__dict__.keys():
             cleaned_attribute_name = attribute.replace(f"_{self.__class__.__name__}__", '')
             if cleaned_attribute_name == "players":
-                player_dicts_list = [Serializable.serialize(player_obj) for player_obj in self.players]
-                players = player_dicts_list
-                attributes_dict[cleaned_attribute_name] = players
-                continue
+                try:
+                    player_dicts_list = [Serializable.serialize(player_obj) for player_obj in self.players]
+                    players = player_dicts_list
+                    attributes_dict[cleaned_attribute_name] = players
+                    continue
+                except AttributeError:
+                    raise Exception(f'Error in the serialization of the attribute: {cleaned_attribute_name}')
             try:
                 attributes_dict[cleaned_attribute_name] = getattr(self, cleaned_attribute_name + '_pod')()
             except AttributeError:

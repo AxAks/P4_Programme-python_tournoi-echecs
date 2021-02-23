@@ -41,6 +41,7 @@ def test_deserialize_tournament(attributes_dict):
     _obj = Tournament(**attributes_dict)
     return _obj
 
+
 print("Start: Test Serialization/Deserialization Tournament")
 print("No AssertionError returned means the test passed\nA problem returns an Assertion Error")
 serialized_tournament24 = test_serialize_tournament(tournament24)
