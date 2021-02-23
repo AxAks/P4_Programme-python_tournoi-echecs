@@ -191,8 +191,10 @@ class Tournament(Serializable):
             raise AttributeError()
 
     def serialize(self) -> dict:
-        # Serializable.serialize() mais qui gere la serialisation des players de la liste players  en tant qu'attribut ? (surcharge/substitution)
-        # Serializable.serialize() + cas spécifique de la liste de joueurs
+        """
+        This method overrides the Serializable.serialize() method to convert the property Players
+        into a list of dicts instead of a list of Player objects
+        """
         attributes_dict = {}
         for attribute in self.__dict__.keys():
             cleaned_attribute_name = attribute.replace(f"_{self.__class__.__name__}__", '')

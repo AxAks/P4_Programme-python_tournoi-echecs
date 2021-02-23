@@ -52,7 +52,7 @@ print(round3.__dict__)
 
 # Serialization / Deserialization
 def test_serialize_round(round_object):
-    return Serializable.serialize(round_object)
+    return Round.serialize(round_object)
 
 
 def test_deserialize_round(attributes_dict):
@@ -65,9 +65,10 @@ print("No AssertionError returned means the test passed\nA problem returns an As
 serialized_round1 = test_serialize_round(round1)
 deserialized_round1 = test_deserialize_round(serialized_round1)
 print(round1)
-print(round1.__dict__)
+print(round1.__dict__) # pb print trouver comment afficher le detail du tournoi sous forme de dict alors qu'on est dans une instance d'objet
 print(deserialized_round1.__dict__)
 
-assert round1.__dict__ == deserialized_round1.__dict__
+
+assert round1.__dict__ == deserialized_round1.__dict__ # le test ne fonctionne plus mais les données sont bonnes
 
 print("End: Test Serialization/Deserialization Round")
