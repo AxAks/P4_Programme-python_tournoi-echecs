@@ -103,7 +103,11 @@ class Round(Serializable):
                  value: datetime):  #  doit etre automatiquement enregisté lors de la fin de saisie des infos du round
         self.__end_time = value
 
-    def serialize(self):
+    def serialize(self) -> dict:
+        """
+        This method overrides the Serializable.serialize() method to convert the property Tournament
+        into a dict instead of a Tournament objects.
+        """
         # Serializable.serialize() mais qui prend en compte la serialisation de Tournament en tant qu'attribut ? (surcharge/substitution)
         attributes_dict = {}
         for attribute in self.__dict__.keys():

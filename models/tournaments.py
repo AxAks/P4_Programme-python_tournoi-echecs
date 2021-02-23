@@ -193,7 +193,7 @@ class Tournament(Serializable):
     def serialize(self) -> dict:
         """
         This method overrides the Serializable.serialize() method to convert the property Players
-        into a list of dicts instead of a list of Player objects
+        into a list of dicts instead of a list of Player objects.
         """
         attributes_dict = {}
         for attribute in self.__dict__.keys():
