@@ -1,5 +1,7 @@
 # coding=utf-8
 
+from enum import Enum
+
 
 class Serializable:
     """
@@ -10,9 +12,9 @@ class Serializable:
         attributes_dict = {}
         for attribute in self.__dict__.keys():
             cleaned_attribute_name = attribute.replace(f"_{self.__class__.__name__}__", '')
-            try:
+            if hasattr(self, cleaned_attribute_name + '_pod'):
                 attributes_dict[cleaned_attribute_name] = getattr(self, cleaned_attribute_name + '_pod')()
-            except AttributeError:
+            else:
                 attributes_dict[cleaned_attribute_name] = getattr(self, cleaned_attribute_name)
         return attributes_dict
 

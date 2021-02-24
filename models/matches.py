@@ -110,9 +110,9 @@ class Match(Serializable):
                     continue
                 except AttributeError:
                     raise Exception(f'Error in the serialization of the attribute: {cleaned_attribute_name}')
-            try:
+            if hasattr(self, cleaned_attribute_name + '_pod'):
                 attributes_dict[cleaned_attribute_name] = getattr(self, cleaned_attribute_name + '_pod')()
-            except AttributeError:
+            else:
                 attributes_dict[cleaned_attribute_name] = getattr(self, cleaned_attribute_name)
         match_tuple = \
             (

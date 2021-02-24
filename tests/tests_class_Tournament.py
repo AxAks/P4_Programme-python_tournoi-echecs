@@ -20,6 +20,10 @@ player4 = Player('Deflar', 'Didier', '1991-12-21', 'FEMALE', 4)
 players_list = [player1, player2, player3, player4]
 
 # Tournament
+# pb assert
+
+# ecrire un dictionnaire des données et c'est ca qu'on comparera à deserialized_tournament24 !
+
 name = 'Best Tournament Ever'
 location = 'Geneve'
 date = '1987-02-28'

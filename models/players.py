@@ -8,6 +8,8 @@ from enum import Enum
 
 from models.serializable import Serializable
 
+from constants import MINIMUM_AGE, MINIMUM_RANKING, MAXIMUM_RANKING
+
 
 class Player(Serializable):
     """
@@ -17,8 +19,10 @@ class Player(Serializable):
     Gender = Enum("Gender", "MALE FEMALE")
     attributes = Enum("attributes", "last_name first_name birthdate gender ranking")
 
-    def __init__(self, last_name: str, first_name: str, birthdate: Union[str, date],
+#  ajouter un attribut uuid, voir uuid4 module (gestion des uuid pas de registre à tenir), sinon tenir un registre et on incremente, avec ID_MAX pour le player value)None possible, if value == None ajouter un UUID
+    def __init__(self, last_name: str, first_name: str, birthdate: Union[str, date], #  (self, **params) avec boucle for + try/except si elle sont dans params on recupere la valeur
                  gender: Union[str, Gender], ranking: int):
+        # super().__init__('last_name', 'first_name', ...) a faire dans toutes les classes
         errors = []
         try:
             self.last_name = last_name
@@ -113,18 +117,13 @@ class Player(Serializable):
     @birthdate.setter
     def birthdate(self, value: Union[str, date]):
         if isinstance(value, str):
-            regex_iso8601 = "^(-?(?:[1-9][0-9]*)?[0-9]{4})-(1[0-2]|0[1-9])-(3[01]|0[1-9]|[12][0-9])$"
-            check_iso8601_format = re.compile(regex_iso8601)
-            if re.match(check_iso8601_format, value):
-                try:
-                    value = datetime.strptime(value, '%Y-%m-%d').date()  # transforme la string en format date
-                except ValueError:
-                    raise AttributeError()
-            else:
+            try:
+                value = date.fromisoformat(value)  # transforme la string en format date
+            except ValueError:
                 raise AttributeError()
         elif not isinstance(value, date):
             raise AttributeError()
-        if date.today() - value < timedelta(days=12*365):
+        if date.today() - value < timedelta(days=MINIMUM_AGE*365):
             raise AttributeError()
 
         self.__birthdate = value
@@ -136,7 +135,7 @@ class Player(Serializable):
     @ranking.setter
     def ranking(self, value: int):
         if type(value) == int:
-            if 0 < value < 3000:
+            if MINIMUM_RANKING < value <= MAXIMUM_RANKING:
                 self.__ranking = value
             else:
                 raise AttributeError()

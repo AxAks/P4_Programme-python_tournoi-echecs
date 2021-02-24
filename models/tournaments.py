@@ -6,6 +6,7 @@ from datetime import datetime, date
 from enum import Enum
 from typing import Union
 
+from models.players import Player
 from models.serializable import Serializable
 
 
@@ -126,7 +127,7 @@ class Tournament(Serializable):
         return self.__players
 
     @players.setter
-    def players(self, value: list):
+    def players(self, value: Union[list[str], list[Player]]):
         if isinstance(value, list):
             self.__players = value
         else:
@@ -200,14 +201,14 @@ class Tournament(Serializable):
             cleaned_attribute_name = attribute.replace(f"_{self.__class__.__name__}__", '')
             if cleaned_attribute_name == "players":
                 try:
-                    player_dicts_list = [Serializable.serialize(player_obj) for player_obj in self.players]
+                    player_dicts_list = [player_obj.serialize() for player_obj in self.players]
                     players = player_dicts_list
                     attributes_dict[cleaned_attribute_name] = players
                     continue
                 except AttributeError:
                     raise Exception(f'Error in the serialization of the attribute: {cleaned_attribute_name}')
-            try:
+            if hasattr(self, cleaned_attribute_name + '_pod'):
                 attributes_dict[cleaned_attribute_name] = getattr(self, cleaned_attribute_name + '_pod')()
-            except AttributeError:
+            else:
                 attributes_dict[cleaned_attribute_name] = getattr(self, cleaned_attribute_name)
         return attributes_dict
