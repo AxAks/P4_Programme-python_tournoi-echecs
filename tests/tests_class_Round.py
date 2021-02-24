@@ -6,9 +6,9 @@ File for different tests on the features of the class Round
 from datetime import datetime
 
 from models.serializable import Serializable
-from models.players import Player
-from models.tournaments import Tournament
-from models.rounds import Round
+from models.player import Player
+from models.tournament import Tournament
+from models.round import Round
 
 
 # Sample Values

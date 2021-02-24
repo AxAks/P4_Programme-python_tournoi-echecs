@@ -6,7 +6,7 @@ from datetime import datetime, date
 from enum import Enum
 from typing import Union
 
-from models.players import Player
+from models.player import Player
 from models.serializable import Serializable
 
 

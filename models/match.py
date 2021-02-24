@@ -4,7 +4,7 @@ from enum import Enum
 from typing import Union
 
 from models.serializable import Serializable
-from models.players import Player
+from models.player import Player
 
 
 class Match(Serializable):

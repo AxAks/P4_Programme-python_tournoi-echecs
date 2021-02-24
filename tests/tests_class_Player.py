@@ -5,7 +5,7 @@ File for different tests on the features of the class Player
 """
 
 from models.serializable import Serializable
-from models.players import Player
+from models.player import Player
 
 
 

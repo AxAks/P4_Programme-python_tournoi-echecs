@@ -5,8 +5,8 @@ File for different tests on the features of the class Tournament
 """
 
 from models.serializable import Serializable
-from models.tournaments import Tournament
-from models.players import Player
+from models.tournament import Tournament
+from models.player import Player
 
 
 # Sample Values

@@ -5,8 +5,8 @@ File for different tests on the features of the class Serializable
 """
 
 from models.serializable import Serializable
-from models.players import Player
-from models.tournaments import Tournament
+from models.player import Player
+from models.tournament import Tournament
 import sys
 
 # Sample Values

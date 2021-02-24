@@ -6,9 +6,9 @@ from typing import Union
 from datetime import datetime
 
 from models.serializable import Serializable
-from models.tournaments import Tournament
-from models.matches import Match
-from models.players import Player
+from models.tournament import Tournament
+from models.match import Match
+from models.player import Player
 from constants import INDEX_PLAYER1, INDEX_PLAYER2, INDEX_PLAYER1_SCORE, INDEX_PLAYER2_SCORE
 
 

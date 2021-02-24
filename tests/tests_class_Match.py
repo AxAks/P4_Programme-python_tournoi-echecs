@@ -5,8 +5,8 @@ File for different tests on the features of the class Match
 """
 
 from models.serializable import Serializable
-from models.matches import Match
-from models.players import Player
+from models.match import Match
+from models.player import Player
 
 
 player1 = Player('aKONdé', 'Axel', '1986-05-02', Player.Gender.MALE, 1)
