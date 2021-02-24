@@ -36,18 +36,23 @@ tournament24 = Tournament(name, location, date, players, time_control, descripti
 
 # Match
 
+player1_score = 1
+player2_score = 0
+player3_score = 0.5
+player4_score = 0.5
+
+
+match1 = (player1, player2, player1_score, player2_score)
+match2 = (player3, player4, player3_score, player4_score)
+
+matches_list = [match1, match2]
+
+
 # Round
 
-round1 = Round('Round 1', tournament=None, matches=[], end_time=datetime.now())
-round2 = Round('Round 2', tournament24, matches=[], end_time=datetime.now())
-round3 = Round('Round 3', tournament24, matches=[], end_time=datetime.now())
-
+round1 = Round('Round 1', tournament24, matches_list, end_time=datetime.now())
 print(round1)
 print(round1.__dict__)
-print(round2)
-print(round2.__dict__)
-print(round3)
-print(round3.__dict__)
 
 
 # Serialization / Deserialization
@@ -64,9 +69,9 @@ print("Start: Test Serialization/Deserialization Round")
 print("No AssertionError returned means the test passed\nA problem returns an Assertion Error")
 serialized_round1 = test_serialize_round(round1)
 deserialized_round1 = test_deserialize_round(serialized_round1)
-print(round1)
-print(round1.__dict__) # pb print trouver comment afficher le detail du tournoi sous forme de dict alors qu'on est dans une instance d'objet
-print(deserialized_round1.__dict__)
+print(f'Round 1 Object : {round1}')
+print(f'Round 1 Object Details{round1.__dict__}') # pb print trouver comment afficher le detail du tournoi sous forme de dict alors qu'on est dans une instance d'objet
+print(f'Round 1 serialized {deserialized_round1.__dict__}')
 
 
 assert round1.__dict__ == deserialized_round1.__dict__ # le test ne fonctionne plus mais les données sont bonnes

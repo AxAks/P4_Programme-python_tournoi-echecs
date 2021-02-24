@@ -98,11 +98,10 @@ class Match(Serializable):
     def serialize(self) -> dict:
         """
         This method overrides the Serializable.serialize() method to convert Match Object
-        into a tuple of 2 list [player, score].
+        into a tuple of 2 lists [player, score].
         """
         attributes_dict = {}
         for attribute in self.__dict__.keys():
-            print(self.__dict__.keys())
             cleaned_attribute_name = attribute.replace(f"_{self.__class__.__name__}__", '')
             if cleaned_attribute_name in ('player1', 'player2'):
                 try:

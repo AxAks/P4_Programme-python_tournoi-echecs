@@ -7,6 +7,9 @@ from datetime import datetime
 
 from models.serializable import Serializable
 from models.tournaments import Tournament
+from models.matches import Match
+from models.players import Player
+from constants import INDEX_PLAYER1, INDEX_PLAYER2, INDEX_PLAYER1_SCORE, INDEX_PLAYER2_SCORE
 
 
 class Round(Serializable):
@@ -65,15 +68,19 @@ class Round(Serializable):
         return self.__tournament
 
     @property
-    def tournament_pod(self) -> str:
+    def tournament_pod(self) -> dict:
         return self.__tournament
 
     @tournament.setter
-    def tournament(self, value: object):
+    def tournament(self, value: Union[dict, object]):
         self.__tournament = value
 
     @property
     def matches(self) -> list:
+        return self.__matches
+
+    @property
+    def matches_pod(self) -> list:
         return self.__matches
 
     @matches.setter
@@ -107,20 +114,46 @@ class Round(Serializable):
         """
         This method overrides the Serializable.serialize() method to convert the property Tournament
         into a dict instead of a Tournament objects.
+        and the property matches into a list of tuple.
         """
-        # Serializable.serialize() mais qui prend en compte la serialisation de Tournament en tant qu'attribut ? (surcharge/substitution)
         attributes_dict = {}
         for attribute in self.__dict__.keys():
             cleaned_attribute_name = attribute.replace(f"_{self.__class__.__name__}__", '')
             if cleaned_attribute_name == "tournament":
                 try:
-                    tournament_infos_dict = Serializable.serialize(self.__dict__[attribute])
+                    tournament_infos_dict = Tournament.serialize(self.__dict__[attribute])
                     attributes_dict[cleaned_attribute_name] = tournament_infos_dict
                     continue
                 except AttributeError:
                     raise Exception(f'Error in the serialization of the attribute: {cleaned_attribute_name}')
-            try:
-                attributes_dict[cleaned_attribute_name] = getattr(self, cleaned_attribute_name + '_pod')()
-            except AttributeError:
-                attributes_dict[cleaned_attribute_name] = getattr(self, cleaned_attribute_name)
+            elif cleaned_attribute_name == "matches":
+                matches = []
+                for tuple_item in self.matches:
+                    match_infos = []
+                    for match_info in tuple_item:
+                        if isinstance(match_info, Player):
+                            serialized_player = Player.serialize(match_info)
+                            match_infos.append(serialized_player)
+                        else:
+                            match_infos.append(match_info)
+                    formated_match_tuple = \
+                        [
+                            (match_infos[INDEX_PLAYER1], match_infos[INDEX_PLAYER1_SCORE]),
+                            (match_infos[INDEX_PLAYER2], match_infos[INDEX_PLAYER2_SCORE])
+                        ]
+                    matches.append(formated_match_tuple)
+                try:
+                    attributes_dict[cleaned_attribute_name] = matches   # jusqu'ici ca va, je recupere ce que je veux  !! /Prise de tete ici mais ca se fait surement dans setters ! cf date aussi
+                except AttributeError:
+                    raise Exception(f'Error in the serialization of the attribute: {cleaned_attribute_name}')
+            if cleaned_attribute_name != "matches":
+                try:
+                    attributes_dict[cleaned_attribute_name] = getattr(self, cleaned_attribute_name + '_pod')()
+                except AttributeError:
+                    attributes_dict[cleaned_attribute_name] = getattr(self, cleaned_attribute_name)
+            else:
+                pass
+        print(f'censé etre un attributes dict du round serialized : {attributes_dict}')
+        for attr in attributes_dict:
+            print(attr)
         return attributes_dict
