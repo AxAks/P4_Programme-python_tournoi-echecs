@@ -7,7 +7,6 @@ from datetime import datetime
 
 from models.serializable import Serializable
 from models.tournament import Tournament
-from models.match import Match
 from models.player import Player
 from constants import INDEX_PLAYER1, INDEX_PLAYER2, INDEX_PLAYER1_SCORE, INDEX_PLAYER2_SCORE
 
@@ -17,7 +16,7 @@ class Round(Serializable):
     This is the class for the Python Object: Round
     """
 
-    def __init__(self, name: str, tournament: object, matches: list,
+    def __init__(self, name: str, tournament: object, matches: list[tuple],
                  end_time: datetime, start_time: datetime = datetime.now()):
         errors = []
         try:
@@ -76,15 +75,15 @@ class Round(Serializable):
         self.__tournament = value
 
     @property
-    def matches(self) -> list:
+    def matches(self) -> list[tuple]:
         return self.__matches
 
     @property
-    def matches_pod(self) -> list:
+    def matches_pod(self) -> list[tuple]:
         return self.__matches
 
     @matches.setter
-    def matches(self, value: list):
+    def matches(self, value: list[tuple]):
         self.__matches = value
 
     @property

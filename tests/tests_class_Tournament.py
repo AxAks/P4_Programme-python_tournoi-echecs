@@ -73,7 +73,7 @@ tournament24_dict = {
                  'birthdate': '1991-12-21', 'gender': 'MALE', 'ranking': 1300}],
     'time_control': 'BULLET',
     'description': 'a very nice tournament with four outstanding players',
-    'rounds_list': 0,
+    'rounds_list': [],
     'rounds': 3
 }
 

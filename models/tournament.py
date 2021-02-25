@@ -9,7 +9,6 @@ from typing import Union
 from models.player import Player
 from models.serializable import Serializable
 
-
 class Tournament(Serializable):
     """
     This is the class for the Python Object: Tournament
@@ -48,7 +47,7 @@ class Tournament(Serializable):
         try:
             self.rounds_list = rounds_list
         except AttributeError:
-            errors.append('Rounds Count')
+            errors.append('Rounds List')
         try:
             self.rounds = rounds
         except AttributeError:
@@ -122,7 +121,7 @@ class Tournament(Serializable):
     @players.setter
     def players(self, value: Union[list[dict], list[Player]]):
         player_dicts_list = []
-        if isinstance(value[0], dict): # il faut faire les memes verifs sur les dicts que les verifs sur les attributs de Player (ex: last_name = majs,mins)
+        if isinstance(value[0], dict):
             for player_dict in value:
                 try:
                     player_instance = Player(**player_dict)
@@ -176,13 +175,15 @@ class Tournament(Serializable):
     def rounds_list(self) -> list:
         return self.__rounds_list
 
+    @property
+    def rounds_list_pod(self) -> list:
+
+        return self.__rounds_list
+
     @rounds_list.setter
     def rounds_list(self, value: list):
-        if type(value) == int:
-            if value >= 0:
-                self.__rounds_list = value
-            else:
-                raise AttributeError()
+        if type(value) == list:
+            self.__rounds_list = value
         else:
             raise AttributeError()
 

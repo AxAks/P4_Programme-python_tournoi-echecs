@@ -63,10 +63,10 @@ date = '1987-02-28'
 players = players_list
 time_control = 'BULLET'
 description = 'a very nice tournament with four outstanding players'
-rounds_count = 0
+rounds_list = []
 rounds = 3
 
-tournament24 = Tournament(name, location, date, players, time_control, description, rounds_count, rounds)
+tournament24 = Tournament(name, location, date, players, time_control, description, rounds_list, rounds)
 
 
 # Match

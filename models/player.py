@@ -104,7 +104,7 @@ class Player(Serializable):
             raise AttributeError()
 
     @property
-    def gender(self) -> Gender:
+    def gender(self) -> Union[str, Gender]:
         return self.__gender
 
     def gender_pod(self) -> str:

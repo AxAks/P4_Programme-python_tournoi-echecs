@@ -26,8 +26,8 @@ player2_dict = {
     'ranking': 2400
 }
 
-player1 = Player(player1_dict)
-player2 = Player(player2_dict)
+player1 = Player(**player1_dict)
+player2 = Player(**player2_dict)
 
 
 player1_score = 1
