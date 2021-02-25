@@ -14,10 +14,45 @@ from models.round import Round
 # Sample Values
 
 #  Player
-player1 = Player('aKONdé', 'Axel', '1986-05-02', Player.Gender.MALE, 1)
-player2 = Player('Berd', 'Bernard', '1982-03-01', 'FEMALE', 3)
-player3 = Player('CERAS', 'Cédric', '1978-04-26', 'FEMALE', 2)
-player4 = Player('Deflar', 'Didier', '1991-12-21', 'FEMALE', 4)
+player1_dict = {
+    'uuid': 1,
+    'last_name': 'aKONdé',
+    'first_name': 'Axel',
+    'birthdate': '1986-05-02',
+    'gender': Player.Gender.MALE,
+    'ranking': 2500
+}
+player2_dict = {
+    'uuid': 2,
+    'last_name': 'Berd',
+    'first_name': 'Bernard',
+    'birthdate': '1982-03-01',
+    'gender': 'MALE',
+    'ranking': 2400
+}
+
+player3_dict = {
+    'uuid': 3,
+    'last_name': 'CERAS',
+    'first_name': 'Cédric',
+    'birthdate': '1978-04-26',
+    'gender': 'MALE',
+    'ranking': 1400
+}
+
+player4_dict = {
+    'uuid': 4,
+    'last_name': 'Deflar',
+    'first_name': 'Didier',
+    'birthdate': '1991-12-21',
+    'gender': 'MALE',
+    'ranking': 1300
+}
+
+player1 = Player(**player1_dict)
+player2 = Player(**player2_dict)
+player3 = Player(**player3_dict)
+player4 = Player(**player4_dict)
 
 players_list = [player1, player2, player3, player4]
 
@@ -50,7 +85,14 @@ matches_list = [match1, match2]
 
 # Round
 
-round1 = Round('Round 1', tournament24, matches_list, end_time=datetime.now())
+round1_dict = {
+    'name': 'Round 1',
+    'tournament': tournament24,
+    'matches': matches_list,
+    'end_time': datetime.now()
+}
+
+round1 = Round(**round1_dict)
 print(round1)
 print(round1.__dict__)
 
@@ -70,10 +112,10 @@ print("No AssertionError returned means the test passed\nA problem returns an As
 serialized_round1 = test_serialize_round(round1)
 deserialized_round1 = test_deserialize_round(serialized_round1)
 print(f'Round 1 Object : {round1}')
-print(f'Round 1 Object Details{round1.__dict__}') # pb print trouver comment afficher le detail du tournoi sous forme de dict alors qu'on est dans une instance d'objet
+print(f'Round 1 Object Details{round1_dict}') # pb print trouver comment afficher le detail du tournoi sous forme de dict alors qu'on est dans une instance d'objet
 print(f'Round 1 serialized {deserialized_round1.__dict__}')
 
 
-assert round1.__dict__ == deserialized_round1.__dict__ # le test ne fonctionne plus mais les données sont bonnes
+assert round1_dict == deserialized_round1.__dict__ # le test ne fonctionne plus mais les données sont bonnes
 
 print("End: Test Serialization/Deserialization Round")

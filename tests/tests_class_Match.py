@@ -9,8 +9,26 @@ from models.match import Match
 from models.player import Player
 
 
-player1 = Player('aKONdé', 'Axel', '1986-05-02', Player.Gender.MALE, 1)
-player2 = Player('Berd', 'Bernard', '1982-03-01', 'FEMALE', 3)
+player1_dict = {
+    'uuid': 1,
+    'last_name': 'aKONdé',
+    'first_name': 'Axel',
+    'birthdate': '1986-05-02',
+    'gender': Player.Gender.MALE,
+    'ranking': 2500
+}
+player2_dict = {
+    'uuid': 2,
+    'last_name': 'Berd',
+    'first_name': 'Bernard',
+    'birthdate': '1982-03-01',
+    'gender': 'MALE',
+    'ranking': 2400
+}
+
+player1 = Player(player1_dict)
+player2 = Player(player2_dict)
+
 
 player1_score = 1
 player2_score = 0

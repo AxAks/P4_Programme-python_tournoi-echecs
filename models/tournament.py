@@ -123,15 +123,35 @@ class Tournament(Serializable):
         self.__date = value
 
     @property
-    def players(self) -> list:
+    def players(self) -> list[Player]:
+        return self.__players
+
+    @property
+    def players_pod(self) -> list[dict]:
         return self.__players
 
     @players.setter
-    def players(self, value: Union[list[str], list[Player]]):
-        if isinstance(value, list):
+    def players(self, value: Union[list[dict], list[Player]]):
+        if isinstance(value[0], dict):
             self.__players = value
+        elif isinstance(value[0], Player):
+            player_dicts_list = []
+            for player_obj in value:
+                try:
+                    player_obj.serialize()
+                    player_dicts_list.append(player_obj)
+                except AttributeError:
+                    raise AttributeError()
         else:
             raise AttributeError()
+
+            """    
+            for player_obj in value:
+                try:
+                    player_dicts_list = [player_obj.serialize() for player_obj in self.players]
+            except AttributeError:
+                raise Exception
+            """
 
     @property
     def time_control(self) -> Time_control:
@@ -199,6 +219,7 @@ class Tournament(Serializable):
         attributes_dict = {}
         for attribute in self.__dict__.keys():
             cleaned_attribute_name = attribute.replace(f"_{self.__class__.__name__}__", '')
+            """
             if cleaned_attribute_name == "players":
                 try:
                     player_dicts_list = [player_obj.serialize() for player_obj in self.players]
@@ -207,6 +228,7 @@ class Tournament(Serializable):
                     continue
                 except AttributeError:
                     raise Exception(f'Error in the serialization of the attribute: {cleaned_attribute_name}')
+            """
             if hasattr(self, cleaned_attribute_name + '_pod'):
                 attributes_dict[cleaned_attribute_name] = getattr(self, cleaned_attribute_name + '_pod')()
             else:

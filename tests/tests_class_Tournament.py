@@ -12,10 +12,45 @@ from models.player import Player
 # Sample Values
 
 #  Player
-player1 = Player('aKONdé', 'Axel', '1986-05-02', Player.Gender.MALE, 1)
-player2 = Player('Berd', 'Bernard', '1982-03-01', 'FEMALE', 3)
-player3 = Player('CERAS', 'Cédric', '1978-04-26', 'FEMALE', 2)
-player4 = Player('Deflar', 'Didier', '1991-12-21', 'FEMALE', 4)
+player1_dict = {
+    'uuid': 1,
+    'last_name': 'aKONdé',
+    'first_name': 'Axel',
+    'birthdate': '1986-05-02',
+    'gender': Player.Gender.MALE,
+    'ranking': 2500
+}
+player2_dict = {
+    'uuid': 2,
+    'last_name': 'Berd',
+    'first_name': 'Bernard',
+    'birthdate': '1982-03-01',
+    'gender': 'MALE',
+    'ranking': 2400
+}
+
+player3_dict = {
+    'uuid': 3,
+    'last_name': 'CERAS',
+    'first_name': 'Cédric',
+    'birthdate': '1978-04-26',
+    'gender': 'MALE',
+    'ranking': 1400
+}
+
+player4_dict = {
+    'uuid': 4,
+    'last_name': 'Deflar',
+    'first_name': 'Didier',
+    'birthdate': '1991-12-21',
+    'gender': 'MALE',
+    'ranking': 1300
+}
+
+player1 = Player(**player1_dict)
+player2 = Player(**player2_dict)
+player3 = Player(**player3_dict)
+player4 = Player(**player4_dict)
 
 players_list = [player1, player2, player3, player4]
 
@@ -24,16 +59,18 @@ players_list = [player1, player2, player3, player4]
 
 # ecrire un dictionnaire des données et c'est ca qu'on comparera à deserialized_tournament24 !
 
-name = 'Best Tournament Ever'
-location = 'Geneve'
-date = '1987-02-28'
-players = players_list
-time_control = 'BULLET'
-description = 'a very nice tournament with four outstanding players'
-rounds_count = 0
-rounds = 3
+tournament24_dict = {
+    'name': 'Best Tournament Ever',
+    'location': 'Geneve',
+    'date': '1987-02-28',
+    'players': players_list,
+    'time_control': 'BULLET',
+    'description': 'a very nice tournament with four outstanding players',
+    'rounds_list': 0,
+    'rounds': 3
+}
 
-tournament24 = Tournament(name, location, date, players, time_control, description, rounds_count, rounds)
+tournament24 = Tournament(**tournament24_dict)
 
 
 # Tests Serialization/Deserialization Tournament
@@ -52,5 +89,5 @@ serialized_tournament24 = test_serialize_tournament(tournament24)
 deserialized_tournament24 = test_deserialize_tournament(serialized_tournament24)
 print(tournament24.__dict__)  # pb print trouver comment afficher le detail des players en liste de dicts alors qu'on est dans une instance d'objet
 print(deserialized_tournament24.__dict__)
-assert tournament24.__dict__ == deserialized_tournament24.__dict__ # le test ne fonctionne plus mais les données sont bonnes
+assert tournament24_dict == deserialized_tournament24.__dict__ # le test ne fonctionne plus mais les données sont bonnes
 print("End: Test Serialization/Deserialization Tournament")

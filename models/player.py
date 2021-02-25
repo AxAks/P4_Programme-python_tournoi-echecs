@@ -20,10 +20,14 @@ class Player(Serializable):
     attributes = Enum("attributes", "last_name first_name birthdate gender ranking")
 
 #  ajouter un attribut uuid, voir uuid4 module (gestion des uuid pas de registre à tenir), sinon tenir un registre et on incremente, avec ID_MAX pour le player value)None possible, if value == None ajouter un UUID
-    def __init__(self, last_name: str, first_name: str, birthdate: Union[str, date], #  (self, **params) avec boucle for + try/except si elle sont dans params on recupere la valeur
+    def __init__(self, uuid: int, last_name: str, first_name: str, birthdate: Union[str, date], #  (self, **params) avec boucle for + try/except si elle sont dans params on recupere la valeur
                  gender: Union[str, Gender], ranking: int):
         # super().__init__('last_name', 'first_name', ...) a faire dans toutes les classes
         errors = []
+        try:
+            self.uuid = uuid
+        except AttributeError:
+            errors.append('Uuid')
         try:
             self.last_name = last_name
         except AttributeError:
@@ -47,6 +51,14 @@ class Player(Serializable):
 
         if errors:
             raise Exception(f'Error detected in the following fields: {", ".join(errors)}')
+
+    @property
+    def uuid(self) -> int:
+        return self.__uuid
+
+    @uuid.setter
+    def uuid(self, value: int):
+        self.__uuid = value
 
     @property
     def last_name(self) -> str:
