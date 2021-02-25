@@ -82,12 +82,12 @@ class Round(Serializable):
             raise AttributeError()
 
     @property
-    def matches(self) -> list[tuple]:
+    def matches(self) -> list[list[tuple]]:
         return self.__matches
 
 
     @matches.setter
-    def matches(self, value: list[tuple]):
+    def matches(self, value: list[list[tuple]]):
         matches = []
 
         for tuple_item in value:

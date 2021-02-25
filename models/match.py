@@ -122,7 +122,7 @@ class Match(Serializable):
     def serialize(self) -> dict:
         """
         This method overrides the Serializable.serialize() method to convert Match Object
-        into a tuple of 2 lists [player, score].
+        into a list of 2 tuples [player, score].
         """
         attributes_dict = {}
         for attribute in self.__dict__.keys():
@@ -132,10 +132,10 @@ class Match(Serializable):
             else:
                 attributes_dict[cleaned_attribute_name] = getattr(self, cleaned_attribute_name)
         match_tuple = \
-            [
-                (attributes_dict['player1'],
-                 attributes_dict['player1_score']),
-                (attributes_dict['player2'],
-                 attributes_dict['player2_score'])
-                 ]
+            (
+                [attributes_dict['player1'],
+                 attributes_dict['player1_score']],
+                [attributes_dict['player2'],
+                 attributes_dict['player2_score']]
+            )
         return match_tuple
