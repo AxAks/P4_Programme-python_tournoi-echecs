@@ -8,15 +8,13 @@ from models.player import Player
 
 
 class Match(Serializable):
-    # à ré-écrire !!
     """
     This is the class for the Python Object: Match
+    A single match is saved as a tuple of two lists:
+    -> ([player1, player1_result],[player2, player2_result])
 
-    Un match unique doit etre stocké sous la forme d'un tuple contenant deux listes :
-    -> match1 = ([player1, player1_result],[player2, player2_result])
-
-    Les matchs multiples doivent être stockés sous forme de liste sur l'instance du tour:
-    -> matches = [match1, match2, match3]
+    Multiple matches are not saved here but as a list in the Class Round
+    -> Round.matches = [match1, match2, match3]
     """
     Score = Enum("Score", "0 0.5 1")
 
@@ -44,11 +42,7 @@ class Match(Serializable):
             raise Exception(f'Error detected in the following fields: {", ".join(errors)}')
 
     @property
-    def player1(self) -> Player:
-        return self.__player1
-
-    @property
-    def player1_pod(self) -> dict:
+    def player1(self) -> dict:
         return self.__player1
 
     @player1.setter
@@ -58,16 +52,16 @@ class Match(Serializable):
             serialized_player1 = player1.serialize()
             self.__player1 = serialized_player1
         elif isinstance(value, Player):
-            self.__player1 = value
+            try:
+                player_infos_dict = Serializable.serialize(self.__dict__[value])
+                self.__player1 = player_infos_dict
+            except AttributeError:
+                raise Exception(f'Error in the serialization of the attribute: player1')
         else:
             raise AttributeError()
 
     @property
     def player2(self) -> Union[dict, Player]:
-        return self.__player2
-
-    @property
-    def player2_pod(self) -> dict:
         return self.__player2
 
     @player2.setter
@@ -77,7 +71,11 @@ class Match(Serializable):
             serialized_player2 = player2.serialize()
             self.__player2 = serialized_player2
         elif isinstance(value, Player):
-            self.__player2 = value
+            try:
+                player_infos_dict = Serializable.serialize(self.__dict__[value])
+                self.__player2 = player_infos_dict
+            except AttributeError:
+                raise Exception(f'Error in the serialization of the attribute: player1')
         else:
             raise AttributeError()
 
@@ -129,13 +127,6 @@ class Match(Serializable):
         attributes_dict = {}
         for attribute in self.__dict__.keys():
             cleaned_attribute_name = attribute.replace(f"_{self.__class__.__name__}__", '')
-            if cleaned_attribute_name in ('player1', 'player2'):
-                try:
-                    player_infos_dict = Serializable.serialize(self.__dict__[attribute])
-                    attributes_dict[cleaned_attribute_name] = player_infos_dict
-                    continue
-                except AttributeError:
-                    raise Exception(f'Error in the serialization of the attribute: {cleaned_attribute_name}')
             if hasattr(self, cleaned_attribute_name + '_pod'):
                 attributes_dict[cleaned_attribute_name] = getattr(self, cleaned_attribute_name + '_pod')()
             else:
@@ -146,5 +137,5 @@ class Match(Serializable):
                  attributes_dict['player1_score']],
                 [attributes_dict['player2'],
                  attributes_dict['player2_score']]
-            )
+                 )
         return match_tuple

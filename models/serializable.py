@@ -10,7 +10,7 @@ class Serializable:
     """
     # def __init__(self): je vais le construire après
 
-    def serialize(self,):
+    def serialize(self):
         attributes_dict = {}
         for attribute in self.__dict__.keys():
             cleaned_attribute_name = attribute.replace(f"_{self.__class__.__name__}__", '')
