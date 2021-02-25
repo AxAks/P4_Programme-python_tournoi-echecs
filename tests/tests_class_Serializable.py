@@ -155,5 +155,8 @@ print("Start: Test Serialization/Deserialization Global")
 print("No AssertionError returned means the test passed\nA problem returns an Assertion Error")
 serialized_tournament23 = test_serialize_global(tournament23)
 deserialized_tournament23 = test_deserialize_global(Tournament, serialized_tournament23)
+print(tournament23.__dict__)
+print(deserialized_tournament23.__dict__)
+
 assert tournament23.__dict__ == deserialized_tournament23.__dict__  # pb possible avec le stockage des players ? c'esst l'object player qui est stocké et non les infos du player
 print("End: Test Serialization/Deserialization Global")

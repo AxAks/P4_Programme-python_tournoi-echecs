@@ -62,8 +62,15 @@ players_list = [player1, player2, player3, player4]
 tournament24_dict = {
     'name': 'Best Tournament Ever',
     'location': 'Geneve',
-    'date': '1987-02-28',
-    'players': players_list,
+    'dates': '1987-02-28',
+    'players': [{'uuid': 1, 'last_name': 'Akondé', 'first_name': 'Axel',
+                 'birthdate': '1986-05-02', 'gender': 'MALE', 'ranking': 2500},
+                {'uuid': 2, 'last_name': 'Berd', 'first_name': 'Bernard',
+                 'birthdate': '1982-03-01', 'gender': 'MALE', 'ranking': 2400},
+                {'uuid': 3, 'last_name': 'Ceras', 'first_name': 'Cédric',
+                 'birthdate': '1978-04-26', 'gender': 'MALE', 'ranking': 1400},
+                {'uuid': 4, 'last_name': 'Deflar', 'first_name': 'Didier',
+                 'birthdate': '1991-12-21', 'gender': 'MALE', 'ranking': 1300}],
     'time_control': 'BULLET',
     'description': 'a very nice tournament with four outstanding players',
     'rounds_list': 0,
@@ -87,7 +94,8 @@ print("Start: Test Serialization/Deserialization Tournament")
 print("No AssertionError returned means the test passed\nA problem returns an Assertion Error")
 serialized_tournament24 = test_serialize_tournament(tournament24)
 deserialized_tournament24 = test_deserialize_tournament(serialized_tournament24)
-print(tournament24.__dict__)  # pb print trouver comment afficher le detail des players en liste de dicts alors qu'on est dans une instance d'objet
-print(deserialized_tournament24.__dict__)
-assert tournament24_dict == deserialized_tournament24.__dict__ # le test ne fonctionne plus mais les données sont bonnes
+print(f'Dict: {tournament24_dict}')  # pb print trouver comment afficher le detail des players en liste de dicts alors qu'on est dans une instance d'objet
+print(f'Object: {deserialized_tournament24.__dict__}')
+print(f'Serialized:: {serialized_tournament24}')
+assert tournament24_dict == serialized_tournament24  # le test ne fonctionne plus mais les données sont bonnes
 print("End: Test Serialization/Deserialization Tournament")

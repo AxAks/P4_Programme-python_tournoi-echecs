@@ -2,7 +2,7 @@
 
 import re
 
-from datetime import datetime, date
+from datetime import date
 from enum import Enum
 from typing import Union
 
@@ -18,7 +18,7 @@ class Tournament(Serializable):
     """
     Time_control = Enum("Time_control", "BULLET BLITZ RAPIDE")
 
-    def __init__(self, name: str, location: str, date: Union[str, date], players: list,
+    def __init__(self, name: str, location: str, dates: Union[str, date], players: Union[list[dict], list[Player]],
                  time_control: Union[str, Time_control], description: str, rounds_list: list, rounds: int = 4):
         errors = []
         try:
@@ -30,9 +30,9 @@ class Tournament(Serializable):
         except AttributeError:
             errors.append('Location')
         try:
-            self.date = date
+            self.dates = dates
         except AttributeError:
-            errors.append('Date')
+            errors.append('Dates')
         try:
             self.players = players
         except AttributeError:
@@ -98,67 +98,56 @@ class Tournament(Serializable):
             raise AttributeError()
 
     @property
-    def date(self) -> Union[str, date]:
-        return self.__date
+    def dates(self) -> Union[str, date]:
+        return self.__dates
 
-    def date_pod(self) -> str:
-        return self.__date.isoformat()
+    def dates_pod(self) -> str:
+        return self.__dates.isoformat()
 
-    @date.setter
-    def date(self, value: str):
+    @dates.setter
+    def dates(self, value: Union[str, date]):
         if isinstance(value, str):
-            regex_iso8601 = "^(-?(?:[1-9][0-9]*)?[0-9]{4})-(1[0-2]|0[1-9])-(3[01]|0[1-9]|[12][0-9])$"
-            check_iso8601_format = re.compile(regex_iso8601)
-            if re.match(check_iso8601_format, value):
-                try:
-                    value = datetime.strptime(value, '%Y-%m-%d').date()
-                except ValueError:
-                    raise AttributeError()
-            else:
+            try:
+                value = date.fromisoformat(value)
+                self.__dates = value
+            except ValueError:
                 raise AttributeError()
-
         elif not isinstance(value, date):
             raise AttributeError()
 
-        self.__date = value
-
     @property
-    def players(self) -> list[Player]:
-        return self.__players
-
-    @property
-    def players_pod(self) -> list[dict]:
+    def players(self) -> list[dict]:
         return self.__players
 
     @players.setter
     def players(self, value: Union[list[dict], list[Player]]):
-        if isinstance(value[0], dict):
-            self.__players = value
+        player_dicts_list = []
+        if isinstance(value[0], dict): # il faut faire les memes verifs sur les dicts que les verifs sur les attributs de Player (ex: last_name = majs,mins)
+            for player_dict in value:
+                try:
+                    player_instance = Player(**player_dict)
+                    serialized_player = player_instance.serialize()
+                    player_dicts_list.append(serialized_player)
+                    self.__players = player_dicts_list
+                except AttributeError:
+                    raise AttributeError()
         elif isinstance(value[0], Player):
-            player_dicts_list = []
             for player_obj in value:
                 try:
-                    player_obj.serialize()
-                    player_dicts_list.append(player_obj)
+                    serialized_player = player_obj.serialize()
+                    player_dicts_list.append(serialized_player)
+                    self.__players = player_dicts_list
                 except AttributeError:
                     raise AttributeError()
         else:
             raise AttributeError()
-
-            """    
-            for player_obj in value:
-                try:
-                    player_dicts_list = [player_obj.serialize() for player_obj in self.players]
-            except AttributeError:
-                raise Exception
-            """
 
     @property
     def time_control(self) -> Time_control:
         return self.__time_control
 
     def time_control_pod(self) -> str:
-        return self.__time_control
+        return self.__time_control.name
 
     @time_control.setter
     def time_control(self, value: Union[str, Time_control]):
@@ -219,16 +208,6 @@ class Tournament(Serializable):
         attributes_dict = {}
         for attribute in self.__dict__.keys():
             cleaned_attribute_name = attribute.replace(f"_{self.__class__.__name__}__", '')
-            """
-            if cleaned_attribute_name == "players":
-                try:
-                    player_dicts_list = [player_obj.serialize() for player_obj in self.players]
-                    players = player_dicts_list
-                    attributes_dict[cleaned_attribute_name] = players
-                    continue
-                except AttributeError:
-                    raise Exception(f'Error in the serialization of the attribute: {cleaned_attribute_name}')
-            """
             if hasattr(self, cleaned_attribute_name + '_pod'):
                 attributes_dict[cleaned_attribute_name] = getattr(self, cleaned_attribute_name + '_pod')()
             else:

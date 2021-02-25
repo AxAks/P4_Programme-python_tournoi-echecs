@@ -58,7 +58,10 @@ class Player(Serializable):
 
     @uuid.setter
     def uuid(self, value: int):
-        self.__uuid = value
+        if isinstance(value, int):
+            self.__uuid = value
+        else:
+            raise AttributeError()
 
     @property
     def last_name(self) -> str:
@@ -130,7 +133,7 @@ class Player(Serializable):
     def birthdate(self, value: Union[str, date]):
         if isinstance(value, str):
             try:
-                value = date.fromisoformat(value)  # transforme la string en format date
+                value = date.fromisoformat(value)
             except ValueError:
                 raise AttributeError()
         elif not isinstance(value, date):
