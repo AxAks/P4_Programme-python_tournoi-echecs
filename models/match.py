@@ -132,10 +132,10 @@ class Match(Serializable):
             else:
                 attributes_dict[cleaned_attribute_name] = getattr(self, cleaned_attribute_name)
         match_tuple = \
-            (
-                [attributes_dict['player1'],
-                 attributes_dict['player1_score']],
-                [attributes_dict['player2'],
-                 attributes_dict['player2_score']]
-                 )
+            [
+                (attributes_dict['player1'],
+                 attributes_dict['player1_score']),
+                (attributes_dict['player2'],
+                 attributes_dict['player2_score'])
+                 ]
         return match_tuple

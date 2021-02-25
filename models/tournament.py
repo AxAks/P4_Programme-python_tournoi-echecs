@@ -172,20 +172,12 @@ class Tournament(Serializable):
             raise AttributeError()
 
     @property
-    def rounds_list(self) -> list:
-        return self.__rounds_list
-
-    @property
-    def rounds_list_pod(self) -> list:
-
+    def rounds_list(self) -> list[tuple[dict, int], tuple[dict, int]]:
         return self.__rounds_list
 
     @rounds_list.setter
-    def rounds_list(self, value: list):
-        if type(value) == list:
-            self.__rounds_list = value
-        else:
-            raise AttributeError()
+    def rounds_list(self, value: list[tuple[dict, int], tuple[dict, int]]):
+        self.__rounds_list = value
 
     @property
     def rounds(self) -> int:
