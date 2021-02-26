@@ -70,7 +70,7 @@ class Tournament(Serializable):
         :return:
         """
         #  à factoriser ? : doublon avec Player last_name et first_name
-        authorized_characters = re.compile("^[A-ZÉÈÇÀa-zéèçà\- ]+$")
+        authorized_characters = re.compile("^[A-ZÉÈÇÀa-zéèçà\- 1-9]+$")
         if re.match(authorized_characters, value):
             self.__name = value.title()
         else:
@@ -111,7 +111,9 @@ class Tournament(Serializable):
                 self.__dates = value
             except ValueError:
                 raise AttributeError()
-        elif not isinstance(value, date):
+        elif isinstance(value, date):
+            self.__dates = value
+        else:
             raise AttributeError()
 
     @property

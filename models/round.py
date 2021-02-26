@@ -116,23 +116,41 @@ class Round(Serializable):
         return self.__start_time
 
     def start_time_pod(self) -> str:
-        return self.__start_time.isoformat()
+        return self.__start_time.strftime('%Y-%m-%dT%H:%M:%S')
 
     @start_time.setter
-    def start_time(self, value: datetime):  #  doit etre automatiquement enregisté lors de l'instanciation du round
-        self.__start_time = value
+    def start_time(self, value: datetime) -> Union[str, datetime]:  #  doit etre automatiquement enregisté lors de l'instanciation du round
+        if isinstance(value, str):
+            try:
+                value = datetime.strptime(value, '%Y-%m-%dT%H:%M:%S')
+                self.__start_time = value
+            except ValueError:
+                raise AttributeError()
+        elif isinstance(value, datetime):
+            self.__start_time = value
+        else:
+            raise AttributeError()
 
     @property
     def end_time(self) -> datetime:
         return self.__end_time
 
     def end_time_pod(self) -> str:
-        return self.__end_time.isoformat()
+        return self.__end_time.strftime('%Y-%m-%dT%H:%M:%S')
 
     @end_time.setter
     def end_time(self,
-                 value: datetime):  #  doit etre automatiquement enregisté lors de la fin de saisie des infos du round
-        self.__end_time = value
+                 value: Union[str, datetime]):  #  doit etre automatiquement enregisté lors de la fin de saisie des infos du round
+        if isinstance(value, str):
+            try:
+                value = datetime.strptime(value, '%Y-%m-%dT%H:%M:%S')
+                self.__end_time = value
+            except ValueError:
+                raise AttributeError()
+        elif isinstance(value, datetime):
+            self.__end_time = value
+        else:
+            raise AttributeError()
 
     def serialize(self) -> dict:
         """
