@@ -66,6 +66,10 @@ class Round(Serializable):
     def tournament(self) -> Tournament:
         return self.__tournament
 
+    @property
+    def tournament_pod(self) -> dict:
+        return self.__tournament
+
     @tournament.setter
     def tournament(self, value: Union[dict, Tournament]):
         if isinstance(value, dict):
@@ -84,7 +88,6 @@ class Round(Serializable):
     @property
     def matches(self) -> list[list[tuple]]:
         return self.__matches
-
 
     @matches.setter
     def matches(self, value: list[list[tuple]]):

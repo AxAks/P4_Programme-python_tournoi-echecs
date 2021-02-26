@@ -104,7 +104,7 @@ round1_dict = {
     },
     'matches': [
         [
-            ({'uuid': 1, 'last_name': 'aKONdé', 'first_name': 'Axel', 'birthdate': '1986-05-02', 'gender': 'MALE',
+            ({'uuid': 1, 'last_name': 'Akondé', 'first_name': 'Axel', 'birthdate': '1986-05-02', 'gender': 'MALE',
               'ranking': 2500}, 1),
             ({'uuid': 2, 'last_name': 'Berd', 'first_name': 'Bernard', 'birthdate': '1982-03-01', 'gender': 'MALE',
               'ranking': 2400}, 0)],
@@ -115,8 +115,8 @@ round1_dict = {
               'ranking': 1300}, 0.5)
         ]
     ],
-    'start_time': datetime.now(), # '2021-02-26T11:33:07',
-    'end_time': datetime.now() # '2021-02-26T11:34:07'
+    'start_time': '2021-02-26T11:33:07',
+    'end_time': '2021-02-26T11:34:07'
 }
 
 tournament24
@@ -146,9 +146,9 @@ print("Start: Test Serialization/Deserialization Round")
 print("No AssertionError returned means the test passed\nA problem returns an Assertion Error")
 serialized_round1 = test_serialize_round(round1)
 deserialized_round1 = test_deserialize_round(serialized_round1)
-print(f'Round 1 Object : {round1}')
 print(
-    f'Round 1 Dict Details{round1_dict}')  #  pb print trouver comment afficher le detail du tournoi sous forme de dict alors qu'on est dans une instance d'objet
+    f'Round 1 Dict : {round1_dict}')  #  pb print trouver comment afficher le detail du tournoi sous forme de dict alors qu'on est dans une instance d'objet
+print(f'Round 1 Object : {round1}')
 print(f'Round 1 Object Details{round1.__dict__}')
 print(f'Round 1 serialized {serialized_round1}')
 print(f'Round 1 deserialized {deserialized_round1.__dict__}')
