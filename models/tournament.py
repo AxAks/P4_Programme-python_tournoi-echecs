@@ -9,6 +9,7 @@ from typing import Union
 from models.player import Player
 from models.serializable import Serializable
 
+
 class Tournament(Serializable):
     """
     This is the class for the Python Object: Tournament

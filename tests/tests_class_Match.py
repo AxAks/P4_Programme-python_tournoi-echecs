@@ -45,7 +45,7 @@ match1_dict = {
     'player1_score': 1,
     'player2_score': 0
 }
-match1_tuple =(
+match1_tuple = (
     [
         match1_dict['player1'],
         match1_dict['player1_score']
@@ -56,12 +56,16 @@ match1_tuple =(
     ],
 )
 
+
 match1 = Match(**match1_dict)
+
+
+deserialized_match1 = Serializable.serialize(match1)
 
 print("Start: Test Serialization/Deserialization Match")
 print("No AssertionError returned means the test passed\nA problem returns an Assertion Error")
 serialized_match1 = Match.serialize(match1)
-print(match1_tuple)  # pb print trouver comment afficher le detail des players en liste de dicts alors qu'on est dans une instance d'objet
-print(serialized_match1)
-assert match1_tuple == serialized_match1  #  le test ne fonctionne plus mais les données sont bonnes
+print(f'Match Tuple : {match1_tuple}')
+print(f'Serialized Match 1 : {serialized_match1}')
+assert match1_tuple == serialized_match1
 print("End: Test Serialization/Deserialization Match")

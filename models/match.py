@@ -119,7 +119,7 @@ class Match(Serializable):
         else:
             raise AttributeError()
 
-    def serialize(self) -> dict:
+    def serialize(self) -> tuple[list, list]:
         """
         This method overrides the Serializable.serialize() method to convert Match Object
         into a list of 2 tuples [player, score].
@@ -131,6 +131,7 @@ class Match(Serializable):
                 attributes_dict[cleaned_attribute_name] = getattr(self, cleaned_attribute_name + '_pod')()
             else:
                 attributes_dict[cleaned_attribute_name] = getattr(self, cleaned_attribute_name)
+
         match_tuple = \
             (
                 [attributes_dict['player1'],
@@ -138,4 +139,5 @@ class Match(Serializable):
                 [attributes_dict['player2'],
                  attributes_dict['player2_score']]
             )
+
         return match_tuple

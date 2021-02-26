@@ -158,5 +158,5 @@ deserialized_tournament23 = test_deserialize_global(Tournament, serialized_tourn
 print(tournament23.__dict__)
 print(deserialized_tournament23.__dict__)
 
-assert tournament23.__dict__ == deserialized_tournament23.__dict__  # pb possible avec le stockage des players ? c'esst l'object player qui est stocké et non les infos du player
+assert tournament23.__dict__ == deserialized_tournament23.__dict__
 print("End: Test Serialization/Deserialization Global")
