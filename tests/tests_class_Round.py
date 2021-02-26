@@ -123,7 +123,16 @@ tournament24
 name = 'Best Tournament Ever'
 location = 'Geneve'
 dates = '1987-02-28'
-players = players_list
+players = [
+            {'uuid': 1, 'last_name': 'Akondé', 'first_name': 'Axel', 'birthdate': '1986-05-02', 'gender': 'MALE',
+             'ranking': 2500},
+            {'uuid': 2, 'last_name': 'Berd', 'first_name': 'Bernard', 'birthdate': '1982-03-01', 'gender': 'MALE',
+             'ranking': 2400},
+            {'uuid': 3, 'last_name': 'Ceras', 'first_name': 'Cédric', 'birthdate': '1978-04-26', 'gender': 'MALE',
+             'ranking': 1400},
+            {'uuid': 4, 'last_name': 'Deflar', 'first_name': 'Didier', 'birthdate': '1991-12-21', 'gender': 'MALE',
+             'ranking': 1300}
+        ]
 time_control = 'BULLET'
 description = 'a very nice tournament with four outstanding players'
 rounds_list = []
@@ -144,15 +153,14 @@ def test_deserialize_round(attributes_dict):
 
 print("Start: Test Serialization/Deserialization Round")
 print("No AssertionError returned means the test passed\nA problem returns an Assertion Error")
+
 serialized_round1 = test_serialize_round(round1)
 deserialized_round1 = test_deserialize_round(serialized_round1)
-print(
-    f'Round 1 Dict : {round1_dict}')  #  pb print trouver comment afficher le detail du tournoi sous forme de dict alors qu'on est dans une instance d'objet
+print(f'ICI -> Round 1 Dict : {round1_dict}')
 print(f'Round 1 Object : {round1}')
 print(f'Round 1 Object Details{round1.__dict__}')
-print(f'Round 1 serialized {serialized_round1}')
+print(f'ICI -> Round 1 serialized {serialized_round1}')
 print(f'Round 1 deserialized {deserialized_round1.__dict__}')
-
 assert round1_dict == serialized_round1  #  le test ne fonctionne plus mais les données sont bonnes
-
+assert round1.__dict__ == deserialized_round1.__dict__
 print("End: Test Serialization/Deserialization Round")

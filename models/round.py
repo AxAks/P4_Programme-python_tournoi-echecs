@@ -68,18 +68,19 @@ class Round(Serializable):
 
     @property
     def tournament_pod(self) -> dict:
-        return self.__tournament
+        return Serializable.serialize(self.__tournament)
 
     @tournament.setter
     def tournament(self, value: Union[dict, Tournament]):
         if isinstance(value, dict):
             try:
-                self.__tournament = Tournament(**value)
+                self.__tournament = value
             except AttributeError:
                 raise AttributeError()
         elif isinstance(value, Tournament):
             try:
-                self.__tournament = value
+                serialized_tournament = value.serialize()
+                self.__tournament = serialized_tournament
             except AttributeError:
                 raise AttributeError()
         else:
