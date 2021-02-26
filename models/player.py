@@ -2,7 +2,7 @@
 
 import re
 
-from datetime import date, datetime, timedelta
+from datetime import date, timedelta
 from typing import Union
 from enum import Enum
 
