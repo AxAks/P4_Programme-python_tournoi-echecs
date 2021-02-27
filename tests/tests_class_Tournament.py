@@ -63,20 +63,20 @@ tournament24_dict = {
     'name': 'Best Tournament Ever',
     'location': 'Geneve',
     'dates': '1987-02-28',
-    'players': [{'uuid': 1, 'last_name': 'Akondé', 'first_name': 'Axel',
-                 'birthdate': '1986-05-02', 'gender': 'MALE', 'ranking': 2500},
-                {'uuid': 2, 'last_name': 'Berd', 'first_name': 'Bernard',
-                 'birthdate': '1982-03-01', 'gender': 'MALE', 'ranking': 2400},
-                {'uuid': 3, 'last_name': 'Ceras', 'first_name': 'Cédric',
-                 'birthdate': '1978-04-26', 'gender': 'MALE', 'ranking': 1400},
-                {'uuid': 4, 'last_name': 'Deflar', 'first_name': 'Didier',
-                 'birthdate': '1991-12-21', 'gender': 'MALE', 'ranking': 1300}],
+    'players': [
+            {'uuid': 1, 'last_name': 'Akondé', 'first_name': 'Axel',
+             'birthdate': '1986-05-02', 'gender': 'MALE', 'ranking': 2500},
+            {'uuid': 2, 'last_name': 'Berd', 'first_name': 'Bernard',
+             'birthdate': '1982-03-01', 'gender': 'MALE', 'ranking': 2400},
+            {'uuid': 3, 'last_name': 'Ceras', 'first_name': 'Cédric',
+             'birthdate': '1978-04-26', 'gender': 'MALE', 'ranking': 1400},
+            {'uuid': 4, 'last_name': 'Deflar', 'first_name': 'Didier',
+             'birthdate': '1991-12-21', 'gender': 'MALE', 'ranking': 1300}],
     'time_control': 'BULLET',
     'description': 'a very nice tournament with four outstanding players',
     'rounds_list': [],
     'rounds': 3
 }
-
 tournament24 = Tournament(**tournament24_dict)
 
 

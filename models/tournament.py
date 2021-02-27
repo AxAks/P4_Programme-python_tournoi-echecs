@@ -119,28 +119,21 @@ class Tournament(Serializable):
 
     @property
     def players(self) -> list[dict]:
-        return self.__players
+        return [player_instance.serialize() for player_instance in self.__players]
 
     @players.setter
     def players(self, value: Union[list[dict], list[Player]]):
-        player_dicts_list = []
+        player_objs_list = []
         if isinstance(value[0], dict):
             for player_dict in value:
                 try:
                     player_instance = Player(**player_dict)
-                    serialized_player = player_instance.serialize()
-                    player_dicts_list.append(serialized_player)
-                    self.__players = player_dicts_list
+                    player_objs_list.append(player_instance)
+                    self.__players = player_objs_list
                 except AttributeError:
                     raise AttributeError()
         elif isinstance(value[0], Player):
-            for player_obj in value:
-                try:
-                    serialized_player = player_obj.serialize()
-                    player_dicts_list.append(serialized_player)
-                    self.__players = player_dicts_list
-                except AttributeError:
-                    raise AttributeError()
+            self.__players = value
         else:
             raise AttributeError()
 

@@ -43,79 +43,63 @@ class Match(Serializable):
 
     @property
     def player1(self) -> dict:
-        return self.__player1
+        return self.__player1.serialize()
 
     @player1.setter
     def player1(self, value: Union[dict, Player]):
         if isinstance(value, dict):
             player1 = Player(**value)
-            serialized_player1 = player1.serialize()
-            self.__player1 = serialized_player1
+            self.__player1 = player1
         elif isinstance(value, Player):
             try:
-                player_infos_dict = Serializable.serialize(self.__dict__[value])
-                self.__player1 = player_infos_dict
+                self.__player1 = value
             except AttributeError:
                 raise Exception(f'Error in the serialization of the attribute: player1')
         else:
             raise AttributeError()
 
     @property
-    def player2(self) -> Union[dict, Player]:
-        return self.__player2
+    def player2(self) -> dict:
+        return self.__player2.serialize()
 
     @player2.setter
     def player2(self, value: Union[dict, Player]):
         if isinstance(value, dict):
             player2 = Player(**value)
-            serialized_player2 = player2.serialize()
-            self.__player2 = serialized_player2
+            self.__player2 = player2
         elif isinstance(value, Player):
             try:
-                player_infos_dict = Serializable.serialize(self.__dict__[value])
-                self.__player2 = player_infos_dict
+                self.__player2 = value
             except AttributeError:
                 raise Exception(f'Error in the serialization of the attribute: player1')
         else:
             raise AttributeError()
 
     @property
-    def player1_score(self) -> Union[int, Score]:
+    def player1_score(self) -> int:
         return self.__player1_score
 
-    @property
-    def player1_score_pod(self) -> int:
-        return self.__player1_score.name
-
     @player1_score.setter
-    def player1_score(self, value:  Union[int, Score]):
+    def player1_score(self, value: int):
         if isinstance(value, int):
             try:
                 self.__player1_score = value
             except KeyError:
                 raise AttributeError()
-        elif isinstance(value, self.Score): # pas testé !
-            self.__player1_score = self.Score[value]
         else:
             raise AttributeError()
 
     @property
-    def player2_score(self) -> Union[int, Score]:
+    def player2_score(self) -> int:
         return self.__player2_score
 
-    @property
-    def player2_score_pod(self) -> int:
-        return self.__player2_score.name
-
     @player2_score.setter
-    def player2_score(self, value:  Union[int, Score]):
+    def player2_score(self, value: int):
         if isinstance(value, int):
             try:
                 self.__player2_score = value
             except KeyError:
                 raise AttributeError()
-        elif isinstance(value, self.Score):
-            self.__player2_score = self.Score[value]
         else:
             raise AttributeError()
 

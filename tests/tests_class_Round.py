@@ -103,17 +103,17 @@ round1_dict = {
         'rounds': 3,
     },
     'matches': [
-        [
-            ({'uuid': 1, 'last_name': 'Akondé', 'first_name': 'Axel', 'birthdate': '1986-05-02', 'gender': 'MALE',
-              'ranking': 2500}, 1),
-            ({'uuid': 2, 'last_name': 'Berd', 'first_name': 'Bernard', 'birthdate': '1982-03-01', 'gender': 'MALE',
-              'ranking': 2400}, 0)],
-        [
-            ({'uuid': 3, 'last_name': 'Ceras', 'first_name': 'Cédric', 'birthdate': '1978-04-26', 'gender': 'MALE',
-              'ranking': 1400}, 0.5),
-            ({'uuid': 4, 'last_name': 'Deflar', 'first_name': 'Didier', 'birthdate': '1991-12-21', 'gender': 'MALE',
-              'ranking': 1300}, 0.5)
-        ]
+        (
+            [{'uuid': 1, 'last_name': 'Akondé', 'first_name': 'Axel', 'birthdate': '1986-05-02', 'gender': 'MALE',
+              'ranking': 2500}, 1],
+            [{'uuid': 2, 'last_name': 'Berd', 'first_name': 'Bernard', 'birthdate': '1982-03-01', 'gender': 'MALE',
+              'ranking': 2400}, 0]),
+        (
+            [{'uuid': 3, 'last_name': 'Ceras', 'first_name': 'Cédric', 'birthdate': '1978-04-26', 'gender': 'MALE',
+              'ranking': 1400}, 0.5],
+            [{'uuid': 4, 'last_name': 'Deflar', 'first_name': 'Didier', 'birthdate': '1991-12-21', 'gender': 'MALE',
+              'ranking': 1300}, 0.5]
+        )
     ],
     'start_time': '2021-02-26T11:33:07',
     'end_time': '2021-02-26T11:34:07'

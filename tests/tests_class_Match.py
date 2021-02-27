@@ -38,7 +38,7 @@ match1_dict = {
                 'birthdate': '1986-05-02', 'gender': 'MALE', 'ranking': 2500},
     'player2': {'uuid': 2, 'last_name': 'Berd', 'first_name': 'Bernard',
                 'birthdate': '1982-03-01', 'gender': 'MALE', 'ranking': 2400},
-    'player1_score': 1,
+    'player1_score': 0,
     'player2_score': 0
 }
 match1_tuple = (
@@ -67,3 +67,4 @@ print(f'Match Tuple : {match1_tuple}')
 print(f'Serialized Match 1 : {serialized_match1}')
 assert match1_tuple == serialized_match1
 print("End: Test Serialization/Deserialization Match")
+print(Match.Score._member_map_)
