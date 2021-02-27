@@ -132,6 +132,7 @@ class Match(Serializable):
             else:
                 attributes_dict[cleaned_attribute_name] = getattr(self, cleaned_attribute_name)
 
+        # il faudrait sortir ce bout de code pour factoriser et seulement utiliser Serializable.serialize() partout
         match_tuple = \
             (
                 [attributes_dict['player1'],
@@ -139,5 +140,4 @@ class Match(Serializable):
                 [attributes_dict['player2'],
                  attributes_dict['player2_score']]
             )
-
         return match_tuple

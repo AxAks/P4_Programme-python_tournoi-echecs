@@ -8,7 +8,6 @@ from models.serializable import Serializable
 from models.match import Match
 from models.player import Player
 
-from constants import INDEX_PLAYER1, INDEX_PLAYER2, INDEX_PLAYER1_SCORE, INDEX_PLAYER2_SCORE
 player1_dict = {
     'uuid': 1,
     'last_name': 'aKONdé',
@@ -34,9 +33,6 @@ player1_score = 1
 player2_score = 0
 
 
-
-
-# fait bloquer serialize car on passe les players en dict et non en tant qu'objet
 match1_dict = {
     'player1': {'uuid': 1, 'last_name': 'Akondé', 'first_name': 'Axel',
                 'birthdate': '1986-05-02', 'gender': 'MALE', 'ranking': 2500},
@@ -60,7 +56,9 @@ match1_tuple = (
 match1 = Match(**match1_dict)
 
 
-deserialized_match1 = Serializable.serialize(match1)
+serialized_match1 = Serializable.serialize(match1)
+deserialized_match1 = Match(**serialized_match1)
+
 
 print("Start: Test Serialization/Deserialization Match")
 print("No AssertionError returned means the test passed\nA problem returns an Assertion Error")
