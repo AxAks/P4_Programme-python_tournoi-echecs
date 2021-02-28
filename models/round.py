@@ -87,13 +87,12 @@ class Round(Serializable):
             raise AttributeError()
 
     @property
-    def matches(self) -> list[list[tuple]]:
+    def matches(self) -> list[tuple[list]]:
         return self.__matches
 
     @matches.setter
-    def matches(self, value: list[list[tuple]]):
+    def matches(self, value: list[tuple[list]]): # à revoir !
         matches = []
-
         for tuple_item in value:
             match_infos = []
             for match_info in tuple_item:
@@ -102,14 +101,13 @@ class Round(Serializable):
                     match_infos.append(serialized_player)
                 else:
                     match_infos.append(match_info)
-            """
             formatted_match_tuple = \
-                [
-                    (match_infos[INDEX_PLAYER1], match_infos[INDEX_PLAYER1_SCORE]),
-                    (match_infos[INDEX_PLAYER2], match_infos[INDEX_PLAYER2_SCORE])
-                ]
-            """
-            matches.append(match_infos)
+                (
+                    [match_infos[INDEX_PLAYER1], match_infos[INDEX_PLAYER1_SCORE]],
+                    [match_infos[INDEX_PLAYER2], match_infos[INDEX_PLAYER2_SCORE]]
+                )
+            matches.append(formatted_match_tuple)
+
         try:
             self.__matches = matches
         except AttributeError:

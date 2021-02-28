@@ -67,4 +67,3 @@ print(f'Match Tuple : {match1_tuple}')
 print(f'Serialized Match 1 : {serialized_match1}')
 assert match1_tuple == serialized_match1
 print("End: Test Serialization/Deserialization Match")
-print(Match.Score._member_map_)
