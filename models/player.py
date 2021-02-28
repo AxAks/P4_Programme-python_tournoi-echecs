@@ -1,11 +1,12 @@
 # coding=utf-8
 
 import re
+import uuid
 
 from datetime import date, timedelta
 from typing import Union
 from enum import Enum
-
+from uuid import uuid4, UUID
 from models.serializable import Serializable
 
 from constants import MINIMUM_AGE, MINIMUM_RANKING, MAXIMUM_RANKING
@@ -20,7 +21,7 @@ class Player(Serializable):
     attributes = Enum("attributes", "last_name first_name birthdate gender ranking")
 
 #  ajouter un attribut uuid, voir uuid4 module (gestion des uuid pas de registre à tenir), sinon tenir un registre et on incremente, avec ID_MAX pour le player value)None possible, if value == None ajouter un UUID
-    def __init__(self, uuid: int, last_name: str, first_name: str, birthdate: Union[str, date], #  (self, **params) avec boucle for + try/except si elle sont dans params on recupere la valeur
+    def __init__(self, uuid: Union[str, UUID], last_name: str, first_name: str, birthdate: Union[str, date], #  (self, **params) avec boucle for + try/except si elle sont dans params on recupere la valeur
                  gender: Union[str, Gender], ranking: int):
         # super().__init__('last_name', 'first_name', ...) a faire dans toutes les classes
         errors = []
@@ -53,13 +54,19 @@ class Player(Serializable):
             raise Exception(f'Error detected in the following fields: {", ".join(errors)}')
 
     @property
-    def uuid(self) -> int:
-        return self.__uuid
+    def uuid(self) -> str:
+        return str(self.__uuid)
 
     @uuid.setter
-    def uuid(self, value: int):
-        if isinstance(value, int):
+    def uuid(self, value: Union[str, UUID]):
+        if value is None:
+            value = uuid4()
             self.__uuid = value
+        if isinstance(value, UUID):
+            self.__uuid = value
+        elif isinstance(value, str):
+            # format uuid-4 à verifier avec une regex : voir https://stackoverflow.com/questions/11384589/what-is-the-correct-regex-for-matching-values-generated-by-uuid-uuid4-hex
+            self.__uuid = UUID(value)
         else:
             raise AttributeError()
 

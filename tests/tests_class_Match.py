@@ -32,7 +32,6 @@ player2 = Player(**player2_dict)
 player1_score = 1
 player2_score = 0
 
-
 match1_dict = {
     'player1': {'uuid': 1, 'last_name': 'Akondé', 'first_name': 'Axel',
                 'birthdate': '1986-05-02', 'gender': 'MALE', 'ranking': 2500},

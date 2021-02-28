@@ -25,7 +25,7 @@ player1_dict = {
     'ranking': 2500
 }
 player2_dict = {
-    'uuid': 2,
+    'uuid': 'ce0258eb-cfeb-45e6-a56d-8f5d7260bd9b',
     'last_name': 'Berd',
     'first_name': 'Bernard',
     'birthdate': '1982-03-01',
