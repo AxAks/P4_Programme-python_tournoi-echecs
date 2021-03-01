@@ -95,6 +95,6 @@ serialized_tournament24 = test_serialize_tournament(tournament24)
 deserialized_tournament24 = test_deserialize_tournament(serialized_tournament24)
 print(f'Dict: {tournament24_dict}')
 print(f'Object: {deserialized_tournament24.__dict__}')
-print(f'Serialized:: {serialized_tournament24}')
+print(f'Serialized: {serialized_tournament24}')
 assert tournament24_dict == serialized_tournament24  # le test ne fonctionne plus mais les données sont bonnes
 print("End: Test Serialization/Deserialization Tournament")
