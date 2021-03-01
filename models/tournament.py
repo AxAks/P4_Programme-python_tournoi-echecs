@@ -18,44 +18,17 @@ class Tournament(Serializable):
     """
     Time_control = Enum("Time_control", "BULLET BLITZ RAPIDE")
 
-    def __init__(self, name: str, location: str, dates: Union[str, date], players: Union[list[dict], list[Player]],
-                 time_control: Union[str, Time_control], description: str, rounds_list: list, rounds: int = 4):
+    def __init__(self, **params):
+        attributes = ('name', 'location', 'dates', 'players', 'time_control', 'description', 'rounds_list', 'rounds') # attention trouver comment mettre round à 4 par défaut !!
         errors = []
-        try:
-            self.name = name
-        except AttributeError:
-            errors.append('Name')
-        try:
-            self.location = location
-        except AttributeError:
-            errors.append('Location')
-        try:
-            self.dates = dates
-        except AttributeError:
-            errors.append('Dates')
-        try:
-            self.players = players
-        except AttributeError:
-            errors.append('Players')
-        try:
-            self.time_control = time_control
-        except AttributeError:
-            errors.append('Time Control')
-        try:
-            self.description = description
-        except AttributeError:
-            errors.append('Description')
-        try:
-            self.rounds_list = rounds_list
-        except AttributeError:
-            errors.append('Rounds List')
-        try:
-            self.rounds = rounds
-        except AttributeError:
-            errors.append('Rounds')
-
-        if errors:
-            raise Exception(f'Error detected in the following fields: {", ".join(errors)}')
+        for key, value in params.items():
+            if key in attributes:
+                try:
+                    setattr(self, key, value)
+                except AttributeError:
+                    errors.append(key)
+            if errors:
+                raise Exception(f'Error detected in the following fields: {", ".join(errors)}')
 
     @property
     def name(self) -> str:

@@ -65,7 +65,7 @@ description = 'a very nice tournament with four outstanding players'
 rounds_list = []
 rounds = 3
 
-tournament24 = Tournament(name, location, dates, players, time_control, description, rounds_list, rounds)
+# tournament24 = Tournament(name, location, dates, players, time_control, description, rounds_list, rounds) # pb car 9 args au lieu d'un seul accepté (dict)!
 
 #  Match
 

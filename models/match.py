@@ -18,28 +18,17 @@ class Match(Serializable):
     """
     Score = Enum("Score", "0 0.5 1")
 
-    def __init__(self, player1: Player, player2: Player, player1_score: Union[int, Score],
-                 player2_score: Union[int, Score]):
+    def __init__(self, **params):
         errors = []
-        try:
-            self.player1 = player1
-        except AttributeError:
-            errors.append('Player 1')
-        try:
-            self.player2 = player2
-        except AttributeError:
-            errors.append('Player 2')
-        try:
-            self.player1_score = player1_score
-        except AttributeError:
-            errors.append('Score Player 1')
-        try:
-            self.player2_score = player2_score
-        except AttributeError:
-            errors.append('Score Player 2')
-
-        if errors:
-            raise Exception(f'Error detected in the following fields: {", ".join(errors)}')
+        attributes = ('player1', 'player2', 'player1_score', 'player2_score')
+        for key, value in params.items():
+            if key in attributes:
+                try:
+                    setattr(self, key, value)
+                except AttributeError:
+                    errors.append(key)
+            if errors:
+                raise Exception(f'Error detected in the following fields: {", ".join(errors)}')
 
     @property
     def player1(self) -> dict:

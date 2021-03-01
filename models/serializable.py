@@ -8,7 +8,8 @@ class Serializable:
     This class enables to serialize Python Objects to simple types handled by TinyDB
     It uses introspection to access the object's attributes and methods.
     """
-    # def __init__(self): je vais le construire après
+    # def __init__(self, **params): je vais le construire après
+    # attributes = ('player_uuid', 'last_name', 'first_name', 'birthdate', 'gender', 'ranking', '...', jsute les attributs serialisables)
 
     def serialize(self):
         attributes_dict = {}

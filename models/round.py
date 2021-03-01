@@ -16,32 +16,20 @@ class Round(Serializable):
     This is the class for the Python Object: Round
     """
 
-    def __init__(self, name: str, tournament: object, matches: list[tuple],
-                 end_time: datetime, start_time: datetime = datetime.now()):
+    def __init__(self, **params):
+        #name: str, tournament: object, matches: list[tuple],
+        #        end_time: datetime, start_time: datetime = datetime.now()):
         errors = []
-        try:
-            self.name = name
-        except AttributeError:
-            errors.append('Name')
-        try:
-            self.tournament = tournament
-        except AttributeError:
-            errors.append('Tournament')
-        try:
-            self.matches = matches
-        except AttributeError:
-            errors.append('Matches')
-        try:
-            self.start_time = start_time
-        except AttributeError:
-            errors.append('Start Time')
-        try:
-            self.end_time = end_time
-        except AttributeError:
-            errors.append('End Time')
+        attributes = ('name', 'tournament', 'matches', 'end_time', 'start_time') # start_time = datetime.new() # end_time = datetime de la fin de round
+        for key, value in params.items():
+            if key in attributes:
+                try:
+                    setattr(self, key, value)
+                except AttributeError:
+                    errors.append(key)
 
-        if errors:
-            raise Exception(f'Error detected in the following fields: {", ".join(errors)}')
+            if errors:
+                raise Exception(f'Error detected in the following fields: {", ".join(errors)}')
 
     @property
     def name(self) -> str:
