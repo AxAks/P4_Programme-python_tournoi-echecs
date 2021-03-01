@@ -18,17 +18,16 @@ class Player(Serializable):
     Gender is an sub-class for the Player's gender : only accept the strings "Male" and "Female".
     """
     Gender = Enum("Gender", "MALE FEMALE")
-    attributes = Enum("attributes", "last_name first_name birthdate gender ranking")
+    attributes = ['attributes', 'player_uuid last_name', 'first_name', 'birthdate', 'gender', 'ranking']
 
-#  ajouter un attribut uuid, voir uuid4 module (gestion des uuid pas de registre à tenir), sinon tenir un registre et on incremente, avec ID_MAX pour le player value)None possible, if value == None ajouter un UUID
-    def __init__(self, id: Union[str, UUID], last_name: str, first_name: str, birthdate: Union[str, date],  #  (self, **params) avec boucle for + try/except si elle sont dans params on recupere la valeur
+    def __init__(self, player_uuid: Union[str, UUID], last_name: str, first_name: str, birthdate: Union[str, date],  #  (self, **params) avec boucle for + try/except si elle sont dans params on recupere la valeur
                  gender: Union[str, Gender], ranking: int):
         # super().__init__('last_name', 'first_name', ...) a faire dans toutes les classes
         errors = []
         try:
-            self.uuid = id
+            self.player_uuid = player_uuid
         except AttributeError:
-            errors.append('Uuid')
+            errors.append('Player Uuid')
         try:
             self.last_name = last_name
         except AttributeError:
