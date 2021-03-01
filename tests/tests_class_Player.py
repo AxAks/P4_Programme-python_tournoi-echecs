@@ -17,7 +17,7 @@ from models.player import Player
 
 
 player1_dict = {
-    'uuid': 1,
+    'uuid': '3be40089-64ff-48c2-8e6e-bc005ad378d2',
     'last_name': 'aKONdé',
     'first_name': 'Axel',
     'birthdate': '1986-05-02',
@@ -34,7 +34,7 @@ player2_dict = {
 }
 
 player3_dict = {
-    'uuid': 3,
+    'uuid': '4f4e8869-fbd2-48d7-b759-fafd725df22f',
     'last_name': 'CERAS',
     'first_name': 'Cédric',
     'birthdate': '1978-04-26',
@@ -43,7 +43,7 @@ player3_dict = {
 }
 
 player4_dict = {
-    'uuid': 4,
+    'uuid': '1bcb740a-3ca1-49e8-889f-30ca3c1bc293',
     'last_name': 'Deflar',
     'first_name': 'Didier',
     'birthdate': '1991-12-21',
@@ -52,7 +52,7 @@ player4_dict = {
 }
 
 player5_dict = {
-    'uuid': 5,
+    'uuid': 'f1d63919-1d15-4784-a724-5554dccdb076',
     'last_name': 'Edourd',
     'first_name': 'Emilie',
     'birthdate': '1922-05-01',
@@ -61,7 +61,7 @@ player5_dict = {
 }
 
 player6_dict = {
-    'uuid': 6,
+    'uuid': '6246d2f8-dab2-452e-b994-2c3e8aaedcef',
     'last_name': 'Ferrat',
     'first_name': 'Fanny',
     'birthdate': '1985-09-12',
@@ -70,7 +70,7 @@ player6_dict = {
 }
 
 player7_dict = {
-    'uuid': 7,
+    'uuid': '6cd402fb-9e79-4e23-a326-5b7e215de205',
     'last_name': 'GRAND',
     'first_name': 'Gérard',
     'birthdate': '1982-03-01',
@@ -79,7 +79,7 @@ player7_dict = {
 }
 
 player8_dict = {
-    'uuid': 8,
+    'uuid': '96b0887a-58f0-4aa6-a68f-9b845a7c9ec1',
     'last_name': 'Harry',
     'first_name': 'Henriette',
     'birthdate': '1972-11-21',
@@ -88,7 +88,7 @@ player8_dict = {
 }
 
 player9_dict = {
-    'uuid': 9,
+    'uuid': '23ed1860-bd10-42e1-b7b7-9b4c114a5d5c',
     'last_name': 'Isidore',
     'first_name': 'Isabelle',
     'birthdate': '1984-03-01',
@@ -97,7 +97,7 @@ player9_dict = {
 }
 
 player10_dict = {
-    'uuid': 10,
+    'uuid': '11438f73-64b8-491b-8290-17548a794f58',
     'last_name': 'Junot',
     'first_name': 'Juliette',
     'birthdate': '1982-03-01',
@@ -126,7 +126,6 @@ players = [
     player9, player10
 ]
 
-
 # Tests Serialization/Deserialization
 def test_serialize_player(player_object):
     return Serializable.serialize(player_object)
@@ -146,4 +145,13 @@ print(f'Object: {player2.__dict__}')
 print(f'Serialized: {serialized_player2}')
 assert player2_dict == serialized_player2
 print("End: Test Serialization/Deserialization Player")
-
+print(player1.last_name, player1.uuid)
+print(player2.last_name, player2.uuid)
+print(player3.last_name, player3.uuid)
+print(player4.last_name, player4.uuid)
+print(player5.last_name, player5.uuid)
+print(player6.last_name, player6.uuid)
+print(player7.last_name, player7.uuid)
+print(player8.last_name, player8.uuid)
+print(player9.last_name, player9.uuid)
+print(player10.last_name, player10.uuid)

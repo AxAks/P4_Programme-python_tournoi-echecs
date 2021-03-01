@@ -65,8 +65,10 @@ class Player(Serializable):
         if isinstance(value, UUID):
             self.__uuid = value
         elif isinstance(value, str):
-            # format uuid-4 à verifier avec une regex : voir https://stackoverflow.com/questions/11384589/what-is-the-correct-regex-for-matching-values-generated-by-uuid-uuid4-hex
-            self.__uuid = UUID(value)
+            try:
+                self.__uuid = UUID(value)
+            except ValueError:
+                raise AttributeError()
         else:
             raise AttributeError()
 
