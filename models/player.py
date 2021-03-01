@@ -18,12 +18,26 @@ class Player(Serializable):
     Gender is an sub-class for the Player's gender : only accept the strings "Male" and "Female".
     """
     Gender = Enum("Gender", "MALE FEMALE")
-    attributes = ['attributes', 'player_uuid last_name', 'first_name', 'birthdate', 'gender', 'ranking']
 
-    def __init__(self, player_uuid: Union[str, UUID], last_name: str, first_name: str, birthdate: Union[str, date],  #  (self, **params) avec boucle for + try/except si elle sont dans params on recupere la valeur
-                 gender: Union[str, Gender], ranking: int):
+
+    def __init__(self, **params):
+        # (self, player_uuid: Union[str, UUID], last_name: str, first_name: str, birthdate: Union[str, date],
+        # #  (self, **params) avec boucle for + try/except si elle sont dans params on recupere la valeur
+        # gender: Union[str, Gender], ranking: int):
         # super().__init__('last_name', 'first_name', ...) a faire dans toutes les classes
+        attributes = ('player_uuid', 'last_name', 'first_name', 'birthdate', 'gender', 'ranking')
         errors = []
+        for key, value in params.items():
+            if key in attributes:
+                try:
+                    setattr(self, key, value)
+                except AttributeError:
+                    errors.append(key)
+
+            if errors:
+                raise Exception(f'Error detected in the following fields: {", ".join(errors)}')
+
+        """
         try:
             self.player_uuid = player_uuid
         except AttributeError:
@@ -51,21 +65,21 @@ class Player(Serializable):
 
         if errors:
             raise Exception(f'Error detected in the following fields: {", ".join(errors)}')
-
+    """
     @property
-    def uuid(self) -> str:
-        return str(self.__uuid)
+    def player_uuid(self) -> str:
+        return str(self.__player_uuid)
 
-    @uuid.setter
-    def uuid(self, value: Union[str, UUID]):
+    @player_uuid.setter
+    def player_uuid(self, value: Union[str, UUID]):
         if value is None:
             value = uuid4()
-            self.__uuid = value
+            self.__player_uuid = value
         if isinstance(value, UUID):
-            self.__uuid = value
+            self.__player_uuid = value
         elif isinstance(value, str):
             try:
-                self.__uuid = UUID(value)
+                self.__player_uuid = UUID(value)
             except ValueError:
                 raise AttributeError()
         else:
