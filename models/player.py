@@ -19,7 +19,6 @@ class Player(Serializable):
     """
     Gender = Enum("Gender", "MALE FEMALE")
 
-
     def __init__(self, **params):
         attributes = ('player_uuid', 'last_name', 'first_name', 'birthdate', 'gender', 'ranking')
         errors = []
