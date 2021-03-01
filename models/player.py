@@ -21,10 +21,6 @@ class Player(Serializable):
 
 
     def __init__(self, **params):
-        # (self, player_uuid: Union[str, UUID], last_name: str, first_name: str, birthdate: Union[str, date],
-        # #  (self, **params) avec boucle for + try/except si elle sont dans params on recupere la valeur
-        # gender: Union[str, Gender], ranking: int):
-        # super().__init__('last_name', 'first_name', ...) a faire dans toutes les classes
         attributes = ('player_uuid', 'last_name', 'first_name', 'birthdate', 'gender', 'ranking')
         errors = []
         for key, value in params.items():
