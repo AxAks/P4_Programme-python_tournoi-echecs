@@ -4,7 +4,6 @@
 File for different tests on the features of the class Serializable
 """
 
-from models.serializable import Serializable
 from models.player import Player
 from models.tournament import Tournament
 import sys
@@ -124,17 +123,24 @@ players_list = [
 
 # Tournament
 
-name = 'Best Tournament Ever'
-location = 'Geneve'
-date = '1987-02-28'
-players = [player1, player2, player3, player4]
-time_control = 'BULLET'
-description = 'a very nice tournament with a lot a good players'
-rounds_count = 0
-rounds = 3
-
-
-tournament23 = Tournament(name, location, date, players, time_control, description, rounds_count, rounds)
+tournament24_dict = {
+    'tournament_name': 'Best Tournament Ever',
+    'location': 'Geneve',
+    'dates': '1987-02-28',
+    'players': [
+            {'player_uuid': '3be40089-64ff-48c2-8e6e-bc005ad378d2', 'last_name': 'Akondé', 'first_name': 'Axel',
+             'birthdate': '1986-05-02', 'gender': 'MALE', 'ranking': 2500},
+            {'player_uuid': 'ce0258eb-cfeb-45e6-a56d-8f5d7260bd9b', 'last_name': 'Berd', 'first_name': 'Bernard',
+             'birthdate': '1982-03-01', 'gender': 'MALE', 'ranking': 2400},
+            {'player_uuid': '4f4e8869-fbd2-48d7-b759-fafd725df22f', 'last_name': 'Ceras', 'first_name': 'Cédric',
+             'birthdate': '1978-04-26', 'gender': 'MALE', 'ranking': 1400},
+            {'player_uuid': '1bcb740a-3ca1-49e8-889f-30ca3c1bc293', 'last_name': 'Deflar', 'first_name': 'Didier',
+             'birthdate': '1991-12-21', 'gender': 'MALE', 'ranking': 1300}],
+    'time_control': 'BULLET',
+    'description': 'a very nice tournament with four outstanding players',
+    'rounds_list': [],
+    'rounds': 3
+}
 
 
 # Class Serializable
@@ -143,7 +149,7 @@ tournament23 = Tournament(name, location, date, players, time_control, descripti
 
 
 def test_serialize_global(_obj):
-    return serialize(_obj)
+    return _obj.serialize()
 
 
 def test_deserialize_global(_obj_class, attributes_dict):
@@ -153,10 +159,13 @@ def test_deserialize_global(_obj_class, attributes_dict):
 
 print("Start: Test Serialization/Deserialization Global")
 print("No AssertionError returned means the test passed\nA problem returns an Assertion Error")
-serialized_tournament23 = test_serialize_global(tournament23)
-deserialized_tournament23 = test_deserialize_global(Tournament, serialized_tournament23)
-print(tournament23.__dict__)
-print(deserialized_tournament23.__dict__)
+tournament24 = Tournament(**tournament24_dict)
+serialized_tournament24 = test_serialize_global(tournament24)
+deserialized_tournament24 = test_deserialize_global(Tournament, serialized_tournament24)
+print(tournament24.__dict__)
+print(deserialized_tournament24.__dict__)
+print(tournament24_dict)
+print(serialized_tournament24)
 
-assert tournament23.__dict__ == deserialized_tournament23.__dict__
+assert tournament24_dict == serialized_tournament24
 print("End: Test Serialization/Deserialization Global")
