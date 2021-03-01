@@ -6,5 +6,7 @@ temp : just for me !!
 Views = Interface computer/ user
 
 - print()
-- input()
+- messages
+
+plusieurs fichiers view à écrire : scinder
 """
