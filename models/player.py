@@ -37,35 +37,6 @@ class Player(Serializable):
             if errors:
                 raise Exception(f'Error detected in the following fields: {", ".join(errors)}')
 
-        """
-        try:
-            self.player_uuid = player_uuid
-        except AttributeError:
-            errors.append('Player Uuid')
-        try:
-            self.last_name = last_name
-        except AttributeError:
-            errors.append('Last name')
-        try:
-            self.first_name = first_name
-        except AttributeError:
-            errors.append('First name')
-        try:
-            self.birthdate = birthdate
-        except AttributeError:
-            errors.append('Birthdate')
-        try:
-            self.gender = gender
-        except AttributeError:
-            errors.append('Gender')
-        try:
-            self.ranking = ranking
-        except AttributeError:
-            errors.append('Ranking')
-
-        if errors:
-            raise Exception(f'Error detected in the following fields: {", ".join(errors)}')
-    """
     @property
     def player_uuid(self) -> str:
         return str(self.__player_uuid)
