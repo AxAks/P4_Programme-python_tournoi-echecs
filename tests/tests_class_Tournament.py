@@ -4,7 +4,6 @@
 File for different tests on the features of the class Tournament
 """
 
-from models.serializable import Serializable
 from models.tournament import Tournament
 from models.player import Player
 
@@ -57,10 +56,10 @@ players_list = [player1, player2, player3, player4]
 # Tournament
 # pb assert
 
-# ecrire un dictionnaire des données et c'est ca qu'on comparera à deserialized_tournament24 !
+#  ecrire un dictionnaire des données et c'est ca qu'on comparera à deserialized_tournament24 !
 
 tournament24_dict = {
-    'name': 'Best Tournament Ever',
+    'tournament_name': 'Best Tournament Ever',
     'location': 'Geneve',
     'dates': '1987-02-28',
     'players': [
@@ -82,7 +81,7 @@ tournament24 = Tournament(**tournament24_dict)
 
 # Tests Serialization/Deserialization Tournament
 def test_serialize_tournament(tournament_object):
-    return Serializable.serialize(tournament_object)
+    return tournament_object.serialize()
 
 
 def test_deserialize_tournament(attributes_dict):
@@ -94,7 +93,7 @@ print("Start: Test Serialization/Deserialization Tournament")
 print("No AssertionError returned means the test passed\nA problem returns an Assertion Error")
 serialized_tournament24 = test_serialize_tournament(tournament24)
 deserialized_tournament24 = test_deserialize_tournament(serialized_tournament24)
-print(f'Dict: {tournament24_dict}')  # pb print trouver comment afficher le detail des players en liste de dicts alors qu'on est dans une instance d'objet
+print(f'Dict: {tournament24_dict}')
 print(f'Object: {deserialized_tournament24.__dict__}')
 print(f'Serialized:: {serialized_tournament24}')
 assert tournament24_dict == serialized_tournament24  # le test ne fonctionne plus mais les données sont bonnes

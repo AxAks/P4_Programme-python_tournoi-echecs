@@ -5,10 +5,12 @@ import re
 from typing import Union
 from datetime import datetime
 
+from constants import INDEX_PLAYER1, INDEX_PLAYER2,\
+    INDEX_PLAYER1_SCORE, INDEX_PLAYER2_SCORE, ALPHA_NUMERICAL_STRING_RULE
+
 from models.serializable import Serializable
 from models.tournament import Tournament
 from models.player import Player
-from constants import INDEX_PLAYER1, INDEX_PLAYER2, INDEX_PLAYER1_SCORE, INDEX_PLAYER2_SCORE
 
 
 class Round(Serializable):
@@ -16,11 +18,10 @@ class Round(Serializable):
     This is the class for the Python Object: Round
     """
 
-    def __init__(self, **params):
-        #name: str, tournament: object, matches: list[tuple],
-        #        end_time: datetime, start_time: datetime = datetime.now()):
+    def __init__(self, **params: dict):
         errors = []
-        attributes = ('name', 'tournament', 'matches', 'end_time', 'start_time') # start_time = datetime.new() # end_time = datetime de la fin de round
+        attributes = ('round_name', 'tournament', 'matches', 'end_time',
+                      'start_time')  #  start_time = datetime.new() # end_time = datetime de la fin de round
         for key, value in params.items():
             if key in attributes:
                 try:
@@ -32,11 +33,11 @@ class Round(Serializable):
                 raise Exception(f'Error detected in the following fields: {", ".join(errors)}')
 
     @property
-    def name(self) -> str:
+    def round_name(self) -> str:
         return self.__name
 
-    @name.setter
-    def name(self, value: str):
+    @round_name.setter
+    def round_name(self, value: str):
         """
         Verification of entered characters for last name using regex
         ASCII table and a few special characters
@@ -44,7 +45,7 @@ class Round(Serializable):
         :param value:
         :return:
         """
-        authorized_characters = re.compile("^[A-ZÉÈÇÀa-zéèçà1-9_\- ]+$")
+        authorized_characters = ALPHA_NUMERICAL_STRING_RULE
         if re.match(authorized_characters, value):
             self.__name = value.title()
         else:
@@ -79,13 +80,13 @@ class Round(Serializable):
         return self.__matches
 
     @matches.setter
-    def matches(self, value: list[tuple[list]]): # à revoir !
+    def matches(self, value: Union[dict, list[tuple[list]]]):  #  à revoir !
         matches = []
         for tuple_item in value:
             match_infos = []
             for match_info in tuple_item:
                 if isinstance(match_info, Player):
-                    serialized_player = Serializable.serialize(match_info)
+                    serialized_player = match_info.serialize()
                     match_infos.append(serialized_player)
                 else:
                     match_infos.append(match_info)
@@ -95,9 +96,8 @@ class Round(Serializable):
                     [match_infos[INDEX_PLAYER2], match_infos[INDEX_PLAYER2_SCORE]]
                 )
             matches.append(formatted_match_tuple)
-
         try:
-            self.__matches = matches
+            self.__matches = value
         except AttributeError:
             raise AttributeError()
 
@@ -109,7 +109,8 @@ class Round(Serializable):
         return self.__start_time.strftime('%Y-%m-%dT%H:%M:%S')
 
     @start_time.setter
-    def start_time(self, value: datetime) -> Union[str, datetime]:  #  doit etre automatiquement enregisté lors de l'instanciation du round
+    def start_time(self, value: datetime) -> Union[str, datetime]:
+        #  doit etre automatiquement enregisté lors de l'instanciation du round
         if isinstance(value, str):
             try:
                 value = datetime.strptime(value, '%Y-%m-%dT%H:%M:%S')
@@ -130,7 +131,8 @@ class Round(Serializable):
 
     @end_time.setter
     def end_time(self,
-                 value: Union[str, datetime]):  #  doit etre automatiquement enregisté lors de la fin de saisie des infos du round
+                 value: Union[str, datetime]):
+        #  doit etre automatiquement enregisté lors de la fin de saisie des infos du round
         if isinstance(value, str):
             try:
                 value = datetime.strptime(value, '%Y-%m-%dT%H:%M:%S')
@@ -142,17 +144,8 @@ class Round(Serializable):
         else:
             raise AttributeError()
 
-    def serialize(self) -> dict:
+    def add_match(self, match):
         """
-        This method overrides the Serializable.serialize() method to convert the property Tournament
-        into a dict instead of a Tournament objects.
-        and the property Matches into a list of tuple.
+        This method enables to add the information of a Match to the list of matches of the Round Object
         """
-        attributes_dict = {}
-        for attribute in self.__dict__.keys():
-            cleaned_attribute_name = attribute.replace(f"_{self.__class__.__name__}__", '')
-            if hasattr(self, cleaned_attribute_name + '_pod'):
-                attributes_dict[cleaned_attribute_name] = getattr(self, cleaned_attribute_name + '_pod')()
-            else:
-                attributes_dict[cleaned_attribute_name] = getattr(self, cleaned_attribute_name)
-        return attributes_dict
+        pass

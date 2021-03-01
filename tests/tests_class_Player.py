@@ -4,9 +4,7 @@
 File for different tests on the features of the class Player
 """
 
-from models.serializable import Serializable
 from models.player import Player
-
 
 
 # Class Player
@@ -126,9 +124,10 @@ players = [
     player9, player10
 ]
 
+
 # Tests Serialization/Deserialization
 def test_serialize_player(player_object):
-    return Serializable.serialize(player_object)
+    return player_object.serialize()
 
 
 def test_deserialize_player(attributes_dict):

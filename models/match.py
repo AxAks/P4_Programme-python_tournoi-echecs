@@ -18,7 +18,7 @@ class Match(Serializable):
     """
     Score = Enum("Score", "0 0.5 1")
 
-    def __init__(self, **params):
+    def __init__(self, **params: dict):
         errors = []
         attributes = ('player1', 'player2', 'player1_score', 'player2_score')
         for key, value in params.items():
@@ -60,7 +60,7 @@ class Match(Serializable):
             try:
                 self.__player2 = value
             except AttributeError:
-                raise Exception(f'Error in the serialization of the attribute: player1')
+                raise Exception(f'Error in the serialization of the attribute: player2')
         else:
             raise AttributeError()
 
@@ -92,25 +92,6 @@ class Match(Serializable):
         else:
             raise AttributeError()
 
-    def serialize(self) -> tuple[list, list]:
-        """
-        This method overrides the Serializable.serialize() method to convert Match Object
-        into a list of 2 tuples [player, score].
-        """
-        attributes_dict = {}
-        for attribute in self.__dict__.keys():
-            cleaned_attribute_name = attribute.replace(f"_{self.__class__.__name__}__", '')
-            if hasattr(self, cleaned_attribute_name + '_pod'):
-                attributes_dict[cleaned_attribute_name] = getattr(self, cleaned_attribute_name + '_pod')()
-            else:
-                attributes_dict[cleaned_attribute_name] = getattr(self, cleaned_attribute_name)
-
-        # il faudrait sortir ce bout de code pour factoriser et seulement utiliser Serializable.serialize() partout
-        match_tuple = \
-            (
-                [attributes_dict['player1'],
-                 attributes_dict['player1_score']],
-                [attributes_dict['player2'],
-                 attributes_dict['player2_score']]
-            )
-        return match_tuple
+    def get_match_as_tuple(self):
+        # bout de code de serialize extrait en methode pour factoriser dans Serializable.serialize() partout
+        return [self.player1, self.player1_score], [self.player2, self.player2_score]

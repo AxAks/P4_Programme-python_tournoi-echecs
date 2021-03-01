@@ -56,7 +56,7 @@ player4 = Player(**player4_dict)
 players_list = [player1, player2, player3, player4]
 
 # Tournament
-name = 'Best Tournament Ever'
+tournament_name = 'Best Tournament Ever'
 location = 'Geneve'
 dates = '1987-02-28'
 players = players_list
@@ -65,8 +65,26 @@ description = 'a very nice tournament with four outstanding players'
 rounds_list = []
 rounds = 3
 
-# tournament24 = Tournament(name, location, dates, players, time_control, description, rounds_list, rounds) # pb car 9 args au lieu d'un seul accepté (dict)!
+tournament24_dict = {
+    'tournament_name': 'Best Tournament Ever',
+    'location': 'Geneve',
+    'dates': '1987-02-28',
+    'players': [
+            {'player_uuid': '3be40089-64ff-48c2-8e6e-bc005ad378d2', 'last_name': 'Akondé', 'first_name': 'Axel',
+             'birthdate': '1986-05-02', 'gender': 'MALE', 'ranking': 2500},
+            {'player_uuid': 'ce0258eb-cfeb-45e6-a56d-8f5d7260bd9b', 'last_name': 'Berd', 'first_name': 'Bernard',
+             'birthdate': '1982-03-01', 'gender': 'MALE', 'ranking': 2400},
+            {'player_uuid': '4f4e8869-fbd2-48d7-b759-fafd725df22f', 'last_name': 'Ceras', 'first_name': 'Cédric',
+             'birthdate': '1978-04-26', 'gender': 'MALE', 'ranking': 1400},
+            {'player_uuid': '1bcb740a-3ca1-49e8-889f-30ca3c1bc293', 'last_name': 'Deflar', 'first_name': 'Didier',
+             'birthdate': '1991-12-21', 'gender': 'MALE', 'ranking': 1300}],
+    'time_control': 'BULLET',
+    'description': 'a very nice tournament with four outstanding players',
+    'rounds_list': [],
+    'rounds': 3
+}
 
+tournament24 = Tournament(**tournament24_dict)
 #  Match
 
 player1_score = 1
@@ -74,27 +92,63 @@ player2_score = 0
 player3_score = 0.5
 player4_score = 0.5
 
-match1 = (player1, player2, player1_score, player2_score)
-match2 = (player3, player4, player3_score, player4_score)
+match1_tuple = (
+    [
+        {'player_uuid': '3be40089-64ff-48c2-8e6e-bc005ad378d2',
+         'last_name': 'Akondé',
+         'first_name': 'Axel',
+         'birthdate': '1986-05-02',
+         'gender': 'MALE',
+         'ranking': 2500
+         },
+        0
+    ],
+    [
+        {'player_uuid': 'ce0258eb-cfeb-45e6-a56d-8f5d7260bd9b',
+         'last_name': 'Berd',
+         'first_name': 'Bernard',
+         'birthdate': '1982-03-01',
+         'gender': 'MALE',
+         'ranking': 2400
+         },
+        0
+    ]
+)
 
-matches_list = [match1, match2]
-
+match2_tuple = ([
+                    {'player_uuid': '4f4e8869-fbd2-48d7-b759-fafd725df22f',
+                    'last_name': 'CERAS',
+                    'first_name': 'Cédric',
+                    'birthdate': '1978-04-26',
+                    'gender': 'MALE',
+                    'ranking': 1400
+                     },
+                    0.5],
+                [
+                    {'player_uuid': '1bcb740a-3ca1-49e8-889f-30ca3c1bc293',
+                    'last_name': 'Deflar',
+                    'first_name': 'Didier',
+                    'birthdate': '1991-12-21',
+                    'gender': 'MALE',
+                    'ranking': 1300
+                     },
+                    0.5])
 
 #  Round
 round1_dict = {
-    'name': 'Round 1',
+    'round_name': 'Round 1',
     'tournament': {
         'name': 'Tournament 24 Best Tournament Ever',
         'location': 'Geneve',
         'dates': '1987-02-28',
         'players': [
-            {'uuid': 1, 'last_name': 'Akondé', 'first_name': 'Axel', 'birthdate': '1986-05-02', 'gender': 'MALE',
+            {'uuid': '3be40089-64ff-48c2-8e6e-bc005ad378d2', 'last_name': 'Akondé', 'first_name': 'Axel', 'birthdate': '1986-05-02', 'gender': 'MALE',
              'ranking': 2500},
-            {'uuid': 2, 'last_name': 'Berd', 'first_name': 'Bernard', 'birthdate': '1982-03-01', 'gender': 'MALE',
+            {'uuid': 'ce0258eb-cfeb-45e6-a56d-8f5d7260bd9b', 'last_name': 'Berd', 'first_name': 'Bernard', 'birthdate': '1982-03-01', 'gender': 'MALE',
              'ranking': 2400},
-            {'uuid': 3, 'last_name': 'Ceras', 'first_name': 'Cédric', 'birthdate': '1978-04-26', 'gender': 'MALE',
+            {'uuid': '4f4e8869-fbd2-48d7-b759-fafd725df22f', 'last_name': 'Ceras', 'first_name': 'Cédric', 'birthdate': '1978-04-26', 'gender': 'MALE',
              'ranking': 1400},
-            {'uuid': 4, 'last_name': 'Deflar', 'first_name': 'Didier', 'birthdate': '1991-12-21', 'gender': 'MALE',
+            {'uuid': '1bcb740a-3ca1-49e8-889f-30ca3c1bc293', 'last_name': 'Deflar', 'first_name': 'Didier', 'birthdate': '1991-12-21', 'gender': 'MALE',
              'ranking': 1300}
         ],
         'time_control': 'BULLET',
@@ -104,14 +158,14 @@ round1_dict = {
     },
     'matches': [
         (
-            [{'uuid': 1, 'last_name': 'Akondé', 'first_name': 'Axel', 'birthdate': '1986-05-02', 'gender': 'MALE',
+            [{'uuid': '3be40089-64ff-48c2-8e6e-bc005ad378d2', 'last_name': 'Akondé', 'first_name': 'Axel', 'birthdate': '1986-05-02', 'gender': 'MALE',
               'ranking': 2500}, 1],
-            [{'uuid': 2, 'last_name': 'Berd', 'first_name': 'Bernard', 'birthdate': '1982-03-01', 'gender': 'MALE',
+            [{'uuid': 'ce0258eb-cfeb-45e6-a56d-8f5d7260bd9b', 'last_name': 'Berd', 'first_name': 'Bernard', 'birthdate': '1982-03-01', 'gender': 'MALE',
               'ranking': 2400}, 0]),
         (
-            [{'uuid': 3, 'last_name': 'Ceras', 'first_name': 'Cédric', 'birthdate': '1978-04-26', 'gender': 'MALE',
+            [{'uuid': '4f4e8869-fbd2-48d7-b759-fafd725df22f', 'last_name': 'Ceras', 'first_name': 'Cédric', 'birthdate': '1978-04-26', 'gender': 'MALE',
               'ranking': 1400}, 0.5],
-            [{'uuid': 4, 'last_name': 'Deflar', 'first_name': 'Didier', 'birthdate': '1991-12-21', 'gender': 'MALE',
+            [{'uuid': '1bcb740a-3ca1-49e8-889f-30ca3c1bc293', 'last_name': 'Deflar', 'first_name': 'Didier', 'birthdate': '1991-12-21', 'gender': 'MALE',
               'ranking': 1300}, 0.5]
         )
     ],
@@ -124,7 +178,7 @@ round1 = Round(**round1_dict)
 
 # Serialization / Deserialization
 def test_serialize_round(round_object):
-    return Serializable.serialize(round_object)
+    return round_object.serialize()
 
 
 def test_deserialize_round(attributes_dict):

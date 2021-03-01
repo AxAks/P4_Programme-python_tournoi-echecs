@@ -6,6 +6,8 @@ from datetime import date
 from enum import Enum
 from typing import Union
 
+from constants import ALPHA_NUMERICAL_STRING_RULE, ALPHABETICAL_STRING_RULE
+
 from models.player import Player
 from models.serializable import Serializable
 
@@ -14,12 +16,14 @@ class Tournament(Serializable):
     """
     This is the class for the Python Object: Tournament
     Time_control is an intermediate class for the tournaments's time control
-    that only accept the strings "Bullet", " Blitz"  and "Coup rapide".
+    that only accept the strings "Bullet", " Blitz"  and "Coup Rapide".
     """
     Time_control = Enum("Time_control", "BULLET BLITZ RAPIDE")
 
-    def __init__(self, **params):
-        attributes = ('name', 'location', 'dates', 'players', 'time_control', 'description', 'rounds_list', 'rounds') # attention trouver comment mettre round à 4 par défaut !!
+    def __init__(self, **params: dict):
+        attributes = ('tournament_name', 'location', 'dates',
+                      'players', 'time_control', 'description', 'rounds_list', 'rounds')
+        #  attention trouver comment mettre round à 4 par défaut !!
         errors = []
         for key, value in params.items():
             if key in attributes:
@@ -31,22 +35,21 @@ class Tournament(Serializable):
                 raise Exception(f'Error detected in the following fields: {", ".join(errors)}')
 
     @property
-    def name(self) -> str:
-        return self.__name
+    def tournament_name(self) -> str:
+        return self.__tournament_name
 
-    @name.setter
-    def name(self, value: str):
+    @tournament_name.setter
+    def tournament_name(self, value: str):
         """
-        Verification of entered characters for last name using regex
+        Verification of entered characters for the tournament name using regex
         ASCII table and a few special characters
         The list of authorized characters is to be completed !
         :param value:
         :return:
         """
-        #  à factoriser ? : doublon avec Player last_name et first_name
-        authorized_characters = re.compile("^[A-ZÉÈÇÀa-zéèçà\- 1-9]+$")
+        authorized_characters = ALPHA_NUMERICAL_STRING_RULE
         if re.match(authorized_characters, value):
-            self.__name = value.title()
+            self.__tournament_name = value.title()
         else:
             raise AttributeError()
 
@@ -57,14 +60,14 @@ class Tournament(Serializable):
     @location.setter
     def location(self, value: str):
         """
-        Verification of entered characters for last name using regex
+        Verification of entered characters for the tournament location using regex
         ASCII table and a few special characters
         The list of authorized characters is to be completed !
         :param value:
         :return:
         """
         #  à factoriser ? : doublon avec Player last_name et first_name etc ... (les attributs strings)
-        authorized_characters = re.compile("^[A-ZÉÈÇÀa-zéèçà\- ]+$")
+        authorized_characters = ALPHABETICAL_STRING_RULE
         if re.match(authorized_characters, value):
             self.__location = value.title()
         else:
@@ -162,16 +165,8 @@ class Tournament(Serializable):
         else:
             raise AttributeError()
 
-    def serialize(self) -> dict:
+    def add_round(self, round_info):
         """
-        This method overrides the Serializable.serialize() method to convert the property Players
-        into a list of dicts instead of a list of Player objects.
+        This method enables to add the list of Matches of a Round to the Tournament Object
         """
-        attributes_dict = {}
-        for attribute in self.__dict__.keys():
-            cleaned_attribute_name = attribute.replace(f"_{self.__class__.__name__}__", '')
-            if hasattr(self, cleaned_attribute_name + '_pod'):
-                attributes_dict[cleaned_attribute_name] = getattr(self, cleaned_attribute_name + '_pod')()
-            else:
-                attributes_dict[cleaned_attribute_name] = getattr(self, cleaned_attribute_name)
-        return attributes_dict
+        pass

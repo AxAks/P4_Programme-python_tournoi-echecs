@@ -1,15 +1,15 @@
 # coding=utf-8
 
 import re
-import uuid
 
 from datetime import date, timedelta
 from typing import Union
 from enum import Enum
 from uuid import uuid4, UUID
-from models.serializable import Serializable
 
-from constants import MINIMUM_AGE, MINIMUM_RANKING, MAXIMUM_RANKING
+from constants import MINIMUM_AGE, MINIMUM_RANKING, MAXIMUM_RANKING, ALPHABETICAL_STRING_RULE
+
+from models.serializable import Serializable
 
 
 class Player(Serializable):
@@ -19,7 +19,7 @@ class Player(Serializable):
     """
     Gender = Enum("Gender", "MALE FEMALE")
 
-    def __init__(self, **params):
+    def __init__(self, **params: dict):
         attributes = ('player_uuid', 'last_name', 'first_name', 'birthdate', 'gender', 'ranking')
         errors = []
         for key, value in params.items():
@@ -64,8 +64,7 @@ class Player(Serializable):
         :param value:
         :return:
         """
-        #  à factoriser ? : doublon avec first_name
-        authorized_characters = re.compile("^[A-ZÉÈÇÀa-zéèçà\-]+$")
+        authorized_characters = ALPHABETICAL_STRING_RULE
         if re.match(authorized_characters, value):
             self.__last_name = value.title()
         else:
@@ -84,8 +83,7 @@ class Player(Serializable):
         :param value:
         :return:
         """
-        #  à factoriser ? : doublon avec last_name
-        authorized_characters = re.compile("^[A-ZÉÈÇÀa-zéèçà\-]+$")
+        authorized_characters = ALPHABETICAL_STRING_RULE
         if re.match(authorized_characters, value):
             self.__first_name = value.title()
         else:

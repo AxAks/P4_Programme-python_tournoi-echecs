@@ -143,7 +143,7 @@ tournament23 = Tournament(name, location, date, players, time_control, descripti
 
 
 def test_serialize_global(_obj):
-    return Serializable.serialize(_obj)
+    return serialize(_obj)
 
 
 def test_deserialize_global(_obj_class, attributes_dict):
