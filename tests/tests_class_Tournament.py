@@ -82,7 +82,7 @@ tournament24 = Tournament(**tournament24_dict)
 
 # Tests Serialization/Deserialization Tournament
 def test_serialize_tournament(tournament_object):
-    return Tournament.serialize(tournament_object)
+    return Serializable.serialize(tournament_object)
 
 
 def test_deserialize_tournament(attributes_dict):

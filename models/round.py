@@ -85,7 +85,7 @@ class Round(Serializable):
             match_infos = []
             for match_info in tuple_item:
                 if isinstance(match_info, Player):
-                    serialized_player = Player.serialize(match_info)
+                    serialized_player = Serializable.serialize(match_info)
                     match_infos.append(serialized_player)
                 else:
                     match_infos.append(match_info)

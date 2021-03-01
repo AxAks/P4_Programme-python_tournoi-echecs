@@ -10,7 +10,7 @@ MAXIMUM_RANKING = 3000
 MINIMUM_RANKING = 100
 
 # Class Round
-# Serialize
+# Result as a Tuple
 
 INDEX_PLAYER1 = 0
 INDEX_PLAYER2 = 1

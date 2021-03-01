@@ -124,7 +124,7 @@ round1 = Round(**round1_dict)
 
 # Serialization / Deserialization
 def test_serialize_round(round_object):
-    return Round.serialize(round_object)
+    return Serializable.serialize(round_object)
 
 
 def test_deserialize_round(attributes_dict):
