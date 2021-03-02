@@ -14,8 +14,8 @@ class Serializable:
     Gender = Enum("Gender", "MALE FEMALE")
 
     def __init__(self, **params): # je vais le construire au fur et à mesure (tests avec Player)
-        attributes = ('birthdate', 'gender',
-                      'dates', 'players', 'time_control', 'rounds_list')  # seulement les attributs à serialiser ?
+        attributes = ('player_uuid', 'last_name', 'first_name', 'birthdate', 'gender', 'ranking',
+                      'tournament_name', 'location', 'dates', 'players', 'time_control', 'description', 'rounds_list', 'rounds')  # seulement les attributs à serialiser ?
         errors = []
         for key, value in params.items():
             if key in attributes:
@@ -23,6 +23,7 @@ class Serializable:
                     setattr(self, key, value)
                 except AttributeError:
                     errors.append(key)
+
         if errors:
             raise Exception(f'Error detected in the following fields: {", ".join(errors)}')
 

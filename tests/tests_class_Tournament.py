@@ -12,7 +12,7 @@ from models.player import Player
 
 #  Player
 player1_dict = {
-    'player_uuid': 1,
+    'player_uuid': '3be40089-64ff-48c2-8e6e-bc005ad378d2',
     'last_name': 'aKONdé',
     'first_name': 'Axel',
     'birthdate': '1986-05-02',
@@ -20,7 +20,7 @@ player1_dict = {
     'ranking': 2500
 }
 player2_dict = {
-    'player_uuid': 2,
+    'player_uuid': 'ce0258eb-cfeb-45e6-a56d-8f5d7260bd9b',
     'last_name': 'Berd',
     'first_name': 'Bernard',
     'birthdate': '1982-03-01',
@@ -29,7 +29,7 @@ player2_dict = {
 }
 
 player3_dict = {
-    'player_uuid': 3,
+    'player_uuid': '4f4e8869-fbd2-48d7-b759-fafd725df22f',
     'last_name': 'CERAS',
     'first_name': 'Cédric',
     'birthdate': '1978-04-26',
@@ -38,7 +38,7 @@ player3_dict = {
 }
 
 player4_dict = {
-    'player_uuid': 4,
+    'player_uuid': '1bcb740a-3ca1-49e8-889f-30ca3c1bc293',
     'last_name': 'Deflar',
     'first_name': 'Didier',
     'birthdate': '1991-12-21',
