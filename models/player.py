@@ -19,7 +19,7 @@ class Player(Serializable):
 
     def __init__(self, **params: dict):
         super().__init__(**params)
-        player_attributes = ('player_uuid', 'last_name', 'first_name', 'birthdate', 'gender', 'ranking')  # seulement les attributs à ne pas serialiser ?
+        player_attributes = ('player_uuid', 'last_name', 'first_name', 'birthdate', 'gender', 'ranking')
 
         errors = []
         missing_attributes = []
@@ -52,7 +52,7 @@ class Player(Serializable):
             self.__player_uuid = value
         elif isinstance(value, str):
             try:
-                self.__player_uuid = UUID(value) # à gerer : l'erreur string vide : generer un UUID ? ou pas ?
+                self.__player_uuid = UUID(value)  # à gerer : l'erreur string vide : generer un UUID ? ou pas ?
             except ValueError:
                 raise AttributeError()
         else:

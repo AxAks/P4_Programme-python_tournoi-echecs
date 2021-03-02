@@ -3,9 +3,6 @@
 File for different tests on the features of the class Round
 """
 
-from datetime import datetime
-
-from models.serializable import Serializable
 from models.player import Player
 from models.tournament import Tournament
 from models.round import Round
@@ -40,7 +37,7 @@ player3_dict = {
 }
 
 player4_dict = {
-    'player_uuid':'1bcb740a-3ca1-49e8-889f-30ca3c1bc293',
+    'player_uuid': '1bcb740a-3ca1-49e8-889f-30ca3c1bc293',
     'last_name': 'Deflar',
     'first_name': 'Didier',
     'birthdate': '1991-12-21',
@@ -117,20 +114,20 @@ match1_tuple = (
 
 match2_tuple = ([
                     {'player_uuid': '4f4e8869-fbd2-48d7-b759-fafd725df22f',
-                    'last_name': 'CERAS',
-                    'first_name': 'Cédric',
-                    'birthdate': '1978-04-26',
-                    'gender': 'MALE',
-                    'ranking': 1400
+                     'last_name': 'CERAS',
+                     'first_name': 'Cédric',
+                     'birthdate': '1978-04-26',
+                     'gender': 'MALE',
+                     'ranking': 1400
                      },
                     0.5],
                 [
                     {'player_uuid': '1bcb740a-3ca1-49e8-889f-30ca3c1bc293',
-                    'last_name': 'Deflar',
-                    'first_name': 'Didier',
-                    'birthdate': '1991-12-21',
-                    'gender': 'MALE',
-                    'ranking': 1300
+                     'last_name': 'Deflar',
+                     'first_name': 'Didier',
+                     'birthdate': '1991-12-21',
+                     'gender': 'MALE',
+                     'ranking': 1300
                      },
                     0.5])
 
@@ -142,13 +139,17 @@ round1_dict = {
         'location': 'Geneve',
         'dates': '1987-02-28',
         'players': [
-            {'uuid': '3be40089-64ff-48c2-8e6e-bc005ad378d2', 'last_name': 'Akondé', 'first_name': 'Axel', 'birthdate': '1986-05-02', 'gender': 'MALE',
+            {'uuid': '3be40089-64ff-48c2-8e6e-bc005ad378d2', 'last_name': 'Akondé',
+             'first_name': 'Axel', 'birthdate': '1986-05-02', 'gender': 'MALE',
              'ranking': 2500},
-            {'uuid': 'ce0258eb-cfeb-45e6-a56d-8f5d7260bd9b', 'last_name': 'Berd', 'first_name': 'Bernard', 'birthdate': '1982-03-01', 'gender': 'MALE',
+            {'uuid': 'ce0258eb-cfeb-45e6-a56d-8f5d7260bd9b', 'last_name': 'Berd',
+             'first_name': 'Bernard', 'birthdate': '1982-03-01', 'gender': 'MALE',
              'ranking': 2400},
-            {'uuid': '4f4e8869-fbd2-48d7-b759-fafd725df22f', 'last_name': 'Ceras', 'first_name': 'Cédric', 'birthdate': '1978-04-26', 'gender': 'MALE',
+            {'uuid': '4f4e8869-fbd2-48d7-b759-fafd725df22f', 'last_name': 'Ceras',
+             'first_name': 'Cédric', 'birthdate': '1978-04-26', 'gender': 'MALE',
              'ranking': 1400},
-            {'uuid': '1bcb740a-3ca1-49e8-889f-30ca3c1bc293', 'last_name': 'Deflar', 'first_name': 'Didier', 'birthdate': '1991-12-21', 'gender': 'MALE',
+            {'uuid': '1bcb740a-3ca1-49e8-889f-30ca3c1bc293', 'last_name': 'Deflar',
+             'first_name': 'Didier', 'birthdate': '1991-12-21', 'gender': 'MALE',
              'ranking': 1300}
         ],
         'time_control': 'BULLET',
@@ -158,14 +159,18 @@ round1_dict = {
     },
     'matches': [
         (
-            [{'uuid': '3be40089-64ff-48c2-8e6e-bc005ad378d2', 'last_name': 'Akondé', 'first_name': 'Axel', 'birthdate': '1986-05-02', 'gender': 'MALE',
+            [{'uuid': '3be40089-64ff-48c2-8e6e-bc005ad378d2', 'last_name': 'Akondé',
+              'first_name': 'Axel', 'birthdate': '1986-05-02', 'gender': 'MALE',
               'ranking': 2500}, 1],
-            [{'uuid': 'ce0258eb-cfeb-45e6-a56d-8f5d7260bd9b', 'last_name': 'Berd', 'first_name': 'Bernard', 'birthdate': '1982-03-01', 'gender': 'MALE',
+            [{'uuid': 'ce0258eb-cfeb-45e6-a56d-8f5d7260bd9b', 'last_name': 'Berd',
+              'first_name': 'Bernard', 'birthdate': '1982-03-01', 'gender': 'MALE',
               'ranking': 2400}, 0]),
         (
-            [{'uuid': '4f4e8869-fbd2-48d7-b759-fafd725df22f', 'last_name': 'Ceras', 'first_name': 'Cédric', 'birthdate': '1978-04-26', 'gender': 'MALE',
+            [{'uuid': '4f4e8869-fbd2-48d7-b759-fafd725df22f', 'last_name': 'Ceras',
+              'first_name': 'Cédric', 'birthdate': '1978-04-26', 'gender': 'MALE',
               'ranking': 1400}, 0.5],
-            [{'uuid': '1bcb740a-3ca1-49e8-889f-30ca3c1bc293', 'last_name': 'Deflar', 'first_name': 'Didier', 'birthdate': '1991-12-21', 'gender': 'MALE',
+            [{'uuid': '1bcb740a-3ca1-49e8-889f-30ca3c1bc293', 'last_name': 'Deflar',
+              'first_name': 'Didier', 'birthdate': '1991-12-21', 'gender': 'MALE',
               'ranking': 1300}, 0.5]
         )
     ],

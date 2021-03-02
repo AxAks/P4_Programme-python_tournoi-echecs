@@ -1,7 +1,5 @@
 # coding=utf-8
 
-from typing import Union
-
 from enum import Enum
 
 
@@ -13,14 +11,14 @@ class Serializable:
     """
     Gender = Enum("Gender", "MALE FEMALE")
 
-    def __init__(self, **params): # je vais le construire au fur et à mesure (tests avec Player)
+    def __init__(self, **params):  # je vais le construire au fur et à mesure (tests avec Player)
         player_attributes = ('player_uuid', 'last_name', 'first_name', 'birthdate', 'gender', 'ranking')
         tournament_attributes = ('tournament_name', 'location', 'dates', 'players',
                                  'time_control', 'description', 'rounds_list', 'rounds')
         round_attributes = ('round_name', 'tournament', 'matches', 'end_time', 'start_time')
         match_attributes = ('player1', 'player2', 'player1_score', 'player2_score')
 
-        all_attributes = (player_attributes + tournament_attributes + round_attributes + match_attributes)  # Tous les attributs des classes filles !
+        all_attributes = (player_attributes + tournament_attributes + round_attributes + match_attributes)
 
         errors = []
         for key, value in params.items():
