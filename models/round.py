@@ -19,12 +19,13 @@ class Round(Serializable):
     """
 
     def __init__(self, **params: dict):
-        attributes = ('round_name', 'tournament', 'matches', 'end_time',
+        super().__init__(**params)
+        round_attributes = ('round_name', 'tournament', 'matches', 'end_time',
                       'start_time')  #  start_time = datetime.new() # end_time = datetime de la fin de round
         errors = []
         missing_attributes = []
         for key, value in params.items():
-            if key in attributes:
+            if key in round_attributes:
                 try:
                     setattr(self, key, value)
                 except AttributeError:

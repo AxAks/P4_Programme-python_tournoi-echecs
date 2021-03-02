@@ -14,11 +14,13 @@ class Serializable:
     Gender = Enum("Gender", "MALE FEMALE")
 
     def __init__(self, **params): # je vais le construire au fur et à mesure (tests avec Player)
-        attributes = ('player_uuid', 'last_name', 'first_name', 'birthdate', 'gender', 'ranking',
-                      'tournament_name', 'location', 'dates', 'players', 'time_control', 'description', 'rounds_list', 'rounds')  # seulement les attributs à serialiser ?
+        all_attributes = ('player_uuid', 'last_name', 'first_name', 'birthdate', 'gender', 'ranking',
+                      'tournament_name', 'location', 'dates', 'players', 'time_control', 'description', 'rounds_list', 'rounds',
+                      'round_name', 'tournament', 'matches', 'end_time', 'start_time',
+                      'player1', 'player2', 'player1_score', 'player2_score')  # Tous les attributs des classes filles !
         errors = []
         for key, value in params.items():
-            if key in attributes:
+            if key in all_attributes:
                 try:
                     setattr(self, key, value)
                 except AttributeError:

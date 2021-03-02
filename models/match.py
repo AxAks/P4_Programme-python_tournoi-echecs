@@ -19,11 +19,12 @@ class Match(Serializable):
     Score = Enum("Score", "0 0.5 1")
 
     def __init__(self, **params: dict):
-        attributes = ('player1', 'player2', 'player1_score', 'player2_score')
+        super().__init__(**params)
+        match_attributes = ('player1', 'player2', 'player1_score', 'player2_score')
         errors = []
         missing_attributes = []
         for key, value in params.items():
-            if key in attributes:
+            if key in match_attributes:
                 try:
                     setattr(self, key, value)
                 except AttributeError:

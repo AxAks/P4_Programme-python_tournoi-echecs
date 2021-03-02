@@ -22,12 +22,12 @@ class Tournament(Serializable):
 
     def __init__(self, **params: dict):
         super().__init__(**params)
-        attributes = ('tournament_name', 'location', 'dates', 'players', 'time_control', 'description', 'rounds_list', 'rounds')
+        tournament_attributes = ('tournament_name', 'location', 'dates', 'players', 'time_control', 'description', 'rounds_list', 'rounds')
         #  attention trouver comment mettre round à 4 par défaut !!
         errors = []
         missing_attributes = []
         for key, value in params.items():
-            if key in attributes:
+            if key in tournament_attributes:
                 try:
                     setattr(self, key, value)
                 except AttributeError:
