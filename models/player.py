@@ -18,7 +18,7 @@ class Player(Serializable):
     """
 
     def __init__(self, **params: dict):
-        super().__init__(**params) # à continuer passer les arguments serialisables dans Serializable, utiliser l'heritage
+        super().__init__(**params)
         attributes = ('player_uuid', 'last_name', 'first_name', 'birthdate', 'gender', 'ranking')  # seulement les attributs à ne pas serialiser ?
         errors = []
         missing_attributes = []
