@@ -19,16 +19,24 @@ class Match(Serializable):
     Score = Enum("Score", "0 0.5 1")
 
     def __init__(self, **params: dict):
-        errors = []
         attributes = ('player1', 'player2', 'player1_score', 'player2_score')
+        errors = []
+        missing_attributes = []
         for key, value in params.items():
             if key in attributes:
                 try:
                     setattr(self, key, value)
                 except AttributeError:
                     errors.append(key)
+            else:
+                missing_attributes.append(key)
+
+        if missing_attributes:
+            raise AttributeError(f'The following attributes do not exist'
+                                 f' for the object {self.__class__.__name__}:'
+                                 f' {", ".join(missing_attributes)}')
         if errors:
-            raise Exception(f'Error detected in the following fields: {", ".join(errors)}')
+            raise Exception(f'Errors detected in the following fields: {", ".join(errors)}')
 
     @property
     def player1(self) -> dict:

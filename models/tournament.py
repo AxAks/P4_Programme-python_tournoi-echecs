@@ -21,18 +21,27 @@ class Tournament(Serializable):
     Time_control = Enum("Time_control", "BULLET BLITZ RAPIDE")
 
     def __init__(self, **params: dict):
+        super().__init__(**params)
         attributes = ('tournament_name', 'location', 'dates',
                       'players', 'time_control', 'description', 'rounds_list', 'rounds')
         #  attention trouver comment mettre round à 4 par défaut !!
         errors = []
+        missing_attributes = []
         for key, value in params.items():
             if key in attributes:
                 try:
                     setattr(self, key, value)
                 except AttributeError:
                     errors.append(key)
+            else:
+                missing_attributes.append(key)
+
+        if missing_attributes:
+            raise AttributeError(f'The following attributes do not exist'
+                                 f' for the object {self.__class__.__name__}:'
+                                 f' {", ".join(missing_attributes)}')
         if errors:
-            raise Exception(f'Error detected in the following fields: {", ".join(errors)}')
+            raise Exception(f'Errors detected in the following fields: {", ".join(errors)}')
 
     @property
     def tournament_name(self) -> str:

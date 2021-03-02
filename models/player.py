@@ -4,7 +4,6 @@ import re
 
 from datetime import date, timedelta
 from typing import Union
-from enum import Enum
 from uuid import uuid4, UUID
 
 from constants import MINIMUM_AGE, MINIMUM_RANKING, MAXIMUM_RANKING, ALPHABETICAL_STRING_RULE
@@ -17,21 +16,27 @@ class Player(Serializable):
     This is the class for the Python Object: Player
     Gender is an sub-class for the Player's gender : only accept the strings "Male" and "Female".
     """
-    Gender = Enum("Gender", "MALE FEMALE")
 
     def __init__(self, **params: dict):
-        # super().__init__(player_uuid, last_name, first_name, birthdate, gender, ranking) à continuer passer les arguments serialisables dans Serializable, utiliser l'heritage
-        attributes = ('player_uuid', 'last_name', 'first_name', 'birthdate', 'gender', 'ranking')
+        super().__init__(**params) # à continuer passer les arguments serialisables dans Serializable, utiliser l'heritage
+        attributes = ('player_uuid', 'last_name', 'first_name', 'birthdate', 'gender', 'ranking')  # seulement les attributs à ne pas serialiser ?
         errors = []
+        missing_attributes = []
         for key, value in params.items():
             if key in attributes:
                 try:
                     setattr(self, key, value)
                 except AttributeError:
                     errors.append(key)
+            else:
+                missing_attributes.append(key)
 
+        if missing_attributes:
+            raise AttributeError(f'The following attributes do not exist'
+                                 f' for the object {self.__class__.__name__}:'
+                                 f' {", ".join(missing_attributes)}')
         if errors:
-            raise Exception(f'Error detected in the following fields: {", ".join(errors)}')
+            raise Exception(f'Errors detected in the following fields: {", ".join(errors)}')
 
     @property
     def player_uuid(self) -> str:
@@ -91,14 +96,14 @@ class Player(Serializable):
             raise AttributeError()
 
     @property
-    def gender(self) -> Union[str, Gender]:
+    def gender(self) -> Union[str, Serializable.Gender]:
         return self.__gender
 
     def gender_pod(self) -> str:
         return self.__gender.name
 
     @gender.setter
-    def gender(self, value: Union[str, Gender]):
+    def gender(self, value: Union[str, Serializable.Gender]):
         if isinstance(value, str):
             try:
                 self.__gender = self.Gender[value]
@@ -125,7 +130,7 @@ class Player(Serializable):
                 raise AttributeError()
         elif not isinstance(value, date):
             raise AttributeError()
-        if date.today() - value < timedelta(days=MINIMUM_AGE*365):
+        if date.today() - value < timedelta(days=MINIMUM_AGE * 365):
             raise AttributeError()
 
         self.__birthdate = value

@@ -1,12 +1,30 @@
 # coding=utf-8
 
+from typing import Union
+
+from enum import Enum
+
+
 class Serializable:
     """
     The Serializable class is set as a common/factorized Parent Class for serializable Objects and Attributes
     It shares the principe of heritage with its Subclasses : Player, Tournament, Round and Match.
+    Gender is a sub-class for the Player's gender : only accept the strings "Male" and "Female".
     """
-    # def __init__(self, player_uuid, last_name, first_name, birthdate, gender, ranking):
-    # je vais le construire après (tests avec Player)
+    Gender = Enum("Gender", "MALE FEMALE")
+
+    def __init__(self, **params): # je vais le construire au fur et à mesure (tests avec Player)
+        attributes = ('birthdate', 'gender',
+                      'dates', 'players', 'time_control', 'rounds_list')  # seulement les attributs à serialiser ?
+        errors = []
+        for key, value in params.items():
+            if key in attributes:
+                try:
+                    setattr(self, key, value)
+                except AttributeError:
+                    errors.append(key)
+        if errors:
+            raise Exception(f'Error detected in the following fields: {", ".join(errors)}')
 
     def serialize(self):
         """

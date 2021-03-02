@@ -19,18 +19,25 @@ class Round(Serializable):
     """
 
     def __init__(self, **params: dict):
-        errors = []
         attributes = ('round_name', 'tournament', 'matches', 'end_time',
                       'start_time')  #  start_time = datetime.new() # end_time = datetime de la fin de round
+        errors = []
+        missing_attributes = []
         for key, value in params.items():
             if key in attributes:
                 try:
                     setattr(self, key, value)
                 except AttributeError:
                     errors.append(key)
+            else:
+                missing_attributes.append(key)
 
+        if missing_attributes:
+            raise AttributeError(f'The following attributes do not exist'
+                                 f' for the object {self.__class__.__name__}:'
+                                 f' {", ".join(missing_attributes)}')
         if errors:
-            raise Exception(f'Error detected in the following fields: {", ".join(errors)}')
+            raise Exception(f'Errors detected in the following fields: {", ".join(errors)}')
 
     @property
     def round_name(self) -> str:
