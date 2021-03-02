@@ -27,8 +27,8 @@ class Match(Serializable):
                     setattr(self, key, value)
                 except AttributeError:
                     errors.append(key)
-            if errors:
-                raise Exception(f'Error detected in the following fields: {", ".join(errors)}')
+        if errors:
+            raise Exception(f'Error detected in the following fields: {", ".join(errors)}')
 
     @property
     def player1(self) -> dict:

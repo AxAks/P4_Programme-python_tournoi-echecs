@@ -29,8 +29,8 @@ class Round(Serializable):
                 except AttributeError:
                     errors.append(key)
 
-            if errors:
-                raise Exception(f'Error detected in the following fields: {", ".join(errors)}')
+        if errors:
+            raise Exception(f'Error detected in the following fields: {", ".join(errors)}')
 
     @property
     def round_name(self) -> str:

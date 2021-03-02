@@ -21,7 +21,7 @@ class Player(Serializable):
 
     def __init__(self, **params: dict):
         # super().__init__(player_uuid, last_name, first_name, birthdate, gender, ranking) à continuer passer les arguments serialisables dans Serializable, utiliser l'heritage
-        #  attributes = ('player_uuid', 'last_name', 'first_name', 'birthdate', 'gender', 'ranking')
+        attributes = ('player_uuid', 'last_name', 'first_name', 'birthdate', 'gender', 'ranking')
         errors = []
         for key, value in params.items():
             if key in attributes:
@@ -30,8 +30,8 @@ class Player(Serializable):
                 except AttributeError:
                     errors.append(key)
 
-            if errors:
-                raise Exception(f'Error detected in the following fields: {", ".join(errors)}')
+        if errors:
+            raise Exception(f'Error detected in the following fields: {", ".join(errors)}')
 
     @property
     def player_uuid(self) -> str:
