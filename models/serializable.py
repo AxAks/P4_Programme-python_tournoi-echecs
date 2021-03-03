@@ -11,7 +11,7 @@ class Serializable:
     """
     Gender = Enum("Gender", "MALE FEMALE")
 
-    def __init__(self, **params):  # je vais le construire au fur et à mesure (tests avec Player)
+    def __init__(self, **params):
         player_attributes = ('player_uuid', 'last_name', 'first_name', 'birthdate', 'gender', 'ranking')
         tournament_attributes = ('tournament_name', 'location', 'dates', 'players',
                                  'time_control', 'description', 'rounds_list', 'rounds')
