@@ -10,8 +10,12 @@ class Serializable:
     Gender is a sub-class for the Player's gender : only accept the strings "Male" and "Female".
     """
     Gender = Enum("Gender", "MALE FEMALE")
+    Score = Enum("Score", "0 0.5 1")
 
     def __init__(self, **params):
+        """
+        The initialization in Serializable checks whether the attributes provided exist in the child Class object.
+        """
         player_attributes = ('player_uuid', 'last_name', 'first_name', 'birthdate', 'gender', 'ranking')
         tournament_attributes = ('tournament_name', 'location', 'dates', 'players',
                                  'time_control', 'description', 'rounds_list', 'rounds')

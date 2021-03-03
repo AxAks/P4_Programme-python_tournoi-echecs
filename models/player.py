@@ -18,6 +18,9 @@ class Player(Serializable):
     """
 
     def __init__(self, **params: dict):
+        """
+        The initialization of the class Player checks wheter there is a missing parameter in the entered values.
+        """
         super().__init__(**params)
         player_attributes = ('player_uuid', 'last_name', 'first_name', 'birthdate', 'gender', 'ranking')
 
@@ -41,10 +44,18 @@ class Player(Serializable):
 
     @property
     def player_uuid(self) -> str:
+        """
+        This method returns the player's uuid as an string.
+        """
         return str(self.__player_uuid)
 
     @player_uuid.setter
     def player_uuid(self, value: Union[str, UUID]):
+        """
+        This setter checks the entered player's uuid:
+        - it sets an uuid if there is none given.
+        - it converts the value into an uuid if the entered value is a string
+        """
         if value is None:
             value = uuid4()
             self.__player_uuid = value
@@ -60,16 +71,17 @@ class Player(Serializable):
 
     @property
     def last_name(self) -> str:
+        """
+        This method returns the player's last name as a string.
+        """
         return self.__last_name
 
     @last_name.setter
     def last_name(self, value: str):
         """
-        Verification of entered characters for last name using regex
-        ASCII table and a few special characters
-        The list of authorized characters is to be completed !
-        :param value:
-        :return:
+        This setter checks the entered characters for the player's last name using regex:
+        alphanumerical characters and a few special characters are authorized
+        The list of authorized characters can be extended.
         """
         authorized_characters = ALPHABETICAL_STRING_RULE
         if re.match(authorized_characters, value):
@@ -79,16 +91,17 @@ class Player(Serializable):
 
     @property
     def first_name(self) -> str:
+        """
+        This method returns the player's first name as a string.
+        """
         return self.__first_name
 
     @first_name.setter
     def first_name(self, value: str):
         """
-        Verification of entered characters for first name using regex
-        ASCII table and a few special characters
-        The list of authorized characters is to be completed !
-        :param value:
-        :return:
+        This setter checks the entered characters for the player's first name using regex:
+        alphanumerical characters and a few special characters are authorized
+        The list of authorized characters can be extended.
         """
         authorized_characters = ALPHABETICAL_STRING_RULE
         if re.match(authorized_characters, value):
@@ -97,14 +110,24 @@ class Player(Serializable):
             raise AttributeError()
 
     @property
-    def gender(self) -> Union[str, Serializable.Gender]:
+    def gender(self) -> Serializable.Gender:
+        """
+        This method returns the gender as a Gender Enum.
+        """
         return self.__gender
 
     def gender_pod(self) -> str:
+        """
+        This method returns the gender as a string.
+        """
         return self.__gender.name
 
     @gender.setter
     def gender(self, value: Union[str, Serializable.Gender]):
+        """
+        This setter checks that the entered value is a string or a Gender Enum
+        and sets it as a Gender.
+        """
         if isinstance(value, str):
             try:
                 self.__gender = self.Gender[value]
@@ -116,14 +139,25 @@ class Player(Serializable):
             raise AttributeError()
 
     @property
-    def birthdate(self) -> Union[str, date]:
+    def birthdate(self) -> date:
+        """
+        This method returns the birthdate as a date.
+        """
         return self.__birthdate
 
     def birthdate_pod(self) -> str:
+        """
+        This method returns the birthdate as a string.
+        """
         return self.__birthdate.isoformat()
 
     @birthdate.setter
     def birthdate(self, value: Union[str, date]):
+        """
+        This setter checks that the entered value is a string or a date.
+        in the case of a string, the string is formatted into a date.
+        it also checks wheter the Player has the minimum required age.
+        """
         if isinstance(value, str):
             try:
                 value = date.fromisoformat(value)
@@ -138,10 +172,17 @@ class Player(Serializable):
 
     @property
     def ranking(self) -> int:
+        """
+        This method returns the player's ranking.
+        """
         return self.__ranking
 
     @ranking.setter
     def ranking(self, value: int):
+        """
+        This setter checks that the entered value is a integer
+        and whether the player's ranking fits in the possible ranking values (from 100 to 3000).
+        """
         if type(value) == int:
             if MINIMUM_RANKING < value <= MAXIMUM_RANKING:
                 self.__ranking = value

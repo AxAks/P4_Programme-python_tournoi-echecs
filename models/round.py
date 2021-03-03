@@ -19,6 +19,9 @@ class Round(Serializable):
     """
 
     def __init__(self, **params: dict):
+        """
+        The initialization of the class Round checks wheter there is a missing parameter in the entered values.
+        """
         super().__init__(**params)
         round_attributes = ('round_name', 'tournament', 'matches', 'end_time',
                             'start_time')  #  start_time = datetime.new() # end_time = datetime de la fin de round
@@ -42,16 +45,17 @@ class Round(Serializable):
 
     @property
     def round_name(self) -> str:
+        """
+        This method returns the round's name as a string.
+        """
         return self.__name
 
     @round_name.setter
     def round_name(self, value: str):
         """
-        Verification of entered characters for last name using regex
-        ASCII table and a few special characters
-        The list of authorized characters is to be completed !
-        :param value:
-        :return:
+        This setter checks the entered characters for the round's name using regex:
+        alphanumerical characters and a few special characters are authorized
+        The list of authorized characters can be extended.
         """
         authorized_characters = ALPHA_NUMERICAL_STRING_RULE
         if re.match(authorized_characters, value):
@@ -61,14 +65,24 @@ class Round(Serializable):
 
     @property
     def tournament(self) -> Tournament:
+        """
+        This method returns the tournament associated to the round as Tournament object.
+        """
         return self.__tournament
 
     @property
     def tournament_pod(self) -> dict:
+        """
+        This method returns the tournament associated to the round as a dict.
+        """
         return Serializable.serialize(self.__tournament)
 
     @tournament.setter
     def tournament(self, value: Union[dict, Tournament]):
+        """
+        This setter checks wheter the entered value is a dict or Tournament object
+        and sets the attribute as a dict.
+        """
         if isinstance(value, dict):
             try:
                 self.__tournament = value
@@ -85,10 +99,17 @@ class Round(Serializable):
 
     @property
     def matches(self) -> list[tuple[list]]:
+        """
+        This method returns the list of matches for a round as a list of tuple.
+        """
         return self.__matches
 
     @matches.setter
-    def matches(self, value: Union[dict, list[tuple[list]]]):  #  à revoir !
+    def matches(self, value: Union[dict, list[tuple[list]]]):  #  à revoir !!!!
+        """
+        This setter checks wheter the entered value is a list of Match Objects or a dict
+        and sets the attribute as a list of matches as tuples
+        """
         matches = []
         for tuple_item in value:
             match_infos = []
@@ -111,13 +132,23 @@ class Round(Serializable):
 
     @property
     def start_time(self) -> datetime:
+        """
+        This method returns the start time of the round as a datetime.
+        """
         return self.__start_time
 
     def start_time_pod(self) -> str:
+        """
+        This method returns the start time of the round as a string.
+        """
         return self.__start_time.strftime('%Y-%m-%dT%H:%M:%S')
 
     @start_time.setter
     def start_time(self, value: datetime) -> Union[str, datetime]:
+        """
+        This setter checks wheter the entered value is a string or a datetime object
+        and sets the attribute as a datetime
+        """
         #  doit etre automatiquement enregisté lors de l'instanciation du round
         if isinstance(value, str):
             try:
@@ -132,14 +163,24 @@ class Round(Serializable):
 
     @property
     def end_time(self) -> datetime:
+        """
+        This method returns the end time of the round as a datetime.
+        """
         return self.__end_time
 
     def end_time_pod(self) -> str:
+        """
+        This method returns the end time of the round as a string.
+        """
         return self.__end_time.strftime('%Y-%m-%dT%H:%M:%S')
 
     @end_time.setter
     def end_time(self,
                  value: Union[str, datetime]):
+        """
+        This setter checks wheter the entered value is a string or a datetime object
+        and sets the attribute as a datetime
+        """
         #  doit etre automatiquement enregisté lors de la fin de saisie des infos du round
         if isinstance(value, str):
             try:

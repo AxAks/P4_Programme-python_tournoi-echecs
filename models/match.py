@@ -16,9 +16,11 @@ class Match(Serializable):
     Multiple matches are not saved here but as a list in the Class Round
     -> Round.matches = [match1, match2, match3]
     """
-    Score = Enum("Score", "0 0.5 1")
 
     def __init__(self, **params: dict):
+        """
+        The initialization of the class Match checks wheter there is a missing parameter in the entered values.
+        """
         super().__init__(**params)
         match_attributes = ('player1', 'player2', 'player1_score', 'player2_score')
         errors = []
@@ -41,10 +43,17 @@ class Match(Serializable):
 
     @property
     def player1(self) -> dict:
+        """
+        This method returns the player 1 as a dict.
+        """
         return self.__player1.serialize()
 
     @player1.setter
     def player1(self, value: Union[dict, Player]):
+        """
+        The setter checks whether the entered value is a dict or a Player object
+        and sets the attribute as a Player object
+        """
         if isinstance(value, dict):
             player1 = Player(**value)
             self.__player1 = player1
@@ -58,10 +67,17 @@ class Match(Serializable):
 
     @property
     def player2(self) -> dict:
+        """
+        This method returns the player 2 as a dict.
+        """
         return self.__player2.serialize()
 
     @player2.setter
     def player2(self, value: Union[dict, Player]):
+        """
+        The setter checks whether the entered value is a dict or a Player object
+        and sets the attribute as a Player object
+        """
         if isinstance(value, dict):
             player2 = Player(**value)
             self.__player2 = player2
@@ -74,33 +90,68 @@ class Match(Serializable):
             raise AttributeError()
 
     @property
-    def player1_score(self) -> int:
+    def player1_score(self) -> Serializable.Score:  # à revoir !
+        """
+        This method returns the score of player 1 as an integer.
+        """
         return self.__player1_score
 
+    def player2_score_pod(self) -> int: # à revoir !
+        """
+        This method returns the score of player 1 as an integer.
+        """
+        return self.__gender.name
+
     @player1_score.setter
-    def player1_score(self, value: int):
+    def player1_score(self, value: Union[int, Serializable.Score]): # à revoir !
+        """
+        This setter checks that the entered value is an integer.
+        """
         if isinstance(value, int):
             try:
                 self.__player1_score = value
             except KeyError:
                 raise AttributeError()
+        elif isinstance(value, self.Score):
+            self.__gender = value
         else:
             raise AttributeError()
 
     @property
-    def player2_score(self) -> int:
+    def player2_score(self) -> Serializable.Score: # à revoir !
+        """
+        This method returns the score of player 2 as an integer.
+        """
         return self.__player2_score
 
+    def player2_score_pod(self) -> int: # à revoir !
+        """
+        This method returns the score of player 2 as an integer.
+        """
+        return self.__gender.name
+
     @player2_score.setter
-    def player2_score(self, value: int):
+    def player2_score(self, value: Union[int, Serializable.Score]): # à revoir !
+        """
+        This setter checks that the entered value is an integer.
+        """
         if isinstance(value, int):
             try:
                 self.__player2_score = value
             except KeyError:
                 raise AttributeError()
+        elif isinstance(value, self.Score):
+            self.__gender = value
         else:
             raise AttributeError()
 
     def get_match_as_tuple(self):
         # bout de code de serialize extrait en methode pour factoriser dans Serializable.serialize() partout
         return [self.player1, self.player1_score], [self.player2, self.player2_score]
+
+
+
+
+
+
+

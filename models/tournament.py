@@ -21,6 +21,9 @@ class Tournament(Serializable):
     Time_control = Enum("Time_control", "BULLET BLITZ RAPIDE")
 
     def __init__(self, **params: dict):
+        """
+        The initialization of the class Tournament checks wheter there is a missing parameter in the entered values.
+        """
         super().__init__(**params)
         tournament_attributes = ('tournament_name', 'location', 'dates', 'players',
                                  'time_control', 'description', 'rounds_list', 'rounds')
@@ -45,16 +48,17 @@ class Tournament(Serializable):
 
     @property
     def tournament_name(self) -> str:
+        """
+        This method returns the tournament's name as a string.
+        """
         return self.__tournament_name
 
     @tournament_name.setter
     def tournament_name(self, value: str):
         """
-        Verification of entered characters for the tournament name using regex
-        ASCII table and a few special characters
-        The list of authorized characters is to be completed !
-        :param value:
-        :return:
+        This setter checks the entered characters for the tournament's name using regex:
+        alphanumerical characters and a few special characters are authorized
+        The list of authorized characters can be extended.
         """
         authorized_characters = ALPHA_NUMERICAL_STRING_RULE
         if re.match(authorized_characters, value):
@@ -64,18 +68,18 @@ class Tournament(Serializable):
 
     @property
     def location(self) -> str:
+        """
+        This method returns the location as a string.
+        """
         return self.__location
 
     @location.setter
     def location(self, value: str):
         """
-        Verification of entered characters for the tournament location using regex
-        ASCII table and a few special characters
-        The list of authorized characters is to be completed !
-        :param value:
-        :return:
+        This setter checks the entered characters for the tournament's location using regex:
+        alphabetical characters and a few special characters are authorized
+        The list of authorized characters can be extended.
         """
-        #  à factoriser ? : doublon avec Player last_name et first_name etc ... (les attributs strings)
         authorized_characters = ALPHABETICAL_STRING_RULE
         if re.match(authorized_characters, value):
             self.__location = value.title()
@@ -83,14 +87,24 @@ class Tournament(Serializable):
             raise AttributeError()
 
     @property
-    def dates(self) -> Union[str, date]:
+    def dates(self) -> date:
+        """
+        This method returns the date as a date.
+        """
         return self.__dates
 
     def dates_pod(self) -> str:
+        """
+        This method returns the date as a string.
+        """
         return self.__dates.isoformat()
 
     @dates.setter
     def dates(self, value: Union[str, date]):
+        """
+        This setter checks wheter the entered value is a string or a date object
+        and sets the attribute as a date
+        """
         if isinstance(value, str):
             try:
                 value = date.fromisoformat(value)
@@ -104,10 +118,17 @@ class Tournament(Serializable):
 
     @property
     def players(self) -> list[dict]:
+        """
+        This method returns the players as a list of dicts.
+        """
         return [player_instance.serialize() for player_instance in self.__players]
 
     @players.setter
     def players(self, value: Union[list[dict], list[Player]]):
+        """
+        This setter checks wheter the entered value is list of Player Objects or a list of dicts
+        and sets the attribute as a list of Player Objects
+        """
         player_objs_list = []
         if isinstance(value[0], dict):
             for player_dict in value:
@@ -124,13 +145,23 @@ class Tournament(Serializable):
 
     @property
     def time_control(self) -> Time_control:
+        """
+        This method returns the Time Control as a Time Control Enum.
+        """
         return self.__time_control
 
     def time_control_pod(self) -> str:
+        """
+        This method returns the Time Control as a string.
+        """
         return self.__time_control.name
 
     @time_control.setter
     def time_control(self, value: Union[str, Time_control]):
+        """
+        This setter checks wheter the entered value is a string or a Time Control Enum
+        and sets the attribute as a Time Control Enum
+        """
         if isinstance(value, str):
             try:
                 self.__time_control = self.Time_control[value]
@@ -143,10 +174,16 @@ class Tournament(Serializable):
 
     @property
     def description(self) -> str:
+        """
+        This method returns the description as an integer.
+        """
         return self.__description
 
     @description.setter
     def description(self, value: str):
+        """
+        This setter checks that the entered value is a string.
+        """
         if isinstance(value, str):
             self.__description = value
         else:
@@ -162,10 +199,16 @@ class Tournament(Serializable):
 
     @property
     def rounds(self) -> int:
+        """
+        This method returns the number of round as an integer.
+        """
         return self.__rounds
 
     @rounds.setter
     def rounds(self, value: int):
+        """
+        This setter checks that the entered value is a positive integer.
+        """
         if type(value) == int:
             if value > 0:
                 self.__rounds = value
