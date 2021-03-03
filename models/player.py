@@ -23,19 +23,32 @@ class Player(Model):
         # homogeneiger et documenter
         """
         The initialization of the class Player checks wheter there is a missing parameter in the entered values.
-        # decrire params ci : les types de données ex identifier: None, UUID, str etc..)
+        the type of data are as follows :
+        - identifier: None, UUID or string
+        - last_name: string
+        - first_name: string
+        - birthdate: string or date
+        - gender: string or Gender
+        - ranking: int
         """
         super().__init__(('identifier', 'last_name', 'first_name', 'birthdate', 'gender', 'ranking'), **data)
 
     @property
-    def identifier(self) -> str:
+    def identifier(self) -> UUID:
+        """
+        This method returns the player's uuid as an UUID.
+        """
+        return self.__identifier
+
+    @property
+    def identifier_pod(self) -> str:
         """
         This method returns the player's uuid as an string.
         """
         return str(self.__identifier)
 
     @identifier.setter
-    def identifier(self, value: Union[str, UUID] = None):
+    def identifier(self, value: Union[str, UUID]):
         """
         This setter checks the entered player's uuid:
         - it sets an uuid if there is none given.
@@ -44,7 +57,7 @@ class Player(Model):
         if value is None:
             value = uuid4()
             self.__identifier = value
-        if isinstance(value, UUID):
+        elif isinstance(value, UUID):
             self.__identifier = value
         elif isinstance(value, str):
             try:
@@ -68,6 +81,8 @@ class Player(Model):
         alphanumerical characters and a few special characters are authorized
         The list of authorized characters can be extended.
         """
+        if value is None:
+            raise AttributeError()
         authorized_characters = ALPHABETICAL_STRING_RULE
         if re.match(authorized_characters, value):
             self.__last_name = value.title()
@@ -88,6 +103,8 @@ class Player(Model):
         alphanumerical characters and a few special characters are authorized
         The list of authorized characters can be extended.
         """
+        if value is None:
+            raise AttributeError()
         authorized_characters = ALPHABETICAL_STRING_RULE
         if re.match(authorized_characters, value):
             self.__first_name = value.title()
@@ -113,6 +130,8 @@ class Player(Model):
         This setter checks that the entered value is a string or a Gender Enum
         and sets it as a Gender.
         """
+        if value is None:
+            raise AttributeError()
         if isinstance(value, str):
             try:
                 self.__gender = self.Gender[value]
@@ -143,6 +162,8 @@ class Player(Model):
         in the case of a string, the string is formatted into a date.
         it also checks wheter the Player has the minimum required age.
         """
+        if value is None:
+            raise AttributeError()
         if isinstance(value, str):
             try:
                 value = date.fromisoformat(value)
@@ -168,6 +189,8 @@ class Player(Model):
         This setter checks that the entered value is a integer
         and whether the player's ranking fits in the possible ranking values (from 100 to 3000).
         """
+        if value is None:
+            raise AttributeError()
         if type(value) == int:
             if MINIMUM_RANKING < value <= MAXIMUM_RANKING:
                 self.__ranking = value
