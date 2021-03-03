@@ -3,7 +3,7 @@
 from enum import Enum
 from typing import Union
 
-from models.serializable import Serializable
+from models.model import Serializable
 from models.player import Player
 
 
@@ -17,11 +17,16 @@ class Match(Serializable):
     -> Round.matches = [match1, match2, match3]
     """
 
+    class Score(Enum):
+        WIN = 1.0
+        LOSE = 0.0
+        TIE = 0.5
+
     def __init__(self, **params: dict):
         """
         The initialization of the class Match checks wheter there is a missing parameter in the entered values.
         """
-        super().__init__(**params)
+        super().__init__(('player1', 'player2', 'player1_score', 'player2_score'), **params)
         match_attributes = ('player1', 'player2', 'player1_score', 'player2_score')
         errors = []
         missing_attributes = []
@@ -100,7 +105,7 @@ class Match(Serializable):
         """
         This method returns the score of player 1 as an integer.
         """
-        return self.__gender.name
+        return self.__player2_score.name
 
     @player1_score.setter
     def player1_score(self, value: Union[int, Serializable.Score]): # à revoir !
@@ -113,7 +118,7 @@ class Match(Serializable):
             except KeyError:
                 raise AttributeError()
         elif isinstance(value, self.Score):
-            self.__gender = value
+            self.__player1_score = value
         else:
             raise AttributeError()
 
@@ -128,7 +133,7 @@ class Match(Serializable):
         """
         This method returns the score of player 2 as an integer.
         """
-        return self.__gender.name
+        return self.__player2_score
 
     @player2_score.setter
     def player2_score(self, value: Union[int, Serializable.Score]): # à revoir !

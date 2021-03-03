@@ -5,52 +5,37 @@ import re
 from datetime import date, timedelta
 from typing import Union
 from uuid import uuid4, UUID
+from enum import Enum
 
 from constants import MINIMUM_AGE, MINIMUM_RANKING, MAXIMUM_RANKING, ALPHABETICAL_STRING_RULE
 
-from models.serializable import Serializable
+from models.model import Model
 
 
-class Player(Serializable):
+class Player(Model):
     """
     This is the class for the Python Object: Player
     Gender is an sub-class for the Player's gender : only accept the strings "Male" and "Female".
     """
+    Gender = Enum("Gender", "MALE FEMALE")
 
-    def __init__(self, **params: dict):
+    def __init__(self, **data):
+        # homogeneiger et documenter
         """
         The initialization of the class Player checks wheter there is a missing parameter in the entered values.
+        # decrire params ci : les types de données ex identifier: None, UUID, str etc..)
         """
-        super().__init__(**params)
-        player_attributes = ('player_uuid', 'last_name', 'first_name', 'birthdate', 'gender', 'ranking')
-
-        errors = []
-        missing_attributes = []
-        for key, value in params.items():
-            if key in player_attributes:
-                try:
-                    setattr(self, key, value)
-                except AttributeError:
-                    errors.append(key)
-            else:
-                missing_attributes.append(key)
-
-        if missing_attributes:
-            raise AttributeError(f'The following attributes do not exist'
-                                 f' for the object {self.__class__.__name__}:'
-                                 f' {", ".join(missing_attributes)}')
-        if errors:
-            raise Exception(f'Errors detected in the following fields: {", ".join(errors)}')
+        super().__init__(('identifier', 'last_name', 'first_name', 'birthdate', 'gender', 'ranking'), **data)
 
     @property
-    def player_uuid(self) -> str:
+    def identifier(self) -> str:
         """
         This method returns the player's uuid as an string.
         """
-        return str(self.__player_uuid)
+        return str(self.__identifier)
 
-    @player_uuid.setter
-    def player_uuid(self, value: Union[str, UUID]):
+    @identifier.setter
+    def identifier(self, value: Union[str, UUID] = None):
         """
         This setter checks the entered player's uuid:
         - it sets an uuid if there is none given.
@@ -58,12 +43,12 @@ class Player(Serializable):
         """
         if value is None:
             value = uuid4()
-            self.__player_uuid = value
+            self.__identifier = value
         if isinstance(value, UUID):
-            self.__player_uuid = value
+            self.__identifier = value
         elif isinstance(value, str):
             try:
-                self.__player_uuid = UUID(value)  # à gerer : l'erreur string vide : generer un UUID ? ou pas ?
+                self.__identifier = UUID(value)  # à gerer ( ou deja géré, à tester): l'erreur string vide : generer un UUID ? ou pas ?
             except ValueError:
                 raise AttributeError()
         else:
@@ -110,7 +95,7 @@ class Player(Serializable):
             raise AttributeError()
 
     @property
-    def gender(self) -> Serializable.Gender:
+    def gender(self) -> Gender:
         """
         This method returns the gender as a Gender Enum.
         """
@@ -123,7 +108,7 @@ class Player(Serializable):
         return self.__gender.name
 
     @gender.setter
-    def gender(self, value: Union[str, Serializable.Gender]):
+    def gender(self, value: Union[str, Gender]):
         """
         This setter checks that the entered value is a string or a Gender Enum
         and sets it as a Gender.

@@ -8,12 +8,12 @@ from datetime import datetime
 from constants import INDEX_PLAYER1, INDEX_PLAYER2,\
     INDEX_PLAYER1_SCORE, INDEX_PLAYER2_SCORE, ALPHA_NUMERICAL_STRING_RULE
 
-from models.serializable import Serializable
+from models.model import Model
 from models.tournament import Tournament
 from models.player import Player
 
 
-class Round(Serializable):
+class Round(Model):
     """
     This is the class for the Python Object: Round
     """
@@ -22,7 +22,7 @@ class Round(Serializable):
         """
         The initialization of the class Round checks wheter there is a missing parameter in the entered values.
         """
-        super().__init__(**params)
+        super().__init__(('round_name', 'tournament', 'matches', 'end_time', 'start_time'), **params)
         round_attributes = ('round_name', 'tournament', 'matches', 'end_time',
                             'start_time')  #  start_time = datetime.new() # end_time = datetime de la fin de round
         errors = []
@@ -75,7 +75,7 @@ class Round(Serializable):
         """
         This method returns the tournament associated to the round as a dict.
         """
-        return Serializable.serialize(self.__tournament)
+        return Model.serialize(self.__tournament)
 
     @tournament.setter
     def tournament(self, value: Union[dict, Tournament]):

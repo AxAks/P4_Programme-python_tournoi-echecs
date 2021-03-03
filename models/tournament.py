@@ -5,14 +5,15 @@ import re
 from datetime import date
 from enum import Enum
 from typing import Union
+from uuid import UUID
 
 from constants import ALPHA_NUMERICAL_STRING_RULE, ALPHABETICAL_STRING_RULE
 
 from models.player import Player
-from models.serializable import Serializable
+from models.model import Model
 
 
-class Tournament(Serializable):
+class Tournament(Model):
     """
     This is the class for the Python Object: Tournament
     Time_control is an intermediate class for the tournaments's time control
@@ -20,17 +21,18 @@ class Tournament(Serializable):
     """
     Time_control = Enum("Time_control", "BULLET BLITZ RAPIDE")
 
-    def __init__(self, **params: dict):
+    def __init__(self, **data):
         """
         The initialization of the class Tournament checks wheter there is a missing parameter in the entered values.
         """
-        super().__init__(**params)
+        super().__init__(('tournament_name', 'location', 'dates', 'players',
+                         'time_control', 'description', 'rounds_list', 'rounds'), **data)
         tournament_attributes = ('tournament_name', 'location', 'dates', 'players',
                                  'time_control', 'description', 'rounds_list', 'rounds')
         # attention trouver comment mettre round à 4 par défaut !!
         errors = []
         missing_attributes = []
-        for key, value in params.items():
+        for key, value in data.items():
             if key in tournament_attributes:
                 try:
                     setattr(self, key, value)
@@ -124,11 +126,14 @@ class Tournament(Serializable):
         return [player_instance.serialize() for player_instance in self.__players]
 
     @players.setter
-    def players(self, value: Union[list[dict], list[Player]]):
+    def players(self, value: Union[list[UUID], list[Player]]):
         """
         This setter checks wheter the entered value is list of Player Objects or a list of dicts
         and sets the attribute as a list of Player Objects
         """
+        # doit etre une verificait hétérogene
+        # boucle
+        # ou fonction qui verifie qu'une liste est homogene et renvoie une erreur sinon
         player_objs_list = []
         if isinstance(value[0], dict):
             for player_dict in value:
