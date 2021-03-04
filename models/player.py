@@ -151,7 +151,7 @@ class Player(Model):
     @property
     def gender(self) -> str:
         """
-        This method returns the gender as a Gender Enum.
+        This method returns the gender as a string.
         """
         return self.__gender.name
 
