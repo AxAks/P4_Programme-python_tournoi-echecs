@@ -17,7 +17,6 @@ class Round(Model):
     """
     This is the class for the Python Object: Round
     """
-
     def __init__(self, **params: dict):
         # homogeneiger et documenter comme Player
         """
