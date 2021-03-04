@@ -25,6 +25,15 @@ class Tournament(Model):
         # homogeneiger et documenter comme Player
         """
         The initialization of the class Tournament checks wheter there is a missing parameter in the entered values.
+        the type of data are as follows :
+        - tournament_name:
+        - location:
+        - dates:
+        - players:
+        - time_control: string or Time_Control
+        - description: str
+        - rounds_list: list
+        - rounds:
         """
         super().__init__(('tournament_name', 'location', 'dates', 'players',
                          'time_control', 'description', 'rounds_list', 'rounds'), **data)

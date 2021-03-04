@@ -26,6 +26,11 @@ class Match(Model):
         # homogeneiger et documenter comme Player
         """
         The initialization of the class Match checks wheter there is a missing parameter in the entered values.
+        the type of data are as follows :
+        - player1:
+        - player2:
+        - player1_score:
+        - player2_score:
         """
         super().__init__(('player1', 'player2', 'player1_score', 'player2_score'), **params)
         match_attributes = ('player1', 'player2', 'player1_score', 'player2_score')
@@ -167,6 +172,6 @@ class Match(Model):
         else:
             raise AttributeError()
 
-    def get_match_as_tuple(self):
+    def get_match_as_tuple(self): # pas forcement en tuple, si j'y arrive c'est bien !
         # bout de code de serialize extrait en methode pour factoriser dans Serializable.serialize() partout
         return [self.player1, self.player1_score], [self.player2, self.player2_score]

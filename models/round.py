@@ -22,10 +22,16 @@ class Round(Model):
         # homogeneiger et documenter comme Player
         """
         The initialization of the class Round checks wheter there is a missing parameter in the entered values.
+        the type of data are as follows :
+        - round_name:
+        - tournament: # à supprimer ! on va identifier letournament via name, location, dates
+        - matches:
+        - end_time:  #  doit etre automatiquement enregisté lors de la fin de saisie des infos du round
+        - start_time:  #  start_time = datetime.now() # end_time = datetime de la fin de round
         """
         super().__init__(('round_name', 'tournament', 'matches', 'end_time', 'start_time'), **params)
         round_attributes = ('round_name', 'tournament', 'matches', 'end_time',
-                            'start_time')  #  start_time = datetime.new() # end_time = datetime de la fin de round
+                            'start_time')  #  start_time = datetime.now() # end_time = datetime de la fin de round
         errors = []
         missing_attributes = []
         for key, value in params.items():
