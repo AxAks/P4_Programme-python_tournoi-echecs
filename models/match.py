@@ -119,6 +119,12 @@ class Match(Model):
         """
         if value is None:
             raise AttributeError()
+        if isinstance(value, int):
+            value =float(value)
+            try:
+                self.__player1_score = self.Score(value)
+            except KeyError:
+                raise AttributeError()
         if isinstance(value, float):
             try:
                 self.__player1_score = self.Score(value)

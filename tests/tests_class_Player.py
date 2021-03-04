@@ -19,11 +19,11 @@ player1_dict = {
     'last_name': 'aKONdé',
     'first_name': 'Axel',
     'birthdate': '1986-05-02',
-    'gender': 'MALE',
+    'gender': Player.Gender['MALE'],
     'ranking': 2500
 }
 player2_dict = {
-    'player_uuid': 'ce0258eb-cfeb-45e6-a56d-8f5d7260bd9b',
+    'identifier': 'ce0258eb-cfeb-45e6-a56d-8f5d7260bd9b',
     'last_name': 'Berd',
     'first_name': 'Bernard',
     'birthdate': '1983-03-01',

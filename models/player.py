@@ -2,7 +2,7 @@
 
 import re
 
-from datetime import date, timedelta
+from datetime import date, timedelta, datetime
 from typing import Union
 from uuid import uuid4, UUID
 from enum import Enum
@@ -54,7 +54,7 @@ class Player(Model):
         - it sets an uuid if there is none given.
         - it converts the value into an uuid if the entered value is a string
         """
-        if value is None:
+        if value is None or value == '':
             value = uuid4()
             self.__identifier = value
         elif isinstance(value, UUID):
@@ -62,7 +62,6 @@ class Player(Model):
         elif isinstance(value, str):
             try:
                 self.__identifier = UUID(value)
-                # à gerer ( ou deja géré, à tester): l'erreur string vide : generer un UUID ? ou pas ?
             except ValueError:
                 raise AttributeError()
         else:
@@ -113,15 +112,46 @@ class Player(Model):
             raise AttributeError()
 
     @property
-    def gender(self) -> Gender:
+    def birthdate(self) -> date:
+        """
+        This method returns the birthdate as a date.
+        """
+        return self.__birthdate
+
+    def birthdate_pod(self) -> str:
+        """
+        # This method returns the birthdate as a string.
+        """
+        return self.__birthdate.isoformat()  # pose pb car on retourne une methode et non une string
+
+    @birthdate.setter
+    def birthdate(self, value: Union[str, date]):
+        """
+        This setter checks that the entered value is a string or a date.
+        in the case of a string, the string is formatted into a date.
+        it also checks wheter the Player has the minimum required age.
+        """
+        if value is None:
+            raise AttributeError()
+        if isinstance(value, str):
+            try:
+                value = date.fromisoformat(value)
+            except ValueError:
+                print('je suis content 2')
+                # raise AttributeError()
+        elif not isinstance(value, date):
+            print('je suis content 3')
+            # raise AttributeError()
+        """
+        if date.today() - value < timedelta(days=MINIMUM_AGE * 365):  # method() - date = pas possible ; je masque pour le moment !
+            # raise AttributeError()
+        """
+        self.__birthdate = value
+
+    @property
+    def gender(self) -> str:
         """
         This method returns the gender as a Gender Enum.
-        """
-        return self.__gender
-
-    def gender_pod(self) -> str:
-        """
-        This method returns the gender as a string.
         """
         return self.__gender.name
 
@@ -139,43 +169,9 @@ class Player(Model):
             except KeyError:
                 raise AttributeError()
         elif isinstance(value, self.Gender):
-            self.__gender = value
+            self.__gender = value.name
         else:
             raise AttributeError()
-
-    @property
-    def birthdate(self) -> date:
-        """
-        This method returns the birthdate as a date.
-        """
-        return self.__birthdate
-
-    def birthdate_pod(self) -> str:
-        """
-        This method returns the birthdate as a string.
-        """
-        return self.__birthdate.isoformat()
-
-    @birthdate.setter
-    def birthdate(self, value: Union[str, date]):
-        """
-        This setter checks that the entered value is a string or a date.
-        in the case of a string, the string is formatted into a date.
-        it also checks wheter the Player has the minimum required age.
-        """
-        if value is None:
-            raise AttributeError()
-        if isinstance(value, str):
-            try:
-                value = date.fromisoformat(value)
-            except ValueError:
-                raise AttributeError()
-        elif not isinstance(value, date):
-            raise AttributeError()
-        if date.today() - value < timedelta(days=MINIMUM_AGE * 365):
-            raise AttributeError()
-
-        self.__birthdate = value
 
     @property
     def ranking(self) -> int:
