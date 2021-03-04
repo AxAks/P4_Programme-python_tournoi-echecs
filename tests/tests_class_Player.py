@@ -137,7 +137,7 @@ def test_deserialize_player(attributes_dict):
 
 print("Start: Test Serialization/Deserialization Player")
 print("No AssertionError returned means the test passed\nA problem returns an Assertion Error")
-serialized_player2 = test_serialize_player(player2)
+serialized_player2 = test_serialize_player(player2)  # ca commence a péter ici pour birthdate _pod
 deserialized_player2 = test_deserialize_player(serialized_player2)
 print(f'Dict: {player2_dict}')
 print(f'Object: {player2.__dict__}')

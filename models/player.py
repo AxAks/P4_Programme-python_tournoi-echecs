@@ -118,11 +118,13 @@ class Player(Model):
         """
         return self.__birthdate
 
+    @property
     def birthdate_pod(self) -> str:
         """
         # This method returns the birthdate as a string.
         """
-        return self.__birthdate.isoformat()  # pose pb car on retourne une methode et non une string
+        print(self.__birthdate.isoformat())
+        return self.__birthdate.isoformat()  # pose pb car on retourne une methode et non une string // isoformat() marche avec datetime et non date !
 
     @birthdate.setter
     def birthdate(self, value: Union[str, date]):
@@ -149,9 +151,16 @@ class Player(Model):
         self.__birthdate = value
 
     @property
-    def gender(self) -> str:
+    def gender(self) -> Gender:
         """
         This method returns the gender as a string.
+        """
+        return self.__gender
+
+    @property
+    def gender_pod(self) -> str:
+        """
+        # This method returns the gender as a string.
         """
         return self.__gender.name
 

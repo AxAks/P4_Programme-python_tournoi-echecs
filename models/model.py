@@ -37,15 +37,3 @@ class Model:
             properties = self.properties
         return {property: getattr(self, f"{property}_pod" if hasattr(self, f"{property}_pod") else property)
                 for property in self.properties if property in properties}
-
-        """
-        # à supprimer !??
-        properties_dict = {}
-        for property in self.__dict__.name :
-            cleaned_property_name = property.replace(f"_{self.__class__.__name__}__", '')
-            if hasattr(self, cleaned_property_name + '_pod'):
-                properties_dict[cleaned_property_name] = getattr(self, cleaned_property_name + '_pod')()
-            else:
-                properties_dict[cleaned_property_name] = getattr(self, cleaned_property_name)
-        return properties_dict
-        """
