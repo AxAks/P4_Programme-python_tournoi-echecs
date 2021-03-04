@@ -49,6 +49,14 @@ class Tournament(Model):
             raise Exception(f'Errors detected in the following fields: {", ".join(errors)}')
 
     @property
+    def tournament_identifier(self) -> tuple[str]:
+        """
+        This method returns the tournament's name, location and dates  as a tuple of strings
+        It enables to identify a tournament instance.
+        """
+        return self.__tournament_name, self.location, self.dates_pod()
+
+    @property
     def tournament_name(self) -> str:
         """
         This method returns the tournament's name as a string.

@@ -61,7 +61,8 @@ class Player(Model):
             self.__identifier = value
         elif isinstance(value, str):
             try:
-                self.__identifier = UUID(value)  # à gerer ( ou deja géré, à tester): l'erreur string vide : generer un UUID ? ou pas ?
+                self.__identifier = UUID(value)
+                # à gerer ( ou deja géré, à tester): l'erreur string vide : generer un UUID ? ou pas ?
             except ValueError:
                 raise AttributeError()
         else:

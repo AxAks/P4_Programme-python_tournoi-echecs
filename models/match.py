@@ -3,11 +3,11 @@
 from enum import Enum
 from typing import Union
 
-from models.model import Serializable
+from models.model import Model
 from models.player import Player
 
 
-class Match(Serializable):
+class Match(Model):
     """
     This is the class for the Python Object: Match
     A single match is saved as a tuple of two lists:
@@ -95,20 +95,20 @@ class Match(Serializable):
             raise AttributeError()
 
     @property
-    def player1_score(self) -> Serializable.Score:  # à revoir !
+    def player1_score(self) -> Score:  # à revoir !
         """
         This method returns the score of player 1 as an integer.
         """
         return self.__player1_score
 
-    def player2_score_pod(self) -> int: # à revoir !
+    def player1_score_pod(self) -> int:  # à revoir !
         """
         This method returns the score of player 1 as an integer.
         """
         return self.__player2_score.name
 
     @player1_score.setter
-    def player1_score(self, value: Union[int, Serializable.Score]): # à revoir !
+    def player1_score(self, value: Union[int, Score]):  # à revoir !
         """
         This setter checks that the entered value is an integer.
         """
@@ -123,22 +123,23 @@ class Match(Serializable):
             raise AttributeError()
 
     @property
-    def player2_score(self) -> Serializable.Score: # à revoir !
+    def player2_score(self) -> Score:  # à revoir !
         """
         This method returns the score of player 2 as an integer.
         """
         return self.__player2_score
 
-    def player2_score_pod(self) -> int: # à revoir !
+    def player2_score_pod(self) -> int:  # à revoir !
         """
         This method returns the score of player 2 as an integer.
         """
         return self.__player2_score
 
     @player2_score.setter
-    def player2_score(self, value: Union[int, Serializable.Score]): # à revoir !
+    def player2_score(self, value: Union[int, Score]):  # à revoir !
         """
-        This setter checks that the entered value is an integer.
+        This setter checks that the entered value is an integer
+        and sets the property to a Score.
         """
         if isinstance(value, int):
             try:
@@ -146,17 +147,10 @@ class Match(Serializable):
             except KeyError:
                 raise AttributeError()
         elif isinstance(value, self.Score):
-            self.__gender = value
+            self.__player2_score = value.value
         else:
             raise AttributeError()
 
     def get_match_as_tuple(self):
         # bout de code de serialize extrait en methode pour factoriser dans Serializable.serialize() partout
         return [self.player1, self.player1_score], [self.player2, self.player2_score]
-
-
-
-
-
-
-
