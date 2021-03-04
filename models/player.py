@@ -22,7 +22,7 @@ class Player(Model):
     def __init__(self, **data):
         """
         The initialization of the class Player checks wheter there is a missing parameter in the entered values.
-        the type of data are as follows :
+        the types of data are as follows :
         - identifier: None, UUID or string
         - last_name: string
         - first_name: string

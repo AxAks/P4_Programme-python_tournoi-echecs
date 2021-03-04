@@ -26,31 +26,13 @@ class Match(Model):
         # homogeneiger et documenter comme Player
         """
         The initialization of the class Match checks wheter there is a missing parameter in the entered values.
-        the type of data are as follows :
-        - player1:
-        - player2:
-        - player1_score:
-        - player2_score:
+        the types of data are as follows :
+        - player1: dict # mais à mettre en UUID ou string !
+        - player2: dict # mais à mettre en UUID ou string !
+        - player1_score: integer or Score
+        - player2_score: integer or Score
         """
         super().__init__(('player1', 'player2', 'player1_score', 'player2_score'), **params)
-        match_attributes = ('player1', 'player2', 'player1_score', 'player2_score')
-        errors = []
-        missing_attributes = []
-        for key, value in params.items():
-            if key in match_attributes:
-                try:
-                    setattr(self, key, value)
-                except AttributeError:
-                    errors.append(key)
-            else:
-                missing_attributes.append(key)
-
-        if missing_attributes:
-            raise AttributeError(f'The following attributes do not exist'
-                                 f' for the object {self.__class__.__name__}:'
-                                 f' {", ".join(missing_attributes)}')
-        if errors:
-            raise Exception(f'Errors detected in the following fields: {", ".join(errors)}')
 
     @property
     def player1(self) -> dict:

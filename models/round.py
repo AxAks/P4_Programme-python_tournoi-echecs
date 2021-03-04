@@ -22,33 +22,14 @@ class Round(Model):
         # homogeneiger et documenter comme Player
         """
         The initialization of the class Round checks wheter there is a missing parameter in the entered values.
-        the type of data are as follows :
-        - round_name:
-        - tournament: # à supprimer ! on va identifier letournament via name, location, dates
-        - matches:
-        - end_time:  #  doit etre automatiquement enregisté lors de la fin de saisie des infos du round
-        - start_time:  #  start_time = datetime.now() # end_time = datetime de la fin de round
+        the types of data are as follows :
+        - round_name: string
+        - tournament: # à supprimer ! on va identifier , le round sera identifié dans la classe Tournament
+        - matches: list [tuple or dict] # voir entre tuple et list
+        - end_time: datetime or string  # doit etre automatiquement enregisté lors de la fin de saisie des infos du round
+        - start_time: datetime or string  # start_time = datetime.now() # end_time = datetime de la fin de round
         """
-        super().__init__(('round_name', 'tournament', 'matches', 'end_time', 'start_time'), **params)
-        round_attributes = ('round_name', 'tournament', 'matches', 'end_time',
-                            'start_time')  #  start_time = datetime.now() # end_time = datetime de la fin de round
-        errors = []
-        missing_attributes = []
-        for key, value in params.items():
-            if key in round_attributes:
-                try:
-                    setattr(self, key, value)
-                except AttributeError:
-                    errors.append(key)
-            else:
-                missing_attributes.append(key)
-
-        if missing_attributes:
-            raise AttributeError(f'The following attributes do not exist'
-                                 f' for the object {self.__class__.__name__}:'
-                                 f' {", ".join(missing_attributes)}')
-        if errors:
-            raise Exception(f'Errors detected in the following fields: {", ".join(errors)}')
+        super().__init__(('round_name', 'matches', 'end_time', 'start_time'), **params)
 
     @property
     def round_name(self) -> str:
@@ -72,41 +53,7 @@ class Round(Model):
         else:
             raise AttributeError()
 
-    @property
-    def tournament(self) -> Tournament:
-        """
-        This method returns the tournament associated to the round as Tournament object.
-        """
-        return self.__tournament
-
-    @property
-    def tournament_pod(self) -> dict:
-        """
-        This method returns the tournament associated to the round as a dict.
-        """
-        return Model.serialize(self.__tournament)
-
-    @tournament.setter
-    def tournament(self, value: Union[dict, Tournament]):
-        """
-        This setter checks wheter the entered value is a dict or Tournament object
-        and sets the attribute as a dict.
-        """
-        if value is None:
-            raise AttributeError()
-        if isinstance(value, dict):
-            try:
-                self.__tournament = value
-            except AttributeError:
-                raise AttributeError()
-        elif isinstance(value, Tournament):
-            try:
-                serialized_tournament = value.serialize()
-                self.__tournament = serialized_tournament
-            except AttributeError:
-                raise AttributeError()
-        else:
-            raise AttributeError()
+    # Comment gère t-on la reference à Tournament dans Round ? à voir
 
     @property
     def matches(self) -> list[tuple[list]]:
@@ -116,7 +63,7 @@ class Round(Model):
         return self.__matches
 
     @matches.setter
-    def matches(self, value: Union[dict, list[tuple[list]]]):  #  à revoir !!!!
+    def matches(self, value: Union[dict, list[tuple[list]]]):  #  à revoir !!!! # tuple pas obligatoire ? seulement si possible, si dict : pas si grave !
         """
         This setter checks wheter the entered value is a list of Match Objects or a dict
         and sets the attribute as a list of matches as tuples
@@ -132,12 +79,15 @@ class Round(Model):
                     match_infos.append(serialized_player)
                 else:
                     match_infos.append(match_info)
+            """
             formatted_match_tuple = \
                 (
                     [match_infos[INDEX_PLAYER1], match_infos[INDEX_PLAYER1_SCORE]],
                     [match_infos[INDEX_PLAYER2], match_infos[INDEX_PLAYER2_SCORE]]
                 )
             matches.append(formatted_match_tuple)
+            """
+            matches.append(match_infos)
         try:
             self.__matches = value
         except AttributeError:
@@ -150,6 +100,7 @@ class Round(Model):
         """
         return self.__start_time
 
+    @property
     def start_time_pod(self) -> str:
         """
         This method returns the start time of the round as a string.
@@ -183,6 +134,7 @@ class Round(Model):
         """
         return self.__end_time
 
+    @property
     def end_time_pod(self) -> str:
         """
         This method returns the end time of the round as a string.

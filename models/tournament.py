@@ -25,46 +25,26 @@ class Tournament(Model):
         # homogeneiger et documenter comme Player
         """
         The initialization of the class Tournament checks wheter there is a missing parameter in the entered values.
-        the type of data are as follows :
-        - tournament_name:
-        - location:
-        - dates:
-        - players:
-        - time_control: string or Time_Control
-        - description: str
-        - rounds_list: list
-        - rounds:
+        the types of data are as follows :
+        - tournament_name: string
+        - location: string
+        - dates: date or string
+        - players: list[dict] # à mettre en : list[str] ou list[UUID] !
+        - time_control: string or Time_control
+        - description: string
+        - rounds_list: list[]
+        - rounds: integer
         """
         super().__init__(('tournament_name', 'location', 'dates', 'players',
                          'time_control', 'description', 'rounds_list', 'rounds'), **data)
-        tournament_attributes = ('tournament_name', 'location', 'dates', 'players',
-                                 'time_control', 'description', 'rounds_list', 'rounds')
-        # attention trouver comment mettre round à 4 par défaut !!
-        errors = []
-        missing_attributes = []
-        for key, value in data.items():
-            if key in tournament_attributes:
-                try:
-                    setattr(self, key, value)
-                except AttributeError:
-                    errors.append(key)
-            else:
-                missing_attributes.append(key)
-
-        if missing_attributes:
-            raise AttributeError(f'The following attributes do not exist'
-                                 f' for the object {self.__class__.__name__}:'
-                                 f' {", ".join(missing_attributes)}')
-        if errors:
-            raise Exception(f'Errors detected in the following fields: {", ".join(errors)}')
 
     @property
-    def tournament_identifier(self) -> tuple[str]:
+    def identifier(self) -> tuple[str]:
         """
         This method returns the tournament's name, location and dates  as a tuple of strings
         It enables to identify a tournament instance.
         """
-        return self.__tournament_name, self.location, self.dates_pod()
+        return self.__tournament_name, self.location, self.dates_pod
 
     @property
     def tournament_name(self) -> str:
@@ -117,6 +97,7 @@ class Tournament(Model):
         """
         return self.__dates
 
+    @property
     def dates_pod(self) -> str:
         """
         This method returns the date as a string.
@@ -143,14 +124,14 @@ class Tournament(Model):
             raise AttributeError()
 
     @property
-    def players(self) -> list[dict]:
+    def players(self) -> list[dict]: # mettre juste une liste de UUID des players "identifiers" à la place de tout l'object : le controller fera le lien avec l'objet Player
         """
         This method returns the players as a list of dicts.
         """
         return [player_instance.serialize() for player_instance in self.__players]
 
     @players.setter
-    def players(self, value: Union[list[UUID], list[Player]]):
+    def players(self, value: Union[list[UUID], list[Player]]): # mettre juste une liste de UUID des players "identifiers" à la place de tout l'object
         """
         This setter checks wheter the entered value is list of Player Objects or a list of dicts
         and sets the attribute as a list of Player Objects
@@ -181,6 +162,7 @@ class Tournament(Model):
         """
         return self.__time_control
 
+    @property
     def time_control_pod(self) -> str:
         """
         This method returns the Time Control as a string.
@@ -243,13 +225,14 @@ class Tournament(Model):
         return self.__rounds
 
     @rounds.setter
-    def rounds(self, value: int):
+    def rounds(self, value: int = 4):
         """
-        This setter checks that the entered value is a positive integer.
+        This setter checks that the entered value is a positive integer
+        The default number of rounds is set to 4.
         """
         if value is None:
-            raise AttributeError()
-        if type(value) == int:
+            self.__rounds = 4
+        elif type(value) == int:
             if value > 0:
                 self.__rounds = value
             else:
