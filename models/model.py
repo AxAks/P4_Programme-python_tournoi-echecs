@@ -18,8 +18,6 @@ class Model:
         for property in properties:
             try:
                 setattr(self, property, data[property] if property in data else None)
-                # et uuid (quand on trouve pas l'attribut dans data : pb ! pas géré) on met la valeur à None mais ca pose pb derriere
-                # on met None si on ne trouve pas la property : gerer le cas if None dans setter de chaque property
             except AttributeError:
                 errors.append(property)
 
@@ -31,8 +29,6 @@ class Model:
         This method enables to serialize Python Objects to simple types handled by TinyDB
         It uses introspection to access the object's attributes and methods.
         """
-
-        # à adapter
         if not properties:
             properties = self.properties
         return {property: getattr(self, f"{property}_pod" if hasattr(self, f"{property}_pod") else property)

@@ -2,7 +2,7 @@
 
 import re
 
-from datetime import date, timedelta, datetime
+from datetime import date, timedelta
 from typing import Union
 from uuid import uuid4, UUID
 from enum import Enum
@@ -20,7 +20,6 @@ class Player(Model):
     Gender = Enum("Gender", "MALE FEMALE")
 
     def __init__(self, **data):
-        # homogeneiger et documenter
         """
         The initialization of the class Player checks wheter there is a missing parameter in the entered values.
         the type of data are as follows :
@@ -123,8 +122,7 @@ class Player(Model):
         """
         # This method returns the birthdate as a string.
         """
-        print(self.__birthdate.isoformat())
-        return self.__birthdate.isoformat()  # pose pb car on retourne une methode et non une string // isoformat() marche avec datetime et non date !
+        return self.__birthdate.isoformat()
 
     @birthdate.setter
     def birthdate(self, value: Union[str, date]):
@@ -139,15 +137,13 @@ class Player(Model):
             try:
                 value = date.fromisoformat(value)
             except ValueError:
-                print('je suis content 2')
-                # raise AttributeError()
+                raise AttributeError()
         elif not isinstance(value, date):
-            print('je suis content 3')
-            # raise AttributeError()
-        """
-        if date.today() - value < timedelta(days=MINIMUM_AGE * 365):  # method() - date = pas possible ; je masque pour le moment !
-            # raise AttributeError()
-        """
+            raise AttributeError()
+
+        if date.today() - value < timedelta(days=MINIMUM_AGE * 365):
+            raise AttributeError()
+
         self.__birthdate = value
 
     @property

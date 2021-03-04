@@ -22,6 +22,7 @@ class Tournament(Model):
     Time_control = Enum("Time_control", "BULLET BLITZ RAPIDE")
 
     def __init__(self, **data):
+        # homogeneiger et documenter comme Player
         """
         The initialization of the class Tournament checks wheter there is a missing parameter in the entered values.
         """

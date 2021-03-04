@@ -19,6 +19,7 @@ class Round(Model):
     """
 
     def __init__(self, **params: dict):
+        # homogeneiger et documenter comme Player
         """
         The initialization of the class Round checks wheter there is a missing parameter in the entered values.
         """

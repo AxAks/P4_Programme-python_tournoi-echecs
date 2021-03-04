@@ -23,6 +23,7 @@ class Match(Model):
         TIE = 0.5
 
     def __init__(self, **params: dict):
+        # homogeneiger et documenter comme Player
         """
         The initialization of the class Match checks wheter there is a missing parameter in the entered values.
         """
