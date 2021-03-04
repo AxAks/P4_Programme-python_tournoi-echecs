@@ -70,6 +70,8 @@ class Tournament(Model):
         alphanumerical characters and a few special characters are authorized
         The list of authorized characters can be extended.
         """
+        if value is None:
+            raise AttributeError()
         authorized_characters = ALPHA_NUMERICAL_STRING_RULE
         if re.match(authorized_characters, value):
             self.__tournament_name = value.title()
@@ -90,6 +92,8 @@ class Tournament(Model):
         alphabetical characters and a few special characters are authorized
         The list of authorized characters can be extended.
         """
+        if value is None:
+            raise AttributeError()
         authorized_characters = ALPHABETICAL_STRING_RULE
         if re.match(authorized_characters, value):
             self.__location = value.title()
@@ -115,6 +119,8 @@ class Tournament(Model):
         This setter checks wheter the entered value is a string or a date object
         and sets the attribute as a date
         """
+        if value is None:
+            raise AttributeError()
         if isinstance(value, str):
             try:
                 value = date.fromisoformat(value)
@@ -142,6 +148,8 @@ class Tournament(Model):
         # doit etre une verificait hétérogene
         # boucle
         # ou fonction qui verifie qu'une liste est homogene et renvoie une erreur sinon
+        if value is None:
+            raise AttributeError()
         player_objs_list = []
         if isinstance(value[0], dict):
             for player_dict in value:
@@ -175,6 +183,8 @@ class Tournament(Model):
         This setter checks wheter the entered value is a string or a Time Control Enum
         and sets the attribute as a Time Control Enum
         """
+        if value is None:
+            raise AttributeError()
         if isinstance(value, str):
             try:
                 self.__time_control = self.Time_control[value]
@@ -197,6 +207,8 @@ class Tournament(Model):
         """
         This setter checks that the entered value is a string.
         """
+        if value is None:
+            raise AttributeError()
         if isinstance(value, str):
             self.__description = value
         else:
@@ -208,7 +220,10 @@ class Tournament(Model):
 
     @rounds_list.setter
     def rounds_list(self, value: list[tuple[dict, int], tuple[dict, int]]):
-        self.__rounds_list = value
+        if value is None:
+            raise AttributeError()
+        else:
+            self.__rounds_list = value
 
     @property
     def rounds(self) -> int:
@@ -222,6 +237,8 @@ class Tournament(Model):
         """
         This setter checks that the entered value is a positive integer.
         """
+        if value is None:
+            raise AttributeError()
         if type(value) == int:
             if value > 0:
                 self.__rounds = value

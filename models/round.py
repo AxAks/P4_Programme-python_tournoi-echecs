@@ -57,6 +57,8 @@ class Round(Model):
         alphanumerical characters and a few special characters are authorized
         The list of authorized characters can be extended.
         """
+        if value is None:
+            raise AttributeError()
         authorized_characters = ALPHA_NUMERICAL_STRING_RULE
         if re.match(authorized_characters, value):
             self.__name = value.title()
@@ -83,6 +85,8 @@ class Round(Model):
         This setter checks wheter the entered value is a dict or Tournament object
         and sets the attribute as a dict.
         """
+        if value is None:
+            raise AttributeError()
         if isinstance(value, dict):
             try:
                 self.__tournament = value
@@ -110,6 +114,8 @@ class Round(Model):
         This setter checks wheter the entered value is a list of Match Objects or a dict
         and sets the attribute as a list of matches as tuples
         """
+        if value is None:
+            raise AttributeError()
         matches = []
         for tuple_item in value:
             match_infos = []
@@ -150,6 +156,8 @@ class Round(Model):
         and sets the attribute as a datetime
         """
         #  doit etre automatiquement enregisté lors de l'instanciation du round
+        if value is None:
+            raise AttributeError()
         if isinstance(value, str):
             try:
                 value = datetime.strptime(value, '%Y-%m-%dT%H:%M:%S')
@@ -182,6 +190,8 @@ class Round(Model):
         and sets the attribute as a datetime
         """
         #  doit etre automatiquement enregisté lors de la fin de saisie des infos du round
+        if value is None:
+            raise AttributeError()
         if isinstance(value, str):
             try:
                 value = datetime.strptime(value, '%Y-%m-%dT%H:%M:%S')

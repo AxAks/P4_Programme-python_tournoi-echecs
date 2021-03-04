@@ -59,6 +59,8 @@ class Match(Model):
         The setter checks whether the entered value is a dict or a Player object
         and sets the attribute as a Player object
         """
+        if value is None:
+            raise AttributeError()
         if isinstance(value, dict):
             player1 = Player(**value)
             self.__player1 = player1
@@ -83,6 +85,8 @@ class Match(Model):
         The setter checks whether the entered value is a dict or a Player object
         and sets the attribute as a Player object
         """
+        if value is None:
+            raise AttributeError()
         if isinstance(value, dict):
             player2 = Player(**value)
             self.__player2 = player2
@@ -99,22 +103,25 @@ class Match(Model):
         """
         This method returns the score of player 1 as an integer.
         """
-        return self.__player1_score
+        return self.__player1_score.name
 
-    def player1_score_pod(self) -> int:  # à revoir !
+    def player1_score_pod(self) -> float:  # à revoir !
         """
         This method returns the score of player 1 as an integer.
         """
-        return self.__player2_score.name
+        return self.__player2_score
 
     @player1_score.setter
-    def player1_score(self, value: Union[int, Score]):  # à revoir !
+    def player1_score(self, value: Union[float, Score]):  # à revoir !
         """
-        This setter checks that the entered value is an integer.
+        This setter checks that the entered value is an integer
+        and sets it as a Score.
         """
-        if isinstance(value, int):
+        if value is None:
+            raise AttributeError()
+        if isinstance(value, float):
             try:
-                self.__player1_score = value
+                self.__player1_score = self.Score(value)
             except KeyError:
                 raise AttributeError()
         elif isinstance(value, self.Score):
@@ -127,27 +134,29 @@ class Match(Model):
         """
         This method returns the score of player 2 as an integer.
         """
-        return self.__player2_score
+        return self.__player2_score.name
 
-    def player2_score_pod(self) -> int:  # à revoir !
+    def player2_score_pod(self) -> float:  # à revoir !
         """
         This method returns the score of player 2 as an integer.
         """
         return self.__player2_score
 
     @player2_score.setter
-    def player2_score(self, value: Union[int, Score]):  # à revoir !
+    def player2_score(self, value: Union[float, Score]):  # à revoir !
         """
         This setter checks that the entered value is an integer
         and sets the property to a Score.
         """
-        if isinstance(value, int):
+        if value is None:
+            raise AttributeError()
+        if isinstance(value, float):
             try:
-                self.__player2_score = value
+                self.__player2_score = self.Score(value)
             except KeyError:
                 raise AttributeError()
         elif isinstance(value, self.Score):
-            self.__player2_score = value.value
+            self.__player2_score = value
         else:
             raise AttributeError()
 

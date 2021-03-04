@@ -17,13 +17,14 @@ class Model:
         errors = []
         for property in properties:
             try:
-                setattr(self, property, data[property] if property in data else None) # à verifier ! erreur sur last_name
+                setattr(self, property, data[property] if property in data else None) # à verifier ! erreur sur last_name,
+                # et uuid (quand on trouve pas l'attribut dans data : pb ! pas géré) on met la valeur à None mais ca pose pb derriere
                 # on met None si on ne trouve pas la property : gerer le cas if None dans setter de chaque property
             except AttributeError:
                 errors.append(property)
 
         if errors:
-            raise Exception(f'Error detected in the following fields: {", ".join(errors)}')
+            raise Exception(f'Error detected in the following fields: {", ".join(errors)} for {self.__class__.__name__}')
 
     def serialize(self, properties=None):
         """

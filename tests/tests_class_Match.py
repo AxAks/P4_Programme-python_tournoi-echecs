@@ -33,13 +33,17 @@ player1_score = 1
 player2_score = 0
 """
 match1_dict = {
-    'player1': {'player_uuid': '3be40089-64ff-48c2-8e6e-bc005ad378d2', 'last_name': 'Akondé', 'first_name': 'Axel',
+    'player1': {'identifier': '3be40089-64ff-48c2-8e6e-bc005ad378d2', 'last_name': 'Akondé', 'first_name': 'Axel',
                 'birthdate': '1986-05-02', 'gender': 'MALE', 'ranking': 2500},
-    'player2': {'player_uuid': 'ce0258eb-cfeb-45e6-a56d-8f5d7260bd9b', 'last_name': 'Berd', 'first_name': 'Bernard',
+    'player2': {'identifier': 'ce0258eb-cfeb-45e6-a56d-8f5d7260bd9b', 'last_name': 'Berd', 'first_name': 'Bernard',
                 'birthdate': '1982-03-01', 'gender': 'MALE', 'ranking': 2400},
-    'player1_score': 0,
-    'player2_score': 0
+    'player1_score': 1.0,
+    'player2_score': 0.0
 }
+# résultats possibles d'un match :
+# 1.0 - 0.0
+# 0.5 -  0.5
+# 0.0 - 1.0
 
 """
 match1 = Match(**match1_dict)
@@ -58,9 +62,11 @@ print(f'Match Tuple Type : {type(match1_tuple)}')
 print("End: Test Serialization/Deserialization Match")
 """
 
+print(f'Match Dict: {match1_dict}')
 match_test_obj = Match(**match1_dict)
-print(match_test_obj.__dict__)
+print(f'Match Object Dict: {match_test_obj.__dict__}')
 match_test_serialized = match_test_obj.serialize()
-print(match_test_serialized)
+print(f'Deserialized Match: {match_test_serialized}')
 match_test_tuple = match_test_obj.get_match_as_tuple()
-print(match_test_tuple)
+print(f'Match Tuple: {match_test_tuple}')
+assert match1_dict == match_test_serialized
