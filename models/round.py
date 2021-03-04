@@ -9,7 +9,6 @@ from constants import INDEX_PLAYER1, INDEX_PLAYER2,\
     INDEX_PLAYER1_SCORE, INDEX_PLAYER2_SCORE, ALPHA_NUMERICAL_STRING_RULE
 
 from models.model import Model
-from models.tournament import Tournament
 from models.player import Player
 
 
