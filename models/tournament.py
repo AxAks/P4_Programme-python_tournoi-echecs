@@ -92,14 +92,14 @@ class Tournament(Model):
     @property
     def dates(self) -> date:
         """
-        This method returns the date as a date.
+        This method returns the dates of the tournament as a date.
         """
         return self.__dates
 
     @property
     def dates_pod(self) -> str:
         """
-        This method returns the date as a string.
+        This method returns the dates of the tournament as a string.
         """
         return self.__dates.isoformat()
 
@@ -211,14 +211,24 @@ class Tournament(Model):
 
     @property
     def rounds_list(self) -> list[Round]:
+        """
+        This method returns the tournament's list of rounds as a list of Round objects.
+        """
         return self.__rounds_list
 
     @property
     def rounds_list_pod(self) -> list[dict]:
+        """
+        This method returns the tournament's list of rounds as a list of dicts.
+        """
         return [round_item.serialize() for round_item in self.__rounds_list]
 
     @rounds_list.setter
     def rounds_list(self, value: Union[list[Round], list[dict]]):
+        """
+        This setter checks whether the entered value is a list of Round objects or a list of dicts
+        and sets it as a list of Round object.
+        """
         rounds_list = []
         if value is None or value == []:
             try:
@@ -265,9 +275,3 @@ class Tournament(Model):
                 raise AttributeError()
         else:
             raise AttributeError()
-
-    def add_round(self, round_info):
-        """
-        This method enables to add the list of Matches of a Round to the Tournament Object
-        """
-        pass

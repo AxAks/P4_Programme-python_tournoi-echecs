@@ -19,3 +19,10 @@ Controller file for Tournament
 
 # Le Round doit etre identifié dans Tournament ( dans la liste de Rounds)
 # // Le Match doit etre identifié dans Round ( dans la liste de matchs)
+
+
+def add_round(self, round_info): # voir si utile à un moment
+    """
+    This method enables to add the list of Matches of a Round to the Tournament Object
+    """
+    pass
