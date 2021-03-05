@@ -35,7 +35,7 @@ class Match(Model):
     @property
     def identifier(self) -> tuple[[str, int], [str, int]]:
         """
-        This method returns the match's infos as a tuple of two lists of strings : player/score
+        This getter returns the match's infos as a tuple of two lists of strings : player/score
         It enables to identify a specific match.
         """
         return [self.player1_id_pod, int(self.player1_score_pod)], [self.player2_id_pod, int(self.player2_score_pod)]
@@ -43,14 +43,14 @@ class Match(Model):
     @property
     def player1_id(self) -> UUID:
         """
-        This method returns player1 ID as an UUID.
+        This getter returns player1 ID as an UUID.
         """
         return self.__player1_id
 
     @property
     def player1_id_pod(self) -> str:
         """
-        This method returns player1 ID as a string.
+        This getter returns player1 ID as a string.
         """
         return str(self.__player1_id)
 
@@ -78,14 +78,14 @@ class Match(Model):
     @property
     def player2_id(self) -> UUID:
         """
-        This method returns player2 ID as an UUID.
+        This getter returns player2 ID as an UUID.
         """
         return str(self.__player2_id)
 
     @property
     def player2_id_pod(self) -> str:
         """
-        This method returns player2 ID as a string.
+        This getter returns player2 ID as a string.
         """
         return str(self.__player2_id)
 
@@ -113,14 +113,14 @@ class Match(Model):
     @property
     def player1_score(self) -> Score:
         """
-        This method returns the score of player 1 as a Score
+        This getter returns the score of player 1 as a Score
         """
         return self.__player1_score
 
     @property
     def player1_score_pod(self) -> float:
         """
-        This method returns the score of player 1 as an integer.
+        This getter returns the score of player 1 as an integer.
         """
         return self.__player1_score.value
 
@@ -133,7 +133,7 @@ class Match(Model):
         if value is None:
             raise AttributeError()
         if isinstance(value, int):
-            value =float(value)
+            value = float(value)
         if isinstance(value, float):
             try:
                 self.__player1_score = self.Score(value)
@@ -147,14 +147,14 @@ class Match(Model):
     @property
     def player2_score(self) -> Score:
         """
-        This method returns the score of player 2 as an integer.
+        This getter returns the score of player 2 as an integer.
         """
         return self.__player2_score
 
     @property
     def player2_score_pod(self) -> float:
         """
-        This method returns the score of player 2 as an integer.
+        This getter returns the score of player 2 as an integer.
         """
         return self.__player2_score.value
 
@@ -178,6 +178,3 @@ class Match(Model):
         else:
             raise AttributeError()
 
-    def get_match_as_tuple(self):
-        # pas forcement en tuple, si j'y arrive c'est bien ! pour le moment je prends un dict -> fonction non utilisée
-        return [self.player1_id, self.player1_score], [self.player2_id, self.player2_score]

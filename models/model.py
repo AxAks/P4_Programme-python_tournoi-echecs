@@ -27,8 +27,8 @@ class Model:
 
     def serialize(self, properties=None):
         """
-        This method enables to serialize Python Objects to simple types handled by TinyDB
-        It uses introspection to access the object's attributes and methods.
+        This generic method, along with getters and setters in the child classes,
+        enables to serialize Python Objects to simple types object (PODs or plain old data) handled by TinyDB.
         """
         if not properties:
             properties = self.properties

@@ -40,7 +40,7 @@ class Tournament(Model):
     @property
     def identifier(self) -> tuple[str, str, str]:
         """
-        This method returns the tournament's name, location and dates  as a tuple of strings
+        This getter returns the tournament's name, location and dates  as a tuple of strings
         It enables to identify a tournament instance.
         """
         return self.name, self.location, self.dates_pod
@@ -48,7 +48,7 @@ class Tournament(Model):
     @property
     def name(self) -> str:
         """
-        This method returns the tournament's name as a string.
+        This getter returns the tournament's name as a string.
         """
         return self.__name
 
@@ -70,7 +70,7 @@ class Tournament(Model):
     @property
     def location(self) -> str:
         """
-        This method returns the location as a string.
+        This getter returns the location as a string.
         """
         return self.__location
 
@@ -92,14 +92,14 @@ class Tournament(Model):
     @property
     def dates(self) -> date:
         """
-        This method returns the dates of the tournament as a date.
+        This getter returns the dates of the tournament as a date.
         """
         return self.__dates
 
     @property
     def dates_pod(self) -> str:
         """
-        This method returns the dates of the tournament as a string.
+        This getter returns the dates of the tournament as a string.
         """
         return self.__dates.isoformat()
 
@@ -125,7 +125,7 @@ class Tournament(Model):
     @property
     def players_identifier(self) -> list[str]:
         """
-        This method returns the players' identifier as a list of strings or UUID.
+        This getter returns the players' identifier as a list of strings or UUID.
         The controller matches the Player instance through its identifier
         """
         return [str(player_id) for player_id in self.__players_identifier]
@@ -161,14 +161,14 @@ class Tournament(Model):
     @property
     def time_control(self) -> Time_control:
         """
-        This method returns the Time Control as a Time Control Enum.
+        This getter returns the Time Control as a Time Control Enum.
         """
         return self.__time_control
 
     @property
     def time_control_pod(self) -> str:
         """
-        This method returns the Time Control as a string.
+        This getter returns the Time Control as a string.
         """
         return self.__time_control.name
 
@@ -193,7 +193,7 @@ class Tournament(Model):
     @property
     def description(self) -> str:
         """
-        This method returns the description as an integer.
+        This getter returns the description as an integer.
         """
         return self.__description
 
@@ -212,14 +212,14 @@ class Tournament(Model):
     @property
     def rounds_list(self) -> list[Round]:
         """
-        This method returns the tournament's list of rounds as a list of Round objects.
+        This getter returns the tournament's list of rounds as a list of Round objects.
         """
         return self.__rounds_list
 
     @property
     def rounds_list_pod(self) -> list[dict]:
         """
-        This method returns the tournament's list of rounds as a list of dicts.
+        This getter returns the tournament's list of rounds as a list of dicts.
         """
         return [round_item.serialize() for round_item in self.__rounds_list]
 
@@ -256,7 +256,7 @@ class Tournament(Model):
     @property
     def rounds(self) -> int:
         """
-        This method returns the number of round as an integer.
+        This getter returns the total number of round as an integer.
         """
         return self.__rounds
 

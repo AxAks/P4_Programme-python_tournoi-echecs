@@ -29,7 +29,7 @@ class Round(Model):
     @property
     def identifier(self) -> tuple[str, str, str]:
         """
-        This method returns the round's name, start and end times as a tuple of strings
+        This getter returns the round's name, start and end times as a tuple of strings
         It enables to identify a round instance.
         """
         return self.name, self.start_time_pod, self.end_time_pod
@@ -37,7 +37,7 @@ class Round(Model):
     @property
     def name(self) -> str:
         """
-        This method returns the round's name as a string.
+        This getter returns the round's name as a string.
         """
         return self.__name
 
@@ -56,27 +56,25 @@ class Round(Model):
         else:
             raise AttributeError()
 
-    # Comment gère t-on la reference à Tournament dans Round ? à voir -> Round n'existe pas hors de Tournament
-
     @property
     def matches(self) -> list[Match]:
         """
-        This method returns the list of matches for a round as a list of Match objects.
+        This getter returns the list of matches for a round as a list of Match objects.
         """
         return self.__matches
 
     @property
     def matches_pod(self) -> list[dict]:
         """
-        This method returns the list of matches for a round as a list of match tuples. # or dict !
+        This getter returns the list of matches for a round as a list of match dicts
         """
         return [match_obj.serialize() for match_obj in self.__matches]
 
     @matches.setter
     def matches(self, value: Union[list[dict], list[Match]]):
         """
-        This setter checks whether the entered value is a list of Match Objects or a dict
-        and sets the attribute as a list of matches as tuples
+        This setter checks whether the entered value is a list of Match Objects or a list of dicts
+        and sets the attribute as a list of Match objects
         """
         matches_list = []
         if value is None or value == []:
@@ -102,14 +100,14 @@ class Round(Model):
     @property
     def start_time(self) -> datetime:
         """
-        This method returns the start time of the round as a datetime.
+        This getter returns the start time of the round as a datetime.
         """
         return self.__start_time
 
     @property
     def start_time_pod(self) -> str:
         """
-        This method returns the start time of the round as a string.
+        This getter returns the start time of the round as a string.
         """
         return self.__start_time.strftime('%Y-%m-%dT%H:%M:%S')
 
@@ -119,7 +117,7 @@ class Round(Model):
         This setter checks whether the entered value is a string or a datetime object
         and sets the attribute as a datetime
         """
-        #  doit etre automatiquement enregisté lors de l'instanciation du round
+        #  doit etre automatiquement enregisté lors de l'instanciation du round, voir comment et où on gère ca
         if value is None:
             raise AttributeError()
         if isinstance(value, str):
@@ -136,14 +134,14 @@ class Round(Model):
     @property
     def end_time(self) -> datetime:
         """
-        This method returns the end time of the round as a datetime.
+        This getter returns the end time of the round as a datetime.
         """
         return self.__end_time
 
     @property
     def end_time_pod(self) -> str:
         """
-        This method returns the end time of the round as a string.
+        This getter returns the end time of the round as a string.
         """
         return self.__end_time.strftime('%Y-%m-%dT%H:%M:%S')
 
@@ -167,9 +165,3 @@ class Round(Model):
             self.__end_time = value
         else:
             raise AttributeError()
-
-    def add_match(self, match):  # est ce qu'une méthode est utile ici ? plutot dans controller Tournament je pense
-        """
-        This method enables to add the information of a Match to the list of matches of the Round Object
-        """
-        pass

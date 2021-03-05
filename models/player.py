@@ -35,14 +35,14 @@ class Player(Model):
     @property
     def identifier(self) -> UUID:
         """
-        This method returns the player's uuid as an UUID.
+        This getter returns the player's uuid as an UUID.
         """
         return self.__identifier
 
     @property
     def identifier_pod(self) -> str:
         """
-        This method returns the player's uuid as an string.
+        This getter returns the player's uuid as an string.
         """
         return str(self.__identifier)
 
@@ -69,7 +69,7 @@ class Player(Model):
     @property
     def last_name(self) -> str:
         """
-        This method returns the player's last name as a string.
+        This getter returns the player's last name as a string.
         """
         return self.__last_name
 
@@ -91,7 +91,7 @@ class Player(Model):
     @property
     def first_name(self) -> str:
         """
-        This method returns the player's first name as a string.
+        This getter returns the player's first name as a string.
         """
         return self.__first_name
 
@@ -113,14 +113,14 @@ class Player(Model):
     @property
     def birthdate(self) -> date:
         """
-        This method returns the birthdate as a date.
+        This getter returns the birthdate as a date.
         """
         return self.__birthdate
 
     @property
     def birthdate_pod(self) -> str:
         """
-        # This method returns the birthdate as a string.
+        # This getter returns the birthdate as a string.
         """
         return self.__birthdate.isoformat()
 
@@ -149,14 +149,14 @@ class Player(Model):
     @property
     def gender(self) -> Gender:
         """
-        This method returns the gender as a string.
+        This getter returns the gender as a string.
         """
         return self.__gender
 
     @property
     def gender_pod(self) -> str:
         """
-        # This method returns the gender as a string.
+        # This getter returns the gender as a string.
         """
         return self.__gender.name
 
@@ -181,7 +181,7 @@ class Player(Model):
     @property
     def ranking(self) -> int:
         """
-        This method returns the player's ranking.
+        This getter returns the player's ranking.
         """
         return self.__ranking
 

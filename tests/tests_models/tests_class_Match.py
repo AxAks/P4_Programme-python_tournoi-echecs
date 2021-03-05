@@ -12,7 +12,7 @@ from tests import sample_values as test_sample
 # 1.0 - 0.0
 # 0.5 -  0.5
 # 0.0 - 1.0
-#  est ce qu'on créé une règle pour ca ?
+# est ce qu'on créé une règle pour ca ?
 
 match16 = Match(**test_sample.match16_dict)
 match_test_serialized = match16.serialize()
