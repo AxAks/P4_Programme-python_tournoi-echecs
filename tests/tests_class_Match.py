@@ -25,7 +25,7 @@ print(f'Match Object Dict: {match16.__dict__}')
 print(f'Deserialized Match: {match_test_serialized}')
 print(f'Match Tuple: {match_test_tuple}')
 print("End: Test Serialization/Deserialization Match")
-assert test_sample.match28_dict == match_test_serialized
+assert test_sample.match16_dict == match_test_serialized
 
 serialize_match28 = match16.serialize()
 print(match16)

@@ -103,15 +103,16 @@ class Match(Model):
     @property
     def player1_score(self) -> Score:  # à revoir !
         """
-        This method returns the score of player 1 as an integer.
+        This method returns the score of player 1 as a Score
         """
-        return self.__player1_score.name
+        return self.__player1_score
 
+    @property
     def player1_score_pod(self) -> float:  # à revoir !
         """
         This method returns the score of player 1 as an integer.
         """
-        return self.__player2_score
+        return self.__player1_score.value
 
     @player1_score.setter
     def player1_score(self, value: Union[float, Score]):  # à revoir !
@@ -142,13 +143,14 @@ class Match(Model):
         """
         This method returns the score of player 2 as an integer.
         """
-        return self.__player2_score.name
+        return self.__player2_score
 
+    @property
     def player2_score_pod(self) -> float:  # à revoir !
         """
         This method returns the score of player 2 as an integer.
         """
-        return self.__player2_score
+        return self.__player2_score.value
 
     @player2_score.setter
     def player2_score(self, value: Union[float, Score]):  # à revoir !

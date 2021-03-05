@@ -3,7 +3,8 @@
 """
 This file contains sample dict values for testing purposes
 """
-from models.player import Player
+
+from models.match import Match
 
 #  player dicts
 
@@ -190,8 +191,8 @@ match28_dict = {
 
 
 match16_dict = {
-    'player1': '3be40089-64ff-48c2-8e6e-bc005ad378d2',
-    'player2': 'ce0258eb-cfeb-45e6-a56d-8f5d7260bd9b',
+    'player1_id': '3be40089-64ff-48c2-8e6e-bc005ad378d2',
+    'player2_id': 'ce0258eb-cfeb-45e6-a56d-8f5d7260bd9b',
     'player1_score': 1.0,
     'player2_score': 0.0
 }
