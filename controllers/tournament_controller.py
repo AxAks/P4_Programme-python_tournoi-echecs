@@ -18,4 +18,4 @@ Controller file for Tournament
 
 
 # Le Round doit etre identifié dans Tournament ( dans la liste de Rounds)
-# // LE Match doit etre identifié dans Round ( dans la liste de matchs)
+# // Le Match doit etre identifié dans Round ( dans la liste de matchs)

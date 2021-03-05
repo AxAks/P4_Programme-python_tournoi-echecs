@@ -129,7 +129,7 @@ class Player(Model):
         """
         This setter checks that the entered value is a string or a date.
         in the case of a string, the string is formatted into a date.
-        it also checks wheter the Player has the minimum required age.
+        it also checks whether the Player has the minimum required age.
         """
         if value is None:
             raise AttributeError()

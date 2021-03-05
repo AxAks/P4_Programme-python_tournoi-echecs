@@ -18,16 +18,8 @@ class Model:
         errors = []
         for property in properties:
             try:
-                if property in data:
-                    setattr(self, property, data[property])
-                else:
-                    setattr(self, property, None)
-
-                """
                 setattr(self, property, data[property] if property in data else None)
-                """
             except AttributeError:
-                print("on ajoute l'erreur ICI !! Tournament Round_list perdu")
                 errors.append(property)
         if errors:
             raise Exception(f'Error detected '

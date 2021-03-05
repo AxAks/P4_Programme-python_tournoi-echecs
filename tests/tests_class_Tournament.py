@@ -18,15 +18,15 @@ def test_deserialize_tournament(attributes_dict):
     return _obj
 
 
-print("Start: Test Serialization/Deserialization Tournament")
-print("No AssertionError returned means the test passed\nA problem returns an Assertion Error")
-tournament35 = Tournament(**test_sample.tournament35_dict) # Perte de rounds_list ici !!
-print("ICI on perd rounds_list de tournament")
+tournament35 = Tournament(**test_sample.tournament35_dict)
 serialized_tournament35 = test_serialize_tournament(tournament35)
 deserialized_tournament35 = test_deserialize_tournament(serialized_tournament35)
+
+print("Start: Test Serialization/Deserialization Tournament")
+print("No AssertionError returned means the test passed\nA problem returns an Assertion Error")
 print(f'Dict: {test_sample.tournament35_dict}')
 print(f'Object: {deserialized_tournament35.__dict__}')
 print(f'Serialized: {serialized_tournament35}')
+
 assert test_sample.tournament35_dict == serialized_tournament35
 print("End: Test Serialization/Deserialization Tournament")
-

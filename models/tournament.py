@@ -16,7 +16,7 @@ from models.round import Round
 class Tournament(Model):
     """
     This is the class for the Python Object: Tournament
-    Time_control is an intermediate class for the tournaments's time control
+    Time_control is an intermediate class for the tournament's time control
     that only accept the strings "Bullet", " Blitz"  and "Coup Rapide".
     """
     Time_control = Enum("Time_control", "BULLET BLITZ RAPIDE")
@@ -38,7 +38,7 @@ class Tournament(Model):
                          'time_control', 'description', 'rounds_list', 'rounds'), **data)
 
     @property
-    def identifier(self) -> tuple[str]:
+    def identifier(self) -> tuple[str, str, str]:
         """
         This method returns the tournament's name, location and dates  as a tuple of strings
         It enables to identify a tournament instance.
@@ -106,7 +106,7 @@ class Tournament(Model):
     @dates.setter
     def dates(self, value: Union[str, date]):
         """
-        This setter checks wheter the entered value is a string or a date object
+        This setter checks whether the entered value is a string or a date object
         and sets the attribute as a date
         """
         if value is None:
@@ -128,12 +128,12 @@ class Tournament(Model):
         This method returns the players' identifier as a list of strings or UUID.
         The controller matches the Player instance through its identifier
         """
-        return [str(UUID) for UUID in self.__players_identifier]
+        return [str(player_id) for player_id in self.__players_identifier]
 
     @players_identifier.setter
-    def players_identifier(self, value: Union[list[str], list[UUID]]): # mettre juste une liste de UUID des players "identifiers" à la place de tout l'object
+    def players_identifier(self, value: Union[list[str], list[UUID]]):
         """
-        This setter checks wheter the entered value is list of Player UUIDs or a list of strings
+        This setter checks whether the entered value is list of Player UUIDs or a list of strings
         and sets the attribute as a list of Player UUIDs
         """
         if value is None:
@@ -175,7 +175,7 @@ class Tournament(Model):
     @time_control.setter
     def time_control(self, value: Union[str, Time_control]):
         """
-        This setter checks wheter the entered value is a string or a Time Control Enum
+        This setter checks whether the entered value is a string or a Time Control Enum
         and sets the attribute as a Time Control Enum
         """
         if value is None:

@@ -41,13 +41,14 @@ def test_deserialize_player(attributes_dict):
     return _obj
 
 
+serialized_player2 = test_serialize_player(player2)
+deserialized_player2 = test_deserialize_player(serialized_player2)
+
 print("Start: Test Serialization/Deserialization Player")
 print("No AssertionError returned means the test passed\nA problem returns an Assertion Error")
-serialized_player2 = test_serialize_player(player2)  # ca commence a péter ici pour birthdate _pod
-deserialized_player2 = test_deserialize_player(serialized_player2)
 print(f'Dict: {test_sample.player2_dict}')
 print(f'Object: {player2.__dict__}')
 print(f'Serialized: {serialized_player2}')
+
 assert test_sample.player2_dict == serialized_player2
 print("End: Test Serialization/Deserialization Player")
-

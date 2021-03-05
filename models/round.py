@@ -5,8 +5,7 @@ import re
 from typing import Union
 from datetime import datetime
 
-from constants import INDEX_PLAYER1, INDEX_PLAYER2,\
-    INDEX_PLAYER1_SCORE, INDEX_PLAYER2_SCORE, ALPHA_NUMERICAL_STRING_RULE
+from constants import ALPHA_NUMERICAL_STRING_RULE
 
 from models.model import Model
 from models.match import Match
@@ -68,7 +67,7 @@ class Round(Model):
     @matches.setter
     def matches(self, value: Union[list[dict], list[Match]]):
         """
-        This setter checks wheter the entered value is a list of Match Objects or a dict
+        This setter checks whether the entered value is a list of Match Objects or a dict
         and sets the attribute as a list of matches as tuples
         """
         matches_list = []
@@ -109,7 +108,7 @@ class Round(Model):
     @start_time.setter
     def start_time(self, value: datetime) -> Union[str, datetime]:
         """
-        This setter checks wheter the entered value is a string or a datetime object
+        This setter checks whether the entered value is a string or a datetime object
         and sets the attribute as a datetime
         """
         #  doit etre automatiquement enregisté lors de l'instanciation du round
@@ -144,7 +143,7 @@ class Round(Model):
     def end_time(self,
                  value: Union[str, datetime]):
         """
-        This setter checks wheter the entered value is a string or a datetime object
+        This setter checks whether the entered value is a string or a datetime object
         and sets the attribute as a datetime
         """
         #  doit etre automatiquement enregisté lors de la fin de saisie des infos du round

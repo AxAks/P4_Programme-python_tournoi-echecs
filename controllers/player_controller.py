@@ -6,13 +6,12 @@ Controller file for Player
 """
 Temp : Just for me !
 Controller : link between Models (Classes) and Views
-
 - input()
 - and models updates
-
 plusieurs fichiers controller à écrire : scinder
 """
 
+from models.player import Player
 
 # player_uuid
 # on donne un uuid, il doit renvoyer un Player

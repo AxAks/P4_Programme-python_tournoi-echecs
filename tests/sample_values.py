@@ -5,7 +5,6 @@ This file contains sample dict values for testing purposes
 """
 
 #  player dicts
-
 player1_dict = {
     'identifier': '3be40089-64ff-48c2-8e6e-bc005ad378d2',
     'last_name': 'aKONdé',
@@ -96,20 +95,15 @@ player10_dict = {
 }
 
 #  Tournament dicts
-
 tournament24_dict = {
     'tournament_name': 'Best Tournament Ever',
     'location': 'Geneve',
     'dates': '1987-02-28',
-    'players': [
-        {'identifier': '3be40089-64ff-48c2-8e6e-bc005ad378d2', 'last_name': 'Akondé', 'first_name': 'Axel',
-         'birthdate': '1986-05-02', 'gender': 'MALE', 'ranking': 2500},
-        {'identifier': 'ce0258eb-cfeb-45e6-a56d-8f5d7260bd9b', 'last_name': 'Berd', 'first_name': 'Bernard',
-         'birthdate': '1982-03-01', 'gender': 'MALE', 'ranking': 2400},
-        {'identifier': '4f4e8869-fbd2-48d7-b759-fafd725df22f', 'last_name': 'Ceras', 'first_name': 'Cédric',
-         'birthdate': '1978-04-26', 'gender': 'MALE', 'ranking': 1400},
-        {'identifier': '1bcb740a-3ca1-49e8-889f-30ca3c1bc293', 'last_name': 'Deflar', 'first_name': 'Didier',
-         'birthdate': '1991-12-21', 'gender': 'MALE', 'ranking': 1300}],
+    'players_identifier': [
+        '3be40089-64ff-48c2-8e6e-bc005ad378d2',
+        'ce0258eb-cfeb-45e6-a56d-8f5d7260bd9b',
+        '4f4e8869-fbd2-48d7-b759-fafd725df22f',
+        '1bcb740a-3ca1-49e8-889f-30ca3c1bc293'],
     'time_control': 'BULLET',
     'description': 'a very nice tournament with four outstanding players',
     'rounds_list': [],
@@ -156,11 +150,9 @@ tournament35_dict = {
     'rounds': 3
 }
 
-#  Round dicts
-
+# Round dicts
 round1_dict = {
     'round_name': 'Round 1',
-    # Tuple ou dict ? (dict plus simple dans le système, intéret du tuple ??? si on choisit dict pouvoir defendre le choix pris
     'matches': [
         {'player1_id': '3be40089-64ff-48c2-8e6e-bc005ad378d2', 'player2_id': 'ce0258eb-cfeb-45e6-a56d-8f5d7260bd9b',
          'player1_score': 1.0, 'player2_score': 0.0},
@@ -189,7 +181,6 @@ round2_dict = {
 round91_dict = {
     'round_name': 'Round 1',
     'matches': [
-        # Tuple ou dict ? (dict plus simple dans le système, intéret du tuple ??? si on choisit dict pouvoir defendre le choix pris
         (
             ['3be40089-64ff-48c2-8e6e-bc005ad378d2', 1.0],
             ['ce0258eb-cfeb-45e6-a56d-8f5d7260bd9b', 0.0]
@@ -204,7 +195,6 @@ round91_dict = {
 }
 
 #  Match dicts
-
 match28_dict = {
     'player1': {'identifier': '3be40089-64ff-48c2-8e6e-bc005ad378d2', 'last_name': 'Akondé', 'first_name': 'Axel',
                 'birthdate': '1986-05-02', 'gender': 'MALE', 'ranking': 2500},
