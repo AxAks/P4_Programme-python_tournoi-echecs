@@ -123,7 +123,7 @@ tournament35_dict = {
     'tournament_name': 'Best Tournament Ever',
     'location': 'Genève',
     'dates': '1987-02-28',
-    'players_identifiers': [
+    'players_identifier': [
         '3be40089-64ff-48c2-8e6e-bc005ad378d2',    # pour les players on mettra que les ID et le controlleur fera le lien on passe d'un dict à une string (ou UUID)
         'ce0258eb-cfeb-45e6-a56d-8f5d7260bd9b',
         '4f4e8869-fbd2-48d7-b759-fafd725df22f',

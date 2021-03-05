@@ -20,12 +20,12 @@ def test_deserialize_tournament(attributes_dict):
 
 print("Start: Test Serialization/Deserialization Tournament")
 print("No AssertionError returned means the test passed\nA problem returns an Assertion Error")
-tournament24 = Tournament(**test_sample.tournament24_dict)
-serialized_tournament24 = test_serialize_tournament(tournament24)
-deserialized_tournament24 = test_deserialize_tournament(serialized_tournament24)
-print(f'Dict: {test_sample.tournament24_dict}')
-print(f'Object: {deserialized_tournament24.__dict__}')
-print(f'Serialized: {serialized_tournament24}')
-assert test_sample.tournament24_dict == serialized_tournament24  # le test ne fonctionne plus mais les données sont bonnes
+tournament35 = Tournament(**test_sample.tournament35_dict)
+serialized_tournament35 = test_serialize_tournament(tournament35)
+deserialized_tournament35 = test_deserialize_tournament(serialized_tournament35)
+print(f'Dict: {test_sample.tournament35_dict}')
+print(f'Object: {deserialized_tournament35.__dict__}')
+print(f'Serialized: {serialized_tournament35}')
+assert test_sample.tournament35_dict == serialized_tournament35
 print("End: Test Serialization/Deserialization Tournament")
-print(tournament24.identifier)
+

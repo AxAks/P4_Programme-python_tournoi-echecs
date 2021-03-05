@@ -10,3 +10,7 @@ Controller file for Tournament
 # pour tournoi
 # propriete getter qui return : name, location, date_pod (lecture seule) dans la Classe Tournament
 # pour ne pas instancier deux foisplayer_controller.py
+
+
+# Tournament
+# players_identifier [UUID, UUID]

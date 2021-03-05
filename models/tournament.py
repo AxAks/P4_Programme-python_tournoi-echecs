@@ -9,7 +9,6 @@ from uuid import UUID
 
 from constants import ALPHA_NUMERICAL_STRING_RULE, ALPHABETICAL_STRING_RULE
 
-from models.player import Player
 from models.model import Model
 
 
@@ -29,13 +28,13 @@ class Tournament(Model):
         - tournament_name: string
         - location: string
         - dates: date or string
-        - players: list[dict] # à mettre en : list[str] ou list[UUID] !
+        - players_identifier: list[str] or list[UUID]
         - time_control: string or Time_control
         - description: string
         - rounds_list: list[]
         - rounds: integer
         """
-        super().__init__(('tournament_name', 'location', 'dates', 'players',
+        super().__init__(('tournament_name', 'location', 'dates', 'players_identifier',
                          'time_control', 'description', 'rounds_list', 'rounds'), **data)
 
     @property
@@ -124,25 +123,46 @@ class Tournament(Model):
             raise AttributeError()
 
     @property
-    def players(self) -> list[dict]: # mettre juste une liste de UUID des players "identifiers" à la place de tout l'object : le controller fera le lien avec l'objet Player
+    def players_identifier(self) -> list[str]:
         """
-        This method returns the players as a list of dicts.
+        This method returns the players' identifier as a list of strings or UUID.
+        The controller matches the Player instance through its identifier
         """
-        return [player_instance.serialize() for player_instance in self.__players]
+        return [str(UUID) for UUID in self.__players_identifier]
 
-    @players.setter
-    def players(self, value: Union[list[UUID], list[Player]]): # mettre juste une liste de UUID des players "identifiers" à la place de tout l'object
+    @players_identifier.setter
+    def players_identifier(self, value: Union[list[str], list[UUID]]): # mettre juste une liste de UUID des players "identifiers" à la place de tout l'object
         """
-        This setter checks wheter the entered value is list of Player Objects or a list of dicts
-        and sets the attribute as a list of Player Objects
+        This setter checks wheter the entered value is list of Player UUIDs or a list of strings
+        and sets the attribute as a list of Player UUIDs
         """
-        # doit etre une verificait hétérogene
+        # doit etre une verification hétérogene
         # boucle
         # ou fonction qui verifie qu'une liste est homogene et renvoie une erreur sinon
         if value is None:
             raise AttributeError()
-        player_objs_list = []
-        if isinstance(value[0], dict):
+        players_identifier_list = []
+        for item in value:
+            if isinstance(item, str):
+                try:
+                    player_id = UUID(item)
+                    players_identifier_list.append(player_id)
+                    self.__players_identifier = players_identifier_list
+                except AttributeError:
+                    raise AttributeError()
+
+            elif isinstance(item, UUID):
+                try:
+                    player_id = item
+                    players_identifier_list.append(player_id)
+                    self.__players_identifier = players_identifier_list
+                except AttributeError:
+                    raise AttributeError()
+            else:
+                raise AttributeError()
+
+        """
+            if isinstance(value[0], dict):
             for player_dict in value:
                 try:
                     player_instance = Player(**player_dict)
@@ -154,7 +174,7 @@ class Tournament(Model):
             self.__players = value
         else:
             raise AttributeError()
-
+        """
     @property
     def time_control(self) -> Time_control:
         """
