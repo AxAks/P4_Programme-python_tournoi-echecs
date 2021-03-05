@@ -4,7 +4,6 @@ from enum import Enum
 from typing import Union
 from uuid import UUID
 from models.model import Model
-from models.player import Player
 
 
 class Match(Model):
