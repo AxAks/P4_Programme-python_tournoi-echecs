@@ -50,8 +50,4 @@ print(f'Object: {player2.__dict__}')
 print(f'Serialized: {serialized_player2}')
 assert test_sample.player2_dict == serialized_player2
 print("End: Test Serialization/Deserialization Player")
-print(player1.last_name, player1.identifier)
-print(player2.last_name, player2.identifier)
-print(player3.last_name, player3.identifier)
-print(player4.last_name, player4.identifier)
-print(player5.last_name, player5.identifier)
+

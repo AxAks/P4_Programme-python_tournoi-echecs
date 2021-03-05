@@ -12,7 +12,7 @@ player1_dict = {
     'last_name': 'aKONdé',
     'first_name': 'Axel',
     'birthdate': '1986-05-02',
-    'gender': Player.Gender.MALE,
+    'gender': 'MALE',
     'ranking': 2500
 }
 player2_dict = {
@@ -20,7 +20,7 @@ player2_dict = {
     'last_name': 'Berd',
     'first_name': 'Bernard',
     'birthdate': '1983-03-01',
-    'gender': Player.Gender.MALE,
+    'gender': 'MALE',
     'ranking': 2400
 }
 
