@@ -96,7 +96,7 @@ player10_dict = {
 
 #  Tournament dicts
 tournament24_dict = {
-    'tournament_name': 'Best Tournament Ever',
+    'name': 'Best Tournament Ever',
     'location': 'Geneve',
     'dates': '1987-02-28',
     'players_identifier': [
@@ -111,7 +111,7 @@ tournament24_dict = {
 }
 
 tournament35_dict = {
-    'tournament_name': 'Best Tournament Ever',
+    'name': 'Best Tournament Ever',
     'location': 'Genève',
     'dates': '1987-02-28',
     'players_identifier': [

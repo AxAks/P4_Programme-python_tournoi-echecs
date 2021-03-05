@@ -25,7 +25,7 @@ class Tournament(Model):
         """
         The initialization of all classes is done in the parent class Model.
         the types of data for Tournament are as follows :
-        - tournament_name: string
+        - name: string
         - location: string
         - dates: date or string
         - players_identifier: list[str] or list[UUID]
@@ -34,7 +34,7 @@ class Tournament(Model):
         - rounds_list: list[dict] or list[Round]
         - rounds: integer
         """
-        super().__init__(('tournament_name', 'location', 'dates', 'players_identifier',
+        super().__init__(('name', 'location', 'dates', 'players_identifier',
                          'time_control', 'description', 'rounds_list', 'rounds'), **data)
 
     @property
@@ -43,17 +43,17 @@ class Tournament(Model):
         This method returns the tournament's name, location and dates  as a tuple of strings
         It enables to identify a tournament instance.
         """
-        return self.tournament_name, self.location, self.dates_pod
+        return self.name, self.location, self.dates_pod
 
     @property
-    def tournament_name(self) -> str:
+    def name(self) -> str:
         """
         This method returns the tournament's name as a string.
         """
-        return self.__tournament_name
+        return self.__name
 
-    @tournament_name.setter
-    def tournament_name(self, value: str):
+    @name.setter
+    def name(self, value: str):
         """
         This setter checks the entered characters for the tournament's name using regex:
         alphanumerical characters and a few special characters are authorized
@@ -63,7 +63,7 @@ class Tournament(Model):
             raise AttributeError()
         authorized_characters = ALPHA_NUMERICAL_STRING_RULE
         if re.match(authorized_characters, value):
-            self.__tournament_name = value.title()
+            self.__name = value.title()
         else:
             raise AttributeError()
 
