@@ -20,7 +20,8 @@ def test_deserialize_tournament(attributes_dict):
 
 print("Start: Test Serialization/Deserialization Tournament")
 print("No AssertionError returned means the test passed\nA problem returns an Assertion Error")
-tournament35 = Tournament(**test_sample.tournament35_dict)
+tournament35 = Tournament(**test_sample.tournament35_dict) # Perte de rounds_list ici !!
+print("ICI on perd rounds_list de tournament")
 serialized_tournament35 = test_serialize_tournament(tournament35)
 deserialized_tournament35 = test_deserialize_tournament(serialized_tournament35)
 print(f'Dict: {test_sample.tournament35_dict}')

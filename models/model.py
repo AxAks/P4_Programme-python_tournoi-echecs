@@ -8,7 +8,8 @@ class Model:
 
     def __init__(self, properties, **data):
         """
-        The initialization in Model checks whether the properties of the child Class object exist in the
+        The initialization of all classes is done in this parent class Model
+        The initialization for Model checks whether the properties of the child Class object exist in the
         provided data and assign them the matching value.
         properties : properties of the child objects
         data : information provided for the object to be initialized
@@ -17,11 +18,17 @@ class Model:
         errors = []
         for property in properties:
             try:
+                if property in data:
+                    setattr(self, property, data[property])
+                else:
+                    setattr(self, property, None)
+
+                """
                 setattr(self, property, data[property] if property in data else None)
-
+                """
             except AttributeError:
+                print("on ajoute l'erreur ICI !! Tournament Round_list perdu")
                 errors.append(property)
-
         if errors:
             raise Exception(f'Error detected '
                             f'in the following fields for {self.__class__.__name__}: {", ".join(errors)}')

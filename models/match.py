@@ -22,10 +22,9 @@ class Match(Model):
         TIE = 0.5
 
     def __init__(self, **params: dict):
-        # homogeneiger et documenter comme Player
         """
-        The initialization of the class Match checks wheter there is a missing parameter in the entered values.
-        the types of data are as follows :
+        The initialization of all classes is done in the parent class Model
+        the types of data for Match are as follows :
         - player1_id: UUID or String
         - player2_id: UUID or String
         - player1_score: integer or Score
@@ -64,7 +63,7 @@ class Match(Model):
             try:
                 self.__player1_id = value
             except AttributeError:
-                raise AttributeError
+                raise AttributeError()
         else:
             raise AttributeError()
 
@@ -91,7 +90,10 @@ class Match(Model):
         if value is None:
             raise AttributeError()
         if isinstance(value, str):
-            self.__player2_id = UUID(value)
+            try:
+                self.__player2_id = UUID(value)
+            except AttributeError:
+                raise AttributeError()
         elif isinstance(value, UUID):
             try:
                 self.__player2_id = value

@@ -17,13 +17,11 @@ class Round(Model):
     This is the class for the Python Object: Round
     """
     def __init__(self, **params: dict):
-        # homogeneiger et documenter comme Player
         """
-        The initialization of the class Round checks wheter there is a missing parameter in the entered values.
-        the types of data are as follows :
+        The initialization of all classes is done in the parent class Model.
+        the types of data for Round are as follows :
         - round_name: string
-        - tournament: # à supprimer ! on va identifier , le round sera identifié dans la classe Tournament
-        - matches: list [tuple or dict] # voir entre tuple et list
+        - matches: list[dict] or list[Match]
         - end_time: datetime or string  # doit etre automatiquement enregisté lors de la fin de saisie des infos du round
         - start_time: datetime or string  # start_time = datetime.now() # end_time = datetime de la fin de round
         """

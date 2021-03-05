@@ -12,6 +12,7 @@ from constants import ALPHA_NUMERICAL_STRING_RULE, ALPHABETICAL_STRING_RULE
 from models.model import Model
 from models.round import Round
 
+
 class Tournament(Model):
     """
     This is the class for the Python Object: Tournament
@@ -21,10 +22,9 @@ class Tournament(Model):
     Time_control = Enum("Time_control", "BULLET BLITZ RAPIDE")
 
     def __init__(self, **data):
-        # homogeneiger et documenter comme Player
         """
-        The initialization of the class Tournament checks wheter there is a missing parameter in the entered values.
-        the types of data are as follows :
+        The initialization of all classes is done in the parent class Model.
+        the types of data for Tournament are as follows :
         - tournament_name: string
         - location: string
         - dates: date or string
@@ -158,20 +158,6 @@ class Tournament(Model):
             else:
                 raise AttributeError()
 
-        """
-            if isinstance(value[0], dict):
-            for player_dict in value:
-                try:
-                    player_instance = Player(**player_dict)
-                    player_objs_list.append(player_instance)
-                    self.__players = player_objs_list
-                except AttributeError:
-                    raise AttributeError()
-        elif isinstance(value[0], Player):
-            self.__players = value
-        else:
-            raise AttributeError()
-        """
     @property
     def time_control(self) -> Time_control:
         """
@@ -229,30 +215,33 @@ class Tournament(Model):
 
     @property
     def rounds_list_pod(self) -> list[dict]:
-        return [_round.serialize() for _round in self.__rounds_list]
+        return [round_item.serialize() for round_item in self.__rounds_list]
 
     @rounds_list.setter
     def rounds_list(self, value: Union[list[Round], list[dict]]):
         rounds_list = []
         if value is None or value == []:
-            self.__rounds_list = rounds_list
+            try:
+                self.__rounds_list = rounds_list
+            except AttributeError:
+                raise AttributeError()
         else:
-            for _round in value:
-                if isinstance(_round, Round):
+            for round_item in value:
+                if isinstance(round_item, Round):
                     try:
-                        rounds_list.append(_round)
+                        rounds_list.append(round_item)
                     except AttributeError:
                         raise AttributeError()
-                elif isinstance(_round, dict):
+                elif isinstance(round_item, dict):
                     try:
-                        _round = Round(**_round)
-                        rounds_list.append(_round)
+                        round_item = Round(**round_item)
+                        rounds_list.append(round_item)
                     except AttributeError:
                         raise AttributeError()
                 else:
                     raise AttributeError()
 
-        self.__matches = rounds_list
+        self.__rounds_list = rounds_list
 
     @property
     def rounds(self) -> int:
