@@ -122,7 +122,7 @@ tournament35_dict = {
     'time_control': 'BULLET',
     'description': 'a very nice tournament with four outstanding players',
     'rounds_list': [
-        {'round_name': 'Round 1',
+        {'name': 'Round 1',
          'matches': [
              {'player1_id': '3be40089-64ff-48c2-8e6e-bc005ad378d2',
               'player2_id': 'ce0258eb-cfeb-45e6-a56d-8f5d7260bd9b',
@@ -135,7 +135,7 @@ tournament35_dict = {
          'start_time': '2021-02-26T11:33:07'
          },
         {
-            'round_name': 'Round 2',
+            'name': 'Round 2',
             'matches': [
                 {'player1_id': 'f1d63919-1d15-4784-a724-5554dccdb076',
                  'player2_id': '6246d2f8-dab2-452e-b994-2c3e8aaedcef',
@@ -152,7 +152,7 @@ tournament35_dict = {
 
 # Round dicts
 round1_dict = {
-    'round_name': 'Round 1',
+    'name': 'Round 1',
     'matches': [
         {'player1_id': '3be40089-64ff-48c2-8e6e-bc005ad378d2', 'player2_id': 'ce0258eb-cfeb-45e6-a56d-8f5d7260bd9b',
          'player1_score': 1.0, 'player2_score': 0.0},
@@ -165,7 +165,7 @@ round1_dict = {
 }
 
 round2_dict = {
-    'round_name': 'Round 2',
+    'name': 'Round 2',
     'matches': [
         {'player1_id': 'f1d63919-1d15-4784-a724-5554dccdb076', 'player2_id': '6246d2f8-dab2-452e-b994-2c3e8aaedcef',
          'player1_score': 0.0, 'player2_score': 1.0},
@@ -179,7 +179,7 @@ round2_dict = {
 
 # ex : tuple
 round91_dict = {
-    'round_name': 'Round 1',
+    'name': 'Round 1',
     'matches': [
         (
             ['3be40089-64ff-48c2-8e6e-bc005ad378d2', 1.0],

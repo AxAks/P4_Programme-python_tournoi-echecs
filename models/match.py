@@ -33,6 +33,14 @@ class Match(Model):
         super().__init__(('player1_id', 'player2_id', 'player1_score', 'player2_score'), **params)
 
     @property
+    def identifier(self) -> tuple[[str, int], [str, int]]:
+        """
+        This method returns the match's infos as a tuple of two lists of strings : player/score
+        It enables to identify a specific match.
+        """
+        return [self.player1_id_pod, int(self.player1_score_pod)], [self.player2_id_pod, int(self.player2_score_pod)]
+
+    @property
     def player1_id(self) -> UUID:
         """
         This method returns player1 ID as an UUID.
@@ -172,5 +180,4 @@ class Match(Model):
 
     def get_match_as_tuple(self):
         # pas forcement en tuple, si j'y arrive c'est bien ! pour le moment je prends un dict -> fonction non utilisée
-        # bout de code de serialize extrait en methode pour factoriser dans Model.serialize() partout
         return [self.player1_id, self.player1_score], [self.player2_id, self.player2_score]

@@ -19,22 +19,30 @@ class Round(Model):
         """
         The initialization of all classes is done in the parent class Model.
         the types of data for Round are as follows :
-        - round_name: string
+        - name: string
         - matches: list[dict] or list[Match]
         - end_time: datetime or string  # doit etre automatiquement enregisté lors de la fin de saisie des infos du round
         - start_time: datetime or string  # start_time = datetime.now() # end_time = datetime de la fin de round
         """
-        super().__init__(('round_name', 'matches', 'end_time', 'start_time'), **params)
+        super().__init__(('name', 'matches', 'end_time', 'start_time'), **params)
 
     @property
-    def round_name(self) -> str:
+    def identifier(self) -> tuple[str, str, str]:
+        """
+        This method returns the round's name, start and end times as a tuple of strings
+        It enables to identify a round instance.
+        """
+        return self.name, self.start_time_pod, self.end_time_pod
+
+    @property
+    def name(self) -> str:
         """
         This method returns the round's name as a string.
         """
         return self.__name
 
-    @round_name.setter
-    def round_name(self, value: str):
+    @name.setter
+    def name(self, value: str):
         """
         This setter checks the entered characters for the round's name using regex:
         alphanumerical characters and a few special characters are authorized
