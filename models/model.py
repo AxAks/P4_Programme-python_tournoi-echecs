@@ -22,7 +22,8 @@ class Model:
                 errors.append(property)
 
         if errors:
-            raise Exception(f'Error detected in the following fields for {self.__class__.__name__}: {", ".join(errors)}')
+            raise Exception(f'Error detected '
+                            f'in the following fields for {self.__class__.__name__}: {", ".join(errors)}')
 
     def serialize(self, properties=None):
         """
