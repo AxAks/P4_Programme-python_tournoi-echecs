@@ -1,5 +1,7 @@
 # coding=utf-8
 
+from models.player import Player
+
 """
 Controller file for Player
 """
@@ -11,7 +13,6 @@ Controller : link between Models (Classes) and Views
 plusieurs fichiers controller à écrire : scinder
 """
 
-from models.player import Player
 
 # player_uuid
 # on donne un uuid, il doit renvoyer un Player
@@ -19,9 +20,9 @@ from models.player import Player
 # doit etre au courant de la création des instances de Player
 # methode factory (voir tuto design pattern)
 
+def get_by_id():
 
 
-# getbyuuid()
 # on entre un uuid et on recupere un player
 
 
