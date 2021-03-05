@@ -27,5 +27,3 @@ print(f'Match Tuple: {match_test_tuple}')
 print("End: Test Serialization/Deserialization Match")
 assert test_sample.match16_dict == match_test_serialized
 
-serialize_match28 = match16.serialize()
-print(match16)

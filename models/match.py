@@ -124,10 +124,6 @@ class Match(Model):
             raise AttributeError()
         if isinstance(value, int):
             value =float(value)
-            try:
-                self.__player1_score = self.Score(value)
-            except KeyError:
-                raise AttributeError()
         if isinstance(value, float):
             try:
                 self.__player1_score = self.Score(value)
@@ -160,6 +156,8 @@ class Match(Model):
         """
         if value is None:
             raise AttributeError()
+        if isinstance(value, int):
+            value =float(value)
         if isinstance(value, float):
             try:
                 self.__player2_score = self.Score(value)
@@ -170,18 +168,7 @@ class Match(Model):
         else:
             raise AttributeError()
 
-    # Voir si on surcharge pour avoir un tuple,
-    # mais un dict est plus pratique à manipuler
-    def serialize(self, properties=None):
-        """
-        This method enables to serialize Python Objects to simple types handled by TinyDB
-        It uses introspection to access the object's attributes and methods.
-        """
-        if not properties:
-            properties = self.properties
-        return {property: getattr(self, f"{property}_pod" if hasattr(self, f"{property}_pod") else property)
-                for property in self.properties if property in properties}
-
-    def get_match_as_tuple(self): # pas forcement en tuple, si j'y arrive c'est bien !
-        # bout de code de serialize extrait en methode pour factoriser dans Serializable.serialize() partout
+    def get_match_as_tuple(self):
+        # pas forcement en tuple, si j'y arrive c'est bien ! pour le moment je prends un dict -> fonction non utilisée
+        # bout de code de serialize extrait en methode pour factoriser dans Model.serialize() partout
         return [self.player1_id, self.player1_score], [self.player2_id, self.player2_score]

@@ -139,33 +139,20 @@ tournament35_dict = {
 #  Round dicts
 
 round1_dict = {
-    'round_name': 'Round 1',
-    'matches': [              # Tuple ou dict ? (dict plus simple dans le système, intéret du tuple ??? si on choisit dict pouvoir defendre le choix pris
-        (
-            [{'identifier': '3be40089-64ff-48c2-8e6e-bc005ad378d2', 'last_name': 'Akondé',  # pour les players on mettra que les ID et le controlleur fera le lien on passe d'un dict à une string (ou UUID)
-              'first_name': 'Axel', 'birthdate': '1986-05-02', 'gender': 'MALE',
-              'ranking': 2500}, 1],
-            [{'identifier': 'ce0258eb-cfeb-45e6-a56d-8f5d7260bd9b', 'last_name': 'Berd',
-              'first_name': 'Bernard', 'birthdate': '1982-03-01', 'gender': 'MALE',
-              'ranking': 2400}, 0]),
-        (
-            [{'identifier': '4f4e8869-fbd2-48d7-b759-fafd725df22f', 'last_name': 'Ceras',
-              'first_name': 'Cédric', 'birthdate': '1978-04-26', 'gender': 'MALE',
-              'ranking': 1400}, 0.5],
-            [{'identifier': '1bcb740a-3ca1-49e8-889f-30ca3c1bc293', 'last_name': 'Deflar',
-              'first_name': 'Didier', 'birthdate': '1991-12-21', 'gender': 'MALE',
-              'ranking': 1300}, 0.5]
-        )
+    'round_name': 'Round 1', # Tuple ou dict ? (dict plus simple dans le système, intéret du tuple ??? si on choisit dict pouvoir defendre le choix pris
+    'matches': [
+        {'player1_id': '3be40089-64ff-48c2-8e6e-bc005ad378d2', 'player2_id': 'ce0258eb-cfeb-45e6-a56d-8f5d7260bd9b', 'player1_score': 1.0, 'player2_score': 0.0},
+        {'player1_id': '4f4e8869-fbd2-48d7-b759-fafd725df22f', 'player2_id': '1bcb740a-3ca1-49e8-889f-30ca3c1bc293', 'player1_score': 0.5, 'player2_score': 0.5}
     ],
-    'start_time': '2021-02-26T11:33:07',      #
-    'end_time': '2021-02-26T11:34:07'         #
+    'end_time': '2021-02-26T11:34:07',       # doit etre enregistrée automatiquement quand l'utilisateur marque le tournoi comme terminé
+    'start_time': '2021-02-26T11:33:07'      # doit etre enregistrée automatiquement quand l'utilisateur créé le tournoi
 }
 
 round91_dict = {
     'round_name': 'Round 1',
     'matches': [              # Tuple ou dict ? (dict plus simple dans le système, intéret du tuple ??? si on choisit dict pouvoir defendre le choix pris
         (
-            ['3be40089-64ff-48c2-8e6e-bc005ad378d2', 1.0], # pour les players on mettra que les ID et le controlleur fera le lien on passe d'un dict à une string (ou UUID)
+            ['3be40089-64ff-48c2-8e6e-bc005ad378d2', 1.0],
             ['ce0258eb-cfeb-45e6-a56d-8f5d7260bd9b', 0.0]
         ),
         (
@@ -173,8 +160,8 @@ round91_dict = {
             ['1bcb740a-3ca1-49e8-889f-30ca3c1bc293', 0.5]
         )
     ],
-    'start_time': '2021-02-26T11:33:07',      # doit etre enregistrée automatiquement quand l'utilisateur créé le tournoi
-    'end_time': '2021-02-26T11:34:07'         # doit etre enregistrée automatiquement quand l'utilisateur marque le tournoi comme terminé
+    'start_time': '2021-02-26T11:33:07',
+    'end_time': '2021-02-26T11:34:07'
 }
 
 

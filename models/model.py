@@ -18,6 +18,7 @@ class Model:
         for property in properties:
             try:
                 setattr(self, property, data[property] if property in data else None)
+
             except AttributeError:
                 errors.append(property)
 
