@@ -101,21 +101,21 @@ class Match(Model):
             raise AttributeError()
 
     @property
-    def player1_score(self) -> Score:  # à revoir !
+    def player1_score(self) -> Score:
         """
         This method returns the score of player 1 as a Score
         """
         return self.__player1_score
 
     @property
-    def player1_score_pod(self) -> float:  # à revoir !
+    def player1_score_pod(self) -> float:
         """
         This method returns the score of player 1 as an integer.
         """
         return self.__player1_score.value
 
     @player1_score.setter
-    def player1_score(self, value: Union[float, Score]):  # à revoir !
+    def player1_score(self, value: Union[float, Score]):
         """
         This setter checks that the entered value is an integer
         and sets it as a Score.
@@ -139,21 +139,21 @@ class Match(Model):
             raise AttributeError()
 
     @property
-    def player2_score(self) -> Score:  # à revoir !
+    def player2_score(self) -> Score:
         """
         This method returns the score of player 2 as an integer.
         """
         return self.__player2_score
 
     @property
-    def player2_score_pod(self) -> float:  # à revoir !
+    def player2_score_pod(self) -> float:
         """
         This method returns the score of player 2 as an integer.
         """
         return self.__player2_score.value
 
     @player2_score.setter
-    def player2_score(self, value: Union[float, Score]):  # à revoir !
+    def player2_score(self, value: Union[float, Score]):
         """
         This setter checks that the entered value is an integer
         and sets the property to a Score.
