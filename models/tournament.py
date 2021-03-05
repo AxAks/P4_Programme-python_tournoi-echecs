@@ -10,7 +10,7 @@ from uuid import UUID
 from constants import ALPHA_NUMERICAL_STRING_RULE, ALPHABETICAL_STRING_RULE
 
 from models.model import Model
-
+from models.round import Round
 
 class Tournament(Model):
     """
@@ -31,7 +31,7 @@ class Tournament(Model):
         - players_identifier: list[str] or list[UUID]
         - time_control: string or Time_control
         - description: string
-        - rounds_list: list[]
+        - rounds_list: list[dict] or list[Round]
         - rounds: integer
         """
         super().__init__(('tournament_name', 'location', 'dates', 'players_identifier',
@@ -136,24 +136,21 @@ class Tournament(Model):
         This setter checks wheter the entered value is list of Player UUIDs or a list of strings
         and sets the attribute as a list of Player UUIDs
         """
-        # doit etre une verification hétérogene
-        # boucle
-        # ou fonction qui verifie qu'une liste est homogene et renvoie une erreur sinon
         if value is None:
             raise AttributeError()
         players_identifier_list = []
-        for item in value:
-            if isinstance(item, str):
+        for player_id in value:
+            if isinstance(player_id, str):
                 try:
-                    player_id = UUID(item)
+                    player_id = UUID(player_id)
                     players_identifier_list.append(player_id)
                     self.__players_identifier = players_identifier_list
                 except AttributeError:
                     raise AttributeError()
 
-            elif isinstance(item, UUID):
+            elif isinstance(player_id, UUID):
                 try:
-                    player_id = item
+                    player_id = player_id
                     players_identifier_list.append(player_id)
                     self.__players_identifier = players_identifier_list
                 except AttributeError:
@@ -227,15 +224,35 @@ class Tournament(Model):
             raise AttributeError()
 
     @property
-    def rounds_list(self) -> list[tuple[dict, int], tuple[dict, int]]:
+    def rounds_list(self) -> list[Round]:
         return self.__rounds_list
 
+    @property
+    def rounds_list_pod(self) -> list[dict]:
+        return [_round.serialize() for _round in self.__rounds_list]
+
     @rounds_list.setter
-    def rounds_list(self, value: list[tuple[dict, int], tuple[dict, int]]):
-        if value is None:
-            raise AttributeError()
+    def rounds_list(self, value: Union[list[Round], list[dict]]):
+        rounds_list = []
+        if value is None or value == []:
+            self.__rounds_list = rounds_list
         else:
-            self.__rounds_list = value
+            for _round in value:
+                if isinstance(_round, Round):
+                    try:
+                        rounds_list.append(_round)
+                    except AttributeError:
+                        raise AttributeError()
+                elif isinstance(_round, dict):
+                    try:
+                        _round = Round(**_round)
+                        rounds_list.append(_round)
+                    except AttributeError:
+                        raise AttributeError()
+                else:
+                    raise AttributeError()
+
+        self.__matches = rounds_list
 
     @property
     def rounds(self) -> int:

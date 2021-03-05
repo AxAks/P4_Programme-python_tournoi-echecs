@@ -51,7 +51,7 @@ class Round(Model):
         else:
             raise AttributeError()
 
-    # Comment gère t-on la reference à Tournament dans Round ? à voir
+    # Comment gère t-on la reference à Tournament dans Round ? à voir -> Round n'existe pas hors de Tournament
 
     @property
     def matches(self) -> list[Match]:
@@ -61,34 +61,38 @@ class Round(Model):
         return self.__matches
 
     @property
-    def matches(self) -> list[dict]:
+    def matches_pod(self) -> list[dict]:
         """
         This method returns the list of matches for a round as a list of match tuples. # or dict !
         """
         return [match_obj.serialize() for match_obj in self.__matches]
 
     @matches.setter
-    def matches(self, value: Union[list[dict], list[Match]]): # tuple sera peut-etre un tuple
-        #  à revoir !!!! # tuple pas obligatoire ? seulement si possible, si dict : pas si grave !
-        # Comment je lie les matches à Round ? Match vit dans Round sous la forme d'un dict de données (ou tuple)
+    def matches(self, value: Union[list[dict], list[Match]]):
         """
         This setter checks wheter the entered value is a list of Match Objects or a dict
         and sets the attribute as a list of matches as tuples
         """
-        if value is None or value == []:
-            value = []
-
         matches_list = []
-        for match in value:
-            if isinstance(match, Match):
-                matches_list.append(match)
-            elif isinstance(match, dict):
-                match_obj = Match(**match)
-                matches_list.append(match_obj)
-            else:
-                raise AttributeError()
-
-        self.__matches = matches_list
+        if value is None or value == []:
+            self.matches_list = matches_list
+        else:
+            for match in value:
+                if isinstance(match, Match):
+                    try:
+                        matches_list.append(match)
+                        self.__matches = matches_list
+                    except AttributeError:
+                        raise AttributeError()
+                elif isinstance(match, dict):
+                    try:
+                        match = Match(**match)
+                        matches_list.append(match)
+                        self.__matches = matches_list
+                    except AttributeError:
+                        raise AttributeError()
+                else:
+                    raise AttributeError()
 
     @property
     def start_time(self) -> datetime:
