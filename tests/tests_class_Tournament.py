@@ -30,3 +30,5 @@ print(f'Serialized: {serialized_tournament35}')
 
 assert test_sample.tournament35_dict == serialized_tournament35
 print("End: Test Serialization/Deserialization Tournament")
+
+print(f'Tournament Identification: {tournament35.identifier}')
