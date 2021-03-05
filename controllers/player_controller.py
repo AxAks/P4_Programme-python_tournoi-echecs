@@ -21,7 +21,7 @@ plusieurs fichiers controller à écrire : scinder
 # methode factory (voir tuto design pattern)
 
 def get_by_id():
-
+    pass
 
 # on entre un uuid et on recupere un player
 
