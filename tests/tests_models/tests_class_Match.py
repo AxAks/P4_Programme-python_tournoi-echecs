@@ -16,14 +16,12 @@ from tests import sample_values as test_sample
 
 match16 = Match(**test_sample.match16_dict)
 match_test_serialized = match16.serialize()
-match_test_tuple = match16.get_match_as_tuple()
 
 print("Start: Test Serialization/Deserialization Match")
 print("No AssertionError returned means the test passed\nA problem returns an Assertion Error")
 print(f'Match Dict: {test_sample.match16_dict}')
 print(f'Match Object Dict: {match16.__dict__}')
 print(f'Deserialized Match: {match_test_serialized}')
-print(f'Match Tuple: {match_test_tuple}')
 
 assert test_sample.match16_dict == match_test_serialized
 print("End: Test Serialization/Deserialization Match")
