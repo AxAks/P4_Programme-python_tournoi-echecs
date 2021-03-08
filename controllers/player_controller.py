@@ -1,11 +1,9 @@
 # coding=utf-8
 
-import gc
+from tinydb import TinyDB
 
 from controllers.controller import Creator
 from models.player import Player
-from tinydb import TinyDB
-
 
 """
 Controller file for Player
@@ -18,44 +16,20 @@ Controller : link between Models (Classes) and Views
 plusieurs fichiers controller à écrire : scinder
 """
 
+
 # Use Factory Method
-
-
-
-# player_uuid
-# on donne un uuid, il doit renvoyer un Player
-# tenir un registre des differents players créés
-# doit etre au courant de la création des instances de Player
 # methode factory (voir tuto design pattern)
-
-"""
-class Thingy(object):
-    instances = []
-
-    def __init__(self):
-        self.instances.append(self)
-
-def waste_time_and_memory():
-    t = Thingy()
-
-for i in range(5):
-    waste_time_and_memory()
-
-print Thingy.instances
-"""
-
-# pour tournoi
-# unicité
-# propriete getter qui return : name, location, date_pod
-# pour ne pas instancier deux fois player_controller.py
-# -> fait dans Class Tournament : identifier
-
-
-# class PlayerCreator(Creator):  # ???
+# class PlayerCreator(Creator):  # est ce que je mets tout ca dans une classe (cf Factory Method)???
 """
     Subclass of Creator to create Player instances
     à continuer ...
 """
+
+
+
+
+# doit etre au courant de la création des instances de Player
+# tenir un registre des differents players créés
 def create_player(player_dict): # à voir !
     """
     This method creates Player instances
@@ -68,13 +42,14 @@ def create_player(player_dict): # à voir !
     return new_player
 
 
-def get_player_by_id(player_id):  # on entre un uuid et on recupere un player
+# on donne un player_uuid, il doit renvoyer un Player
+def get_player_by_id(player_id):
     """
     This method enables to get a Player instance from its identifier attribute.
     """
     registry = Player.registry
     if player_id in registry:
-        return registry[player_id].identifier
+        return registry[player_id]
 
     """
     for _obj in gc.get_objects(): # garbage collector : pb lenteur si il y a beaucoup d'instances d'objet de créées
@@ -86,8 +61,11 @@ def get_player_by_id(player_id):  # on entre un uuid et on recupere un player
     """
 
 """
-# Pour sérialiser toutes les instances de joueurs:
-self.instances = [] if self.instances is None else self.instances.append(self) (dans la classe Player)
+# Pour enregistrer les instances crées dans une liste
+# pour sérialiser toutes les instances de joueurs ensuite:
+
+self.instances = [] if self.instances is None else self.instances.append(self) (dans la classe Player) # on laisse tomber ca du coup ?
+
 
 # Pour sauvegarder plusieurs instances de joueurs serialisées dans TinyDB:
 db = TinyDB(‘db.json’)

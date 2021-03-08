@@ -14,4 +14,4 @@ MINIMUM_RANKING = 100
 
 # Regex
 ALPHABETICAL_STRING_RULE = re.compile("^[A-ZÉÈÇÀa-zéèçà\- ]+$")
-ALPHA_NUMERICAL_STRING_RULE = re.compile("^[A-ZÉÈÇÀa-zéèçà1-9_\- ]+$")
+ALPHA_NUMERICAL_STRING_RULE = re.compile("^[A-ZÉÈÇÀa-zéèçà0-9_\- ]+$")
