@@ -1,5 +1,5 @@
 # coding=utf-8
-
+from controllers import player_controller
 from controllers.player_controller import PlayerController
 from models.player import Player
 from tests import sample_values as test_sample
@@ -23,5 +23,4 @@ print(f'Player1: {player1.identifier}\nPlayer2: {player2.identifier}\n'
       f'Player3: {player3.identifier}\nPlayer4: {player4.identifier}')
 
 
-for player in Player.instances:
-      print(player.__dict__)
+player_controller.get_player_by_id('3be40089-64ff-48c2-8e6e-bc005ad378d2')

@@ -1,5 +1,7 @@
 # coding=utf-8
 
+import gc
+
 from models.player import Player
 from tinydb import TinyDB
 
@@ -14,6 +16,10 @@ Controller : link between Models (Classes) and Views
 - and models updates
 plusieurs fichiers controller à écrire : scinder
 """
+
+# Use Factory Method
+
+
 
 
 # player_uuid
@@ -37,22 +43,28 @@ for i in range(5):
 
 print Thingy.instances
 """
-class PlayerController:  # ???
 
-    def create_player(self): # à voir !
-        """
-        This method hold a registery of the created players.
-        """
-        pass
 
-    def get_player_by_id(self, player_id):  # ??? à voir !
-        """
-        This method enables to get a Player instance from its identifier attribute.
+# class PlayerController:  # ???
+
+
+def create_player(self): # à voir !
+    """
+    This method hold a registry of the created players.
+    """
+
+def get_player_by_id(player_id):  # ??? à voir !
+    """
+    This method enables to get a Player instance from its identifier attribute.
+    """
+    for player in gc.get_objects():
+        if isinstance(player, Player) and player_id == Player.identifier:
+            print(player)
         """
         Player # faux
         player_id = Player.identifier # faux
         print(player_id) # faux
-
+        """
 
 # on entre un uuid et on recupere un player
 
