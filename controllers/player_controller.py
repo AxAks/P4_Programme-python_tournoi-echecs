@@ -64,7 +64,7 @@ def create_player(player_dict): # à voir !
     """
     # return new player instance
     new_player = Player(**player_dict)
-    Player.registry[new_player.identifier_pod] = new_player # registry = {} : key = Player.identifier, value = instance
+    Player.registry[new_player.identifier_pod] = new_player  # registry = {} : key = Player.identifier, value = instance
     return new_player
 
 
@@ -84,6 +84,7 @@ def get_player_by_id(player_id):  # on entre un uuid et on recupere un player
         # player_id = Player.identifier # faux
         # print(player_id) # faux
     """
+
 """
 # Pour sérialiser toutes les instances de joueurs:
 self.instances = [] if self.instances is None else self.instances.append(self) (dans la classe Player)
