@@ -35,7 +35,7 @@ class Tournament(Model):
         - rounds_list: list[dict] or list[Round]
         - rounds: integer
         """
-        super().__init__(('name', 'location', 'dates', 'players_identifier',
+        super().__init__(('name', 'location', 'start_date', 'end_date', 'players_identifier',
                          'time_control', 'description', 'rounds_list', 'rounds'), **data)
 
     @property
@@ -91,21 +91,21 @@ class Tournament(Model):
             raise AttributeError()
 
     @property
-    def dates(self) -> date: # attention ! l'idée est de pouvoir faire des tournaois sur plusieurs jours : date_debut, date_fin et par defaut date_debut = date_fin (1 jour)
+    def start_date(self) -> date: # attention ! l'idée est de pouvoir faire des tournaois sur plusieurs jours : date_debut, date_fin et par defaut date_debut = date_fin (1 jour)
         """
         This getter returns the dates of the tournament as a date.
         """
-        return self.__dates
+        return self.__start_date
 
     @property
-    def dates_pod(self) -> str:
+    def start_date_pod(self) -> str:
         """
         This getter returns the dates of the tournament as a string.
         """
-        return self.__dates.isoformat()
+        return self.__start_date.isoformat()
 
-    @dates.setter
-    def dates(self, value: Union[str, date]):
+    @start_date.setter
+    def start_date(self, value: Union[str, date]):
         """
         This setter checks whether the entered value is a string or a date object
         and sets the attribute as a date
@@ -115,14 +115,49 @@ class Tournament(Model):
         if isinstance(value, str):
             try:
                 value = date.fromisoformat(value)
-                self.__dates = value
+                self.__start_date = value
             except ValueError:
                 raise AttributeError()
         elif isinstance(value, date):
-            self.__dates = value
+            self.__start_date = value
         else:
             raise AttributeError()
 
+    @property
+    def end_date(self) -> date:
+        """
+        This getter returns the dates of the tournament as a date.
+        """
+        return self.__end_date
+
+    @property
+    def end_date_pod(self) -> str:
+        """
+        This getter returns the dates of the tournament as a string.
+        """
+        return self.__end_date.isoformat()
+
+    @end_date.setter
+    def end_date(self, value: Union[str, date]):
+        """
+        This setter checks whether the entered value is a string or a date object
+        and sets the attribute as a date
+        It also checks that the period of time is non-negative
+        """
+        if value is None:
+            raise AttributeError()
+        if isinstance(value, str):
+            try:
+                value = date.fromisoformat(value)
+                self.__end_date = value
+            except ValueError:
+                raise AttributeError()
+        elif isinstance(value, date):
+            self.__end_date = value
+        else:
+            raise AttributeError()
+        if self.__end_date < self.__start_date:
+            raise AttributeError()
     @property
     def players_identifier(self) -> list[str]:
         """
