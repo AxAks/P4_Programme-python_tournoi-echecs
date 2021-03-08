@@ -26,6 +26,7 @@ Controller file for Tournament
 # doit etre au courant de la création des instances de Player
 # tenir un registre des differents players créés
 
+
 def create_tournament(tournament_dict): # à voir !
     """
     This method creates Tournament instances
@@ -37,15 +38,17 @@ def create_tournament(tournament_dict): # à voir !
     Tournament.registry[new_tournament.identifier] = new_tournament  # registry = {} : key = Tournamment.identifier, value = instance
     return new_tournament
 
+
 # on donne les infos d'un tournoi , il doit renvoyer le Tournament
 def get_tournament(*args):
     """
     This method enables to get a Tournament instance from its identifier attributes : Name, Location or Dates.
     """
-    registry = Tournament.registry
-    for tuple in registry:
-        if args in tuple:
-            return registry[tuple]
+    registry = Tournament.registry # en l'état, il faut que les trois memebres du tuple soient présents et dans l'ordre
+    for tuple_id in registry:
+        if args in registry:
+            return registry[tuple_id]
+
 # Tournament
 # players_identifier [UUID, UUID]
 
