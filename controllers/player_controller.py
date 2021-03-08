@@ -24,7 +24,16 @@ class PlayerCreator:  # est ce que je mets tout ca dans une classe (cf Factory M
 
     # doit etre au courant de la création des instances de Player
     # tenir un registre des differents players créés
-
+    def create_player(self, player_dict):  #  à voir !
+        """
+        This method creates Player instances
+        and hold a registry of the created players.
+        à continuer ...
+        """
+        new_player = Player(self, **player_dict)
+        Player.registry[
+            new_player.identifier_pod] = new_player  # registry = {} : key = Player.identifier, value = instance
+        return new_player
     """
     # return new player instance
     new_player = Player(**player_dict)
