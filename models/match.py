@@ -15,6 +15,7 @@ class Match(Model):
     Multiple matches are not saved here but as a list in the Class Round
     -> Round.matches = [match1, match2, match3]
     """
+    registry = {}
 
     class Score(Enum):
         WIN = 1.0

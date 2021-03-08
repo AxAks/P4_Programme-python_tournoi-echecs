@@ -44,7 +44,7 @@ class Tournament(Model):
         This getter returns the tournament's name, location and dates  as a tuple of strings
         It enables to identify a tournament instance.
         """
-        return self.name, self.location, self.dates_pod
+        return self.name, self.location, self.start_date_pod, self.end_date_pod
 
     @property
     def name(self) -> str:

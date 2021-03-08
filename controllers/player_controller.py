@@ -1,8 +1,5 @@
 # coding=utf-8
 
-from tinydb import TinyDB
-
-from controllers.controller import Creator
 from models.player import Player
 
 """
@@ -19,7 +16,7 @@ plusieurs fichiers controller à écrire : scinder
 
 # Use Factory Method
 # methode factory (voir tuto design pattern)
-class PlayerCreator(Creator):  # est ce que je mets tout ca dans une classe (cf Factory Method)???
+class PlayerCreator:  # est ce que je mets tout ca dans une classe (cf Factory Method)???
     """
     Subclass of the Class Creator to create Player instances
     à continuer ...
@@ -27,17 +24,13 @@ class PlayerCreator(Creator):  # est ce que je mets tout ca dans une classe (cf 
 
     # doit etre au courant de la création des instances de Player
     # tenir un registre des differents players créés
-    def create_player(self, player_dict): # à voir !
-        """
-        This method creates Player instances
-        and hold a registry of the created players.
-        à continuer ...
-        """
-        # return new player instance
-        new_player = Player(**player_dict)
-        Player.registry[new_player.identifier_pod] = new_player  # registry = {} : key = Player.identifier, value = instance
-        return new_player
 
+    """
+    # return new player instance
+    new_player = Player(**player_dict)
+    Player.registry[new_player.identifier_pod] = new_player  # registry = {} : key = Player.identifier, value = instance
+    return new_player
+    """
 
     # on donne un player_uuid, il doit renvoyer un Player
     def get_player_by_id(self, player_id):

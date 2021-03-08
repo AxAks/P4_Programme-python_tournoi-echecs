@@ -15,6 +15,8 @@ class Round(Model):
     """
     This is the class for the Python Object: Round
     """
+    registry = {}
+
     def __init__(self, **params: dict):
         """
         The initialization of all classes is done in the parent class Model.

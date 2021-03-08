@@ -98,7 +98,8 @@ player10_dict = {
 tournament24_dict = {
     'name': 'Best Tournament Ever',
     'location': 'Geneve',
-    'dates': '1987-02-28',
+    'start_date': '1987-02-28',
+    'end_date': '1987-02-28',
     'players_identifier': [
         '3be40089-64ff-48c2-8e6e-bc005ad378d2',
         'ce0258eb-cfeb-45e6-a56d-8f5d7260bd9b',
