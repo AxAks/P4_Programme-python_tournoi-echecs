@@ -16,38 +16,36 @@ Controller file for Tournament
 # pour ne pas instancier deux foisplayer_controller.py
 
 
-
-
-# class TournamentCreator(Creator):  # est ce que je mets tout ca dans une classe (cf Factory Method)???
-"""
+class TournamentCreator(Creator):  # est ce que je mets tout ca dans une classe (cf Factory Method)???
+    """
     Subclass of Creator to create Tournament instances
     à continuer ...
-"""
-# doit etre au courant de la création des instances de Player
-# tenir un registre des differents players créés
+    """
+
+    # doit etre au courant de la création des instances de Player
+    # tenir un registre des differents players créés
+
+    def create_tournament(self, tournament_dict): # à voir !
+        """
+        This method creates Tournament instances
+        and hold a registry of the created Tournaments.
+        à continuer ...
+        """
+        # return new Tournament instance
+        new_tournament = Tournament(**tournament_dict)
+        Tournament.registry[new_tournament.identifier] = new_tournament  # registry = {} : key = Tournamment.identifier, value = instance
+        return new_tournament
 
 
-def create_tournament(tournament_dict): # à voir !
-    """
-    This method creates Tournament instances
-    and hold a registry of the created Tournaments.
-    à continuer ...
-    """
-    # return new Tournament instance
-    new_tournament = Tournament(**tournament_dict)
-    Tournament.registry[new_tournament.identifier] = new_tournament  # registry = {} : key = Tournamment.identifier, value = instance
-    return new_tournament
-
-
-# on donne les infos d'un tournoi , il doit renvoyer le Tournament
-def get_tournament(*args):
-    """
-    This method enables to get a Tournament instance from its identifier attributes : Name, Location or Dates.
-    """
-    registry = Tournament.registry # en l'état, il faut que les trois memebres du tuple soient présents et dans l'ordre
-    for tuple_id in registry:
-        if args in registry:
-            return registry[tuple_id]
+    # on donne les infos d'un tournoi , il doit renvoyer le Tournament
+    def get_tournament(self, *args):
+        """
+        This method enables to get a Tournament instance from its identifier attributes : Name, Location or Dates.
+        """
+        registry = Tournament.registry # en l'état, il faut que les trois membres du tuple soient présents et dans l'ordre
+        for tuple_id in registry:
+            if args in registry:
+                return registry[tuple_id]
 
 # Tournament
 # players_identifier [UUID, UUID]

@@ -91,7 +91,7 @@ class Tournament(Model):
             raise AttributeError()
 
     @property
-    def dates(self) -> date:
+    def dates(self) -> date: # attention ! l'idée est de pouvoir faire des tournaois sur plusieurs jours : date_debut, date_fin et par defaut date_debut = date_fin (1 jour)
         """
         This getter returns the dates of the tournament as a date.
         """

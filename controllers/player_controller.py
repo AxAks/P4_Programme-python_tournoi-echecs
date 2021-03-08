@@ -19,37 +19,34 @@ plusieurs fichiers controller à écrire : scinder
 
 # Use Factory Method
 # methode factory (voir tuto design pattern)
-# class PlayerCreator(Creator):  # est ce que je mets tout ca dans une classe (cf Factory Method)???
-"""
-    Subclass of Creator to create Player instances
-    à continuer ...
-"""
-
-
-
-
-# doit etre au courant de la création des instances de Player
-# tenir un registre des differents players créés
-def create_player(player_dict): # à voir !
+class PlayerCreator(Creator):  # est ce que je mets tout ca dans une classe (cf Factory Method)???
     """
-    This method creates Player instances
-    and hold a registry of the created players.
+    Subclass of the Class Creator to create Player instances
     à continuer ...
     """
-    # return new player instance
-    new_player = Player(**player_dict)
-    Player.registry[new_player.identifier_pod] = new_player  # registry = {} : key = Player.identifier, value = instance
-    return new_player
+
+    # doit etre au courant de la création des instances de Player
+    # tenir un registre des differents players créés
+    def create_player(self, player_dict): # à voir !
+        """
+        This method creates Player instances
+        and hold a registry of the created players.
+        à continuer ...
+        """
+        # return new player instance
+        new_player = Player(**player_dict)
+        Player.registry[new_player.identifier_pod] = new_player  # registry = {} : key = Player.identifier, value = instance
+        return new_player
 
 
-# on donne un player_uuid, il doit renvoyer un Player
-def get_player_by_id(player_id):
-    """
-    This method enables to get a Player instance from its identifier attribute.
-    """
-    registry = Player.registry
-    if player_id in registry:
-        return registry[player_id]
+    # on donne un player_uuid, il doit renvoyer un Player
+    def get_player_by_id(self, player_id):
+        """
+        This method enables to get a Player instance from its identifier attribute.
+        """
+        registry = Player.registry
+        if player_id in registry:
+            return registry[player_id]
 
     """
     for _obj in gc.get_objects(): # garbage collector : pb lenteur si il y a beaucoup d'instances d'objet de créées
