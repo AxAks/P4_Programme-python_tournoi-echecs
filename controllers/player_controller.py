@@ -2,6 +2,7 @@
 
 import gc
 
+from controllers.controller import Creator
 from models.player import Player
 from tinydb import TinyDB
 
@@ -18,7 +19,6 @@ plusieurs fichiers controller à écrire : scinder
 """
 
 # Use Factory Method
-
 
 
 
@@ -44,41 +44,46 @@ for i in range(5):
 print Thingy.instances
 """
 
+# pour tournoi
+# unicité
+# propriete getter qui return : name, location, date_pod
+# pour ne pas instancier deux fois player_controller.py
+# -> fait dans Class Tournament : identifier
 
-# class PlayerController:  # ???
 
-
-def create_player(self): # à voir !
+# class PlayerCreator(Creator):  # ???
+"""
+    Subclass of Creator to create Player instances
+    à continuer ...
+"""
+def create_player(player_dict): # à voir !
     """
-    This method hold a registry of the created players.
+    This method creates Player instances
+    and hold a registry of the created players.
+    à continuer ...
     """
+    # return new player instance
+    new_player = Player(**player_dict)
+    Player.registry[new_player.identifier_pod] = new_player # registry = {} : key = Player.identifier, value = instance
+    return new_player
 
-def get_player_by_id(player_id):  # ??? à voir !
+
+def get_player_by_id(player_id):  # on entre un uuid et on recupere un player
     """
     This method enables to get a Player instance from its identifier attribute.
     """
-    for player in gc.get_objects():
-        if isinstance(player, Player) and player_id == Player.identifier:
-            print(player)
-        """
-        Player # faux
-        player_id = Player.identifier # faux
-        print(player_id) # faux
-        """
+    registry = Player.registry
+    if player_id in registry:
+        return registry[player_id].identifier
 
-# on entre un uuid et on recupere un player
-
-
-# registre : dict !!!!
-# key : uuid
-# value : instance
-
-
-# unicité
-# pour tournoi
-# propriete getter qui return : name, location, date_pod
-# pour ne pas instancier deux fois player_controller.py
-
+    """
+    for _obj in gc.get_objects(): # garbage collector : pb lenteur si il y a beaucoup d'instances d'objet de créées
+        if isinstance(_obj, Player) and player_id == _obj.identifier_pod:
+            return _obj
+        # Player # faux
+        # player_id = Player.identifier # faux
+        # print(player_id) # faux
+    """
 """
 # Pour sérialiser toutes les instances de joueurs:
 self.instances = [] if self.instances is None else self.instances.append(self) (dans la classe Player)
