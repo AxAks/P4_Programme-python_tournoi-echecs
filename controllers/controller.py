@@ -5,8 +5,8 @@
 
 from constants import PLAYER_PROPERTIES, TOURNAMENT_PROPERTIES, ROUND_PROPERTIES, MATCH_PROPERTIES
 
-from controllers.controller_match import MatchCreator
-from controllers.controller_round import RoundCreator
+from controllers.match_controller import MatchCreator
+from controllers.round_controller import RoundCreator
 from controllers.player_controller import PlayerCreator
 from controllers.tournament_controller import TournamentCreator
 
