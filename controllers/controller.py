@@ -1,15 +1,15 @@
 # coding=utf-8
 
+# si besoin
+# supprimer si pas utile au final
+
 from constants import PLAYER_PROPERTIES, TOURNAMENT_PROPERTIES, ROUND_PROPERTIES, MATCH_PROPERTIES
 
 from controllers.controller_match import MatchCreator
 from controllers.controller_round import RoundCreator
-from controllers.player_controller import PlayerCreator
-from controllers.tournament_controller import TournamentCreator
+# from controllers.player_controller import PlayerCreator
+# from controllers.tournament_controller import TournamentCreator
 
-
-# si besoin
-# supprimer si pas utile au final
 from models.player import Player
 from models.tournament import Tournament
 
@@ -19,12 +19,15 @@ from models.tournament import Tournament
 The Creator class is set as a common/factorized Parent Class for child Objects
 à continuer ....
 """
+
+
 def create_object(self, _obj_dict, properties_from_dict):
     """
     This method calls the method in chargereator
     """
     creator = self._get_creator(properties_from_dict)
     return creator(_obj_dict)
+
 
 def _get_creator(_obj_dict):
     """
