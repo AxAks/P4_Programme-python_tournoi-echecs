@@ -7,53 +7,52 @@ from constants import PLAYER_PROPERTIES, TOURNAMENT_PROPERTIES, ROUND_PROPERTIES
 
 from controllers.controller_match import MatchCreator
 from controllers.controller_round import RoundCreator
-# from controllers.player_controller import PlayerCreator
-# from controllers.tournament_controller import TournamentCreator
+from controllers.player_controller import PlayerCreator
+from controllers.tournament_controller import TournamentCreator
 
 from models.player import Player
 from models.tournament import Tournament
 
 
-# class Creator:
-"""
-The Creator class is set as a common/factorized Parent Class for child Objects
-à continuer ....
-"""
-
-
-def create_object(self, _obj_dict, properties_from_dict):
+class Creator:
     """
-    This method calls the method in chargereator
+    The Creator class is set as a common/factorized Parent Class for child Objects
+    à continuer ....
     """
-    creator = self._get_creator(properties_from_dict)
-    return creator(_obj_dict)
+    registry = {}
+
+    def create(self, _obj_dict, properties_from_dict):
+        """
+        This method calls the method defining the right Creator for the provided dictionary
+        """
+        creator = self._get_creator(properties_from_dict)
+        return creator(_obj_dict)
+
+    def _get_creator(self, _obj_dict):
+        """
+        This method gets a dict as input and defines the type of object to create through the provided keys
+        It then forwards the creation task to the right concrete Creator
+        """
+        properties_from_dict = []
+        for key in _obj_dict:
+            properties_from_dict.append(key)
+        if properties_from_dict == PLAYER_PROPERTIES:
+            print('New Player !')
+            return PlayerCreator.create(_obj_dict)
+        elif properties_from_dict == TOURNAMENT_PROPERTIES:
+            print('New Tournament !')
+            return TournamentCreator.create(_obj_dict)
+        elif properties_from_dict == ROUND_PROPERTIES:
+            print('New Round !')
+            return RoundCreator.create(_obj_dict)
+        elif properties_from_dict == MATCH_PROPERTIES:
+            print('New Match !')
+            return MatchCreator.create(_obj_dict)
+        else:
+            raise AttributeError(f'No object found for this dict!')
 
 
-def _get_creator(_obj_dict):
-    """
-    This method gets a dict as input and defines the type of object to create through the provided keys
-    It then forwards the creation task to the right concrete Creator
-    """
-    properties_from_dict = []
-    for key in _obj_dict:
-        properties_from_dict.append(key)
-    if properties_from_dict == PLAYER_PROPERTIES:
-        print('New Player !')
-        return PlayerCreator.create_player(_obj_dict)
-    elif properties_from_dict == TOURNAMENT_PROPERTIES:
-        print('New Tournament !')
-        return TournamentCreator.create_tournament(_obj_dict)
-    elif properties_from_dict == ROUND_PROPERTIES:
-        print('New Round !')
-        return RoundCreator.create_round(_obj_dict)
-    elif properties_from_dict == MATCH_PROPERTIES:
-        print('New Match !')
-        return MatchCreator.create_match(_obj_dict)
-    else:
-        raise AttributeError(f'No object found for this dict!')
-
-
-def create_player(player_dict): # à voir !
+def create_player(player_dict): # à voir ! TEST
     """
     This method creates Player instances
     and hold a registry of the created players.
@@ -64,7 +63,7 @@ def create_player(player_dict): # à voir !
     new_player.identifier_pod] = new_player  # registry = {} : key = Player.identifier, value = instance
     return new_player
 
-def create_tournament(tournament_dict):  #  à voir !
+def create_tournament(tournament_dict):  #  à voir ! TEST
     """
     This method receives dicts from the abstract Creator for Tournament instances to be created
     and hold a registry of the created Tournaments.

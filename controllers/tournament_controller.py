@@ -4,7 +4,7 @@ Controller file for Tournament
 """
 
 from models.tournament import Tournament
-
+from controllers.controller import Creator
 
 # unicité
 # pour tournoi
@@ -12,17 +12,17 @@ from models.tournament import Tournament
 # pour ne pas instancier deux foisplayer_controller.py
 
 
-# class TournamentCreator:  # est ce que je mets tout ca dans une classe (cf Factory Method)???
-"""
-Subclass of Creator to create and manage Tournament instances
-à continuer ...
-"""
+class TournamentCreator(Creator):  # est ce que je mets tout ca dans une classe (cf Factory Method)???
+    """
+    Subclass of Creator to create and manage Tournament instances
+    à continuer ...
+    """
 
 # doit etre au courant de la création des instances de Player
 # tenir un registre des differents players créés
 
 
-def create_tournament(tournament_dict):  #  à voir !
+def create(tournament_dict):  #  à voir !
     """
     This method receives dicts from the abstract Creator for Tournament instances to be created
     and hold a registry of the created Tournaments.
@@ -30,7 +30,7 @@ def create_tournament(tournament_dict):  #  à voir !
     """
     # return new Tournament instance
     new_tournament = Tournament(**tournament_dict)
-    Tournament.registry[
+    Creator.registry[
         new_tournament.identifier] = new_tournament  # registry = {} : key = Tournamment.identifier, value = instance
     print('New Tournament Created and stored !')
     return new_tournament
@@ -41,7 +41,7 @@ def get_tournament(*args):
     """
     This method enables to get a Tournament instance from its identifier attributes : Name, Location or Dates.
     """
-    registry = Tournament.registry  # en l'état, il faut que tous les membres du tuple (4) soient présents et dans l'ordre
+    registry = Creator.registry  # en l'état, il faut que tous les membres du tuple (4) soient présents et dans l'ordre
     for tuple_id in registry:
         if args in registry:
             return registry[tuple_id]

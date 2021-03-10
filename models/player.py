@@ -17,7 +17,6 @@ class Player(Model):
     This is the class for the Python Object: Player
     Gender is an sub-class for the Player's gender : only accept the strings "Male" and "Female".
     """
-    registry = {}
     Gender = Enum("Gender", "MALE FEMALE")
 
     def __init__(self, **data):

@@ -14,7 +14,6 @@ from models.round import Round
 
 
 class Tournament(Model):
-    registry = {}
     """
     This is the class for the Python Object: Tournament
     Time_control is an intermediate class for the tournament's time control
