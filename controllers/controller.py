@@ -21,6 +21,7 @@ class Creator:
     """
     player_registry = {}
     tournament_registry = {}
+
     def create(self, _obj_dict, properties_from_dict):
         """
         This method calls the method defining the right Creator for the provided dictionary
