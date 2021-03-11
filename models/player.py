@@ -53,7 +53,6 @@ class Player(Model):
         - it sets an uuid if there is none given.
         - it converts the value into an uuid if the entered value is a string
         """
-
         if value is None or value == '':
             value = uuid4()
             self.__identifier = value
