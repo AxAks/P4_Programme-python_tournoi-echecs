@@ -29,14 +29,6 @@ class Round(Model):
         super().__init__(('name', 'matches', 'end_time', 'start_time'), **params)
 
     @property
-    def identifier(self) -> tuple[str, str, str]:
-        """
-        This getter returns the round's name, start and end times as a tuple of strings
-        It enables to identify a round instance.
-        """
-        return self.name, self.start_time_pod, self.end_time_pod
-
-    @property
     def name(self) -> str:
         """
         This getter returns the round's name as a string.

@@ -19,8 +19,8 @@ class Creator:
     The Creator class is set as a common/factorized Parent Class for child Objects
     à continuer ....
     """
-    registry = {}
-
+    player_registry = {}
+    tournament_registry = {}
     def create(self, _obj_dict, properties_from_dict):
         """
         This method calls the method defining the right Creator for the provided dictionary

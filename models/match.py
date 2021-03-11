@@ -34,14 +34,6 @@ class Match(Model):
         super().__init__(('player1_id', 'player2_id', 'player1_score', 'player2_score'), **params)
 
     @property
-    def identifier(self) -> tuple[[str, int], [str, int]]:
-        """
-        This getter returns the match's infos as a tuple of two lists of strings : player/score
-        It enables to identify a specific match.
-        """
-        return [self.player1_id_pod, int(self.player1_score_pod)], [self.player2_id_pod, int(self.player2_score_pod)]
-
-    @property
     def player1_id(self) -> UUID:
         """
         This getter returns player1 ID as an UUID.

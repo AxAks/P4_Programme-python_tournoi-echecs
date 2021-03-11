@@ -121,7 +121,12 @@ class Tournament(Model):
             self.__start_date = value
         else:
             raise AttributeError()
-
+        """
+        if  not self.__end_date: # bloc pas reglé : je veux verifier s'il y a une date de fin ou non et verifier que la date de fin est superieur à la date de début
+            self.__start_date = value
+        if self.__start_date > self.__end_date:
+            raise Exception('pas bon !')
+        """
     @property
     def end_date(self) -> date:
         """
@@ -155,8 +160,12 @@ class Tournament(Model):
             self.__end_date = value
         else:
             raise AttributeError()
-        if self.__end_date < self.__start_date:
-            raise AttributeError()
+        """
+        if not self.__start_date: # bloc pas reglé : je veux verifier s'il y a une date de début ou non et verifier que la date de fin est superieur à la date de début
+            self.__end_date = value 
+        if self.__start_date > self.__end_date:
+            raise Exception('pas bon !')
+        """
     @property
     def players_identifier(self) -> list[str]:
         """

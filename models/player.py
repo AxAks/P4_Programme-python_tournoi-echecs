@@ -57,7 +57,13 @@ class Player(Model):
             value = uuid4()
             self.__identifier = value
         elif isinstance(value, UUID):
-            self.__identifier = value
+            # penser à gérer les differentes versions de UUID, nous on veut que les UUID soient uuid4 (et pas 1, 2 ou 3) à verifier !!
+            # Try/except this using ValueError -> val = UUID(value, version=4)
+            try:
+                UUID(value, version=4)
+                self.__identifier = value
+            except ValueError:
+                raise AttributeError()
         elif isinstance(value, str):
             try:
                 self.__identifier = UUID(value)

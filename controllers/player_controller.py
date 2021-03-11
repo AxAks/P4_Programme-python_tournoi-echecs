@@ -30,7 +30,7 @@ class PlayerCreator():  # est ce que je mets tout ca dans une classe (cf Factory
         à continuer ...
         """
         new_player = Player(**properties_from_dict)
-        Creator.registry[
+        Creator.player_registry[
             new_player.identifier_pod] = new_player  # registry = {} : key = Player.identifier, value = instance
         return new_player
     """
@@ -45,7 +45,7 @@ class PlayerCreator():  # est ce que je mets tout ca dans une classe (cf Factory
         """
         This method enables to get a Player instance from its identifier attribute.
         """
-        registry = Creator.registry
+        registry = Creator.player_registry
         if player_id in registry:
             return registry[player_id]
 

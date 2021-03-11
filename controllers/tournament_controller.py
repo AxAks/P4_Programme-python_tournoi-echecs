@@ -30,7 +30,7 @@ def create(tournament_dict):  #  à voir !
     """
     # return new Tournament instance
     new_tournament = Tournament(**tournament_dict)
-    Creator.registry[
+    Creator.tournament_registry[
         new_tournament.identifier] = new_tournament  # registry = {} : key = Tournamment.identifier, value = instance
     print('New Tournament Created and stored !')
     return new_tournament
@@ -41,7 +41,7 @@ def get_tournament(*args):
     """
     This method enables to get a Tournament instance from its identifier attributes : Name, Location or Dates.
     """
-    registry = Creator.registry  # en l'état, il faut que tous les membres du tuple (4) soient présents et dans l'ordre
+    registry = Creator.tournament_registry  # en l'état, il faut que tous les membres du tuple (4) soient présents et dans l'ordre
     for tuple_id in registry:
         if args in registry:
             return registry[tuple_id]
