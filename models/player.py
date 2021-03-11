@@ -53,21 +53,19 @@ class Player(Model):
         - it sets an uuid if there is none given.
         - it converts the value into an uuid if the entered value is a string
         """
+
         if value is None or value == '':
             value = uuid4()
             self.__identifier = value
         elif isinstance(value, UUID):
-            # penser à gérer les differentes versions de UUID, nous on veut que les UUID soient uuid4 (et pas 1, 2 ou 3) à verifier !!
-            # Try/except this using ValueError -> val = UUID(value, version=4)
-            try:
-                UUID(value, version=4)
+            if value == UUID(str(value), version=4):
                 self.__identifier = value
-            except ValueError:
+            else:
                 raise AttributeError()
         elif isinstance(value, str):
-            try:
+            if UUID(value) == UUID(value, version=4):
                 self.__identifier = UUID(value)
-            except ValueError:
+            else:
                 raise AttributeError()
         else:
             raise AttributeError()
