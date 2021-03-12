@@ -8,7 +8,7 @@ from constants import PLAYER_PROPERTIES, TOURNAMENT_PROPERTIES, ROUND_PROPERTIES
 from controllers.match_controller import MatchCreator
 from controllers.round_controller import RoundCreator
 from controllers.player_controller import PlayerCreator
-from controllers.tournament_controller import TournamentCreator
+# from controllers.tournament_controller import TournamentCreator
 
 from models.player import Player
 from models.tournament import Tournament
@@ -72,17 +72,20 @@ def create_tournament(tournament_dict):  #  à voir ! TEST
     """
     # return new Tournament instance
     new_tournament = Tournament(**tournament_dict)
-    Tournament.registry[
+    Creator.tournament_registry[
         new_tournament.identifier] = new_tournament  # registry = {} : key = Tournamment.identifier, value = instance
     print('New Tournament Created and stored !')
     return new_tournament
 
 # on donne les infos d'un tournoi , il doit renvoyer le Tournament
-def get_tournament(*args):
+def get_tournament(search):
     """
     This method enables to get a Tournament instance from its identifier attributes : Name, Location or Dates.
     """
-    registry = Tournament.registry # en l'état, il faut que les trois membres du tuple soient présents et dans l'ordre
-    for tuple_id in registry:
-        if args in registry:
-            return registry[tuple_id]
+    registry = Creator.tournament_registry  # en l'état, il faut que tous les membres du tuple (4) soient présents et dans l'ordre -> tuple transformé en string
+    results = []
+    for key in registry:
+        if key.find(search):
+            results.append(registry[key])
+            print(registry[key])
+    return results

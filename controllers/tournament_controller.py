@@ -12,11 +12,11 @@ from controllers.controller import Creator
 # pour ne pas instancier deux foisplayer_controller.py
 
 
-class TournamentCreator(Creator):  # est ce que je mets tout ca dans une classe (cf Factory Method)???
-    """
-    Subclass of Creator to create and manage Tournament instances
-    à continuer ...
-    """
+# class TournamentCreator(Creator):  # est ce que je mets tout ca dans une classe (cf Factory Method)???
+"""
+Subclass of Creator to create and manage Tournament instances
+à continuer ...
+"""
 
 # doit etre au courant de la création des instances de Player
 # tenir un registre des differents players créés
@@ -41,10 +41,12 @@ def get_tournament(*args):
     """
     This method enables to get a Tournament instance from its identifier attributes : Name, Location or Dates.
     """
-    registry = Creator.tournament_registry  # en l'état, il faut que tous les membres du tuple (4) soient présents et dans l'ordre
-    for tuple_id in registry:
-        if args in registry:
-            return registry[tuple_id]
+    registry = Creator.tournament_registry  # en l'état, il faut que tous les membres du tuple (4) soient présents et dans l'ordre -> tuple transformé en string
+    for key in registry:
+        if key.find(args):
+            return registry[key]
+
+# attention ! l'idée est de pouvoir faire des tournois sur plusieurs jours : date_debut, date_fin et par defaut date_debut = date_fin (1 jour)
 
 # Tournament
 # players_identifier [UUID, UUID]

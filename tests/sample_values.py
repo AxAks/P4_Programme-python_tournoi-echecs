@@ -115,7 +115,7 @@ tournament35_dict = {
     'name': 'Best Tournament Ever',
     'location': 'Genève',
     'start_date': '1987-01-21',
-    'end_date': '1987-01-23',
+    'end_date': '1987-01-22',
     'players_identifier': [
         '3be40089-64ff-48c2-8e6e-bc005ad378d2',
         'ce0258eb-cfeb-45e6-a56d-8f5d7260bd9b',

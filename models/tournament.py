@@ -38,12 +38,12 @@ class Tournament(Model):
                          'time_control', 'description', 'rounds_list', 'rounds'), **data)
 
     @property
-    def identifier(self) -> tuple[str, str, str]:
+    def identifier(self) -> str:
         """
         This getter returns the tournament's name, location and dates  as a tuple of strings
         It enables to identify a tournament instance.
         """
-        return str(f"{self.name}, {self.location}, {self.start_date_pod}, {self.end_date_pod}")
+        return str(f"{self.name} , {self.location} , {self.start_date_pod} , {self.end_date_pod}")
 
     @property
     def name(self) -> str:
@@ -90,7 +90,7 @@ class Tournament(Model):
             raise AttributeError()
 
     @property
-    def start_date(self) -> date: # attention ! l'idée est de pouvoir faire des tournaois sur plusieurs jours : date_debut, date_fin et par defaut date_debut = date_fin (1 jour)
+    def start_date(self) -> date:
         """
         This getter returns the dates of the tournament as a date.
         """
@@ -121,12 +121,15 @@ class Tournament(Model):
             self.__start_date = value
         else:
             raise AttributeError()
-        """
-        if  not self.__end_date: # bloc pas reglé : je veux verifier s'il y a une date de fin ou non et verifier que la date de fin est superieur à la date de début
+
+        if hasattr(self, 'end_date'):
+            if self.__start_date > self.__end_date:
+                raise AttributeError()
+            else:
+                self.__start_date = value
+        else:
             self.__start_date = value
-        if self.__start_date > self.__end_date:
-            raise Exception('pas bon !')
-        """
+
     @property
     def end_date(self) -> date:
         """
@@ -160,12 +163,14 @@ class Tournament(Model):
             self.__end_date = value
         else:
             raise AttributeError()
-        """
-        if not self.__start_date: # bloc pas reglé : je veux verifier s'il y a une date de début ou non et verifier que la date de fin est superieur à la date de début
-            self.__end_date = value 
-        if self.__start_date > self.__end_date:
-            raise Exception('pas bon !')
-        """
+
+        if hasattr(self, 'start_date'):
+            if self.__start_date > self.__end_date:
+                raise AttributeError()
+            else:
+                self.__end_date = value
+        else:
+            self.__end_date = value
     @property
     def players_identifier(self) -> list[str]:
         """
