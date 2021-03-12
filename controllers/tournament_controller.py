@@ -47,6 +47,7 @@ def get_tournament(*args):
             return registry[key]
 
 # attention ! l'idée est de pouvoir faire des tournois sur plusieurs jours : date_debut, date_fin et par defaut date_debut = date_fin (1 jour)
+# -> à faire dans les inputs input je pense.
 
 # Tournament
 # players_identifier [UUID, UUID]
