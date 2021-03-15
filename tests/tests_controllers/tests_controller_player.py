@@ -21,9 +21,9 @@ players_list = [test_sample.player1_dict,
                 test_sample.player3_dict,
                 test_sample.player4_dict]
 
-for player in players_list:
-    Creator.player_creator.create(**player)
-    print('ici')
+for player_dict in players_list:
+    player = player_creator.create(**player_dict)
+    print(player)
 
 # tests
 

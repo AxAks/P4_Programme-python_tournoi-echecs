@@ -26,4 +26,3 @@ print(f'Deserialized Match: {match_test_serialized}')
 assert test_sample.match16_dict == match_test_serialized
 print("End: Test Serialization/Deserialization Match")
 
-print(f'Match 16 Identification: {match16.identifier}')

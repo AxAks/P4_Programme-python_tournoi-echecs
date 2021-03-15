@@ -36,4 +36,3 @@ print(f'Round 1 deserialized: {deserialized_round1.__dict__}')
 assert test_sample.round1_dict == serialized_round1
 print("End: Test Serialization/Deserialization Round")
 
-print(f'Round 1 Identification: {round1.identifier}')
