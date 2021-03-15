@@ -25,4 +25,4 @@ ROUND_PROPERTIES = ['name', 'matches', 'end_time', 'start_time']
 MATCH_PROPERTIES = ['player1_id', 'player2_id', 'player1_score', 'player2_score']
 
 
-EMPTY_SEARCH_STRINGS = ['', ' ', '-']
+EMPTY_SEARCH_STRINGS = ['', ' ', '-', '_']

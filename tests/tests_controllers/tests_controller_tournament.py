@@ -5,7 +5,7 @@ File for different tests on the features of the tournament controller
 """
 
 # from controllers.tournament_controller import TournamentCreator
-from controllers.controller import Creator
+from controllers.creator import Creator
 from models.tournament import Tournament
 from tests import sample_values as test_sample
 

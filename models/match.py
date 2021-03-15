@@ -3,7 +3,7 @@
 from enum import Enum
 from typing import Union
 from uuid import UUID
-from .model import Model
+from models.model import Model
 
 
 class Match(Model):
@@ -15,7 +15,6 @@ class Match(Model):
     Multiple matches are not saved here but as a list in the Class Round
     -> Round.matches = [match1, match2, match3]
     """
-    registry = {}
 
     class Score(Enum):
         WIN = 1.0

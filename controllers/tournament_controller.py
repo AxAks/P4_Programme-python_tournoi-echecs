@@ -1,23 +1,21 @@
 # coding=utf-8
+
+from controllers.creator import Creator
+from models.tournament import Tournament
+
 """
 Controller file for Tournament
 """
-import re
-from constants import EMPTY_SEARCH_STRINGS
-from models.tournament import Tournament
-from controllers.controller import Creator
-
-# unicité
-# pour tournoi
-# propriete getter qui return : name, location, date_pod (lecture seule) dans la Classe Tournament
-# pour ne pas instancier deux foisplayer_controller.py
 
 
-# class TournamentCreator():  # est ce que je mets tout ca dans une classe (cf Factory Method)???
-"""
-Subclass of Creator to create and manage Tournament instances
-à continuer ...
-"""
+class TournamentCreator:  # est ce que je mets tout ca dans une classe (cf Factory Method)???
+    """
+    Subclass of Creator to create and manage Tournament instances
+    à continuer ...
+    """
+    tournament_creator = Creator(Tournament)  # copié des tests, à voir si je peux en faire quelque chose
+
+
 
 # attention ! l'idée est de pouvoir faire des tournois sur plusieurs jours : date_debut, date_fin et par defaut date_debut = date_fin (1 jour)
 # -> à faire dans les inputs je pense.

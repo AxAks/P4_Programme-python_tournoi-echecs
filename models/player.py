@@ -8,8 +8,7 @@ from uuid import uuid4, UUID
 from enum import Enum
 
 from constants import MINIMUM_AGE, MINIMUM_RANKING, MAXIMUM_RANKING, ALPHABETICAL_STRING_RULE
-
-from .model import Model
+from models.model import Model
 
 
 class Player(Model):

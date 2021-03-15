@@ -1,8 +1,7 @@
 # coding=utf-8
 
-from controllers.controller import Creator
-from controllers import controller
-# from controllers import player_controller
+from controllers.creator import Creator
+from controllers.player_controller import PlayerCreator
 # from controllers.player_controller import PlayerCreator
 from models.player import Player
 from tests import sample_values as test_sample
@@ -23,7 +22,8 @@ players_list = [test_sample.player1_dict,
                 test_sample.player4_dict]
 
 for player in players_list:
-    player_creator.create(**player)
+    Creator.player_creator.create(**player)
+    print('ici')
 
 # tests
 

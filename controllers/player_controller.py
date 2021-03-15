@@ -1,8 +1,12 @@
 # coding=utf-8
 
+from controllers.creator import Creator
+from models.player import Player
+
 """
 Controller file for Player
 """
+
 """
 Temp : Just for me !
 Controller : link between Models (Classes) and Views
@@ -13,6 +17,17 @@ plusieurs fichiers controller à écrire : scinder
 # Use Factory Method
 # methode factory (voir tuto design pattern)
 # voir controller directement : Class Creator
+
+
+class PlayerCreator:
+    """
+    Subclass of Creator to create and manage Player instances
+    à continuer ...
+    """
+    player_creator = Creator(Player)  # copié des tests, à voir si je peux en faire quelque chose
+
+
+
 
 
 

@@ -7,15 +7,14 @@ from datetime import datetime
 
 from constants import ALPHA_NUMERICAL_STRING_RULE
 
-from .model import Model
-from .match import Match
+from models.model import Model
+from models.match import Match
 
 
 class Round(Model):
     """
     This is the class for the Python Object: Round
     """
-    registry = {}
 
     def __init__(self, **params: dict):
         """
