@@ -2,7 +2,8 @@
 """
 Controller file for Tournament
 """
-
+import re
+from constants import EMPTY_SEARCH_STRINGS
 from models.tournament import Tournament
 from controllers.controller import Creator
 
@@ -12,47 +13,31 @@ from controllers.controller import Creator
 # pour ne pas instancier deux foisplayer_controller.py
 
 
-# class TournamentCreator(Creator):  # est ce que je mets tout ca dans une classe (cf Factory Method)???
+# class TournamentCreator():  # est ce que je mets tout ca dans une classe (cf Factory Method)???
 """
 Subclass of Creator to create and manage Tournament instances
 à continuer ...
 """
 
-# doit etre au courant de la création des instances de Player
-# tenir un registre des differents players créés
-
-
-def create(tournament_dict):  #  à voir !
-    """
-    This method receives dicts from the abstract Creator for Tournament instances to be created
-    and hold a registry of the created Tournaments.
-    à continuer ...
-    """
-    # return new Tournament instance
-    new_tournament = Tournament(**tournament_dict)
-    Creator.tournament_registry[
-        new_tournament.identifier] = new_tournament  # registry = {} : key = Tournamment.identifier, value = instance
-    print('New Tournament Created and stored !')
-    return new_tournament
-
-
-# on donne les infos d'un tournoi , il doit renvoyer le Tournament
+# on donne les infos d'un tournoi , il doit renvoyer les Tournaments correspondants
 def get_tournament(search):
     """
     This method enables to get a Tournament instance from its identifier attributes : Name, Location or Dates.
     """
     registry = Creator.tournament_registry  # string de 4 attributs, la recherche doit etre améliorée !
-    results = []
+    results = {}
     for key in registry:
         for search_match in re.finditer(search, key):
-            results.append(registry[key])
+            if registry[key].identifier not in results:
+                results[key] = registry[key]
+        if search in EMPTY_SEARCH_STRINGS:
+            results = {}
     return results
 
-# attention ! l'idée est de pouvoir faire des tournois sur plusieurs jours : date_debut, date_fin et par defaut date_debut = date_fin (1 jour)
-# -> à faire dans les inputs input je pense.
 
-# Tournament
-# players_identifier [UUID, UUID]
+
+# attention ! l'idée est de pouvoir faire des tournois sur plusieurs jours : date_debut, date_fin et par defaut date_debut = date_fin (1 jour)
+# -> à faire dans les inputs je pense.
 
 
 #  Comment gère t-on la reference à Tournament dans Round ? à voir -> Round n'existe pas hors de Tournament

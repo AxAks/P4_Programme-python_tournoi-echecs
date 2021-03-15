@@ -9,7 +9,7 @@ from enum import Enum
 
 from constants import MINIMUM_AGE, MINIMUM_RANKING, MAXIMUM_RANKING, ALPHABETICAL_STRING_RULE
 
-from models.model import Model
+from .model import Model
 
 
 class Player(Model):

@@ -1,3 +1,3 @@
 # coding=utf-8
 
-from models.model import Serializable
+from models.model import Model

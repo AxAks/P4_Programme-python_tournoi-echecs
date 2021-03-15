@@ -7,8 +7,8 @@ from datetime import datetime
 
 from constants import ALPHA_NUMERICAL_STRING_RULE
 
-from models.model import Model
-from models.match import Match
+from .model import Model
+from .match import Match
 
 
 class Round(Model):

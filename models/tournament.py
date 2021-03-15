@@ -9,8 +9,8 @@ from uuid import UUID
 
 from constants import ALPHA_NUMERICAL_STRING_RULE, ALPHABETICAL_STRING_RULE
 
-from models.model import Model
-from models.round import Round
+from .model import Model
+from .round import Round
 
 
 class Tournament(Model):
