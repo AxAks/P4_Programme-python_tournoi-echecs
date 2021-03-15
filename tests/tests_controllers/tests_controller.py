@@ -27,12 +27,16 @@ tournament_creator = Creator(Tournament)
 player1 = player_creator.create(**test_sample.player1_dict)
 player2 = player_creator.create(**test_sample.player2_dict)
 tournament35 = tournament_creator.create(**test_sample.tournament35_dict)
+tournament343 = tournament_creator.create(**test_sample.tournament343_dict)
 
 print(player1.identifier)
 print(player2.identifier)
 print(tournament35.__dict__)
 print(player_creator.registry)
 print(tournament_creator.registry)
+
+print(player_creator.search('2'))
+print(tournament_creator.search('Gen'))
 
 
 

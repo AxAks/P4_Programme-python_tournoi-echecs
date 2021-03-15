@@ -19,23 +19,6 @@ Subclass of Creator to create and manage Tournament instances
 à continuer ...
 """
 
-# on donne les infos d'un tournoi , il doit renvoyer les Tournaments correspondants
-def get_tournament(search):
-    """
-    This method enables to get a Tournament instance from its identifier attributes : Name, Location or Dates.
-    """
-    registry = Creator.tournament_registry  # string de 4 attributs, la recherche doit etre améliorée !
-    results = {}
-    for key in registry:
-        for search_match in re.finditer(search, key):
-            if registry[key].identifier not in results:
-                results[key] = registry[key]
-        if search in EMPTY_SEARCH_STRINGS:
-            results = {}
-    return results
-
-
-
 # attention ! l'idée est de pouvoir faire des tournois sur plusieurs jours : date_debut, date_fin et par defaut date_debut = date_fin (1 jour)
 # -> à faire dans les inputs je pense.
 
