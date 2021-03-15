@@ -3,7 +3,10 @@
 # si besoin
 # supprimer si pas utile au final
 
-from constants import PLAYER_PROPERTIES, TOURNAMENT_PROPERTIES, ROUND_PROPERTIES, MATCH_PROPERTIES
+import re
+
+from constants import PLAYER_PROPERTIES, TOURNAMENT_PROPERTIES, ROUND_PROPERTIES, MATCH_PROPERTIES, \
+    EMPTY_SEARCH_STRINGS
 
 from controllers.match_controller import MatchCreator
 from controllers.round_controller import RoundCreator
@@ -60,9 +63,30 @@ def create_player(player_dict): # à voir ! TEST
     à continuer ...
     """
     new_player = Player(**player_dict)
-    Player.registry[
+    Creator.player_registry[
     new_player.identifier_pod] = new_player  # registry = {} : key = Player.identifier, value = instance
     return new_player
+
+# on donne un player_uuid, il doit renvoyer les Player correspondants
+def get_by_id(search):
+    """
+    This method enables to get one or more Player instance(s) from their identifier
+    It excludes empty searches.
+    """
+    registry = Creator.player_registry  # string de 4 attributs, la recherche doit etre améliorée !
+    results = {}
+    for key in registry:
+        for search_match in re.finditer(search, key):
+            if registry[key].identifier_pod not in results:
+                results[key] = registry[key]
+    if search in EMPTY_SEARCH_STRINGS:
+        results = {}
+    return results
+    """
+    registry = Creator.player_registry
+    if player_id in registry:
+        return registry[player_id]
+    """
 
 def create_tournament(tournament_dict):  #  à voir ! TEST
     """
@@ -77,15 +101,26 @@ def create_tournament(tournament_dict):  #  à voir ! TEST
     print('New Tournament Created and stored !')
     return new_tournament
 
-# on donne les infos d'un tournoi , il doit renvoyer le Tournament
+# on donne les infos d'un tournoi , il doit renvoyer les Tournaments correspondants
 def get_tournament(search):
     """
     This method enables to get a Tournament instance from its identifier attributes : Name, Location or Dates.
     """
-    registry = Creator.tournament_registry  # en l'état, il faut que tous les membres du tuple (4) soient présents et dans l'ordre -> tuple transformé en string
-    results = []
+    registry = Creator.tournament_registry  # string de 4 attributs, la recherche doit etre améliorée !
+    results = {}
     for key in registry:
-        if key.find(search):
-            results.append(registry[key])
-            print(registry[key])
+        for search_match in re.finditer(search, key):
+            if registry[key].identifier not in results:
+                results[key] = registry[key]
+        if search in EMPTY_SEARCH_STRINGS:
+            results = {}
+    return results
+
+    results = {}
+    for key in registry:
+        for search_match in re.finditer(search, key):
+            if registry[key].identifier_pod not in results:
+                results[key] = registry[key]
+    if search in ('', ' ', '-'):
+        results = {}
     return results

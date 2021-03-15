@@ -37,14 +37,16 @@ def create(tournament_dict):  #  à voir !
 
 
 # on donne les infos d'un tournoi , il doit renvoyer le Tournament
-def get_tournament(*args):
+def get_tournament(search):
     """
     This method enables to get a Tournament instance from its identifier attributes : Name, Location or Dates.
     """
-    registry = Creator.tournament_registry  # en l'état, il faut que tous les membres du tuple (4) soient présents et dans l'ordre -> tuple transformé en string
+    registry = Creator.tournament_registry  # string de 4 attributs, la recherche doit etre améliorée !
+    results = []
     for key in registry:
-        if key.find(args):
-            return registry[key]
+        for search_match in re.finditer(search, key):
+            results.append(registry[key])
+    return results
 
 # attention ! l'idée est de pouvoir faire des tournois sur plusieurs jours : date_debut, date_fin et par defaut date_debut = date_fin (1 jour)
 # -> à faire dans les inputs input je pense.
