@@ -18,6 +18,7 @@ plusieurs fichiers controller à écrire : scinder
 # methode factory (voir tuto design pattern)
 # voir controller directement : Class Creator
 
+
 class PlayerCreator:
     """
     Subclass of Creator to create and manage Player instances

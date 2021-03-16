@@ -1,9 +1,13 @@
 # coding=utf-8
 
-class GeneralMenu:
-    """
-    General Class for all Menus
-    """
+"""
+Class for a generic Menu
+"""
+
+
+class GenericMenu:
     def __init__(self):
         pass
+
+
 

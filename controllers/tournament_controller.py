@@ -13,9 +13,12 @@ class TournamentCreator:  # est ce que je mets tout ca dans une classe (cf Facto
     Subclass of Creator to create and manage Tournament instances
     à continuer ...
     """
+    """
     tournament_creator = Creator(Tournament)  # copié des tests, à voir si je peux en faire quelque chose
+    """
 
-
+    def create_tournament(self):
+        pass
 
 # attention ! l'idée est de pouvoir faire des tournois sur plusieurs jours : date_debut, date_fin et par defaut date_debut = date_fin (1 jour)
 # -> à faire dans les inputs je pense.

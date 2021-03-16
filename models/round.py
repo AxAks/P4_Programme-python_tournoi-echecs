@@ -110,7 +110,7 @@ class Round(Model):
         This setter checks whether the entered value is a string or a datetime object
         and sets the attribute as a datetime
         """
-        #  doit etre automatiquement enregisté lors de l'instanciation du round, voir comment et où on gère ca
+        #  doit etre automatiquement enregisté lors de l'instanciation du round, voir comment et où on gère ca : use datetime.datetime.now()
         if value is None:
             raise AttributeError()
         if isinstance(value, str):
@@ -145,7 +145,7 @@ class Round(Model):
         This setter checks whether the entered value is a string or a datetime object
         and sets the attribute as a datetime
         """
-        #  doit etre automatiquement enregisté lors de la fin de saisie des infos du round
+        #  doit etre automatiquement enregisté lors de la fin de saisie des infos du round : use datetime.datetime.now()
         if value is None:
             raise AttributeError()
         if isinstance(value, str):
