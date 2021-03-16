@@ -18,7 +18,6 @@ plusieurs fichiers controller à écrire : scinder
 # methode factory (voir tuto design pattern)
 # voir controller directement : Class Creator
 
-
 class PlayerCreator:
     """
     Subclass of Creator to create and manage Player instances
@@ -29,16 +28,20 @@ class PlayerCreator:
 
 
 
-
-
-
 # infos pour la suite !
 """
 # Pour enregistrer les instances crées dans une liste
 # pour sérialiser toutes les instances de joueurs ensuite:
 
-self.instances = [] if self.instances is None else self.instances.append(self) (dans la classe Player) # on laisse tomber ca du coup ?
+player_creator.registry
+tournament_creator.registry
 
+
+serialized_instances = []
+for key in registry:
+    serialized_instance = registry[key].serialize()
+    serialized_instances.append(serialized_instance)
+return serialized_instances
 
 # Pour sauvegarder plusieurs instances de joueurs serialisées dans TinyDB:
 db = TinyDB(‘db.json’)

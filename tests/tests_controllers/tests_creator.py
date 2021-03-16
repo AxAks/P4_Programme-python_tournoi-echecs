@@ -1,4 +1,5 @@
 # coding=utf-8
+
 from models.player import Player
 from models.tournament import Tournament
 from tests import sample_values as test_sample
@@ -45,7 +46,14 @@ print(tournament35.__dict__)
 print(player_creator.registry)
 print(tournament_creator.registry)
 
-print(player_creator.search('2'))
+print(player_creator.search('ff'))
 print(tournament_creator.search('Gen'))
 
+
+# Serialisation des instances
+serialized_player_instances = [player_creator.registry[key].serialize() for key in player_creator.registry]
+[print(serialized_player_instance) for serialized_player_instance in serialized_player_instances]
+
+serialized_tournament_instances = [tournament_creator.registry[key].serialize() for key in tournament_creator.registry]
+[print(serialized_tournament_instance) for serialized_tournament_instance in serialized_tournament_instances]
 
