@@ -48,50 +48,37 @@ class GeneralMenu:
         """
         This method enables to create a tournament.
         """
-        pass
+        name = self.ask_tournament_name()
+        location = self.ask_tournament_location()
+        players = self.ask_tournament_players()
+        print(f"Tournament Information\n"
+              f"Name: {name}\n"
+              f"Location: {location},\n"
+              f"Players: {players}")
+        return name, location, players
 
-    def manage_players(self): # trop large , devra etre decoupé je pense
-        pass
-
-    def load_tournament(self):
-        """
-        This method enables to load a previously saved tournament
-        """
-        pass
-
-    def save_tournament(self):
-        """
-        This method enables to save the state of a tournament
-        """
-        pass
-
-
-
-    # General Prints :
-
-
-    # General Inputs :
-
-    # Tournament : Pour la création des tournois
-    # 'name', 'location', 'start_date', 'end_date', 'players_identifier',
-    # 'time_control', 'description', 'rounds_list', 'rounds'
     def ask_tournament_name(self):
         """
         This method asks for the tournament's name
         """
-        pass
+        return input("Enter Tournament name: ")
 
     def ask_tournament_location(self):
         """
         This method asks for the tournament's location
         """
-        pass
+        return input("Enter Tournament Location: ")
 
-    def ask_tournament_player(self):
+    def ask_tournament_players(self):
         """
         This method asks for the list of 8 players for the tournament
         """
-        pass
+        tournament_players = []
+        n = 1
+        while n < 9:
+            tournament_players.append(input(f"Enter Player ID {n}/8:"))
+            n += 1
+        return tournament_players
 
     def ask_tournament_time_control(self):
         """
@@ -103,6 +90,9 @@ class GeneralMenu:
         """
         This method asks for a description of the tournament
         """
+        pass
+
+    def manage_players(self): # trop large , devra etre decoupé je pense
         pass
 
     # Player: Pour la Player Database
@@ -143,6 +133,30 @@ class GeneralMenu:
         """
         pass
 
+    def load_tournament(self):
+        """
+        This method enables to load a previously saved tournament
+        """
+        pass
+
+    def save_tournament(self):
+        """
+        This method enables to save the state of a tournament
+        """
+        pass
+
+
+
+    # General Prints :
+
+
+    # General Inputs :
+
+    # Tournament : Pour la création des tournois
+    # 'name', 'location', 'start_date', 'end_date', 'players_identifier',
+    # 'time_control', 'description', 'rounds_list', 'rounds'
+
+
     # Round: pour entrer les resultats d'un round
     # 'name', 'matches', 'end_time', 'start_time'
 
@@ -163,6 +177,7 @@ class GeneralMenu:
 
     def ask_round_start_time(self):  # doit etre renseigné automatiquement en fait !
         pass
+
 
     # Match: pour entrer les resultats d'un match
     # 'player1_id', 'player2_id', 'player1_score', 'player2_score'
