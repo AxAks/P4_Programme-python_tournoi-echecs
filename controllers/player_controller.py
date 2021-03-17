@@ -27,8 +27,6 @@ class PlayerCreator:
     player_creator = Creator(Player)  # copié des tests, à voir si je peux en faire quelque chose
 
 
-
-
 # infos pour la suite !
 """
 # Pour enregistrer les instances crées dans une liste
