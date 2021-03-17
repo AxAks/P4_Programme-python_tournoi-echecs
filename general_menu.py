@@ -1,47 +1,35 @@
 # coding=utf-8
 
-import sys
-
-from controllers.creator import Creator
-from models.match import Match
-from models.player import Player
-from models.round import Round
-from models.tournament import Tournament
-
 """
 Class for a generic Menu
 """
 
+import sys
 
 class GeneralMenu:
     """
-    This class displays a general menu and accepts choice inputs to navigate through the program.
+    This class manages a general menu to navigate through the program.
     """
     def __init__(self):
-        self.player = Player()
-        self.tournament = Tournament()
-        self.round = Round()
-        self.match = Match()
         self.choices = {
-            "1": self.action1,
-            "2": self.action2,
-            "3": self.load_tournament,
-            "4": self.save_tournament,
-            "5": self.action5,
-            "......": self.action("..."),
-            "0": self.quit
+            '1': self.create_tournament,
+            '2': self.manage_players,
+            '3': self.load_tournament,
+            '4': self.save_tournament,
+            # '...': self.action('...'),
+            '0': self.quit
         }
 
     def general_menu(self):
         """
         This method displays the different options of the menu.
         """
-        print("Chess Tournament Manager - Menu\n"
-              "1. Create a New Tournament\n"
-              "2. Player Database Management\n"
-              "3. Load a Tournament\n"
-              "4. Save Tournament\n"
-              "\n0. Quit")
+        print('Chess Tournament Manager - Menu\n'
+              '\n1. Create a New Tournament\n'
+              '2. Player Database Management\n'
+              '3. Load Tournament\n'
+              '4. Save Tournament\n'
+              '\n0. Quit')
 
     def run(self):
         """
@@ -49,12 +37,12 @@ class GeneralMenu:
         """
         while True:
             self.general_menu()
-            choice = input("Enter an option: ")
+            choice = input('\nEnter an option: ')
             action = self.choices.get(choice) # prend l'input et fait le lien avec le dict self.choices pour renvoyer vers la def()
             if action:
                 action()
             else:
-                print("{0} is not a valid choice".format(choice))  # pas sur que le print fonctionne...
+                print(f'"{choice}" is not a valid choice')
 
     def create_tournament(self):
         """
@@ -210,6 +198,10 @@ class GeneralMenu:
         """
         pass
 
+    def quit(self):
+        print('Chess Tournament Manager terminated')
+        sys.exit(0)
 
-if __name__ == "__main__":
+
+if __name__ == '__main__':
     GeneralMenu().run()
