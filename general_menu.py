@@ -1,109 +1,215 @@
 # coding=utf-8
-import os
+
 import sys
+
+from controllers.creator import Creator
+from models.match import Match
+from models.player import Player
+from models.round import Round
+from models.tournament import Tournament
 
 """
 Class for a generic Menu
 """
 
+
 class GeneralMenu:
+    """
+    This class displays a general menu and accepts choice inputs to navigate through the program.
+    """
+    def __init__(self):
+        self.player = Player()
+        self.tournament = Tournament()
+        self.round = Round()
+        self.match = Match()
+        self.choices = {
+            "1": self.action1,
+            "2": self.action2,
+            "3": self.load_tournament,
+            "4": self.save_tournament,
+            "5": self.action5,
+            "......": self.action("..."),
+            "0": self.quit
+        }
+
+    def general_menu(self):
+        """
+        This method displays the different options of the menu.
+        """
+        print("Chess Tournament Manager - Menu\n"
+              "1. Create a New Tournament\n"
+              "2. Player Database Management\n"
+              "3. Load a Tournament\n"
+              "4. Save Tournament\n"
+              "\n0. Quit")
+
+    def run(self):
+        """
+        This method displays the menu and responds to choices made.
+        """
+        while True:
+            self.general_menu()
+            choice = input("Enter an option: ")
+            action = self.choices.get(choice) # prend l'input et fait le lien avec le dict self.choices pour renvoyer vers la def()
+            if action:
+                action()
+            else:
+                print("{0} is not a valid choice".format(choice))  # pas sur que le print fonctionne...
+
+    def create_tournament(self):
+        """
+        This method enables to create a tournament.
+        """
+        pass
+
+    def manage_players(self): # trop large , devra etre decoupé je pense
+        pass
+
+    def load_tournament(self):
+        """
+        This method enables to load a previously saved tournament
+        """
+        pass
+
+    def save_tournament(self):
+        """
+        This method enables to save the state of a tournament
+        """
+        pass
 
 
-# Main definition - constants
-menu_actions = {}
+
+    # General Prints :
 
 
-# =======================
-#     MENUS FUNCTIONS
-# =======================
+    # General Inputs :
 
-# Main menu
-def main_menu():
-    os.system('clear')
+    # Tournament : Pour la création des tournois
+    # 'name', 'location', 'start_date', 'end_date', 'players_identifier',
+    # 'time_control', 'description', 'rounds_list', 'rounds'
+    def ask_tournament_name(self):
+        """
+        This method asks for the tournament's name
+        """
+        pass
 
-    print("Welcome to Chess Tournaments Manager,\n")
-    print("Please choose the menu you want to start:")
-    print("1: Tournament")
-    print("2: Player Database Management")
-    print("3: ")
-    print("4: ")
-    print("5: ")
-    print("6: ")
-    print("7: ")
-    print("8: ")
-    print("\n0. Quit")
-    choice = input(" >>  ")
-    exec_menu(choice)
+    def ask_tournament_location(self):
+        """
+        This method asks for the tournament's location
+        """
+        pass
 
-    return
+    def ask_tournament_player(self):
+        """
+        This method asks for the list of 8 players for the tournament
+        """
+        pass
+
+    def ask_tournament_time_control(self):
+        """
+        This method asks for the time control format of the tournament
+        """
+        pass
+
+    def ask_tournament_description(self):
+        """
+        This method asks for a description of the tournament
+        """
+        pass
+
+    # Player: Pour la Player Database
+    # 'identifier', 'last_name', 'first_name', 'birthdate', 'gender', 'ranking'
+
+    def ask_player_identifier(self):
+        """
+        This method asks for the player's identifier
+        """
+        pass
+    def ask_player_last_name(self):
+        """
+        This method asks for the player's last name
+        """
+        pass
+
+    def ask_player_first_name(self):
+        """
+        This method asks for the player's first name
+        """
+        pass
+
+    def ask_player_birthdate(self):
+        """
+        This method asks for the player's birthdate
+        """
+        pass
+
+    def ask_player_gender(self):
+        """
+        This method asks for the player's gender
+        """
+        pass
+
+    def ask_player_ranking(self):
+        """
+        This method asks for the player's ranking
+        """
+        pass
+
+    # Round: pour entrer les resultats d'un round
+    # 'name', 'matches', 'end_time', 'start_time'
+
+    def ask_round_name(self): # si le format est round+n, on peut incrementer au fur et à mesure
+        """
+        This method asks for the round's name at the beginning of the round
+        """
+        pass
+
+    def ask_round_matches(self): # peut s'ajouter automatiquement lorsque les résultats des matches sont enregistrés
+        """"
+        This method asks for the list of match results for a round
+        """
+        pass
+
+    def ask_round_end_time(self):  # doit etre renseigné automatiquement en fait !
+        pass
+
+    def ask_round_start_time(self):  # doit etre renseigné automatiquement en fait !
+        pass
+
+    # Match: pour entrer les resultats d'un match
+    # 'player1_id', 'player2_id', 'player1_score', 'player2_score'
+
+    def ask_match_player1_id(self):  # en fait on le recupere de generate_matchups()
+        """
+        This method asks for player1's ID at the begining of a match/round
+        """
+        pass
+
+    def ask_match_player2_id(self):  # en fait on le recupere de generate_matchups()
+        """
+        This method asks for player2's ID at the begining of a match/round
+        """
+        pass
+
+    def ask_match_player1_score(self):
+        """
+        This method asks for player1's score at the end of a match/round
+        """
+        pass
+
+    def ask_match_player2_score(self):
+        """
+        This method asks for player2's score at the end of a match/round
+        """
+        pass
+
+    def generate_matchups(self):
+        """
+        This method randomly generates the tournament match-ups between the Players for the different rounds
+        It takes into account the match-ups that have already been played in the previous rounds.
+        """
+        pass
 
 
-# Execute menu
-def exec_menu(choice):
-    os.system('clear')
-    ch = choice.lower()
-    if ch == '':
-        menu_actions['main_menu']()
-    else:
-        try:
-            menu_actions[ch]()
-        except KeyError:
-            print("Invalid selection, please try again.\n")
-            menu_actions['main_menu']()
-    return
-
-
-# Menu 1
-def menu1():
-    print("Hello Menu 1 !\n")
-    print("9. Back")
-    print("0. Quit")
-    choice = input(" >>  ")
-    exec_menu(choice)
-    return
-
-
-# Menu 2
-def menu2():
-    print("Hello Menu 2 !\n")
-    print("9. Back")
-    print("0. Quit")
-    choice = input(" >>  ")
-    exec_menu(choice)
-    return
-
-
-# Back to main menu
-def back():
-    menu_actions['main_menu']()
-
-
-# Exit program
-def exit():
-    sys.exit()
-
-
-# =======================
-#    MENUS DEFINITIONS
-# =======================
-
-# Menu definition
-menu_actions = {
-    'main_menu': main_menu,
-    '1': menu1,
-    '2': menu2,
-    '9': back,
-    '0': exit,
-}
-
-# =======================
-#      MAIN PROGRAM
-# =======================
-
-# Main Program
 if __name__ == "__main__":
-    # Launch main menu
-    main_menu()
-
-
-
+    GeneralMenu().run()
