@@ -6,6 +6,9 @@ Class for a generic Menu
 
 import sys
 
+from views.player_views import PlayerMenu
+
+
 class GeneralMenu:
     """
     This class manages a general menu to navigate through the program.
@@ -16,7 +19,6 @@ class GeneralMenu:
             '2': self.manage_players,
             '3': self.load_tournament,
             '4': self.save_tournament,
-            # '...': self.action('...'),
             '0': self.quit
         }
 
@@ -24,11 +26,12 @@ class GeneralMenu:
         """
         This method displays the different options of the menu.
         """
-        print('Chess Tournament Manager - Menu\n'
+        print('Chess Tournament Manager\n'
+              '-General Menu-\n'
               '\n1. Create a New Tournament\n'
               '2. Player Database Management\n'
-              '3. Load Tournament\n'
-              '4. Save Tournament\n'
+              '3. Load State\n'
+              '4. Save State\n'
               '\n0. Quit')
 
     def run(self):
@@ -51,11 +54,16 @@ class GeneralMenu:
         name = self.ask_tournament_name()
         location = self.ask_tournament_location()
         players = self.ask_tournament_players()
-        print(f"Tournament Information\n"
+        time_control = self.ask_tournament_time_control()
+        description = self.ask_tournament_description()
+
+        print(f"\nTournament Information\n"
               f"Name: {name}\n"
-              f"Location: {location},\n"
-              f"Players: {players}")
-        return name, location, players
+              f"Location: {location}\n"
+              f"Players: {players}\n"
+              f"Time Control Format: {time_control}\n"
+              f"Description: {description}\n")
+        return name, location, players, time_control, description
 
     def ask_tournament_name(self):
         """
@@ -69,7 +77,7 @@ class GeneralMenu:
         """
         return input("Enter Tournament Location: ")
 
-    def ask_tournament_players(self):
+    def ask_tournament_players(self): # ce serait sympa de pouvoir faire une recherche !
         """
         This method asks for the list of 8 players for the tournament
         """
@@ -84,16 +92,38 @@ class GeneralMenu:
         """
         This method asks for the time control format of the tournament
         """
-        pass
+        return input("Enter Time Control Format: ")
 
     def ask_tournament_description(self):
         """
         This method asks for a description of the tournament
         """
-        pass
+        return input("Enter Tournament Description: ")
 
-    def manage_players(self): # trop large , devra etre decoupé je pense
-        pass
+    def manage_players(self):  # trop large , devra etre decoupé je pense
+        """
+        This method gives access to the Player Database Management
+        """
+        PlayerMenu().run()
+
+        """
+        identifier = self.ask_player_identifier()
+        last_name = self.ask_player_last_name()
+        first_name = self.ask_player_first_name()
+        birthdate = self.ask_player_birthdate()
+        gender = self.ask_player_gender()
+        ranking = self.ask_player_ranking()
+
+        print(f"\nNew Player Information\n"
+              f"Identifier: {identifier}\n"
+              f"Last Name: {last_name}\n"
+              f"First Name: {first_name}\n"
+              f"Birthdate: {birthdate}\n"
+              f"Gender: {gender}\n"
+              f"Ranking: {ranking}\n")
+
+        return identifier, last_name, first_name, birthdate, gender, ranking
+        """
 
     # Player: Pour la Player Database
     # 'identifier', 'last_name', 'first_name', 'birthdate', 'gender', 'ranking'
@@ -102,36 +132,37 @@ class GeneralMenu:
         """
         This method asks for the player's identifier
         """
-        pass
+        return input("Enter Player ID: ")
+
     def ask_player_last_name(self):
         """
         This method asks for the player's last name
         """
-        pass
+        return input("Enter Player Last Name: ")
 
     def ask_player_first_name(self):
         """
         This method asks for the player's first name
         """
-        pass
+        return input("Enter Player First Name: ")
 
     def ask_player_birthdate(self):
         """
         This method asks for the player's birthdate
         """
-        pass
+        return input("Enter Player Birthdate: ")
 
     def ask_player_gender(self):
         """
         This method asks for the player's gender
         """
-        pass
+        return input("Enter Player Gender: ")
 
     def ask_player_ranking(self):
         """
         This method asks for the player's ranking
         """
-        pass
+        return input("Enter Player Ranking: ")
 
     def load_tournament(self):
         """
@@ -164,7 +195,7 @@ class GeneralMenu:
         """
         This method asks for the round's name at the beginning of the round
         """
-        pass
+        return input("Enter Round Name: ")
 
     def ask_round_matches(self): # peut s'ajouter automatiquement lorsque les résultats des matches sont enregistrés
         """"
@@ -186,25 +217,25 @@ class GeneralMenu:
         """
         This method asks for player1's ID at the begining of a match/round
         """
-        pass
+        return input("Select Player1: ")
 
     def ask_match_player2_id(self):  # en fait on le recupere de generate_matchups()
         """
         This method asks for player2's ID at the begining of a match/round
         """
-        pass
+        return input("Select Player2: ")
 
     def ask_match_player1_score(self):
         """
         This method asks for player1's score at the end of a match/round
         """
-        pass
+        return input("Enter Player1 Score: ")
 
     def ask_match_player2_score(self):
         """
         This method asks for player2's score at the end of a match/round
         """
-        pass
+        return input("Enter Player2 Score: ")
 
     def generate_matchups(self):
         """

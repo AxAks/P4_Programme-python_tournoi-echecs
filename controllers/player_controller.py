@@ -24,7 +24,9 @@ class PlayerCreator:
     Subclass of Creator to create and manage Player instances
     à continuer ...
     """
-    player_creator = Creator(Player)  # copié des tests, à voir si je peux en faire quelque chose
+    def player_creator(self):
+        player_creator = Creator(Player)  # copié des tests, à voir si je peux en faire quelque chose
+        return player_creator
 
 
 # infos pour la suite !
