@@ -1,51 +1,85 @@
 # coding=utf-8
 
 """
-Class for a generic Menu
+Generic Class for Menu
 """
 
 import sys
 
-from views.player_views import PlayerMenu
 
-
-class GeneralMenu:
+class Menu:
     """
-    This class manages a general menu to navigate through the program.
+    This class is a parent Class for all Menu screens
+    It enables to navigate through the program.
     """
     def __init__(self):
-        self.choices = {
-            '1': self.create_tournament,
-            '2': self.manage_players,
-            '3': self.load_tournament,
-            '4': self.save_tournament,
-            '0': self.quit
-        }
+        self.choices = [self.back, self.manage_players, self.manage_tournaments]  # essayer de voir si on peut calquer le systeme de Models.py
 
-    def general_menu(self):
+    def menu(self):
         """
         This method displays the different options of the menu.
         """
-        print('Chess Tournament Manager\n'
-              '-General Menu-\n'
-              '\n1. Create a New Tournament\n'
-              '2. Player Database Management\n'
-              '3. Load State\n'
-              '4. Save State\n'
-              '\n0. Quit')
+        print(f"Chess Tournament Manager\n")
+        for choice in self.choices:
+            reformated_choice_str = choice.__name__.replace('_', ' ').title()
+            print(f"{self.choices.index(choice)}: {reformated_choice_str}")
 
     def run(self):
         """
         This method displays the menu and responds to choices made.
         """
+
+
+
+        """
+        x = None
+        
+        while x != '1' and x != '2':
+            x = raw_input("Please input a number 1 or 2: ")
+            if x == '1':
+                print '1'
+            elif x == '2':
+                print '2'
+            else:
+                print 'Neither 1 nor 2.'
+        
+        print "all OK"
+        """
         while True:
-            self.general_menu()
-            choice = input('\nEnter an option: ')
-            action = self.choices.get(choice) # prend l'input et fait le lien avec le dict self.choices pour renvoyer vers la def()
+            self.menu()
+            choice = -1  # Vérifier que cest un integer et qu'il est compris dans la liste des choix : sinon redemander un input; marche pas !!!
+            while not 0 <= choice < len(self.choices):
+                choice = int(input('\nEnter an option: '))
+            action = self.choices[choice]
             if action:
                 action()
             else:
                 print(f'"{choice}" is not a valid choice')
+
+    def manage_players(self):
+        """
+        This method leads to the Players Database Manager menu
+        """
+        pass
+        # PlayerMenuController.redirect_player_menu()
+
+    def manage_tournaments(self):
+        """
+        This method leads to the Tournaments Manager menu
+        """
+        pass
+
+    def back(self):
+        """
+        This method enables to go back to the previous screen
+        The program quits if the screen is the root menu.
+        """
+        # (à écrire ...)
+        print('Chess Tournament Manager terminated')
+        sys.exit(0)
+
+
+
 
     def create_tournament(self):
         """
@@ -104,7 +138,8 @@ class GeneralMenu:
         """
         This method gives access to the Player Database Management
         """
-        PlayerMenu().run()
+        print('hello')
+        # PlayerMenu().run()
 
         """
         identifier = self.ask_player_identifier()
@@ -212,4 +247,4 @@ class GeneralMenu:
 
 
 if __name__ == '__main__':
-    GeneralMenu().run()
+    Menu().run()

@@ -1,29 +1,24 @@
 # coding=utf-8
 
-
-"""
-temp : just for me !!
-Views = Interface computer/ user
-
-- input()  # car logique d'interchageabilité, toutes les fonctions d'interface entrée/sortie au meme endroit
-- print()
-- messages
-
-plusieurs fichiers view à écrire : scinder
-"""
 import sys
 
 from controllers.factory import Factory
 from models.player import Player
+from views.menus.menu import Menu
+
+"""
+View file for the Player Database Management Menu.
+"""
 
 
-class PlayerMenu:
+class PlayerMenu(Menu):
     """
     This class manages a menu to navigate through the Player Database Management.
     """
 
     def __init__(self):
         self.choices = {
+            '1': self.display_all_player,
             '1': self.add_player,
             '2': self.search_player,
             '3': self.edit_player,
@@ -57,6 +52,9 @@ class PlayerMenu:
                 action()
             else:
                 print(f'"{choice}" is not a valid choice')
+
+    def display_all_player(self):
+        pass
 
     def add_player(self):
         new_player_dict = {}

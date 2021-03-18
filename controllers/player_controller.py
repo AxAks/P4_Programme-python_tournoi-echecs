@@ -2,6 +2,7 @@
 
 from controllers.factory import Factory
 from models.player import Player
+from views.menus.player_menu import PlayerMenu
 
 """
 Controller file for Player
@@ -27,6 +28,12 @@ class PlayerFactory:
     def player_factory(self):
         player_factory = Factory(Player)  # copié des tests, à voir si je peux en faire quelque chose
         return player_factory
+
+
+class PlayerMenuController:
+    def redirect_player_menu(self):
+        PlayerMenu().run()
+
 
 
 # infos pour la suite !
