@@ -13,9 +13,9 @@ plusieurs fichiers view à écrire : scinder
 """
 import sys
 
-from controllers.creator import Creator
-from controllers.player_controller import PlayerCreator
+from controllers.factory import Factory
 from models.player import Player
+
 
 class PlayerMenu:
     """
@@ -59,7 +59,70 @@ class PlayerMenu:
                 print(f'"{choice}" is not a valid choice')
 
     def add_player(self):
-        pass
+        new_player_dict = {}
+        identifier = self.ask_player_identifier()
+        new_player_dict['identifier'] = identifier
+        last_name = self.ask_player_last_name()
+        new_player_dict['last_name'] = last_name
+        first_name = self.ask_player_first_name()
+        new_player_dict['first_name'] = first_name
+        birthdate = self.ask_player_birthdate()
+        new_player_dict['birthdate'] = birthdate
+        gender = self.ask_player_gender()
+        new_player_dict['gender'] = gender
+        ranking = self.ask_player_ranking()
+        new_player_dict['ranking'] = ranking
+        print(new_player_dict)
+        print(f"\nNew Player Information\n"
+              f"Identifier: {identifier}\n"
+              f"Last Name: {last_name}\n"
+              f"First Name: {first_name}\n"
+              f"Birthdate: {birthdate}\n"
+              f"Gender: {gender}\n"
+              f"Ranking: {ranking}\n")
+        player_factory = Factory(Player)
+        new_player = player_factory.create(**new_player_dict)
+        print(player_factory.registry)
+        return new_player
+
+        # Player: Pour la Player Database
+        #  'identifier', 'last_name', 'first_name', 'birthdate', 'gender', 'ranking'
+
+    def ask_player_identifier(self):
+        """
+        This method asks for the player's identifier
+        """
+        return input("Enter Player ID: ")
+
+    def ask_player_last_name(self):
+        """
+        This method asks for the player's last name
+        """
+        return input("Enter Player Last Name: ")
+
+    def ask_player_first_name(self):
+        """
+        This method asks for the player's first name
+        """
+        return input("Enter Player First Name: ")
+
+    def ask_player_birthdate(self):
+        """
+        This method asks for the player's birthdate
+        """
+        return input("Enter Player Birthdate(YYYY-MM-DD): ")
+
+    def ask_player_gender(self):
+        """
+        This method asks for the player's gender
+        """
+        return input("Enter Player Gender: ")
+
+    def ask_player_ranking(self):
+        """
+        This method asks for the player's ranking
+        """
+        return int(input("Enter Player Ranking: "))
 
     def search_player(self):
         pass

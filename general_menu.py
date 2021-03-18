@@ -125,44 +125,6 @@ class GeneralMenu:
         return identifier, last_name, first_name, birthdate, gender, ranking
         """
 
-    # Player: Pour la Player Database
-    # 'identifier', 'last_name', 'first_name', 'birthdate', 'gender', 'ranking'
-
-    def ask_player_identifier(self):
-        """
-        This method asks for the player's identifier
-        """
-        return input("Enter Player ID: ")
-
-    def ask_player_last_name(self):
-        """
-        This method asks for the player's last name
-        """
-        return input("Enter Player Last Name: ")
-
-    def ask_player_first_name(self):
-        """
-        This method asks for the player's first name
-        """
-        return input("Enter Player First Name: ")
-
-    def ask_player_birthdate(self):
-        """
-        This method asks for the player's birthdate
-        """
-        return input("Enter Player Birthdate: ")
-
-    def ask_player_gender(self):
-        """
-        This method asks for the player's gender
-        """
-        return input("Enter Player Gender: ")
-
-    def ask_player_ranking(self):
-        """
-        This method asks for the player's ranking
-        """
-        return input("Enter Player Ranking: ")
 
     def load_tournament(self):
         """

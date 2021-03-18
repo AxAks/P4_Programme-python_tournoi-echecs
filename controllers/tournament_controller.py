@@ -1,6 +1,6 @@
 # coding=utf-8
 
-from controllers.creator import Creator
+from controllers.factory import Factory
 from models.tournament import Tournament
 
 """
@@ -8,13 +8,13 @@ Controller file for Tournament
 """
 
 
-class TournamentCreator:  # est ce que je mets tout ca dans une classe (cf Factory Method)???
+class TournamentFactory:  # est ce que je mets tout ca dans une classe (cf Factory Method)???
     """
-    Subclass of Creator to create and manage Tournament instances
+    Subclass of Factory to create and manage Tournament instances
     à continuer ...
     """
     """
-    tournament_creator = Creator(Tournament)  # copié des tests, à voir si je peux en faire quelque chose
+    tournament_factory = Factory(Tournament)  # copié des tests, à voir si je peux en faire quelque chose
     """
 
     def create_tournament(self):

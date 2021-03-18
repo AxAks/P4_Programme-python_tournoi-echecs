@@ -1,6 +1,6 @@
 # coding=utf-8
 
-from controllers.creator import Creator
+from controllers.factory import Factory
 from models.player import Player
 
 """
@@ -16,17 +16,17 @@ plusieurs fichiers controller à écrire : scinder
 
 # Use Factory Method
 # methode factory (voir tuto design pattern)
-# voir controller directement : Class Creator
+# voir controller directement : Class Factory
 
 
-class PlayerCreator:
+class PlayerFactory:
     """
-    Subclass of Creator to create and manage Player instances
+    Subclass of Factory to create and manage Player instances
     à continuer ...
     """
-    def player_creator(self):
-        player_creator = Creator(Player)  # copié des tests, à voir si je peux en faire quelque chose
-        return player_creator
+    def player_factory(self):
+        player_factory = Factory(Player)  # copié des tests, à voir si je peux en faire quelque chose
+        return player_factory
 
 
 # infos pour la suite !
@@ -34,8 +34,8 @@ class PlayerCreator:
 # Pour enregistrer les instances crées dans une liste
 # pour sérialiser toutes les instances de joueurs ensuite:
 
-player_creator.registry
-tournament_creator.registry
+player_factory.registry
+tournament_factory.registry
 
 
 serialized_instances = []

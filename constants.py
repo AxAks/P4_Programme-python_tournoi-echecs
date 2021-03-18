@@ -17,7 +17,7 @@ ALPHABETICAL_STRING_RULE = re.compile("^[A-ZÉÈÇÀa-zéèçà\- ]+$")
 ALPHA_NUMERICAL_STRING_RULE = re.compile("^[A-ZÉÈÇÀa-zéèçà0-9_\- ]+$")
 
 
-# Controller Creator
+# Controller Factory
 PLAYER_PROPERTIES = ['last_name', 'identifier', 'first_name', 'birthdate', 'gender', 'ranking']
 TOURNAMENT_PROPERTIES = ['name', 'location', 'start_date', 'end_date', 'players_identifier',
                          'time_control', 'description', 'rounds_list', 'rounds']

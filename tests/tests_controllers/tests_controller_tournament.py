@@ -4,23 +4,23 @@
 File for different tests on the features of the tournament controller
 """
 
-# from controllers.tournament_controller import TournamentCreator
-from controllers.creator import Creator
+# from controllers.tournament_controller import TournamentFactory
+from controllers.factory import Factory
 from models.tournament import Tournament
 from tests import sample_values as test_sample
 
 
 
 
-tournament_creator = Creator(Tournament)
+tournament_factory = Factory(Tournament)
 
 # instanciation des Tournois et ajout au registre
 print("--Tournament Creation 1--")
-print(tournament_creator.create(**test_sample.tournament35_dict))
+print(tournament_factory.create(**test_sample.tournament35_dict))
 print("--Tournament Creation 2--")
-print(tournament_creator.create(**test_sample.tournament343_dict).identifier)
+print(tournament_factory.create(**test_sample.tournament343_dict).identifier)
 print("--Tournament Registry--")
-print(tournament_creator.registry)
+print(tournament_factory.registry)
 print("--Get 1 Tournament--")
 
 """

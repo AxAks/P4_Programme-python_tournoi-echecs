@@ -7,10 +7,11 @@ from typing import Any
 from constants import EMPTY_SEARCH_STRINGS
 
 
-class Creator:
+class Factory:
     """
-    The Creator class is set as a common/factorized Class that enable to instantiate any type of object from a dict.
-    This Class creates specific Creators based on the object's type
+    The Factory class is set as a common/factorized Class that enable to instantiate any type of object from a dict.
+    This Class creates specific Factories based on the object's type
+    The instances are registered in a registry and can be searched for.
     """
     def __init__(self, obj_type):
         self.registry = {}
@@ -18,11 +19,11 @@ class Creator:
 
     def create(self, **params):
         """
-        This method creates new objects through the specific creator and adds them to a registry
+        This method creates new objects through the specific factory and adds them to a registry
         """
-        obj = self.obj_type(**params)  # on créé l'instance
-        identifier = obj.identifier  # on recupère l'identifier
-        if identifier not in self.registry:  # on ajoute l'instance au registre
+        obj = self.obj_type(**params)
+        identifier = obj.identifier
+        if identifier not in self.registry:
             self.registry[identifier] = obj
             return obj
 
