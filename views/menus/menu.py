@@ -29,52 +29,44 @@ class Menu:
         This method displays the menu and responds to choices made.
         """
 
-
-
-        """
-        x = None
-        
-        while x != '1' and x != '2':
-            x = raw_input("Please input a number 1 or 2: ")
-            if x == '1':
-                print '1'
-            elif x == '2':
-                print '2'
-            else:
-                print 'Neither 1 nor 2.'
-        
-        print "all OK"
-        """
         while True:
-            self.menu()
+            valid_choices = range(len(self.choices))
             choice = -1  # Vérifier que cest un integer et qu'il est compris dans la liste des choix : sinon redemander un input; marche pas !!!
-            while not 0 <= choice < len(self.choices):
-                choice = int(input('\nEnter an option: '))
+            while choice not in valid_choices:
+                self.menu()
+                _input = input('\nEnter an option: ')
+                try:
+                    choice = int(_input)
+                    if choice not in valid_choices:
+                        print(f'"{choice}" is not a valid choice')
+                except ValueError:
+                    print(f'"{_input}" is not a valid choice')
+
+
+
             action = self.choices[choice]
-            if action:
-                action()
-            else:
-                print(f'"{choice}" is not a valid choice')
+            action()
+
 
     def manage_players(self):
         """
         This method leads to the Players Database Manager menu
         """
-        pass
+        print('haie')
         # PlayerMenuController.redirect_player_menu()
 
     def manage_tournaments(self):
         """
         This method leads to the Tournaments Manager menu
         """
-        pass
+        print('there')
 
     def back(self):
         """
         This method enables to go back to the previous screen
         The program quits if the screen is the root menu.
         """
-        # (à écrire ...)
+        print('back')
         print('Chess Tournament Manager terminated')
         sys.exit(0)
 
@@ -134,11 +126,12 @@ class Menu:
         """
         return input("Enter Tournament Description: ")
 
-    def manage_players(self):  # trop large , devra etre decoupé je pense
+
+    # def manage_players(self):  # trop large , devra etre decoupé je pense
         """
         This method gives access to the Player Database Management
         """
-        print('hello')
+    #    print('hello')
         # PlayerMenu().run()
 
         """
