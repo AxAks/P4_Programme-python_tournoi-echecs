@@ -42,8 +42,6 @@ class Menu:
                 except ValueError:
                     print(f'"{_input}" is not a valid choice')
 
-
-
             action = self.choices[choice]
             action()
 
