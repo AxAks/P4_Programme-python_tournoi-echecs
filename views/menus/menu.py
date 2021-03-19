@@ -31,7 +31,7 @@ class Menu:
 
         while True:
             valid_choices = range(len(self.choices))
-            choice = -1  # Vérifier que cest un integer et qu'il est compris dans la liste des choix : sinon redemander un input; marche pas !!!
+            choice = -1
             while choice not in valid_choices:
                 self.menu()
                 _input = input('\nEnter an option: ')
