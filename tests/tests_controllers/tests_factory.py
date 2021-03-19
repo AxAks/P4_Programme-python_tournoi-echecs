@@ -5,8 +5,6 @@ from models.tournament import Tournament
 from tests import sample_values as test_sample
 from controllers.superfactory import super_factory as sf
 
-from controllers.factory import Factory
-
 
 """
 File for different tests on the features of the general controller
