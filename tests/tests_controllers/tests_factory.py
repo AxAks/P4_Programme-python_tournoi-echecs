@@ -12,12 +12,6 @@ from controllers.factory import Factory
 File for different tests on the features of the general controller
 """
 
-"""
-# Creation des Createurs d'objets
-player_factory = Factory(Player)  # je veux trouver un moyen d'enlever cette étape ! # SuperFactory
-tournament_factory = Factory(Tournament)  # ici aussi
-"""
-
 # Creation des contructeurs d'objets via SuperFactory
 player_factory = sf.create_factory(Player)
 tournament_factory = sf.create_factory(Tournament)
