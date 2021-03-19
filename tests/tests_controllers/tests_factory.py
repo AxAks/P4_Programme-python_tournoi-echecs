@@ -3,7 +3,6 @@
 from models.player import Player
 from models.tournament import Tournament
 from tests import sample_values as test_sample
-from controllers.superfactory import SuperFactory
 from controllers.superfactory import super_factory as sf
 
 from controllers.factory import Factory
@@ -13,27 +12,17 @@ from controllers.factory import Factory
 File for different tests on the features of the general controller
 """
 
-
-# je veux une fonction générique qui :
-# - crée tout type d'objets
-# - tient un registre
-# - permet de chercher un instance d'objet
-# - s'appuie sur des subclasses specifiques à un type d'objet (Player/Tournament)
-# -> Class Factory dans controller
-
 """
 # Creation des Createurs d'objets
 player_factory = Factory(Player)  # je veux trouver un moyen d'enlever cette étape ! # SuperFactory
 tournament_factory = Factory(Tournament)  # ici aussi
 """
-# Creation via SuperFactory
-super_factory = SuperFactory()
-print(super_factory)
-print(super_factory.factories)
+
+# Creation des contructeurs d'objets via SuperFactory
 player_factory = sf.create_factory(Player)
 tournament_factory = sf.create_factory(Tournament)
 
-# Creation des objets via Factory simple
+# Creation des objets via Factory
 player1 = player_factory.create(**test_sample.player1_dict)
 player2 = player_factory.create(**test_sample.player2_dict)
 tournament35 = tournament_factory.create(**test_sample.tournament35_dict)
