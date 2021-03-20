@@ -4,7 +4,6 @@
 Class for the Home Menu
 This file is launched via the
 """
-import sys
 
 from views.menus.menu import Menu
 from views.menus.player_menu import PlayerMenu
@@ -17,13 +16,11 @@ class HomeMenu(Menu):
     It enables to navigate through the program.
     """
     def __init__(self):
-        super().__init__(program_name='Chess Tournament Manager', menu_name='-Home Menu-', root_page=True)
+        super().__init__(program_name='Chess Tournament Manager', menu_name='-Home Menu-',
+                         root_page=True)
         specific_menu_choices = [self.manage_players, self.manage_tournaments]
         [self.choices.append(choice) for choice in specific_menu_choices]
 
-    #  on recupère def run()! et def back()? (avec un if) via l'héritage de Menu car il sont toujours identiques
-
-    # def specifique
     def manage_players(self):
         """
         This method leads to the Players Database Manager menu
@@ -38,96 +35,9 @@ class HomeMenu(Menu):
 
 
 
-    def create_tournament(self):
-        """
-        This method enables to create a tournament.
-        """
-        name = self.ask_tournament_name()
-        location = self.ask_tournament_location()
-        players = self.ask_tournament_players()
-        time_control = self.ask_tournament_time_control()
-        description = self.ask_tournament_description()
-
-        print(f"\nTournament Information\n"
-              f"Name: {name}\n"
-              f"Location: {location}\n"
-              f"Players: {players}\n"
-              f"Time Control Format: {time_control}\n"
-              f"Description: {description}\n")
-        return name, location, players, time_control, description
-
-    def ask_tournament_name(self):
-        """
-        This method asks for the tournament's name
-        """
-        return input("Enter Tournament name: ")
-
-    def ask_tournament_location(self):
-        """
-        This method asks for the tournament's location
-        """
-        return input("Enter Tournament Location: ")
-
-    def ask_tournament_players(self): # ce serait sympa de pouvoir faire une recherche !
-        """
-        This method asks for the list of 8 players for the tournament
-        """
-        tournament_players = []
-        n = 1
-        while n < 9:
-            tournament_players.append(input(f"Enter Player ID {n}/8:"))
-            n += 1
-        return tournament_players
-
-    def ask_tournament_time_control(self):
-        """
-        This method asks for the time control format of the tournament
-        """
-        return input("Enter Time Control Format: ")
-
-    def ask_tournament_description(self):
-        """
-        This method asks for a description of the tournament
-        """
-        return input("Enter Tournament Description: ")
 
 
-    # def manage_players(self):  # trop large , devra etre decoupé je pense
-        """
-        This method gives access to the Player Database Management
-        """
-    #    print('hello')
-        # PlayerMenu().run()
-
-        """
-        identifier = self.ask_player_identifier()
-        last_name = self.ask_player_last_name()
-        first_name = self.ask_player_first_name()
-        birthdate = self.ask_player_birthdate()
-        gender = self.ask_player_gender()
-        ranking = self.ask_player_ranking()
-
-        print(f"\nNew Player Information\n"
-              f"Identifier: {identifier}\n"
-              f"Last Name: {last_name}\n"
-              f"First Name: {first_name}\n"
-              f"Birthdate: {birthdate}\n"
-              f"Gender: {gender}\n"
-              f"Ranking: {ranking}\n")
-
-        return identifier, last_name, first_name, birthdate, gender, ranking
-        """
-
-
-    # General Prints :
-
-
-    # General Inputs :
-
-    # Tournament : Pour la création des tournois
-    # 'name', 'location', 'start_date', 'end_date', 'players_identifier',
-    # 'time_control', 'description', 'rounds_list', 'rounds'
-
+    # defs à reprendre et reutiliser autre part
 
     # Round: pour entrer les resultats d'un round
     # 'name', 'matches', 'end_time', 'start_time'

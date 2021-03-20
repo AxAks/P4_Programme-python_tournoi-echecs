@@ -17,47 +17,40 @@ class PlayerMenu(Menu):
     This class manages a menu to navigate through the Player Database Management.
     """
     def __init__(self):
-        super().__init__(program_name='Chess Tournament Manager', menu_name='-Players Menu-')
+        super().__init__(program_name='Chess Tournament Manager', menu_name='-Players Menu-',
+                         previous_page=home_menu.HomeMenu())
+        self.previous_page = home_menu.HomeMenu()
         specific_menu_choices = [self.list_all, self.add_new_player, self.edit_player]
         [self.choices.append(choice) for choice in specific_menu_choices]
 
 
-    #  on recupère def run() et def back() (avec un if) via l'héritage de Menu car il sont toujours identiques
-
-
-    #defs à ecrire !
-    def list_all(self): # directs to another menu Class ListPlayers , mutualiser avec list_all de tournaments dans menu
+    def list_all(self): # Mutualiser avec list_all de tournaments dans menu si possible
         ListPlayerMenu().run()
 
     def edit_player(self):
         pass
 
-#defs à revoir
-    def add_new_player(self):  # utiliser pour formulaire ?
-        new_player_dict = {}
+    # defs à revoir
+    def add_new_player(self):  # à utiliser pour formulaire plutot ! à revoir aussi !
         identifier = self.ask_player_identifier()
-        new_player_dict['identifier'] = identifier
         last_name = self.ask_player_last_name()
-        new_player_dict['last_name'] = last_name
         first_name = self.ask_player_first_name()
-        new_player_dict['first_name'] = first_name
         birthdate = self.ask_player_birthdate()
-        new_player_dict['birthdate'] = birthdate
         gender = self.ask_player_gender()
-        new_player_dict['gender'] = gender
         ranking = self.ask_player_ranking()
-        new_player_dict['ranking'] = ranking
-        print(new_player_dict)
-        print(f"\nNew Player Information\n"
-              f"Identifier: {identifier}\n"
-              f"Last Name: {last_name}\n"
-              f"First Name: {first_name}\n"
-              f"Birthdate: {birthdate}\n"
-              f"Gender: {gender}\n"
-              f"Ranking: {ranking}\n")
+        new_player_dict = {
+            'identifier': identifier,
+            'last_name': last_name,
+            'first_name': first_name,
+            'birthdate': birthdate,
+            'gender': gender,
+            'ranking': ranking
+        }
+        print(f'\nNew Player Information\n', new_player_dict)
         player_factory = Factory(Player)
         new_player = player_factory.create(**new_player_dict)
         print(player_factory.registry)
+        print(new_player.__dict__)
         return new_player
 
     def ask_player_identifier(self):
