@@ -15,44 +15,43 @@ class PlayerMenu(Menu):
     """
     This class manages a menu to navigate through the Player Database Management.
     """
-
     def __init__(self):
-        self.choices = {
-            '1': self.display_all_player,
-            '1': self.add_player,
-            '2': self.search_player,
-            '3': self.edit_player,
-            '4': self.save_tournament,
-            '5': self.load_tournament,
-            '0': self.quit
-        }
+        super().__init__()  # initialise les choix généraux depuis Menu
+        specific_menu_choices = [self.list_all_players, self.add_new_player, self.edit_player]  # liste des choix spécifiques de PlayerMenu
+        [self.choices.append(choice) for choice in specific_menu_choices]  # ajoute les spécificités de PlayerMenu à la liste de choix
 
-    def player_menu(self):
+
+    #  on recupère run() via l'héritage de Menu
+
+
+    def player_menu(self):  # à réécrire de facon specifique
         """
         This method displays the different options of the menu: Player Database.
         """
-        print('Chess Tournament Manager\n'
-              '-Players Menu-\n'
-              '\n1. Add New Player\n'
-              '2. Search Players\n'
-              '3. Edit Players\n'
-              '4. Load State\n'
-              '5. Save State\n'
-              '\n0. Quit')
+        pass
 
-    def run(self):
-        """
-        This method displays the menu and responds to choices made.
-        """
-        while True:
-            self.player_menu()
-            choice = input('\nEnter an option: ')
-            action = self.choices.get(choice)
-            if action:
-                action()
-            else:
-                print(f'"{choice}" is not a valid choice')
 
+    #defs à ecrire !
+
+    def add_new_player(self):
+        pass
+
+    def list_all_players(self):
+        pass
+
+    def edit_player(self):
+        pass
+
+    def save_tournament(self):
+        pass
+
+    def load_torunament(self):
+        pass
+
+
+
+
+#defs à revoir
     def display_all_player(self):
         pass
 
@@ -137,3 +136,7 @@ class PlayerMenu(Menu):
     def quit(self):  # Doublon general menu
         print('Chess Tournament Manager terminated')
         sys.exit(0)
+
+
+if __name__ == '__main__':
+    PlayerMenu().run()

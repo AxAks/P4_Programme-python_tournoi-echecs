@@ -17,24 +17,36 @@ class TournamentMenu(Menu):
     """
 
     def __init__(self):
-        self.choices = {
-            '1': self.new_tournament,
-            '2': self.display_all,
-            '3': self.edit_player,
-            '4': self.save_tournament,
-            '5': self.load_tournament,
-            '0': self.quit
-        }
+        super().__init__()  # initialise les choix généraux depuis Menu
+        specific_menu_choices = [self.list_all_tournaments, self.create_new_tournament,
+                                 self.save_tournament, self.load_tournament]  # liste des choix spécifiques de TournamentMenu
+        [self.choices.append(choice) for choice in specific_menu_choices]  # ajoute les spécificités de TournamentMenu à la liste de choix
 
-    def player_menu(self):
+
+    #  on recupère run() via l'héritage de Menu
+
+    def tournaments_menu(self):
         """
-        This method displays the different options of the menu: Player Database.
+        This method displays the different options of the menu: Tournaments Management.
         """
         print('Chess Tournament Manager\n'
-              '-Players Menu-\n'
-              '\n1. Add New Player\n'
-              '2. Search Players\n'
-              '3. Edit Players\n'
-              '4. Load State\n'
-              '5. Save State\n'
-              '\n0. Quit')
+              '-Tournaments Menu-\n')
+
+
+    #defs à ecrire !
+
+    def create_new_tournament(self):
+        pass
+
+    def list_all_tournaments(self):
+        pass
+
+    def save_tournament(self):
+        pass
+
+    def load_tournament(self):
+        pass
+
+
+if __name__ == '__main__':
+    TournamentMenu().run()
