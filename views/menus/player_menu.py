@@ -16,15 +16,16 @@ class PlayerMenu(Menu):
     This class manages a menu to navigate through the Player Database Management.
     """
     def __init__(self):
-        super().__init__()  # initialise les choix généraux depuis Menu
-        specific_menu_choices = [self.list_all_players, self.add_new_player, self.edit_player]  # liste des choix spécifiques de PlayerMenu
-        [self.choices.append(choice) for choice in specific_menu_choices]  # ajoute les spécificités de PlayerMenu à la liste de choix
+        super().__init__()
+        self.menu_name = 'Players Menu'
+        specific_menu_choices = [self.list_all_players, self.add_new_player, self.edit_player]
+        [self.choices.append(choice) for choice in specific_menu_choices]
 
 
-    #  on recupère run() via l'héritage de Menu
+    #  on recupère def run() et def back() (avec un if) via l'héritage de Menu car il sont toujours identiques
 
 
-    def player_menu(self):  # à réécrire de facon specifique
+    def player_menu(self):  # à réécrire de facon specifique (notamment un print "Menu Players")
         """
         This method displays the different options of the menu: Player Database.
         """
@@ -32,7 +33,6 @@ class PlayerMenu(Menu):
 
 
     #defs à ecrire !
-
     def add_new_player(self):
         pass
 

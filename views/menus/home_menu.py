@@ -1,11 +1,13 @@
 # coding=utf-8
 
 """
-Generic Class for Menu
+Class for the Home Menu
+This file is launched via the
 """
 
-import sys
-from menu import Menu
+from views.menus.menu import Menu
+from views.menus.player_menu import PlayerMenu
+from views.menus.tournament_menu import TournamentMenu
 
 
 class HomeMenu(Menu):
@@ -14,22 +16,21 @@ class HomeMenu(Menu):
     It enables to navigate through the program.
     """
     def __init__(self):
-        super().__init__()  # initialise les choix généraux depuis Menu
-        specific_menu_choices = [self.manage_players, self.manage_tournaments]  # liste des choix spécifiques de HomeMenu
-        [self.choices.append(choice) for choice in specific_menu_choices]  # ajoute les spécificités de HomeMenu à la liste de choix
+        super().__init__()
+        self.menu_name = 'Chess Tournament Manager'
+        specific_menu_choices = [self.manage_players, self.manage_tournaments]
+        [self.choices.append(choice) for choice in specific_menu_choices]
 
-    #  on recupère def run() via l'héritage de Menu car il est toujours identique (et def back() ?)
+    #  on recupère def run() et def back() (avec un if) via l'héritage de Menu car il sont toujours identiques
 
     # def specifique
-
-
-    # est ce que j'ecris une def HomeMenu specifique ?
+    # est ce que j'ecris une def HomeMenu specifique ? (notamment un print "Home Menu")
 
     def manage_players(self):
         """
         This method leads to the Players Database Manager menu
         """
-        print('haie')
+        print(PlayerMenu().menu_name)
         # PlayerMenuController.redirect_player_menu()
 
     # def specifique
@@ -37,20 +38,7 @@ class HomeMenu(Menu):
         """
         This method leads to the Tournaments Manager menu
         """
-        print('there')
-
-    def back(self):
-        """
-        This method enables to go back to the previous screen
-        The program quits if the screen is the root menu.
-        """
-        print('Back to previous menu screen')
-
-        print('Chess Tournament Manager terminated')
-        sys.exit(0)
-
-
-
+        print(TournamentMenu().menu_name)
 
     def create_tournament(self):
         """
@@ -133,20 +121,6 @@ class HomeMenu(Menu):
         """
 
 
-    def load_tournament(self):
-        """
-        This method enables to load a previously saved tournament
-        """
-        pass
-
-    def save_tournament(self):
-        """
-        This method enables to save the state of a tournament
-        """
-        pass
-
-
-
     # General Prints :
 
 
@@ -213,10 +187,3 @@ class HomeMenu(Menu):
         """
         pass
 
-    def quit(self):
-        print('Chess Tournament Manager terminated')
-        sys.exit(0)
-
-
-if __name__ == '__main__':
-    HomeMenu().run()

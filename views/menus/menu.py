@@ -13,13 +13,13 @@ class Menu:
     It enables to navigate through the program.
     """
     def __init__(self):
-        self.choices = [self.back, self.save_state, self.load_state]  # essayer de voir si on peut calquer le systeme de Models.py
+        self.menu_name = 'Menu'
+        self.choices = [self.back, self.save_state, self.load_state]
 
     def menu(self) -> None:
         """
         This method displays the different options of the menu.
         """
-        print('Menu')
         for choice in self.choices:
             reformated_choice_str = choice.__name__.replace('_', ' ').title()
             print(f"{self.choices.index(choice)}: {reformated_choice_str}")
@@ -28,6 +28,7 @@ class Menu:
         """
         This method displays the menu and responds to choices made.
         """
+        print(self.menu_name)
         while True:
             valid_choices = range(len(self.choices))
             choice = -1
@@ -67,7 +68,3 @@ class Menu:
         This method enables to load a previously saved state of the program from a database file at any time.
         """
         print(f'Program state loaded via {database_file}')
-
-
-if __name__ == '__main__': # à enlever je crois
-    Menu().run()

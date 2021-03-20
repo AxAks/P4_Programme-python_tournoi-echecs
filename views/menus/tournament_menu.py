@@ -17,15 +17,16 @@ class TournamentMenu(Menu):
     """
 
     def __init__(self):
-        super().__init__()  # initialise les choix généraux depuis Menu
+        super().__init__()
+        self.menu_name = 'Tournaments Menu'
         specific_menu_choices = [self.list_all_tournaments, self.create_new_tournament,
-                                 self.save_tournament, self.load_tournament]  # liste des choix spécifiques de TournamentMenu
-        [self.choices.append(choice) for choice in specific_menu_choices]  # ajoute les spécificités de TournamentMenu à la liste de choix
+                                 self.save_tournament, self.load_tournament]
+        [self.choices.append(choice) for choice in specific_menu_choices]
 
 
-    #  on recupère run() via l'héritage de Menu
+    #  on recupère def run() et def back() (avec un if) via l'héritage de Menu car il sont toujours identiques
 
-    def tournaments_menu(self):
+    def tournaments_menu(self): # à réécrire de facon specifique (notamment un print "Menu Tournaments")
         """
         This method displays the different options of the menu: Tournaments Management.
         """
