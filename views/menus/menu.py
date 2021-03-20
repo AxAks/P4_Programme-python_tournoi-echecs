@@ -12,9 +12,11 @@ class Menu:
     This class is a parent Class for all Menu screens
     It enables to navigate through the program.
     """
-    def __init__(self):
-        self.menu_name = 'Menu'
-        self.choices = [self.back, self.save_state, self.load_state]
+    def __init__(self, program_name, menu_name, root_page=False):
+        self.program_name = program_name
+        self.menu_name = menu_name
+        self.root_page = root_page
+        self.choices = [self.quit, self.back, self.save_state, self.load_state]
 
     def menu(self) -> None:
         """
@@ -28,8 +30,8 @@ class Menu:
         """
         This method displays the menu and responds to choices made.
         """
-        print(self.menu_name)
         while True:
+            print(self.program_name, '\n', self.menu_name, '\n')
             valid_choices = range(len(self.choices))
             choice = -1
             while choice not in valid_choices:
@@ -45,17 +47,23 @@ class Menu:
             action = self.choices[choice]
             action()
 
+    def quit(self) -> None:  # à retirer si j'arrive à faire fonctionner back corretement avec un if !
+        """
+        This method enables to quit the program at any time.
+        """
+        print('Program terminated')
+        sys.exit(0)
+
     def back(self) -> None:
         """
         This method enables to go back to the previous screen
         The program quits if the screen is the root menu.
         """
-        if "currentMenu".run() == "HomeMenu".run():  # pseudo-code à definir
+        if self.root_page:
             print('Program terminated')
             sys.exit(0)
         else:
-            print('Back to previous Menu Screen')
-            "PreviousSpecificMenu()".run()  # pseudo-code à definir
+            print('tu dois trouver le moyen générique de revenir à l\'ecran précédent !')
 
     def save_state(self) -> None:  # on enregistrera dans TinyDB apres serialisation de tous les Players et Tournaments (via les registres)
         """

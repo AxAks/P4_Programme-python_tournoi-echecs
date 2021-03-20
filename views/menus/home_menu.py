@@ -4,6 +4,7 @@
 Class for the Home Menu
 This file is launched via the
 """
+import sys
 
 from views.menus.menu import Menu
 from views.menus.player_menu import PlayerMenu
@@ -16,29 +17,26 @@ class HomeMenu(Menu):
     It enables to navigate through the program.
     """
     def __init__(self):
-        super().__init__()
-        self.menu_name = 'Chess Tournament Manager'
+        super().__init__(program_name='Chess Tournament Manager', menu_name='-Home Menu-', root_page=True)
         specific_menu_choices = [self.manage_players, self.manage_tournaments]
         [self.choices.append(choice) for choice in specific_menu_choices]
 
-    #  on recupère def run() et def back() (avec un if) via l'héritage de Menu car il sont toujours identiques
+    #  on recupère def run()! et def back()? (avec un if) via l'héritage de Menu car il sont toujours identiques
 
     # def specifique
-    # est ce que j'ecris une def HomeMenu specifique ? (notamment un print "Home Menu")
-
     def manage_players(self):
         """
         This method leads to the Players Database Manager menu
         """
-        print(PlayerMenu().menu_name)
-        # PlayerMenuController.redirect_player_menu()
+        PlayerMenu().run()
 
-    # def specifique
     def manage_tournaments(self):
         """
         This method leads to the Tournaments Manager menu
         """
-        print(TournamentMenu().menu_name)
+        TournamentMenu().run()
+
+
 
     def create_tournament(self):
         """

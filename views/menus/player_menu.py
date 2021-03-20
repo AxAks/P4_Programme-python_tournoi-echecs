@@ -1,10 +1,11 @@
 # coding=utf-8
 
-import sys
-
 from controllers.factory import Factory
 from models.player import Player
+from views.menus.list_players_menu import ListPlayerMenu
 from views.menus.menu import Menu
+import views.menus.home_menu as home_menu  # import du module plutot que la classe pour eviter le pb d'import circulaire
+
 
 """
 View file for the Player Database Management Menu.
@@ -16,46 +17,23 @@ class PlayerMenu(Menu):
     This class manages a menu to navigate through the Player Database Management.
     """
     def __init__(self):
-        super().__init__()
-        self.menu_name = 'Players Menu'
-        specific_menu_choices = [self.list_all_players, self.add_new_player, self.edit_player]
+        super().__init__(program_name='Chess Tournament Manager', menu_name='-Players Menu-')
+        specific_menu_choices = [self.list_all, self.add_new_player, self.edit_player]
         [self.choices.append(choice) for choice in specific_menu_choices]
 
 
     #  on recupère def run() et def back() (avec un if) via l'héritage de Menu car il sont toujours identiques
 
 
-    def player_menu(self):  # à réécrire de facon specifique (notamment un print "Menu Players")
-        """
-        This method displays the different options of the menu: Player Database.
-        """
-        pass
-
-
     #defs à ecrire !
-    def add_new_player(self):
-        pass
-
-    def list_all_players(self):
-        pass
+    def list_all(self): # directs to another menu Class ListPlayers , mutualiser avec list_all de tournaments dans menu
+        ListPlayerMenu().run()
 
     def edit_player(self):
         pass
 
-    def save_tournament(self):
-        pass
-
-    def load_torunament(self):
-        pass
-
-
-
-
 #defs à revoir
-    def display_all_player(self):
-        pass
-
-    def add_player(self):
+    def add_new_player(self):  # utiliser pour formulaire ?
         new_player_dict = {}
         identifier = self.ask_player_identifier()
         new_player_dict['identifier'] = identifier
@@ -81,9 +59,6 @@ class PlayerMenu(Menu):
         new_player = player_factory.create(**new_player_dict)
         print(player_factory.registry)
         return new_player
-
-        # Player: Pour la Player Database
-        #  'identifier', 'last_name', 'first_name', 'birthdate', 'gender', 'ranking'
 
     def ask_player_identifier(self):
         """
@@ -120,22 +95,6 @@ class PlayerMenu(Menu):
         This method asks for the player's ranking
         """
         return int(input("Enter Player Ranking: "))
-
-    def search_player(self):
-        pass
-
-    def edit_player(self):
-        pass
-
-    def save_tournament(self):  # Doublon General menu, doit etre factorisé car doit accessible de partout: "sauver l'etat du systeme"
-        pass
-
-    def load_tournament(self):  # Doublon general menu
-        pass
-
-    def quit(self):  # Doublon general menu
-        print('Chess Tournament Manager terminated')
-        sys.exit(0)
 
 
 if __name__ == '__main__':
