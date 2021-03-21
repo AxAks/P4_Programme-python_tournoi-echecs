@@ -1,7 +1,7 @@
 # coding=utf-8
 
 """
-Generic Class for Menu
+Generic Class for Menus
 """
 
 import sys

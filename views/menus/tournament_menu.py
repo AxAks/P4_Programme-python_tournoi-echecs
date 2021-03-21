@@ -47,23 +47,29 @@ class TournamentMenu(Menu):
     # 'time_control', 'description', 'rounds_list', 'rounds'
 
 
-    def add_new_tournament(self):
+    def add_new_tournament(self): # mettre des verifs champs par champs!
         """
         This method asks all the required info about a specific tournament.
         It returns the info as a dict
         """
         name = self.ask_tournament_name()
         location = self.ask_tournament_location()
+        start_date = self.ask_tournament_start_date()
+        end_date = self.ask_tournament_end_date() # demander si le tournoi est sur un jour si oui attribuer la meme date que start_date
         players = self.ask_tournament_players()
         time_control = self.ask_tournament_time_control()
         description = self.ask_tournament_description()
         new_tournament_dict = {
             'name': name,
             'location': location,
+            'start_date': start_date,
+            'end_date': end_date,
             'players': players,
             'time_control': time_control,
             'description': description
         }
+        # return new_tournament_dict
+
         print(f'\nTournament Information\n', new_tournament_dict)
         tournament_factory = Factory(Tournament)
         new_tournament = tournament_factory.create(**new_tournament_dict)
@@ -83,7 +89,20 @@ class TournamentMenu(Menu):
         """
         return input("Enter Tournament Location: ")
 
-    def ask_tournament_players(self): # ce serait sympa de pouvoir faire une recherche !
+    def ask_tournament_start_date(self):
+        """
+        This method asks for the tournament's start date
+        """
+        return input("Enter Tournament's start date (YYYY-MM-DD): ")
+
+    def ask_tournament_end_date(self):
+        """
+        This method asks for the tournament's end date
+        """
+        return input("Enter Tournament's end date (YYYY-MM-DD): ")
+
+    def ask_tournament_players(self): # ce serait sympa de pouvoir faire une recherche dans la base des joueurs !
+        # si on a des string vide ca pete derriere à l'instanciation des Players ...
         """
         This method asks for the list of 8 players for the tournament
         """

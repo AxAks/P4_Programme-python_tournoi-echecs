@@ -171,6 +171,7 @@ class Tournament(Model):
                 self.__end_date = value
         else:
             self.__end_date = value
+
     @property
     def players_identifier(self) -> list[str]:
         """
@@ -199,7 +200,6 @@ class Tournament(Model):
 
             elif isinstance(player_id, UUID):
                 try:
-                    player_id = player_id
                     players_identifier_list.append(player_id)
                     self.__players_identifier = players_identifier_list
                 except AttributeError:

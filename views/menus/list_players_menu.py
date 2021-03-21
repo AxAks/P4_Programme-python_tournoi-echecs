@@ -1,5 +1,6 @@
 # coding=utf-8
-
+from controllers.factory import Factory
+from models.player import Player
 from views.menus.menu import Menu
 import views.menus.player_menu as player_menu  # import du module plutot que la classe pour eviter le pb d'import circulaire
 
