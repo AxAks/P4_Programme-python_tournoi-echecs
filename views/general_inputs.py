@@ -67,22 +67,20 @@ class PlayerInputs:
             "Enter Player Gender: ")  #  mettre des verifs  de formatage de l'input ici et demander de resaisir si pas bon / semblable à Tournament Time_Control (Enum)
         return _input
 
-    def ask_player_ranking(self) -> int: # verif à revoir !
+    def ask_player_ranking(self) -> int:
         """
         This method asks for the player's ranking
         """
         valid_ranking = False
-        _input = int(input("Enter Player Ranking: "))
         while valid_ranking is False:
             try:
                 _input = int(input("Enter Player Ranking: "))  #  Verif que string est integer btw 100 et 3000. pb quand lettre.
-                if _input in RANKING_RANGE: # pb vers ici : pas de print d'erreur si hors du range !
+                if _input in RANKING_RANGE:
                     valid_ranking = True
                 else:
                     print('Ranking must be a digit between 100 and 3000, please retry...')
             except ValueError:
                 print('Ranking must be a digit between 100 and 3000, please retry...')
-                _input = int(input("Enter Player Ranking: "))
         return _input
 
 
