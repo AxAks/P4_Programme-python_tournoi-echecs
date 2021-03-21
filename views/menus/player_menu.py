@@ -1,7 +1,5 @@
 # coding=utf-8
 
-from controllers.factory import Factory
-from models.player import Player
 from views.forms.add_new_player_form import NewPlayerForm
 from views.menus.list_players_menu import ListPlayerMenu
 from views.menus.menu import Menu
@@ -33,9 +31,6 @@ class PlayerMenu(Menu):
 
     def edit_player(self):
         pass
-
-    # defs à revoir
-
 
 
 if __name__ == '__main__':
