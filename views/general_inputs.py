@@ -8,7 +8,7 @@ import re
 from datetime import date
 
 from models.tournament import Tournament
-from constants import ALPHABETICAL_STRING_RULE, MINIMUM_RANKING, MAXIMUM_RANKING
+from constants import ALPHABETICAL_STRING_RULE, RANKING_RANGE
 
 
 # Inputs Player
@@ -76,7 +76,7 @@ class PlayerInputs:
         while valid_ranking is False:
             try:
                 _input = int(input("Enter Player Ranking: "))  #  Verif que string est integer btw 100 et 3000. pb quand lettre.
-                if MINIMUM_RANKING < _input <= MAXIMUM_RANKING: # pb vers ici : pas de print d'erreur si hors du range !
+                if _input in RANKING_RANGE: # pb vers ici : pas de print d'erreur si hors du range !
                     valid_ranking = True
                 else:
                     print('Ranking must be a digit between 100 and 3000, please retry...')

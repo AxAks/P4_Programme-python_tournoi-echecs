@@ -7,7 +7,7 @@ from typing import Union
 from uuid import uuid4, UUID
 from enum import Enum
 
-from constants import MINIMUM_AGE, MINIMUM_RANKING, MAXIMUM_RANKING, ALPHABETICAL_STRING_RULE
+from constants import MINIMUM_AGE, ALPHABETICAL_STRING_RULE, RANKING_RANGE
 from models.model import Model
 
 
@@ -196,7 +196,7 @@ class Player(Model):
         if value is None:
             raise AttributeError()
         if type(value) == int:
-            if MINIMUM_RANKING < value <= MAXIMUM_RANKING:
+            if value in RANKING_RANGE:
                 self.__ranking = value
             else:
                 raise AttributeError()
