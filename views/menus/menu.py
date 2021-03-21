@@ -26,8 +26,8 @@ class Menu:
         This method displays the different options of the menu.
         """
         for choice in self.choices:
-            reformated_choice_str = choice.__name__.replace('_', ' ').title()
-            print(f"{self.choices.index(choice)}: {reformated_choice_str}")
+            reformatted_choice_str = choice.__name__.replace('_', ' ').title()
+            print(f"{self.choices.index(choice)}: {reformatted_choice_str}")
 
     def run(self) -> None:
         """
