@@ -15,7 +15,7 @@ class ListPlayerMenu(Menu):
     This class is a menu used to display sorted or filtered lists of Players from the Database.
     """
     def __init__(self):
-        super().__init__(program_name='Chess Tournament Manager', menu_name='-Players Reports Menu-',
+        super().__init__(program_name='Chess Tournament Manager', menu_name='Players Reports Menu',
                          previous_page=player_menu.PlayerMenu())
         specific_menu_choices = [self.sort_by_last_name, self.sort_by_ranking,
                                  self.search_by_id, self.search_by_last_name, self.search_by_birthdate]

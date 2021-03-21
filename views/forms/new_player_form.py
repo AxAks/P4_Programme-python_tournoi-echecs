@@ -3,16 +3,18 @@
 """
 Form file for the creation of a new player in the database.
 """
+
 from views.forms.form import Form
+from views.menus.menu import Menu
 
 
-class NewPlayerForm(Form):
+class NewPlayerForm(Form):  # faire heriter de Menu aussi ? (fonction de navigation : back, etc)
     """
     This class asks the required data for the creation of a player instance.
     and returns a dict.
     """
     def __init__(self):
-        pass
+        super().__init__()
 
     def add_new_player(self) -> dict:  # mettre des verifs champs par champs!
         last_name = self.ask_player_last_name()
@@ -41,28 +43,33 @@ class NewPlayerForm(Form):
         """
         This method asks for the player's last name
         """
-        return input("Enter Player Last Name: ")
+        _input = input("Enter Player Last Name: ")  # mettre des verifs  de formatage de l'input ici et demander de resaisir si pas bon
+        return _input
 
     def ask_player_first_name(self) -> str:
         """
         This method asks for the player's first name
         """
-        return input("Enter Player First Name: ")
+        _input = input("Enter Player First Name: ")  # mettre des verifs  de formatage de l'input ici et demander de resaisir si pas bon
+        return _input
 
     def ask_player_birthdate(self) -> str:
         """
         This method asks for the player's birthdate
         """
-        return input("Enter Player Birthdate(YYYY-MM-DD): ")
+        _input = input("Enter Player Birthdate(YYYY-MM-DD): ")  #  mettre des verifs  de formatage de l'input ici et demander de resaisir si pas bon
+        return _input
 
     def ask_player_gender(self) -> str:
         """
         This method asks for the player's gender
         """
-        return input("Enter Player Gender: ")
+        _input = input("Enter Player Gender: ")  #  mettre des verifs  de formatage de l'input ici et demander de resaisir si pas bon
+        return _input
 
     def ask_player_ranking(self) -> str:
         """
         This method asks for the player's ranking
         """
-        return int(input("Enter Player Ranking: "))
+        _input = int(input("Enter Player Ranking: "))  #  mettre des verifs  de formatage de l'input ici et demander de resaisir si pas bon
+        return _input

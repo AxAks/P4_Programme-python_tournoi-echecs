@@ -1,6 +1,6 @@
 # coding=utf-8
 
-from views.forms.add_new_player_form import NewPlayerForm
+from views.forms.new_player_form import NewPlayerForm
 from views.menus.list_players_menu import ListPlayerMenu
 from views.menus.menu import Menu
 import views.menus.home_menu as home_menu  # import du module plutot que la classe pour eviter le pb d'import circulaire
@@ -16,7 +16,7 @@ class PlayerMenu(Menu):
     This class manages a menu to navigate through the Player Database Management.
     """
     def __init__(self):
-        super().__init__(program_name='Chess Tournament Manager', menu_name='-Players Menu-',
+        super().__init__(program_name='Chess Tournament Manager', menu_name='Players Menu',
                          previous_page=home_menu.HomeMenu())
         self.previous_page = home_menu.HomeMenu()
         specific_menu_choices = [self.list_all, self.add_new_player, self.edit_player]
@@ -31,7 +31,3 @@ class PlayerMenu(Menu):
 
     def edit_player(self):
         pass
-
-
-if __name__ == '__main__':
-    PlayerMenu().run()

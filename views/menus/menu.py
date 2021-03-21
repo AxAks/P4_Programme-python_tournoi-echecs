@@ -15,7 +15,7 @@ class Menu:
     def __init__(self, program_name, menu_name,
                  previous_page=None, root_page=False, exiting_message='Program Terminated'):
         self.program_name = program_name
-        self.menu_name = menu_name
+        self.menu_name = f'-{menu_name}-'
         self.previous_page = previous_page
         self.root_page = root_page
         self.exiting_message = exiting_message
@@ -65,10 +65,10 @@ class Menu:
         """
         This method enables to save the state of the program at any time.
         """
-        print('Program state saved')
+        print('Program state saved(funct to write)')
 
     def load_state(self, database_file) -> None:  # on chargera depuis TinyDB : deserialisation de tous les Players et Tournaments (instanciation via creators)
         """
         This method enables to load a previously saved state of the program from a database file at any time.
         """
-        print(f'Program state loaded via {database_file}')
+        print(f'Program state loaded via "database_file"(funct to write)')
