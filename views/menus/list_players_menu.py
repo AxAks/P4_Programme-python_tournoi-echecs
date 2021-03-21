@@ -16,7 +16,8 @@ class ListPlayerMenu(Menu):
     def __init__(self):
         super().__init__(program_name='Chess Tournament Manager', menu_name='-Players Reports Menu-',
                          previous_page=player_menu.PlayerMenu())
-        specific_menu_choices = [self.sort_by_last_name, self.sort_by_ranking, self.search_player]
+        specific_menu_choices = [self.sort_by_last_name, self.sort_by_ranking,
+                                 self.search_by_id, self.search_by_last_name, self.search_by_birthdate]
         [self.choices.append(choice) for choice in specific_menu_choices]
 
     def sort_by_last_name(self):  # on peut gérer tous les attributs de Player
@@ -25,5 +26,11 @@ class ListPlayerMenu(Menu):
     def sort_by_ranking(self):
         pass
 
-    def search_player(self):
+    def search_by_id(self):
+        pass
+
+    def search_by_last_name(self):
+        pass
+
+    def search_by_birthdate(self):
         pass

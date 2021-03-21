@@ -15,14 +15,18 @@ class ListTournamentsMenu(Menu):
     def __init__(self):
         super().__init__(program_name='Chess Tournament Manager', menu_name='-Tournaments Reports Menu-',
                          previous_page=tournament_menu.TournamentMenu())
-        specific_menu_choices = [self.sort_by_name, self.sort_by_location, self.search_tournament]
+        specific_menu_choices = [self.sort_by_name, self.sort_by_location,
+                                 self.sort_by_start_date, self.search_by_id]
         [self.choices.append(choice) for choice in specific_menu_choices]
 
-    def sort_by_name(self):  # on peut gérer tous les attributs de Tournaments
+    def sort_by_name(self):
         pass
 
     def sort_by_location(self):
         pass
 
-    def search_tournament(self):
+    def sort_by_start_date(self):
+        pass
+
+    def search_by_id(self):
         pass

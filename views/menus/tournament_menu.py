@@ -20,7 +20,7 @@ class TournamentMenu(Menu):
     def __init__(self):
         super().__init__(program_name='Chess Tournament Manager', menu_name='-Tournaments Menu-',
                          previous_page=home_menu.HomeMenu())
-        specific_menu_choices = [self.list_all, self.create_new_tournament,
+        specific_menu_choices = [self.list_all, self.add_new_tournament,
                                  self.save_tournament, self.load_tournament]
         [self.choices.append(choice) for choice in specific_menu_choices]
 
@@ -28,7 +28,7 @@ class TournamentMenu(Menu):
         ListTournamentsMenu().run()
 
     # defs à ecrire !
-    def create_new_tournament(self):
+    def add_new_tournament(self):
         pass
 
 

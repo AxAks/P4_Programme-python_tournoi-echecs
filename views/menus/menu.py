@@ -12,11 +12,13 @@ class Menu:
     This class is a parent Class for all Menu screens
     It enables to navigate through the program.
     """
-    def __init__(self, program_name, menu_name, previous_page=None, root_page=False):
+    def __init__(self, program_name, menu_name,
+                 previous_page=None, root_page=False, exiting_message='Program Terminated'):
         self.program_name = program_name
         self.menu_name = menu_name
         self.previous_page = previous_page
         self.root_page = root_page
+        self.exiting_message = exiting_message
         self.choices = [self.back, self.save_state, self.load_state]
 
     def menu(self) -> None:
@@ -54,7 +56,7 @@ class Menu:
         The program quits if the screen is the root menu.
         """
         if self.root_page:
-            print('Program terminated')
+            print(self.exiting_message)
             sys.exit(0)
         else:
             self.previous_page.run()
