@@ -14,7 +14,7 @@ class NewPlayerForm(Form):
     def __init__(self):
         pass
 
-    def add_new_player(self):  # mettre des verifs champs par champs!
+    def add_new_player(self) -> dict:  # mettre des verifs champs par champs!
         last_name = self.ask_player_last_name()
         first_name = self.ask_player_first_name()
         birthdate = self.ask_player_birthdate()
@@ -37,31 +37,31 @@ class NewPlayerForm(Form):
         return new_player
         """
 
-    def ask_player_last_name(self):
+    def ask_player_last_name(self) -> str:
         """
         This method asks for the player's last name
         """
         return input("Enter Player Last Name: ")
 
-    def ask_player_first_name(self):
+    def ask_player_first_name(self) -> str:
         """
         This method asks for the player's first name
         """
         return input("Enter Player First Name: ")
 
-    def ask_player_birthdate(self):
+    def ask_player_birthdate(self) -> str:
         """
         This method asks for the player's birthdate
         """
         return input("Enter Player Birthdate(YYYY-MM-DD): ")
 
-    def ask_player_gender(self):
+    def ask_player_gender(self) -> str:
         """
         This method asks for the player's gender
         """
         return input("Enter Player Gender: ")
 
-    def ask_player_ranking(self):
+    def ask_player_ranking(self) -> str:
         """
         This method asks for the player's ranking
         """

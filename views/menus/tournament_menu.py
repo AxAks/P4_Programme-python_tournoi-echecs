@@ -24,7 +24,7 @@ class TournamentMenu(Menu):
                                  self.save_tournament, self.load_tournament]
         [self.choices.append(choice) for choice in specific_menu_choices]
 
-    def list_all(self):  # redirige vers list_tournaments_menu, à mutualiser ? rendre générique, pareil que le list_all de player
+    def list_all(self):
         ListTournamentsMenu().run()
 
     # defs à ecrire !
@@ -47,7 +47,7 @@ class TournamentMenu(Menu):
     # 'time_control', 'description', 'rounds_list', 'rounds'
 
 
-    def add_new_tournament(self): # mettre des verifs champs par champs!
+    def add_new_tournament(self) -> dict: # mettre des verifs champs par champs!
         """
         This method asks all the required info about a specific tournament.
         It returns the info as a dict
@@ -77,31 +77,31 @@ class TournamentMenu(Menu):
         print(new_tournament.__dict__)
         return new_tournament
 
-    def ask_tournament_name(self):
+    def ask_tournament_name(self) -> str:
         """
         This method asks for the tournament's name
         """
         return input("Enter Tournament name: ")
 
-    def ask_tournament_location(self):
+    def ask_tournament_location(self) -> str:
         """
         This method asks for the tournament's location
         """
         return input("Enter Tournament Location: ")
 
-    def ask_tournament_start_date(self):
+    def ask_tournament_start_date(self) -> str:
         """
         This method asks for the tournament's start date
         """
         return input("Enter Tournament's start date (YYYY-MM-DD): ")
 
-    def ask_tournament_end_date(self):
+    def ask_tournament_end_date(self) -> str:
         """
         This method asks for the tournament's end date
         """
         return input("Enter Tournament's end date (YYYY-MM-DD): ")
 
-    def ask_tournament_players(self): # ce serait sympa de pouvoir faire une recherche dans la base des joueurs !
+    def ask_tournament_players(self) -> str: # ce serait sympa de pouvoir faire une recherche dans la base des joueurs !
         # si on a des string vide ca pete derriere à l'instanciation des Players ...
         """
         This method asks for the list of 8 players for the tournament
@@ -114,18 +114,17 @@ class TournamentMenu(Menu):
             n += 1
         return tournament_players
 
-    def ask_tournament_time_control(self):
+    def ask_tournament_time_control(self) -> str:
         """
         This method asks for the time control format of the tournament
         """
         return input("Enter Time Control Format: ")
 
-    def ask_tournament_description(self):
+    def ask_tournament_description(self) -> str:
         """
         This method asks for a description of the tournament
         """
         return input("Enter Tournament Description: ")
-
 
 
 if __name__ == '__main__':

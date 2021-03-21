@@ -23,7 +23,7 @@ class PlayerMenu(Menu):
         [self.choices.append(choice) for choice in specific_menu_choices]
 
 
-    def list_all(self): # Mutualiser avec list_all de tournaments dans menu si possible
+    def list_all(self):
         ListPlayerMenu().run()
 
     def add_new_player(self):

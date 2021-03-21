@@ -20,13 +20,13 @@ class HomeMenu(Menu):
         specific_menu_choices = [self.manage_players, self.manage_tournaments]
         [self.choices.append(choice) for choice in specific_menu_choices]
 
-    def manage_players(self):
+    def manage_players(self) -> None:
         """
         This method leads to the Players Database Manager menu
         """
         PlayerMenu().run()
 
-    def manage_tournaments(self):
+    def manage_tournaments(self) -> None:
         """
         This method leads to the Tournaments Manager menu
         """
