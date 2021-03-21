@@ -4,12 +4,14 @@
 File listing all possible inputs
 """
 # à scinder surement ensuite !
+import re
+from datetime import date
+
+from models.tournament import Tournament
+from constants import ALPHABETICAL_STRING_RULE, MINIMUM_RANKING, MAXIMUM_RANKING
 
 
 # Inputs Player
-from models.tournament import Tournament
-
-
 class PlayerInputs:
 
     def __init__(self):
@@ -18,27 +20,42 @@ class PlayerInputs:
     def ask_player_last_name(self) -> str:
         """
         This method asks for the player's last name
+        and checks the formatting of the string
         """
-        _input = input(
-            "Enter Player Last Name: ")  #  mettre des verifs  de formatage de l'input ici et demander de resaisir si pas bon
+        _input = input("Enter Player Last Name: ")
+        while not re.match(ALPHABETICAL_STRING_RULE, _input):
+            print('Unauthorized characters found, please retry...')
+            _input = input("Enter Player Last Name: ")  # Verif de formatage String saisie
         return _input
 
 
     def ask_player_first_name(self) -> str:
         """
         This method asks for the player's first name
+        and checks the formatting of the string
         """
-        _input = input(
-            "Enter Player First Name: ")  #  mettre des verifs  de formatage de l'input ici et demander de resaisir si pas bon
+        _input = input("Enter Player First Name: ")
+        while not re.match(ALPHABETICAL_STRING_RULE, _input):
+            print('Unauthorized characters found, please retry...')
+            _input = input("Enter Player First Name: ")  # Verif de formatage String saisie lettres seulement
         return _input
 
 
-    def ask_player_birthdate(self) -> str:
+    def ask_player_birthdate(self) -> date:
         """
         This method asks for the player's birthdate
+        and checks the formatting of the string
         """
-        _input = input(
-            "Enter Player Birthdate(YYYY-MM-DD): ")  #  mettre des verifs  de formatage de l'input ici et demander de resaisir si pas bon
+        valid_date = False
+        _input = input("Enter Player Birthdate(YYYY-MM-DD): ")
+        while valid_date is False:
+            try:
+                _input = date.fromisoformat(_input)
+                valid_date = True
+            except ValueError:  # Verif de formatage String saisie format date iso , + chiffres et pas des lettres
+                valid_date = False
+                print('Not in format YYYY-MM-DD, please retry...')
+                _input = input("Enter Player Birthdate(YYYY-MM-DD): ")
         return _input
 
 
@@ -47,16 +64,25 @@ class PlayerInputs:
         This method asks for the player's gender
         """
         _input = input(
-            "Enter Player Gender: ")  #  mettre des verifs  de formatage de l'input ici et demander de resaisir si pas bon
+            "Enter Player Gender: ")  #  mettre des verifs  de formatage de l'input ici et demander de resaisir si pas bon / semblable à Tournament Time_Control (Enum)
         return _input
 
-
-    def ask_player_ranking(self) -> str:
+    def ask_player_ranking(self) -> int: # verif à revoir !
         """
         This method asks for the player's ranking
         """
-        _input = int(input(
-            "Enter Player Ranking: "))  #  mettre des verifs  de formatage de l'input ici et demander de resaisir si pas bon
+        valid_ranking = False
+        _input = int(input("Enter Player Ranking: "))
+        while valid_ranking is False:
+            try:
+                _input = int(input("Enter Player Ranking: "))  #  Verif que string est integer btw 100 et 3000. pb quand lettre.
+                if MINIMUM_RANKING < _input <= MAXIMUM_RANKING: # pb vers ici : pas de print d'erreur si hors du range !
+                    valid_ranking = True
+                else:
+                    print('Ranking must be a digit between 100 and 3000, please retry...')
+            except ValueError:
+                print('Ranking must be a digit between 100 and 3000, please retry...')
+                _input = int(input("Enter Player Ranking: "))
         return _input
 
 
