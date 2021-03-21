@@ -2,7 +2,6 @@
 
 """
 Class for the Home Menu
-This file is launched via the
 """
 
 from views.menus.menu import Menu
@@ -12,8 +11,8 @@ from views.menus.tournament_menu import TournamentMenu
 
 class HomeMenu(Menu):
     """
-    This class is a parent Class for all Menu screens
-    It enables to navigate through the program.
+    This class is the root Menu of the program.
+    This is the first screen the user lands on.
     """
     def __init__(self):
         super().__init__(program_name='Chess Tournament Manager', menu_name='-Home Menu-',
