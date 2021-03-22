@@ -190,6 +190,8 @@ class Tournament(Model):
             raise AttributeError()
         players_identifier_list = []
         for player_id in value:
+            if player_id is None or player_id == '':
+                raise AttributeError()
             if isinstance(player_id, str):
                 try:
                     player_id = UUID(player_id)

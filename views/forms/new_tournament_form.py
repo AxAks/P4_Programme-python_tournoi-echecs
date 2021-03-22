@@ -16,11 +16,7 @@ class NewTournamentForm(Form):  # faire heriter de Menu aussi ? (fonction de na
     def __init__(self):
         pass
 
-        #  Tournament : Pour la création des tournois
-        #  'name', 'location', 'start_date', 'end_date', 'players_identifier',
-        # 'time_control', 'description', 'rounds_list', 'rounds'
-
-    def add_new_tournament(self) -> dict:  # mettre des verifs champs par champs!
+    def add_new_tournament(self) -> dict:
         """
         This method asks all the required info about a specific tournament.
         It returns the info as a dict
@@ -28,7 +24,8 @@ class NewTournamentForm(Form):  # faire heriter de Menu aussi ? (fonction de na
         name = TournamentInputs().ask_tournament_name()
         location = TournamentInputs().ask_tournament_location()
         start_date = TournamentInputs().ask_tournament_start_date()
-        end_date = TournamentInputs().ask_tournament_end_date()  #  demander si le tournoi est sur un jour si oui attribuer la meme date que start_date
+        # demander si le tournoi est sur un jour si oui attribuer la meme date que start_date (controller ?) voir check_one_day_tournament (a repenser)
+        end_date = TournamentInputs().ask_tournament_end_date()
         players_identifier = TournamentInputs().ask_tournament_players_identifier()
         time_control = TournamentInputs().ask_tournament_time_control()
         description = TournamentInputs().ask_tournament_description()
@@ -51,5 +48,4 @@ class NewTournamentForm(Form):  # faire heriter de Menu aussi ? (fonction de na
         print(new_tournament.__dict__)
         return new_tournament
         """
-
 

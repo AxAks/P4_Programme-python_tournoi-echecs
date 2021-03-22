@@ -3,7 +3,7 @@
 from controllers.factory import Factory
 
 
-class SuperFactory: # fonctionne pas je ne sais pas pourquoi
+class SuperFactory:
     def __init__(self):
         self.factories = {}
 

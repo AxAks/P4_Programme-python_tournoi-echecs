@@ -17,6 +17,10 @@ class PlayerInputs:
     def __init__(self):
         pass
 
+    def search_player_by_id(self, search):
+        # probleme, je ne sais pas comment faire avec le player_registry, l'idée est de chercher l'uuid dans le dict player_registry
+        pass
+
     def ask_player_identifier(self) -> str:  # pas facile de copier un uuid4 , plutot une recherche !!
         valid_uuid4 = False
         input_info = f"Enter Player ID:"
@@ -164,6 +168,36 @@ class TournamentInputs:
                 _input = input(input_info)
         return _input
 
+    def check_one_day_tournament(self):
+        """
+        This method automatically sets the end date of a tournament to the already entered start date
+        if the user indicates that it is a one-day tournament.
+        The input of the end date is made easier : Yes or No
+        """
+        start_date = self.ask_tournament_start_date()
+        valid_choice = False
+        choices_info = '(1: YES, 2: NO)'
+        input_info = f'Is it a one-day Tournament ? {choices_info}: '
+        wrong_input = 'Invalid choice (1 or 2), please retry...'
+        _input = input(input_info)
+        while not valid_choice:
+            try:
+                _input = int(_input)
+                if _input in (1, 2):
+                    if _input == 1:
+                        _input = start_date  # pas sûr de moi ! je veux que _input aie la valeur de start_date mais là je redemande la date de debut
+                    else:
+                        self.ask_tournament_end_date()  # pas sûr de moi ! la ca doit etre bon ! ca renvoie vers ask_tournament_end_date
+                        valid_choice = True  # bizarre !
+                else:
+                    print(wrong_input)
+                    _input = input(input_info)
+            except ValueError:
+                print(wrong_input)
+                _input = input(input_info)
+            return start_date, _input
+
+
     def ask_tournament_end_date(self) -> date:
         """
         This method asks for the tournament's end date
@@ -180,18 +214,21 @@ class TournamentInputs:
                 _input = input(input_info)
         return _input
 
-    def ask_tournament_players_identifier(self) -> list:  #  ce serait sympa de pouvoir faire une recherche dans la base des joueurs !
+    def ask_tournament_players_identifier(self) -> list:
+        # ce serait sympa de pouvoir faire une recherche dans la base des joueurs !
         # si on a des string vide ca pete derriere à l'instanciation des Players ...
         """
         This method asks for the list of 8 players for the tournament
         """
-        #  mettre des verifs  de formatage de l'input ici et demander de resaisir si pas bon ( mais faire une recherche car impossible de taper un uuid4...)
+        #  mettre des verifs de formatage de l'input ici et demander de resaisir si pas bon
+        # mais faire une recherche car impossible de taper un uuid4...
         tournament_players_identifier = []
         n = 1
         while n < 9:
             valid_uuid4 = False
             input_info = f"Enter Player ID {n}/8:"
-            _input = input(input_info)  # mettre en place une recherche dans le registre plutot !
+            _input = input(input_info)
+            # mettre en place une recherche dans le registre plutot ! integrer la fonction search_player_by_id
             while not valid_uuid4:
                 try:
                     _input = UUID(str(_input), version=4)

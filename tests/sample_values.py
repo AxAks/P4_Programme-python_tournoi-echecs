@@ -203,9 +203,9 @@ round1_dict = {
         {'player1_id': '4f4e8869-fbd2-48d7-b759-fafd725df22f', 'player2_id': '1bcb740a-3ca1-49e8-889f-30ca3c1bc293',
          'player1_score': 0.5, 'player2_score': 0.5}
     ],
-    'end_time': '2021-02-26T11:34:07',
-    # doit etre enregistrée automatiquement quand l'utilisateur marque le tournoi comme terminé
-    'start_time': '2021-02-26T11:33:07'  # doit etre enregistrée automatiquement quand l'utilisateur créé le tournoi
+    'end_time': '2021-02-26T11:34:07', # a voir pour le setting des deux datetime ... datetime.datetime.now() à l'instanciation et ensuite update possible de l'heure' de fin ou de début, a voir
+    # doit etre enregistrée automatiquement quand l'utilisateur marque le round comme terminé (Controllers Tournoi qui update le end_time avec datetime.datetime.now())
+    'start_time': '2021-02-26T11:33:07'  # doit etre enregistrée automatiquement quand l'utilisateur créé le round ? ou alors il entre la date et lheure de debut quand il entre les resultats du round
 }
 
 round2_dict = {
@@ -216,9 +216,9 @@ round2_dict = {
         {'player1_id': '6cd402fb-9e79-4e23-a326-5b7e215de205', 'player2_id': '96b0887a-58f0-4aa6-a68f-9b845a7c9ec1',
          'player1_score': 1.0, 'player2_score': 0.0}
     ],
-    'end_time': '2021-02-26T11:34:07',
-    # doit etre enregistrée automatiquement quand l'utilisateur marque le tournoi comme terminé
-    'start_time': '2021-02-26T11:33:07'  # doit etre enregistrée automatiquement quand l'utilisateur créé le tournoi
+    'end_time': '2021-02-26T11:34:07',# a voir pour le setting des deux datetime ... datetime.datetime.now() à l'instanciation et ensuite update possible de l'heure' de fin ou de début, a voir
+    # doit etre enregistrée automatiquement quand l'utilisateur marque le round comme terminé (Controllers Tournoi qui update le end_time avec datetime.datetime.now())
+    'start_time': '2021-02-26T11:33:07'  # doit etre enregistrée automatiquement quand l'utilisateur créé le round ? ou alors il entre la date et lheure de debut quand il entre les resultats du round
 }
 
 # ex : tuple
