@@ -21,23 +21,19 @@ class NewTournamentForm(Form):  # faire heriter de Menu aussi ? (fonction de na
         This method asks all the required info about a specific tournament.
         It returns the info as a dict
         """
-        name = TournamentInputs().ask_tournament_name()
-        location = TournamentInputs().ask_tournament_location()
-        start_date = TournamentInputs().ask_tournament_start_date()
+        ask_properties_dict = {
+        'name': TournamentInputs().ask_tournament_name(),
+        'location': TournamentInputs().ask_tournament_location(),
+        'start_date': TournamentInputs().ask_tournament_start_date(),
         # demander si le tournoi est sur un jour si oui attribuer la meme date que start_date (controller ?) voir check_one_day_tournament (a repenser)
-        end_date = TournamentInputs().ask_tournament_end_date()
-        players_identifier = TournamentInputs().ask_tournament_players_identifier()
-        time_control = TournamentInputs().ask_tournament_time_control()
-        description = TournamentInputs().ask_tournament_description()
-        new_tournament_dict = {
-            'name': name,
-            'location': location,
-            'start_date': start_date,
-            'end_date': end_date,
-            'players_identifier': players_identifier,
-            'time_control': time_control,
-            'description': description
+        'end_date': TournamentInputs().ask_tournament_end_date(),
+        'players_identifier': TournamentInputs().ask_tournament_players_identifier(),
+        'time_control': TournamentInputs().ask_tournament_time_control(),
+        'description': TournamentInputs().ask_tournament_description()
         }
+        new_tournament_dict = {}
+        for key in ask_properties_dict:
+            new_tournament_dict[key] = ask_properties_dict[key]
         print(new_tournament_dict)
         return new_tournament_dict
         """

@@ -15,22 +15,20 @@ class NewPlayerForm(Form):  # faire heriter de Menu aussi ? (fonction de naviga
     This class asks the required data for the creation of a player instance.
     and returns a dict.
     """
-    def __init__(self):
-        pass
+    def __init__(self, program_name='Chess Tournament Manager', menu_name='New Player Form'):
+        super().__init__()
 
     def add_new_player(self) -> dict:
-        last_name = PlayerInputs().ask_player_last_name()
-        first_name = PlayerInputs().ask_player_first_name()
-        birthdate = PlayerInputs().ask_player_birthdate()
-        gender = PlayerInputs().ask_player_gender()
-        ranking = PlayerInputs().ask_player_ranking()
-        new_player_dict = {
-            'last_name': last_name,
-            'first_name': first_name,
-            'birthdate': birthdate,
-            'gender': gender,
-            'ranking': ranking
+        ask_properties_dict = {
+        'last_name': PlayerInputs().ask_player_last_name(),
+        'first_name': PlayerInputs().ask_player_first_name(),
+        'birthdate': PlayerInputs().ask_player_birthdate(),
+        'gender': PlayerInputs().ask_player_gender(),
+        'ranking': PlayerInputs().ask_player_ranking()
         }
+        new_player_dict = {}
+        for key in ask_properties_dict:
+            new_player_dict[key] = ask_properties_dict[key]
         return new_player_dict
         """
         print(f'\nNew Player Information\n', new_player_dict)
