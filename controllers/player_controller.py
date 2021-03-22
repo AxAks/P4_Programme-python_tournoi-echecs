@@ -35,7 +35,6 @@ class PlayerMenuController:
         PlayerMenu().run()
 
 
-
 # infos pour la suite !
 """
 # Pour enregistrer les instances crées dans une liste

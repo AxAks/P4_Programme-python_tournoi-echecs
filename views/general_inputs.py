@@ -7,6 +7,7 @@ File listing all possible inputs
 import re
 from datetime import date
 
+from models.player import Player
 from models.tournament import Tournament
 from constants import ALPHABETICAL_STRING_RULE, RANKING_RANGE
 
@@ -28,7 +29,6 @@ class PlayerInputs:
             _input = input("Enter Player Last Name: ")  # Verif de formatage String saisie
         return _input
 
-
     def ask_player_first_name(self) -> str:
         """
         This method asks for the player's first name
@@ -39,7 +39,6 @@ class PlayerInputs:
             print('Unauthorized characters found, please retry...')
             _input = input("Enter Player First Name: ")  # Verif de formatage String saisie lettres seulement
         return _input
-
 
     def ask_player_birthdate(self) -> date:
         """
@@ -63,8 +62,27 @@ class PlayerInputs:
         """
         This method asks for the player's gender
         """
-        _input = input(
-            "Enter Player Gender: ")  #  mettre des verifs  de formatage de l'input ici et demander de resaisir si pas bon / semblable à Tournament Time_Control (Enum)
+        valid_gender = False  # Verif tordue mais ca marche !!
+        choices_info = '(1: MALE, 2: FEMALE)'
+        input_info = f'Enter Player Gender {choices_info}: '
+        wrong_input = 'Invalid choice (1 or 2), please retry...'
+
+        _input = input(input_info)
+        while not valid_gender:
+            try:
+                _input = int(_input)
+                if _input in (1, 2):
+                    if _input == 1:
+                        _input = 'MALE'
+                    else:
+                        _input = 'FEMALE'
+                    valid_gender = True
+                else:
+                    print(wrong_input)
+                    _input = input(input_info)
+            except ValueError:
+                print(wrong_input)
+                _input = input(input_info)
         return _input
 
     def ask_player_ranking(self) -> int:
@@ -131,14 +149,35 @@ class TournamentInputs:
             n += 1
         return tournament_players_identifier
 
+
+
+
     def ask_tournament_time_control(self) -> str:
         """
         This method asks for the time control format of the tournament
         """
-        choices = {}
-        for key in Tournament.Time_control:
-            choices[key.name] = key.value
-        _input = input(f"Enter Time Control Format {choices}: ")  # mettre un choix ici ! 1, 2 ou 3 avec affichage des choix
+        valid_time_control = False
+        choices_info = '(1: BULLET, 2: BLITZ, 3: RAPIDE)'
+        input_info = f'Enter Time Control Format {choices_info}: '
+        wrong_input = 'Invalid choice (1, 2 or 3), please retry...'
+        _input = input(input_info)
+        while not valid_time_control:
+            try:
+                _input = int(_input)
+                if _input in (1, 2, 3):
+                    if _input == 1:
+                        _input = 'BULLET'
+                    elif _input == 2:
+                        _input == 'BLITZ'
+                    else:
+                        _input = 'RAPIDE'
+                    valid_time_control = True
+                else:
+                    print(wrong_input)
+                    _input = input(input_info)
+            except ValueError:
+                print(wrong_input)
+                _input = input(input_info)
         return _input
 
     def ask_tournament_description(self) -> str:
@@ -209,3 +248,6 @@ class TournamentInputs:
         """
         pass
 
+
+PlayerInputs().ask_player_gender()
+TournamentInputs().ask_tournament_time_control()

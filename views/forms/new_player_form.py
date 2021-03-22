@@ -16,7 +16,7 @@ class NewPlayerForm(Form):  # faire heriter de Menu aussi ? (fonction de naviga
     and returns a dict.
     """
     def __init__(self):
-        super().__init__()
+        pass
 
     def add_new_player(self) -> dict:  # mettre des verifs champs par champs!
         last_name = PlayerInputs().ask_player_last_name()
