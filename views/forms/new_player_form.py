@@ -22,7 +22,7 @@ class NewPlayerForm(Form, Menu):
         specific_menu_choices = [self.add_new_player]
         [self.choices.append(choice) for choice in specific_menu_choices]
 
-    def add_new_player(self) -> dict:
+    def add_new_player(self) -> dict:  # à passer en tnat que add_new dans Form
         print(self.program_name, '\n', self.menu_name, '\n')
         ask_properties_dict = {
         'last_name': PlayerInputs().ask_player_last_name(),

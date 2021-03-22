@@ -23,7 +23,7 @@ class NewTournamentForm(Form, Menu):  # faire heriter de Menu aussi ? (fonction
         specific_menu_choices = [self.add_new_tournament]
         [self.choices.append(choice) for choice in specific_menu_choices]
 
-    def add_new_tournament(self) -> dict:
+    def add_new_tournament(self) -> dict: #  à passer en tnat que add_new dans Form
         """
         This method asks all the required info about a specific tournament.
         It returns the info as a dict
