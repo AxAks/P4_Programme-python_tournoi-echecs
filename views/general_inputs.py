@@ -17,6 +17,9 @@ class PlayerInputs:
     def __init__(self):
         pass
 
+    def ask_obj_property(self):  # à rédiger et à enlever de PlayerInputs !!!
+        pass
+
     def search_player_by_id(self, search):
         # probleme, je ne sais pas comment faire avec le player_registry, l'idée est de chercher l'uuid dans le dict player_registry
         pass

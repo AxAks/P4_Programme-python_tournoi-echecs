@@ -16,7 +16,7 @@ class Form(Menu):
                          previous_page=previous_page, root_page=root_page,
                          exiting_message=exiting_message)
 
-    def add_new(self, properties, *args):   #essayer de rendre add_new_tournament et add_new_player générique !!
+    def add_new(self, , *args):   #essayer de rendre add_new_tournament et add_new_player générique !! cf ask_obj_property() dans class Player_Inputs
         print(self.program_name, '\n', self.menu_name, '\n')
         # Où est ce que je recupère la liste des properties et comment je fais le tri par rapport à l'objet, dans les classes filles... à continuer elaboratino redaction!
         properties = {} # reflechir par rapport à add tournament et add player
