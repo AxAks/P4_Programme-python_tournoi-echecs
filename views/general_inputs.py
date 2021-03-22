@@ -198,9 +198,6 @@ class TournamentInputs:
             n += 1
         return tournament_players_identifier
 
-
-
-
     def ask_tournament_time_control(self) -> str:
         """
         This method asks for the time control format of the tournament using digits
@@ -234,10 +231,11 @@ class TournamentInputs:
         """
         This method asks for a description of the tournament
         """
-        _input = input("Enter Tournament Description: ")  # mettre des verifs  de formatage de l'input ici et demander de resaisir si pas bon (ex : longueur du texte ?, limitation pas mis dans les models)
+        _input = input("Enter Tournament Description: ")
+        while _input == '':
+            print('Description cannot be empty, please retry...')
+            _input = input("Enter Tournament Description: ")  # Verif que l'input n'est pas vide
         return _input
-
-
 
 
     # defs à reprendre et reutiliser autre part !!!!!
@@ -300,4 +298,5 @@ class TournamentInputs:
 
 
 TournamentInputs().ask_tournament_players_identifier()
+
 
