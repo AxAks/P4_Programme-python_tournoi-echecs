@@ -8,10 +8,6 @@ from views.menus.list_tournaments_menu import ListTournamentsMenu
 
 import views.menus.home_menu as home_menu
 
-"""
-View file for the Tournament Management Menu.
-"""
-
 
 class TournamentMenu(Menu):
     """

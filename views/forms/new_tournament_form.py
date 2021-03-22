@@ -6,21 +6,25 @@ Form file for the creation of a new tournament in the database.
 
 from views.forms.form import Form
 from views.general_inputs import TournamentInputs
+from views.menus.menu import Menu
 
 
-class NewTournamentForm(Form):  # faire heriter de Menu aussi ? (fonction de navigation : back, etc)
+class NewTournamentForm(Form, Menu):  # faire heriter de Menu aussi ? (fonction de navigation : back, etc) # en cascade actuellement : Menu -> Form -> .
     """
     This class asks the required data for the creation of a Tournament instance
     and returns a dict.
     """
-    def __init__(self):
-        pass
+    def __init__(self, program_name='Chess Tournament Manager', menu_name='New Tournament Form'):
+        super().__init__(program_name='Chess Tournament Manager', menu_name='New Tournament Form')
+        specific_menu_choices = [self.add_new_tournament]
+        [self.choices.append(choice) for choice in specific_menu_choices]
 
     def add_new_tournament(self) -> dict:
         """
         This method asks all the required info about a specific tournament.
         It returns the info as a dict
         """
+        print(self.program_name, '\n', self.menu_name, '\n')
         ask_properties_dict = {
         'name': TournamentInputs().ask_tournament_name(),
         'location': TournamentInputs().ask_tournament_location(),
@@ -34,14 +38,11 @@ class NewTournamentForm(Form):  # faire heriter de Menu aussi ? (fonction de na
         new_tournament_dict = {}
         for key in ask_properties_dict:
             new_tournament_dict[key] = ask_properties_dict[key]
-        print(new_tournament_dict)
         return new_tournament_dict
         """
-        print(f'\nTournament Information\n', new_tournament_dict)
+        print(f'\nTournament Information\n', new_tournament_dict)  # pas dans les views
         tournament_factory = Factory(Tournament)
         new_tournament = tournament_factory.create(**new_tournament_dict)
-        print(tournament_factory.registry)
-        print(new_tournament.__dict__)
         return new_tournament
         """
 

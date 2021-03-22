@@ -3,7 +3,7 @@
 """
 File to launch the program:
 from the terminal : python chess_tournament_manager.py
-the file is located at the root of the project
+the file is located at the root of the project,
 it redirects to the Home Menu file in the views directory.
 """
 

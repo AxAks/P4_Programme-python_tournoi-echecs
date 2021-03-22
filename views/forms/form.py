@@ -11,5 +11,14 @@ class Form(Menu):
     This class is a parent Class for all Forms
     It enables the user to enter data and return the data as dicts.
     """
-    def __init__(self):
-        super().__init__(program_name='Chess Tournament Manager', menu_name='Form')
+    def __init__(self, program_name, menu_name):
+        super().__init__(program_name=program_name, menu_name=menu_name,
+                         previous_page=None, root_page=False,
+                         exiting_message='Leaving Form')
+
+    def add_new(self, ):   #essayer de rendre add_new_tournament et add_new_player générique !!
+        print(self.program_name, '\n', self.menu_name, '\n')
+        properties = {'où est ce que je recupere la lsite des properties...'}
+        properties_dict = {}
+        for _property in properties:
+            properties_dict[_property] = ask_property()

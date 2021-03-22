@@ -15,9 +15,7 @@ Controller : link between Models (Classes) and Views
 plusieurs fichiers controller à écrire : scinder
 """
 
-# Use Factory Method
-# methode factory (voir tuto design pattern)
-# voir controller directement : Class Factory
+# voir comment on gère SuperFactory, Factory, PlayerFactory, Tournament Factory : mise en place d'un Singleton ?
 
 
 class PlayerFactory:
@@ -30,9 +28,9 @@ class PlayerFactory:
         return player_factory
 
 
-class PlayerMenuController:
-    def redirect_player_menu(self):
-        PlayerMenu().run()
+class PlayerController(Player, PlayerMenu):
+    def __init__(self):
+        super().__init__()
 
 
 # infos pour la suite !

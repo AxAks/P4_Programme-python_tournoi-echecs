@@ -5,11 +5,6 @@ from views.menus.menu import Menu
 import views.menus.player_menu as player_menu  # import du module plutot que la classe pour eviter le pb d'import circulaire
 
 
-"""
-View file for the Player Reports Management Menu.
-"""
-
-
 class ListPlayerMenu(Menu):
     """
     This class is a menu used to display sorted or filtered lists of Players from the Database.

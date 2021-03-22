@@ -1,9 +1,5 @@
 # coding=utf-8
 
-"""
-Generic Class for Menus
-"""
-
 import sys
 
 

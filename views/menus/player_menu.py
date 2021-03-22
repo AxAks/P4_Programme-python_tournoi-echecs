@@ -6,11 +6,6 @@ from views.menus.menu import Menu
 import views.menus.home_menu as home_menu  # import du module plutot que la classe pour eviter le pb d'import circulaire
 
 
-"""
-View file for the Player Database Management Menu.
-"""
-
-
 class PlayerMenu(Menu):
     """
     This class manages a menu to navigate through the Player Database Management.
@@ -27,7 +22,7 @@ class PlayerMenu(Menu):
         ListPlayerMenu().run()
 
     def add_new_player(self):
-        NewPlayerForm().add_new_player()
+        NewPlayerForm().run()
 
     def edit_player(self):
         pass

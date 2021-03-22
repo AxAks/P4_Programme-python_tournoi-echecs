@@ -3,10 +3,6 @@
 from views.menus.menu import Menu
 from views.menus import tournament_menu   # import du module plutot que la classe pour eviter le pb d'import circulaire
 
-"""
-View file for the Tournaments Reports Management Menu.
-"""
-
 
 class ListTournamentsMenu(Menu):
     """
