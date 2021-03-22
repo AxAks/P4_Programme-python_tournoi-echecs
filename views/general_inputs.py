@@ -306,9 +306,4 @@ class TournamentInputs:
         pass
 
 
-PlayerInputs().ask_player_identifier()
-TournamentInputs().ask_tournament_players_identifier()
-TournamentInputs().ask_tournament_time_control()
-TournamentInputs().ask_tournament_description()
-
 
