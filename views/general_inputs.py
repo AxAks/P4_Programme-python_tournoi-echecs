@@ -6,6 +6,7 @@ File listing all possible inputs
 # à scinder surement ensuite !
 import re
 from datetime import date
+from uuid import UUID
 
 from models.player import Player
 from models.tournament import Tournament
@@ -17,6 +18,17 @@ class PlayerInputs:
 
     def __init__(self):
         pass
+
+    def ask_player_identifier(self) -> str: # pas facile de copier un uuid4 , plutot une recherche !!
+        valid_uuid4 = False
+        _input = input(f"Enter Player ID")
+        while not valid_uuid4:
+            try:
+                _input = UUID(str(_input), version=4)
+                valid_uuid4 = True
+            except ValueError:
+                print('Invalid player Identifier, please retry...')
+        return _input
 
     def ask_player_last_name(self) -> str:
         """
@@ -160,16 +172,29 @@ class TournamentInputs:
                 _input = input("Enter Tournament's end date (YYYY-MM-DD): ")
         return _input
 
+
     def ask_tournament_players_identifier(self) -> str:  #  ce serait sympa de pouvoir faire une recherche dans la base des joueurs !
         # si on a des string vide ca pete derriere à l'instanciation des Players ...
         """
         This method asks for the list of 8 players for the tournament
         """
-        tournament_players_identifier = []  # mettre des verifs  de formatage de l'input ici et demander de resaisir si pas bon
+        #  mettre des verifs  de formatage de l'input ici et demander de resaisir si pas bon ( mais faire une recherche car impossible de taper un uuid4...)
+        tournament_players_identifier = []
         n = 1
         while n < 9:
-            _input = input(f"Enter Player ID {n}/8:")
-            tournament_players_identifier.append(_input)
+            valid_uuid4 = False
+            _input = input(f"Enter Player ID {n}/8:") # mettre en place une recherche dans le registre plutot ! + ajouter une verif : que l'uuid n'est pas djà entré dans la liste!
+            while not valid_uuid4:
+                try:
+                    _input = UUID(str(_input), version=4)
+                    valid_uuid4 = True
+                except ValueError:
+                    print('Invalid player Identifier, please retry...')
+                    _input = input(f"Enter Player ID {n}/8:")
+            if _input not in tournament_players_identifier:
+                tournament_players_identifier.append(_input)
+            else:
+                print('Player Identifier already entered, please retry...')
             n += 1
         return tournament_players_identifier
 
@@ -209,7 +234,7 @@ class TournamentInputs:
         """
         This method asks for a description of the tournament
         """
-        _input = input("Enter Tournament Description: ")  # mettre des verifs  de formatage de l'input ici et demander de resaisir si pas bon
+        _input = input("Enter Tournament Description: ")  # mettre des verifs  de formatage de l'input ici et demander de resaisir si pas bon (ex : longueur du texte ?, limitation pas mis dans les models)
         return _input
 
 
@@ -274,5 +299,5 @@ class TournamentInputs:
         pass
 
 
-PlayerInputs().ask_player_birthdate()
+TournamentInputs().ask_tournament_players_identifier()
 
