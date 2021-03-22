@@ -42,8 +42,9 @@ class PlayerInputs:
 
     def ask_player_birthdate(self) -> date:
         """
-        This method asks for the player's birthdate
-        and checks the formatting of the string
+        This method asks for the player's birthdate,
+        checks the format of the string entered
+        and forces it into a date format
         """
         valid_date = False
         _input = input("Enter Player Birthdate(YYYY-MM-DD): ")
@@ -60,7 +61,8 @@ class PlayerInputs:
 
     def ask_player_gender(self) -> str:
         """
-        This method asks for the player's gender
+        This method asks for the player's gender using digits
+        and returns a formatted string
         """
         valid_gender = False  # Verif tordue mais ca marche !!
         choices_info = '(1: MALE, 2: FEMALE)'
@@ -154,7 +156,8 @@ class TournamentInputs:
 
     def ask_tournament_time_control(self) -> str:
         """
-        This method asks for the time control format of the tournament
+        This method asks for the time control format of the tournament using digits
+        and returns a formatted string
         """
         valid_time_control = False
         choices_info = '(1: BULLET, 2: BLITZ, 3: RAPIDE)'
