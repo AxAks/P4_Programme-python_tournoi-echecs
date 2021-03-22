@@ -24,6 +24,7 @@ tournament343copy = tournament_factory.create(**test_sample.tournament343_dict)
 
 print(f"Player1 ID: {player1.identifier}")
 print(f"Player2 ID: {player2.identifier}")
+print(player1copy.identifier)
 print(f"Tournament 35: {tournament35.__dict__}")
 print(f"Registre Joueurs: {player_factory.registry}")
 print(f"Registre Tournois:{tournament_factory.registry}")
