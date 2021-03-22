@@ -8,8 +8,6 @@ import re
 from datetime import date
 from uuid import UUID
 
-from models.player import Player
-from models.tournament import Tournament
 from constants import ALPHABETICAL_STRING_RULE, RANKING_RANGE, ALPHA_NUMERICAL_STRING_RULE
 
 
@@ -19,15 +17,17 @@ class PlayerInputs:
     def __init__(self):
         pass
 
-    def ask_player_identifier(self) -> str: # pas facile de copier un uuid4 , plutot une recherche !!
+    def ask_player_identifier(self) -> str:  # pas facile de copier un uuid4 , plutot une recherche !!
         valid_uuid4 = False
-        _input = input(f"Enter Player ID")
+        input_info = f"Enter Player ID:"
+        _input = input(input_info)
         while not valid_uuid4:
             try:
                 _input = UUID(str(_input), version=4)
                 valid_uuid4 = True
             except ValueError:
                 print('Invalid player Identifier, please retry...')
+                _input = input(input_info)
         return _input
 
     def ask_player_last_name(self) -> str:
@@ -35,10 +35,11 @@ class PlayerInputs:
         This method asks for the player's last name
         and checks the formatting of the string
         """
-        _input = input("Enter Player Last Name: ")
+        input_info = "Enter Player Last Name: "
+        _input = input(input_info)
         while not re.match(ALPHABETICAL_STRING_RULE, _input):
             print('Unauthorized characters found, please retry...')
-            _input = input("Enter Player Last Name: ")  # Verif de formatage String saisie
+            _input = input(input_info)
         return _input
 
     def ask_player_first_name(self) -> str:
@@ -46,10 +47,11 @@ class PlayerInputs:
         This method asks for the player's first name
         and checks the formatting of the string
         """
-        _input = input("Enter Player First Name: ")
+        input_info = "Enter Player First Name: "
+        _input = input(input_info)
         while not re.match(ALPHABETICAL_STRING_RULE, _input):
             print('Unauthorized characters found, please retry...')
-            _input = input("Enter Player First Name: ")  # Verif de formatage String saisie lettres seulement
+            _input = input(input_info)
         return _input
 
     def ask_player_birthdate(self) -> date:
@@ -59,14 +61,15 @@ class PlayerInputs:
         and forces it into a date format
         """
         valid_date = False
-        _input = input("Enter Player Birthdate(YYYY-MM-DD): ")
+        input_info = "Enter Player Birthdate(YYYY-MM-DD): "
+        _input = input(input_info)
         while not valid_date:
             try:
                 _input = date.fromisoformat(_input)
                 valid_date = True
-            except ValueError:  # Verif de formatage String saisie format date iso , + chiffres et pas des lettres
+            except ValueError:
                 print('Not in format YYYY-MM-DD, please retry...')
-                _input = input("Enter Player Birthdate(YYYY-MM-DD): ")
+                _input = input(input_info)
         return _input
 
 
@@ -75,7 +78,7 @@ class PlayerInputs:
         This method asks for the player's gender using digits
         and returns a formatted string
         """
-        # valid_gender = False  # Verif tordue mais ca marche !!
+        valid_gender = False
         choices_info = '(1: MALE, 2: FEMALE)'
         input_info = f'Enter Player Gender {choices_info}: '
         wrong_input = 'Invalid choice (1 or 2), please retry...'
@@ -103,15 +106,17 @@ class PlayerInputs:
         This method asks for the player's ranking
         """
         valid_ranking = False
+        input_info = "Enter Player Ranking: "
+        wrong_input = 'Ranking must be a digit between 100 and 3000, please retry...'
         while valid_ranking is False:
             try:
-                _input = int(input("Enter Player Ranking: "))  #  Verif que string est integer btw 100 et 3000. pb quand lettre.
+                _input = int(input(input_info))
                 if _input in RANKING_RANGE:
                     valid_ranking = True
                 else:
-                    print('Ranking must be a digit between 100 and 3000, please retry...')
+                    print(wrong_input)
             except ValueError:
-                print('Ranking must be a digit between 100 and 3000, please retry...')
+                print(wrong_input)
         return _input
 
 
@@ -120,60 +125,62 @@ class TournamentInputs:
     def __init__(self):
         pass
 
-
     def ask_tournament_name(self) -> str:
         """
         This method asks for the tournament's name
         """
-        _input = input("Enter Tournament name: ")  # mettre des verifs  de formatage de l'input ici et demander de resaisir si pas bon
+        input_info = "Enter Tournament name: "
+        _input = input(input_info)
         while not re.match(ALPHA_NUMERICAL_STRING_RULE, _input):
-            print('Unauthorized characters found, please retry...')  # Verif de formatage String saisie
-            _input = input("Enter Player Last Name: ")
+            print('Unauthorized characters found, please retry...')
+            _input = input(input_info)
         return _input
 
     def ask_tournament_location(self) -> str:
         """
         This method asks for the tournament's location
         """
-        _input = input("Enter Tournament Location: ")  # mettre des verifs  de formatage de l'input ici et demander de resaisir si pas bon
+        input_info = "Enter Tournament Location: "
+        _input = input(input_info)
         while not re.match(ALPHABETICAL_STRING_RULE, _input):
-            print('Unauthorized characters found, please retry...')  # Verif de formatage String saisie
-            _input = input("Enter Player Last Name: ")
+            print('Unauthorized characters found, please retry...')
+            _input = input(input_info)
         return _input
 
 
-    def ask_tournament_start_date(self) -> str:
+    def ask_tournament_start_date(self) -> date:
         """
         This method asks for the tournament's start date
         """
         valid_date = False
-        _input = input("Enter Tournament's start date (YYYY-MM-DD): ")  # mettre des verifs  de formatage de l'input ici et demander de resaisir si pas bon
+        input_info = "Enter Tournament's start date (YYYY-MM-DD): "
+        _input = input(input_info)
         while not valid_date:
             try:
                 _input = date.fromisoformat(_input)
                 valid_date = True
             except ValueError:
                 print('Not in format YYYY-MM-DD, please retry...')
-                _input = input("Enter Tournament's start date (YYYY-MM-DD): ")
+                _input = input(input_info)
         return _input
 
-    def ask_tournament_end_date(self) -> str:
+    def ask_tournament_end_date(self) -> date:
         """
         This method asks for the tournament's end date
         """
         valid_date = False
-        _input = input("Enter Tournament's end date (YYYY-MM-DD): ")  # mettre des verifs  de formatage de l'input ici et demander de resaisir si pas bon
+        input_info = "Enter Tournament's end date (YYYY-MM-DD): "
+        _input = input(input_info)
         while not valid_date:
             try:
                 _input = date.fromisoformat(_input)
                 valid_date = True
             except ValueError:
                 print('Not in format YYYY-MM-DD, please retry...')
-                _input = input("Enter Tournament's end date (YYYY-MM-DD): ")
+                _input = input(input_info)
         return _input
 
-
-    def ask_tournament_players_identifier(self) -> str:  #  ce serait sympa de pouvoir faire une recherche dans la base des joueurs !
+    def ask_tournament_players_identifier(self) -> list:  #  ce serait sympa de pouvoir faire une recherche dans la base des joueurs !
         # si on a des string vide ca pete derriere à l'instanciation des Players ...
         """
         This method asks for the list of 8 players for the tournament
@@ -183,19 +190,20 @@ class TournamentInputs:
         n = 1
         while n < 9:
             valid_uuid4 = False
-            _input = input(f"Enter Player ID {n}/8:") # mettre en place une recherche dans le registre plutot ! + ajouter une verif : que l'uuid n'est pas djà entré dans la liste!
+            input_info = f"Enter Player ID {n}/8:"
+            _input = input(input_info)  # mettre en place une recherche dans le registre plutot !
             while not valid_uuid4:
                 try:
                     _input = UUID(str(_input), version=4)
                     valid_uuid4 = True
+                    if _input not in tournament_players_identifier:
+                        tournament_players_identifier.append(_input)
+                        n += 1
+                    else:
+                        print('Player Identifier already entered, please retry...')
                 except ValueError:
                     print('Invalid player Identifier, please retry...')
-                    _input = input(f"Enter Player ID {n}/8:")
-            if _input not in tournament_players_identifier:
-                tournament_players_identifier.append(_input)
-            else:
-                print('Player Identifier already entered, please retry...')
-            n += 1
+                    _input = input(input_info)
         return tournament_players_identifier
 
     def ask_tournament_time_control(self) -> str:
@@ -231,10 +239,11 @@ class TournamentInputs:
         """
         This method asks for a description of the tournament
         """
-        _input = input("Enter Tournament Description: ")
+        input_info = "Enter Tournament Description: "
+        _input = input(input_info)
         while _input == '':
             print('Description cannot be empty, please retry...')
-            _input = input("Enter Tournament Description: ")  # Verif que l'input n'est pas vide
+            _input = input(input_info)
         return _input
 
 
@@ -297,6 +306,9 @@ class TournamentInputs:
         pass
 
 
+PlayerInputs().ask_player_identifier()
 TournamentInputs().ask_tournament_players_identifier()
+TournamentInputs().ask_tournament_time_control()
+TournamentInputs().ask_tournament_description()
 
 
