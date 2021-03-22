@@ -18,7 +18,8 @@ class Form(Menu):
 
     def add_new(self, ):   #essayer de rendre add_new_tournament et add_new_player générique !!
         print(self.program_name, '\n', self.menu_name, '\n')
-        properties = {'où est ce que je recupere la lsite des properties...'}
+        # Où est ce que je recupère la liste des properties et comment je fais le tri par rapport à l'objet, dans les classes filles... à continuer elaboratino redaction!
+        properties = {}
         properties_dict = {}
         for _property in properties:
             properties_dict[_property] = ask_property()
