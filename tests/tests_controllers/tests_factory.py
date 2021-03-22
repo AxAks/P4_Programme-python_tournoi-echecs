@@ -17,15 +17,16 @@ tournament_factory = sf.create_factory(Tournament)
 # Creation des objets via Factory
 player1 = player_factory.create(**test_sample.player1_dict)
 player2 = player_factory.create(**test_sample.player2_dict)
+player1copy = player_factory.create(**test_sample.player1_dict)
 tournament35 = tournament_factory.create(**test_sample.tournament35_dict)
 tournament343 = tournament_factory.create(**test_sample.tournament343_dict)
+tournament343copy = tournament_factory.create(**test_sample.tournament343_dict)
 
 print(f"Player1 ID: {player1.identifier}")
 print(f"Player2 ID: {player2.identifier}")
 print(f"Tournament 35: {tournament35.__dict__}")
 print(f"Registre Joueurs: {player_factory.registry}")
 print(f"Registre Tournois:{tournament_factory.registry}")
-
 print(f"Recherche 1 (Player): {player_factory.search('ff')}")
 print(f"Recherche 2 (Tournament): {tournament_factory.search('Gen')}")
 

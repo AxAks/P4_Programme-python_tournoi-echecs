@@ -25,7 +25,10 @@ class Factory:
         identifier = obj.identifier
         if identifier not in self.registry:
             self.registry[identifier] = obj
-            return obj
+        else:
+            print(f'{self.obj_type.__name__}: "{obj.identifier}" already exists in the Registry. '
+                  f'It cannot be created twice.')
+        return obj
 
     def search(self, search: str) -> Any:
         results = {}
