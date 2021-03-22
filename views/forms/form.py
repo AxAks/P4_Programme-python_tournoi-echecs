@@ -19,7 +19,18 @@ class Form(Menu):
     def add_new(self, ):   #essayer de rendre add_new_tournament et add_new_player générique !!
         print(self.program_name, '\n', self.menu_name, '\n')
         # Où est ce que je recupère la liste des properties et comment je fais le tri par rapport à l'objet, dans les classes filles... à continuer elaboratino redaction!
-        properties = {}
+        properties = {} # reflechir par rapport à add tournament et add player
+        # Ex de properties pour un objet: 'last_name', 'first_name', 'birthdate', 'gender', 'ranking'
+        # Ex de fonctions d'input correspondantes pour cet objet:
+        # PlayerInputs().ask_player_last_name(),   # PlayerInputs doit aussi etre rendu iddentique poru tous les objects
+        # PlayerInputs().ask_player_first_name(),
+        # PlayerInputs().ask_player_birthdate(),
+        # PlayerInputs().ask_player_gender(),
+        # PlayerInputs().ask_player_ranking()
+
         properties_dict = {}
+
         for _property in properties:
             properties_dict[_property] = ask_property()
+
+        return properties_dict
