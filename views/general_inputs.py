@@ -9,7 +9,7 @@ from datetime import date
 
 from models.player import Player
 from models.tournament import Tournament
-from constants import ALPHABETICAL_STRING_RULE, RANKING_RANGE
+from constants import ALPHABETICAL_STRING_RULE, RANKING_RANGE, ALPHA_NUMERICAL_STRING_RULE
 
 
 # Inputs Player
@@ -48,12 +48,11 @@ class PlayerInputs:
         """
         valid_date = False
         _input = input("Enter Player Birthdate(YYYY-MM-DD): ")
-        while valid_date is False:
+        while not valid_date:
             try:
                 _input = date.fromisoformat(_input)
                 valid_date = True
             except ValueError:  # Verif de formatage String saisie format date iso , + chiffres et pas des lettres
-                valid_date = False
                 print('Not in format YYYY-MM-DD, please retry...')
                 _input = input("Enter Player Birthdate(YYYY-MM-DD): ")
         return _input
@@ -64,7 +63,7 @@ class PlayerInputs:
         This method asks for the player's gender using digits
         and returns a formatted string
         """
-        valid_gender = False  # Verif tordue mais ca marche !!
+        # valid_gender = False  # Verif tordue mais ca marche !!
         choices_info = '(1: MALE, 2: FEMALE)'
         input_info = f'Enter Player Gender {choices_info}: '
         wrong_input = 'Invalid choice (1 or 2), please retry...'
@@ -109,11 +108,15 @@ class TournamentInputs:
     def __init__(self):
         pass
 
+
     def ask_tournament_name(self) -> str:
         """
         This method asks for the tournament's name
         """
         _input = input("Enter Tournament name: ")  # mettre des verifs  de formatage de l'input ici et demander de resaisir si pas bon
+        while not re.match(ALPHA_NUMERICAL_STRING_RULE, _input):
+            print('Unauthorized characters found, please retry...')  # Verif de formatage String saisie
+            _input = input("Enter Player Last Name: ")
         return _input
 
     def ask_tournament_location(self) -> str:
@@ -121,20 +124,40 @@ class TournamentInputs:
         This method asks for the tournament's location
         """
         _input = input("Enter Tournament Location: ")  # mettre des verifs  de formatage de l'input ici et demander de resaisir si pas bon
+        while not re.match(ALPHABETICAL_STRING_RULE, _input):
+            print('Unauthorized characters found, please retry...')  # Verif de formatage String saisie
+            _input = input("Enter Player Last Name: ")
         return _input
+
 
     def ask_tournament_start_date(self) -> str:
         """
         This method asks for the tournament's start date
         """
+        valid_date = False
         _input = input("Enter Tournament's start date (YYYY-MM-DD): ")  # mettre des verifs  de formatage de l'input ici et demander de resaisir si pas bon
+        while not valid_date:
+            try:
+                _input = date.fromisoformat(_input)
+                valid_date = True
+            except ValueError:
+                print('Not in format YYYY-MM-DD, please retry...')
+                _input = input("Enter Tournament's start date (YYYY-MM-DD): ")
         return _input
 
     def ask_tournament_end_date(self) -> str:
         """
         This method asks for the tournament's end date
         """
+        valid_date = False
         _input = input("Enter Tournament's end date (YYYY-MM-DD): ")  # mettre des verifs  de formatage de l'input ici et demander de resaisir si pas bon
+        while not valid_date:
+            try:
+                _input = date.fromisoformat(_input)
+                valid_date = True
+            except ValueError:
+                print('Not in format YYYY-MM-DD, please retry...')
+                _input = input("Enter Tournament's end date (YYYY-MM-DD): ")
         return _input
 
     def ask_tournament_players_identifier(
@@ -252,5 +275,5 @@ class TournamentInputs:
         pass
 
 
-PlayerInputs().ask_player_gender()
-TournamentInputs().ask_tournament_time_control()
+PlayerInputs().ask_player_birthdate()
+
