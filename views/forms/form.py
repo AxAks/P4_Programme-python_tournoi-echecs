@@ -11,12 +11,12 @@ class Form(Menu):
     This class is a parent Class for all Forms
     It enables the user to enter data and return the data as dicts.
     """
-    def __init__(self, program_name, menu_name):
+    def __init__(self, program_name, menu_name, previous_page, root_page, exiting_message):
         super().__init__(program_name=program_name, menu_name=menu_name,
-                         previous_page=None, root_page=False,
-                         exiting_message='Leaving Form')
+                         previous_page=previous_page, root_page=root_page,
+                         exiting_message=exiting_message)
 
-    def add_new(self, ):   #essayer de rendre add_new_tournament et add_new_player générique !!
+    def add_new(self, properties, *args):   #essayer de rendre add_new_tournament et add_new_player générique !!
         print(self.program_name, '\n', self.menu_name, '\n')
         # Où est ce que je recupère la liste des properties et comment je fais le tri par rapport à l'objet, dans les classes filles... à continuer elaboratino redaction!
         properties = {} # reflechir par rapport à add tournament et add player

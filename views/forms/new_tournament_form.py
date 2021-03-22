@@ -6,6 +6,7 @@ Form file for the creation of a new tournament in the database.
 
 from views.forms.form import Form
 from views.general_inputs import TournamentInputs
+from views.menus import tournament_menu
 from views.menus.menu import Menu
 
 
@@ -15,7 +16,10 @@ class NewTournamentForm(Form, Menu):  # faire heriter de Menu aussi ? (fonction
     and returns a dict.
     """
     def __init__(self, program_name='Chess Tournament Manager', menu_name='New Tournament Form'):
-        super().__init__(program_name='Chess Tournament Manager', menu_name='New Tournament Form')
+        super().__init__(program_name='Chess Tournament Manager', menu_name='New Tournament Form',
+                         previous_page=tournament_menu.TournamentMenu(),
+                         root_page=False, exiting_message='Leaving Form')
+
         specific_menu_choices = [self.add_new_tournament]
         [self.choices.append(choice) for choice in specific_menu_choices]
 

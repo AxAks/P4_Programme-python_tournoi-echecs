@@ -4,17 +4,21 @@
 Form file for the creation of a new player in the database.
 """
 from views.forms.form import Form
+from views.menus import player_menu
 from views.menus.menu import Menu  # ?
 from views.general_inputs import PlayerInputs
 
 
-class NewPlayerForm(Form, Menu):  # faire heriter de Menu aussi ? (fonction de navigation : back, etc) # en cascade actuellement : Menu -> Form -> .
+class NewPlayerForm(Form, Menu):
     """
     This class asks the required data for the creation of a player instance.
     and returns a dict.
     """
     def __init__(self):
-        super().__init__(program_name='Chess Tournament Manager', menu_name='New Player Form')
+        super().__init__(program_name='Chess Tournament Manager', menu_name='New Player Form',
+                         previous_page=player_menu.PlayerMenu(),
+                         root_page=False, exiting_message='Leaving Form')
+
         specific_menu_choices = [self.add_new_player]
         [self.choices.append(choice) for choice in specific_menu_choices]
 
