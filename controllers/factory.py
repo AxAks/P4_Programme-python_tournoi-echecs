@@ -19,7 +19,8 @@ class Factory:
 
     def create(self, **params):
         """
-        This method creates new objects through the specific factory and adds them to a registry
+        This method creates new objects through the specific factory
+        and adds them to a registry if the identifier is not already registered
         """
         obj = self.obj_type(**params)
         identifier = obj.identifier
