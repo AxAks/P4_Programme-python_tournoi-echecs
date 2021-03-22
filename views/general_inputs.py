@@ -160,8 +160,7 @@ class TournamentInputs:
                 _input = input("Enter Tournament's end date (YYYY-MM-DD): ")
         return _input
 
-    def ask_tournament_players_identifier(
-            self) -> str:  #  ce serait sympa de pouvoir faire une recherche dans la base des joueurs !
+    def ask_tournament_players_identifier(self) -> str:  #  ce serait sympa de pouvoir faire une recherche dans la base des joueurs !
         # si on a des string vide ca pete derriere à l'instanciation des Players ...
         """
         This method asks for the list of 8 players for the tournament
