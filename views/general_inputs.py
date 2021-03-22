@@ -304,6 +304,3 @@ class TournamentInputs:
         It takes into account the match-ups that have already been played in the previous rounds.
         """
         pass
-
-
-
