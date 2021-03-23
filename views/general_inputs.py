@@ -10,18 +10,23 @@ from uuid import UUID
 
 from constants import ALPHABETICAL_STRING_RULE, RANKING_RANGE, ALPHA_NUMERICAL_STRING_RULE
 
+# generic inputs
+class GenericInput:
+
+    def __init__(self):
+        pass
+
+    def ask_obj_property(self, obj='player', _property='last_name'):  # à rédiger et à enlever de PlayerInputs !!!
+        # appelé par Form.add_new, doit etre generique et renvoyer vers une fonction particuliere selon l'objet
+        funct_str = f'self.ask_{obj}_{_property}()' # voir argparse ?
+        print(funct_str)
+        print(type(funct_str))
 
 # Inputs Player
 class PlayerInputs:
 
     def __init__(self):
         pass
-
-    def ask_obj_property(self, obj='player', _property='last_name'):  # à rédiger et à enlever de PlayerInputs !!!
-        _property =
-        funct_str = f'self.ask_{obj}_{_property}()' # voir argparse ?
-        print(funct_str)
-        print(type(funct_str))
 
     def search_player_by_id(self, search):
         # probleme, je ne sais pas comment faire avec le player_registry, l'idée est de chercher l'uuid dans le dict player_registry
@@ -347,6 +352,3 @@ class TournamentInputs:
         It takes into account the match-ups that have already been played in the previous rounds.
         """
         pass
-
-
-PlayerInputs().ask_obj_property()

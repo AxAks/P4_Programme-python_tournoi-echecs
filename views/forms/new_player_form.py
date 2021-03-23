@@ -5,7 +5,7 @@ Form file for the creation of a new player in the database.
 """
 from views.forms.form import Form
 from views.menus import player_menu
-from views.menus.menu import Menu  # ?
+from views.menus.menu import Menu
 from views.general_inputs import PlayerInputs
 
 
@@ -22,7 +22,7 @@ class NewPlayerForm(Form, Menu):
         specific_menu_choices = [self.add_new_player]
         [self.choices.append(choice) for choice in specific_menu_choices]
 
-    def add_new_player(self) -> dict:  # à passer en tnat que add_new dans Form
+    def add_new_player(self) -> dict:  # à passer en tant que add_new (générique) dans Form
         print(self.program_name, '\n', self.menu_name, '\n')
         ask_properties_dict = {
         'last_name': PlayerInputs().ask_player_last_name(),
@@ -40,3 +40,4 @@ class NewPlayerForm(Form, Menu):
         new_player = Factory(Player).create(**new_player_dict)
         return new_player
         """
+
