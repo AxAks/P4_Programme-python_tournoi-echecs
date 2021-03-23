@@ -13,14 +13,15 @@ from constants import ALPHABETICAL_STRING_RULE, RANKING_RANGE, ALPHA_NUMERICAL_S
 # generic inputs
 class GenericInput:
 
-    def __init__(self):
-        pass
+    def __init__(self, funct):
+        self.funct = funct
 
-    def ask_obj_property(self, obj='player', _property='last_name'):  # à rédiger et à enlever de PlayerInputs !!!
+    def ask_obj_property(self, obj, _property):  # à rédiger et à enlever de PlayerInputs !!!
         # appelé par Form.add_new, doit etre generique et renvoyer vers une fonction particuliere selon l'objet
-        funct_str = f'self.ask_{obj}_{_property}()' # voir argparse ?
-        print(funct_str)
-        print(type(funct_str))
+        funct = f'ask_{obj}_{_property}()'
+        self.funct = funct # voir argparse ?
+        print(funct)
+        print(type(funct))
 
 # Inputs Player
 class PlayerInputs:
@@ -352,3 +353,6 @@ class TournamentInputs:
         It takes into account the match-ups that have already been played in the previous rounds.
         """
         pass
+
+
+GenericInput().ask_obj_property()
