@@ -15,7 +15,7 @@ class TournamentInputs(GenericInputs):
     Class listing all possible inputs related to Tournament
     """
     def __init__(self):
-        super().__init__()
+        super().init()
 
     def ask_name(self) -> str:
         """

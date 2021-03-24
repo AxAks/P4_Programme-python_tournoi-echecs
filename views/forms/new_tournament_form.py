@@ -6,7 +6,7 @@ Form file for the creation of a new tournament in the database.
 
 from views.forms.form import Form
 from views.inputs.generic_inputs import GenericInputs
-from views.inputs.tournament_inputs import TournamentInputs
+#from views.inputs.tournament_inputs import TournamentInputs
 from views.menus import tournament_menu
 from views.menus.menu import Menu
 

@@ -7,7 +7,7 @@ from views.forms.form import Form
 from views.inputs.generic_inputs import GenericInputs
 from views.menus import player_menu
 from views.menus.menu import Menu
-from views.inputs.player_inputs import PlayerInputs
+#from views.inputs.player_inputs import PlayerInputs
 
 
 class NewPlayerForm(Form):

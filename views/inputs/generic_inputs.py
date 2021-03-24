@@ -14,19 +14,6 @@ class GenericInputs:
     def __init__(self):
         pass
 
-    """
-    def __init__(self, properties, *args):
-        self.properties = properties
-        errors = []
-        try:
-            [setattr(self, _property, f'aks_{args}') for _property in properties]
-        except AttributeError:
-            errors.append(f'aks_{args}')
-        if errors:
-            raise Exception(f'The following Method(s)'
-                            f' could not be found in {self.__class__.__name__}: {", ".join(errors)}')
-    """
-
     def ask_properties(self, *args):  # fonctionne un peu mais pas fini : comment est ce que je lui passe les args   # appelé par Form.add_new, doit etre generique et renvoyer vers une fonction particuliere selon l'objet
         for arg in args:
             method_name = f'ask_{arg}'
@@ -36,7 +23,6 @@ class GenericInputs:
                 print(f'{arg.replace("_", " ").title()} is  : "{method}"')
             except Exception as e:
                 raise Exception(e)
-        return method #f'ask{arg}()' #pb si deux objets ont des attributs identiques -> surement qu'ils font la meme chose, à voir
         return method #f'ask{arg}()' #pb si deux objets ont des attributs identiques -> surement qu'ils font la meme chose, à voir
 
     @property

@@ -1,6 +1,6 @@
 # coding=utf-8
 
-
+"""
 import re
 from datetime import date
 from uuid import UUID
@@ -8,22 +8,22 @@ from uuid import UUID
 from constants import ALPHABETICAL_STRING_RULE, RANKING_RANGE
 
 from models.factory import Factory
-from views.inputs.generic_inputs import GenericInputs
+from views.inputs import GenericInputs
 
 
 class PlayerInputs(GenericInputs):
-    """
-    Class listing all possible inputs related to players
-    """
+"""
+    #Class listing all possible inputs related to players
+"""
     def __init__(self):
         super().__init__()
 
     @property
     def ask_last_name(self) -> str:
-        """
-        This method asks for the player's last name
-        and checks the formatting of the string
-        """
+"""
+        #This method asks for the player's last name
+        #and checks the formatting of the string
+"""
         input_info = f"Enter Last Name: "
         _input = input(input_info)
         while not re.match(ALPHABETICAL_STRING_RULE, _input):
@@ -33,10 +33,10 @@ class PlayerInputs(GenericInputs):
 
     @property
     def ask_first_name(self) -> str:
-        """
-        This method asks for the player's first name
-        and checks the formatting of the string
-        """
+"""
+        #This method asks for the player's first name
+        #and checks the formatting of the string
+"""
         input_info = "Enter First Name: "
         _input = input(input_info)
         while not re.match(ALPHABETICAL_STRING_RULE, _input):
@@ -65,11 +65,11 @@ class PlayerInputs(GenericInputs):
 
     @property
     def ask_birthdate(self) -> date:
-        """
-        This method asks for the player's birthdate,
-        checks the format of the string entered
-        and forces it into a date format
-        """
+"""
+        #This method asks for the player's birthdate,
+        #checks the format of the string entered
+        #and forces it into a date format
+"""
         valid_date = False
         input_info = "Enter Player Birthdate(YYYY-MM-DD): "
         _input = input(input_info)
@@ -84,10 +84,10 @@ class PlayerInputs(GenericInputs):
 
     @property
     def ask_gender(self) -> str:
-        """
-        This method asks for the player's gender using digits
-        and returns a formatted string
-        """
+"""
+        #This method asks for the player's gender using digits
+        #and returns a formatted string
+"""
         valid_gender = False
         choices_info = '(1: MALE, 2: FEMALE)'
         input_info = f'Enter Player Gender {choices_info}: '
@@ -113,9 +113,9 @@ class PlayerInputs(GenericInputs):
 
     @property
     def ask_ranking(self) -> int:
-        """
-        This method asks for the player's ranking
-        """
+"""
+        #This method asks for the player's ranking
+"""
         valid_ranking = False
         input_info = "Enter Player Ranking: "
         wrong_input = 'Ranking must be a digit between 100 and 3000, please retry...'
@@ -129,3 +129,4 @@ class PlayerInputs(GenericInputs):
             except ValueError:
                 print(wrong_input)
         return _input
+"""

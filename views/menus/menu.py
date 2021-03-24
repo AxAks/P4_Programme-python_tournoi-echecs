@@ -53,6 +53,7 @@ class Menu:
         """
         if self.root_page:
             print(self.exiting_message)
+            self.save_state()
             sys.exit(0)
         else:
             self.previous_page.run()

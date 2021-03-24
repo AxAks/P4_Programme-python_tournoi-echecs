@@ -242,10 +242,8 @@ round91_dict = {
 
 #  Match dicts
 match28_dict = {
-    'player1': {'identifier': '3be40089-64ff-48c2-8e6e-bc005ad378d2', 'last_name': 'Akondé', 'first_name': 'Axel',
-                'birthdate': '1986-05-02', 'gender': 'MALE', 'ranking': 2500},
-    'player2': {'identifier': 'ce0258eb-cfeb-45e6-a56d-8f5d7260bd9b', 'last_name': 'Berd', 'first_name': 'Bernard',
-                'birthdate': '1982-03-01', 'gender': 'MALE', 'ranking': 2400},
+    'player1_id': '3be40089-64ff-48c2-8e6e-bc005ad378d2',
+    'player2_id': 'ce0258eb-cfeb-45e6-a56d-8f5d7260bd9b',
     'player1_score': 1.0,
     'player2_score': 0.0
 }
