@@ -6,7 +6,7 @@ Form file for the creation of a new player in the database.
 from views.forms.form import Form
 from views.menus import player_menu
 from views.menus.menu import Menu
-from views.general_inputs import PlayerInputs
+from views.inputs.generic_inputs import PlayerInputs
 
 
 class NewPlayerForm(Form, Menu):

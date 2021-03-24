@@ -16,11 +16,11 @@ class Model:
         """
         self.properties = properties
         errors = []
-        for property in properties:
+        for _property in properties:
             try:
-                setattr(self, property, data[property] if property in data else None)
+                setattr(self, _property, data[_property] if _property in data else None)
             except AttributeError:
-                errors.append(property)
+                errors.append(_property)
         if errors:
             raise Exception(f'Error detected '
                             f'in the following fields for {self.__class__.__name__}: {", ".join(errors)}')
@@ -32,5 +32,5 @@ class Model:
         """
         if not properties:
             properties = self.properties
-        return {property: getattr(self, f"{property}_pod" if hasattr(self, f"{property}_pod") else property)
-                for property in self.properties if property in properties}
+        return {_property: getattr(self, f"{_property}_pod" if hasattr(self, f"{_property}_pod") else _property)
+                for _property in self.properties if _property in properties}
