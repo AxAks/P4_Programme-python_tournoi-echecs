@@ -7,7 +7,7 @@ from uuid import UUID
 
 from constants import ALPHABETICAL_STRING_RULE, RANKING_RANGE
 
-from controllers.factory import Factory
+from models.factory import Factory
 from views.inputs.generic_inputs import GenericInputs
 
 
@@ -16,7 +16,7 @@ class PlayerInputs(GenericInputs):
     Class listing all possible inputs related to players
     """
     def __init__(self):
-        super().init()
+        super().__init__()
 
     @property
     def ask_last_name(self) -> str:
@@ -24,7 +24,7 @@ class PlayerInputs(GenericInputs):
         This method asks for the player's last name
         and checks the formatting of the string
         """
-        input_info = "Enter Last Name: "
+        input_info = f"Enter Last Name: "
         _input = input(input_info)
         while not re.match(ALPHABETICAL_STRING_RULE, _input):
             print('Unauthorized characters found, please retry...')

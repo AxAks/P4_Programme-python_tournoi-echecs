@@ -94,6 +94,7 @@ player10_dict = {
     'ranking': 500
 }
 
+
 #  Tournament dicts
 tournament24_dict = {
     'name': 'Best Tournament Ever',
@@ -221,6 +222,7 @@ round2_dict = {
     'start_time': '2021-02-26T11:33:07'  # doit etre enregistrée automatiquement quand l'utilisateur créé le round ? ou alors il entre la date et lheure de debut quand il entre les resultats du round
 }
 
+
 # ex : tuple
 round91_dict = {
     'name': 'Round 1',
@@ -254,3 +256,17 @@ match16_dict = {
     'player1_score': 1.0,
     'player2_score': 0.0
 }
+
+
+#regroupement en liste pour simuler l'instanciation (def load_state)
+
+players_list = [
+    player1_dict, player2_dict, player3_dict, player4_dict, player5_dict,
+    player6_dict, player7_dict, player8_dict, player9_dict, player10_dict
+]
+
+tournaments_list = [tournament24_dict, tournament35_dict, tournament343_dict]
+
+rounds_list = [round1_dict, round2_dict]
+
+matches_list = [match16_dict, match28_dict]

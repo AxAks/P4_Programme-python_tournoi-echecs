@@ -5,12 +5,13 @@ Form file for the creation of a new tournament in the database.
 """
 
 from views.forms.form import Form
-from views.inputs.generic_inputs import TournamentInputs
+from views.inputs.generic_inputs import GenericInputs
+from views.inputs.tournament_inputs import TournamentInputs
 from views.menus import tournament_menu
 from views.menus.menu import Menu
 
 
-class NewTournamentForm(Form, Menu):  # faire heriter de Menu aussi ? (fonction de navigation : back, etc) # en cascade actuellement : Menu -> Form -> .
+class NewTournamentForm(Form):  # faire heriter de Menu aussi ? (fonction de navigation : back, etc) # en cascade actuellement : Menu -> Form -> .
     """
     This class asks the required data for the creation of a Tournament instance
     and returns a dict.
@@ -30,14 +31,14 @@ class NewTournamentForm(Form, Menu):  # faire heriter de Menu aussi ? (fonction
         """
         print(self.program_name, '\n', self.menu_name, '\n')
         ask_properties_dict = {
-        'name': TournamentInputs().ask_tournament_name(),
-        'location': TournamentInputs().ask_tournament_location(),
-        'start_date': TournamentInputs().ask_tournament_start_date(),
+        'name': GenericInputs().ask_properties('name'),
+        'location': GenericInputs().ask_properties('location'),
+        'start_date': GenericInputs().ask_properties('start_date'),
         # demander si le tournoi est sur un jour si oui attribuer la meme date que start_date (controller ?) voir check_one_day_tournament (a repenser)
-        'end_date': TournamentInputs().ask_tournament_end_date(),
-        'players_identifier': TournamentInputs().ask_tournament_players_identifier(),
-        'time_control': TournamentInputs().ask_tournament_time_control(),
-        'description': TournamentInputs().ask_tournament_description()
+        'end_date': GenericInputs().ask_properties('end_date'),
+        'players_identifier': GenericInputs().ask_properties('players_identifier'),
+        'time_control': GenericInputs().ask_properties('time_control'),
+        'description': GenericInputs().ask_properties('description')
         }
         new_tournament_dict = {}
         for key in ask_properties_dict:

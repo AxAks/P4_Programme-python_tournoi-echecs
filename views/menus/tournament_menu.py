@@ -1,7 +1,5 @@
 # coding=utf-8
 
-from controllers.factory import Factory
-from models.tournament import Tournament
 from views.forms.new_tournament_form import NewTournamentForm
 from views.menus.menu import Menu
 from views.menus.list_tournaments_menu import ListTournamentsMenu

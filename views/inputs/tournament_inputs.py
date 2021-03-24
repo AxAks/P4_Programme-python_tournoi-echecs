@@ -15,7 +15,7 @@ class TournamentInputs(GenericInputs):
     Class listing all possible inputs related to Tournament
     """
     def __init__(self):
-        super().init()
+        super().__init__()
 
     def ask_name(self) -> str:
         """
@@ -100,9 +100,9 @@ class TournamentInputs(GenericInputs):
                 _input = input(input_info)
         return _input
 
-    def ask_identifiers_list(self) -> list: # liste d'UUID de Players et el nombre est fixé à 8 joueurs : nom de fonction pas explicite
+    def ask_identifiers_list(self) -> list:
+        # liste d'UUID de Players et le nombre est fixé à 8 joueurs : nom de fonction pas explicite
         # ce serait sympa de pouvoir faire une recherche dans la base des joueurs !
-        # si on a des string vide ca pete derriere à l'instanciation des Players ...
         """
         This method asks for a list of 8 players for a tournament
         """
@@ -168,6 +168,3 @@ class TournamentInputs(GenericInputs):
             print('Description cannot be empty, please retry...')
             _input = input(input_info)
         return _input
-
-
-GenericInputs().ask_properties('last_name', 'first_name')

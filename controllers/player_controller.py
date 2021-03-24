@@ -1,6 +1,6 @@
 # coding=utf-8
 
-from controllers.factory import Factory
+from models.factory import Factory
 from models.player import Player
 from views.menus.player_menu import PlayerMenu
 

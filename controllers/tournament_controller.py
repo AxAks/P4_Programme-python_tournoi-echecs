@@ -1,8 +1,5 @@
 # coding=utf-8
 
-from controllers.factory import Factory
-from models.tournament import Tournament
-
 """
 Controller file for Tournament
 """
