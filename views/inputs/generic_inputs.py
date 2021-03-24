@@ -5,7 +5,9 @@ from datetime import date
 from uuid import UUID
 
 from constants import ALPHABETICAL_STRING_RULE, RANKING_RANGE, ALPHA_NUMERICAL_STRING_RULE
+from models.player import Player
 
+from models.superfactory import super_factory as sf # jsute pour le test sur liste des players
 
 class GenericInputs:
     """
@@ -185,6 +187,7 @@ class GenericInputs:
         """
         #  mettre des verifs de formatage de l'input ici et demander de resaisir si pas bon
         # mais faire une recherche car impossible de taper un uuid4...
+        sf.factories[Player].search(input('search a player by id :'))  # sur la bonne voie, continuer !!
         tournament_players_identifier = []
         n = 1
         while n < 9:

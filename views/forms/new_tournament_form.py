@@ -36,7 +36,7 @@ class NewTournamentForm(Form):  # faire heriter de Menu aussi ? (fonction de na
         'start_date': GenericInputs().ask_properties('start_date'),
         # demander si le tournoi est sur un jour si oui attribuer la meme date que start_date (controller ?) voir check_one_day_tournament (a repenser)
         'end_date': GenericInputs().ask_properties('end_date'),
-        'players_identifier': GenericInputs().ask_properties('players_identifier'),
+        'identifiers_list': GenericInputs().ask_properties('identifiers_list'),
         'time_control': GenericInputs().ask_properties('time_control'),
         'description': GenericInputs().ask_properties('description')
         }

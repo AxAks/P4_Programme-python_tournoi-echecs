@@ -48,7 +48,7 @@ class PlayerInputs(GenericInputs):
     def search_by_id(self, _obj, search): # _obj = Tournament ou Player: sachant que ce n'est pas le meme type d'ID... (Round et Match ? ils n'ont pas d'ID mais on peut en faire voir si utile)
         # probleme, je ne sais pas comment faire avec le player_registry, l'idée est de chercher l'uuid dans le dict player_registry ou l'identifier du tournoi dans tournament_registry
         Factory(_obj).search(search)  # pas
-
+        # sf.factories[Player].search !! avec import de sf (super_factory as sf)
     @property
     def ask_identifier(self) -> str:  # pas facile de copier un uuid4 , plutot une recherche !! # juste pour Player !
         valid_uuid4 = False

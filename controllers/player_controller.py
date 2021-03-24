@@ -3,7 +3,7 @@
 from models.factory import Factory
 from models.player import Player
 from views.menus.player_menu import PlayerMenu
-
+from models.superfactory import super_factory as sf
 """
 Controller file for Player
 """
@@ -31,6 +31,10 @@ class PlayerFactory:
 class PlayerController(Player, PlayerMenu):
     def __init__(self):
         super().__init__()
+
+
+def search_by_id():
+    return sf.factories[Player].search
 
 
 # infos pour la suite !
