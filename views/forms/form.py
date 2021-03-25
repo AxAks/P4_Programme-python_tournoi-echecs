@@ -19,11 +19,14 @@ class Form(Menu):
                          exiting_message=exiting_message)
 
     #add_new ne veut rien dire renommer en submit ou run  par exemple
-    def add_new(self, properties) -> dict:   # essayer de rendre add_new_tournament et add_new_player générique !! cf ask_obj_property() dans class Player_Inputs
+    def add_new(self, properties) -> dict:   # essayer de rendre add_new_tournament et add_new_player générique !! cf ask_properties() dans class GenericInputs()
         print(self.program_name, '\n', self.menu_name, '\n')
         # Où est ce que je recupère la liste des properties et comment je fais le tri par rapport à l'objet, à continuer elaboration/redaction!
         # reflechir par rapport à add tournament et add player
         # properties = ['last_name', 'first_name', 'birthdate', 'gender', 'ranking']
+        # ou
+        # properties = ['name', 'location', 'start_date', 'end_date',
+        #             'players_identifier', 'time_control', 'description', 'rounds_list', 'rounds']
         # cette partie est valable, mais ask_property pas codée
         properties_dict = {}
         for _property in properties:

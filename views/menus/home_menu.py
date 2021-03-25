@@ -3,6 +3,7 @@
 from views.menus.menu import Menu
 from controllers import menu_controller
 
+
 class HomeMenu(Menu):
     """
     This class is the root Menu of the program.
@@ -19,13 +20,13 @@ class HomeMenu(Menu):
         """
         This method leads to the Players Database Manager menu
         """
-        menu_controller.to_player_menu().run()
+        menu_controller.to_player_menu()
 
     def manage_tournaments(self) -> None:
         """
         This method leads to the Tournaments Manager menu
         """
-        menu_controller.to_tournament_menu().run()
+        menu_controller.to_tournament_menu()
 
     def start_tournament(self) -> None:
         """

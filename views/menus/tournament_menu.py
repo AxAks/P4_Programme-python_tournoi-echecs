@@ -3,8 +3,8 @@
 from views.forms.new_tournament_form import NewTournamentForm
 from views.menus.menu import Menu
 from views.menus.list_tournaments_menu import ListTournamentsMenu
-
 import views.menus.home_menu as home_menu
+from controllers import menu_controller
 
 
 class TournamentMenu(Menu):
@@ -20,13 +20,12 @@ class TournamentMenu(Menu):
         [self.choices.append(choice) for choice in specific_menu_choices]
 
     def list_all(self):
-        ListTournamentsMenu().run()
+        menu_controller.to_list_all_tournaments()
 
-    # defs à ecrire !
     def add_new_tournament(self):
-        NewTournamentForm().add_new_tournament()
+        menu_controller.to_new_tournament_form()
 
-
+    # defs à ecrire
     def save_tournament(self):
         pass
 
