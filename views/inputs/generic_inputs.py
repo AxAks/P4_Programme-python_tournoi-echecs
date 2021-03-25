@@ -5,9 +5,9 @@ from datetime import date
 from uuid import UUID
 
 from constants import ALPHABETICAL_STRING_RULE, RANKING_RANGE, ALPHA_NUMERICAL_STRING_RULE
+from models.superfactory import super_factory as sf # juste pour le test sur liste des players
 from models.player import Player
 
-from models.superfactory import super_factory as sf # jsute pour le test sur liste des players
 
 class GenericInputs:
     """
@@ -185,7 +185,7 @@ class GenericInputs:
         """
         This method asks for a list of 8 players for a tournament
         """
-        #  mettre des verifs de formatage de l'input ici et demander de resaisir si pas bon
+        # mettre des verifs de formatage de l'input ici et demander de resaisir si pas bon
         # mais faire une recherche car impossible de taper un uuid4...
         sf.factories[Player].search(input('search a player by id :'))  # sur la bonne voie, continuer !!
         tournament_players_identifier = []
@@ -208,6 +208,7 @@ class GenericInputs:
                     print('Invalid player, please retry...')
                     _input = input(input_info)
         return tournament_players_identifier
+
 
     @property
     def ask_time_control(self) -> str:
@@ -318,4 +319,4 @@ class GenericInputs:
     @property
     def ask_start_time(self):  # doit etre renseigné automatiquement en fait !
         pass
-# GenericInputs().ask_properties('last_name', 'first_name')  # Ne pas passer les éléments manuellement !
+

@@ -30,17 +30,3 @@ class Form(Menu):
             properties_dict[_property] = GenericInputs().ask_property()
         print(properties)
         return properties_dict
-        """
-        # Ex de properties pour un objet: 
-        # 'last_name', 
-        # 'first_name', 
-        # 'birthdate', 
-        # 'gender', 
-        # 'ranking'
-        # Ex de fonctions d'input correspondantes pour cet objet:
-        # PlayerInputs().ask_player_last_name(),   # PlayerInputs doit aussi etre rendu iddentique poru tous les objects
-        # PlayerInputs().ask_player_first_name(),
-        # PlayerInputs().ask_player_birthdate(),
-        # PlayerInputs().ask_player_gender(),
-        # PlayerInputs().ask_player_ranking()
-        """

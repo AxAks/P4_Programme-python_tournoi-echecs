@@ -7,7 +7,7 @@ the file is located at the root of the project,
 it redirects to the Home Menu file in the views directory.
 """
 
-from views.menus.home_menu import HomeMenu
+from controllers import menu_controller
 
 from models.superfactory import super_factory as sf
 from models.factory import Factory
@@ -44,7 +44,7 @@ def main():
     print(sf.factories[Player].registry)  # c'est cette synthaxe qu'il faut utiliser pour search!
     print(sf.factories[Tournament].registry)
     # ouverture du menu
-    HomeMenu().run()
+    menu_controller.to_home_menu()
 
     # simuler la fonction save : on serialize tout avec des boucles for similaires aux tests
     serialized_player_instances = [player_factory.registry[key].serialize() for key in player_factory.registry]

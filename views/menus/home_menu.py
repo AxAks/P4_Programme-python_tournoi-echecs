@@ -1,9 +1,7 @@
 # coding=utf-8
 
 from views.menus.menu import Menu
-from views.menus.player_menu import PlayerMenu
-from views.menus.tournament_menu import TournamentMenu
-
+from controllers import menu_controller
 
 class HomeMenu(Menu):
     """
@@ -21,13 +19,13 @@ class HomeMenu(Menu):
         """
         This method leads to the Players Database Manager menu
         """
-        PlayerMenu().run()
+        menu_controller.to_player_menu().run()
 
     def manage_tournaments(self) -> None:
         """
         This method leads to the Tournaments Manager menu
         """
-        TournamentMenu().run()
+        menu_controller.to_tournament_menu().run()
 
     def start_tournament(self) -> None:
         """
