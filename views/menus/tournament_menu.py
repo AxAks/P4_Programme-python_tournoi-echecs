@@ -1,8 +1,7 @@
 # coding=utf-8
 
-from views.forms.new_tournament_form import NewTournamentForm
+
 from views.menus.menu import Menu
-from views.menus.list_tournaments_menu import ListTournamentsMenu
 import views.menus.home_menu as home_menu
 from controllers import menu_controller
 

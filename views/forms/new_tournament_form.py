@@ -8,7 +8,7 @@ from views.forms.form import Form
 from views.inputs.generic_inputs import GenericInputs
 #from views.inputs.tournament_inputs import TournamentInputs
 from views.menus import tournament_menu
-from views.menus.menu import Menu
+from controllers import menu_controller
 
 
 class NewTournamentForm(Form):  # faire heriter de Menu aussi ? (fonction de navigation : back, etc) # en cascade actuellement : Menu -> Form -> .

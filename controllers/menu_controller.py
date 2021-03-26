@@ -2,7 +2,7 @@
 """
 manage menus via controllers
 """
-
+from views.forms.new_tournament_form import NewTournamentForm
 from views.menus.player_menu import PlayerMenu
 from views.menus.tournament_menu import TournamentMenu
 from views.menus.home_menu import HomeMenu
@@ -66,7 +66,4 @@ def to_new_tournament_form():
     """
     This function redirects to the Tournament Creation Form
     """
-    ListTournamentsMenu().run()
-
-
-
+    NewTournamentForm().run()

@@ -5,13 +5,13 @@ from datetime import date
 from uuid import UUID
 
 from constants import ALPHABETICAL_STRING_RULE, RANKING_RANGE, ALPHA_NUMERICAL_STRING_RULE
-from models.superfactory import super_factory as sf # juste pour le test sur liste des players
-from models.player import Player
 
+from models.superfactory import super_factory as sf
+from models.player import Player
 
 class GenericInputs:
     """
-    Generic Parent Class for all possible inputs
+    Class for all inputs
     """
     def __init__(self):
         pass
@@ -22,7 +22,7 @@ class GenericInputs:
             my_cls = GenericInputs() # voir comment rendre la classe variable ou générique Player, Tournament, (Round et Match)
             try:
                 method = getattr(my_cls, method_name)
-                print(f'{arg.replace("_", " ").title()} is  : "{method}"')
+                print(f'{arg.replace("_", " ").title()} is  : "{method}"') # un vieux print illisible pour identifier list de tournament ...
             except Exception as e:
                 raise Exception(e)
         return method #f'ask{arg}()' #pb si deux objets ont des attributs identiques -> surement qu'ils font la meme chose, à voir
@@ -104,7 +104,7 @@ class GenericInputs:
     @property
     def ask_ranking(self) -> int:
         """
-        This method asks for the player's ranking
+        This method asks a ranking between 100 and 3000
         """
         valid_ranking = False
         input_info = "Enter Player Ranking: "
@@ -137,7 +137,7 @@ class GenericInputs:
         """
         This method asks for a location
         """
-        input_info = "Enter Tournament Location: "
+        input_info = "Enter Location: "
         _input = input(input_info)
         while not re.match(ALPHABETICAL_STRING_RULE, _input):
             print('Unauthorized characters found, please retry...')
@@ -150,7 +150,7 @@ class GenericInputs:
         This method asks for a start date
         """
         valid_date = False
-        input_info = "Enter Tournament's start date (YYYY-MM-DD): "
+        input_info = "Enter start date (YYYY-MM-DD): "
         _input = input(input_info)
         while not valid_date:
             try:
@@ -167,7 +167,7 @@ class GenericInputs:
         This method asks for an end date
         """
         valid_date = False
-        input_info = "Enter Tournament's end date (YYYY-MM-DD): "
+        input_info = "Enter end date (YYYY-MM-DD): "
         _input = input(input_info)
         while not valid_date:
             try:
@@ -178,43 +178,38 @@ class GenericInputs:
                 _input = input(input_info)
         return _input
 
+
     @property
     def ask_identifiers_list(self) -> list: # pas generique actuellement....
         # liste d'UUID de Players et le nombre est fixé à 8 joueurs : nom de fonction pas explicite
-        # ce serait sympa de pouvoir faire une recherche dans la base des joueurs !
         """
         This method asks for a list of 8 players for a tournament
         """
-        # mettre des verifs de formatage de l'input ici et demander de resaisir si pas bon
-        # mais faire une recherche car impossible de taper un uuid4...
-        sf.factories[Player].search(input('search a player by id :'))  # sur la bonne voie, continuer !!
-        tournament_players_identifier = []
+        tournament_players_identifier = {}
         n = 1
+        print("Please, select players to add")
         while n < 9:
-            valid_uuid4 = False
-            input_info = f"Enter Player ID {n}/8:"
-            _input = input(input_info)
-            # mettre en place une recherche dans le registre plutot ! integrer la fonction search_player_by_id
-            while not valid_uuid4:
-                try:
-                    _input = UUID(str(_input), version=4)
-                    valid_uuid4 = True
-                    if _input not in tournament_players_identifier:
-                        tournament_players_identifier.append(_input)
-                        n += 1
-                    else:
-                        print('Identifier already entered in the list, please retry...')
-                except ValueError:
-                    print('Invalid player, please retry...')
-                    _input = input(input_info)
+            player_dict = search_one_player_in_registry()
+            if len(player_dict) == 0:
+               player_dict = search_one_player_in_registry()
+            for key in player_dict:
+                if key not in tournament_players_identifier:
+                    tournament_players_identifier[key] = player_dict[key]
+                    print(f"Player {n}/8 added")
+                    print(f"{player_dict[key].last_name_pod}, "
+                          f"{player_dict[key].first_name_pod}: "
+                          f"{player_dict[key].identifier_pod}")
+                    n += 1
+                else:
+                    print('Player already entered in the list, please retry...')
         return tournament_players_identifier
 
 
     @property
     def ask_time_control(self) -> str:
         """
-        This method asks for the time control format of a tournament using digits
-        and returns a formatted string
+        This method asks for the time control format of a tournament using digits for choice
+        and returns the matching formatted string
         """
         valid_time_control = False
         choices_info = '(1: BULLET, 2: BLITZ, 3: RAPIDE)'
@@ -243,9 +238,9 @@ class GenericInputs:
     @property
     def ask_description(self) -> str:
         """
-        This method asks for a description of a tournament
+        This method asks for a description text
         """
-        input_info = "Enter Tournament Description: "
+        input_info = "Enter Description: "
         _input = input(input_info)
         while _input == '':
             print('Description cannot be empty, please retry...')
@@ -320,3 +315,30 @@ class GenericInputs:
     def ask_start_time(self):  # doit etre renseigné automatiquement en fait !
         pass
 
+
+def search_one_player_in_registry():
+    results = sf.factories[Player].search(input('Search a player by id : '))
+    while len(results) > 1:
+        for identifier in results:
+            print( f'{results[identifier].last_name},'
+                    f' {results[identifier].first_name}:'
+                    f' {results[identifier].identifier_pod}\n'
+                    f'-> {results[identifier].birthdate_pod},'
+                    f' {results[identifier].gender_pod.title()},'
+                    f' {results[identifier].ranking}\n')
+        print(f'{len(results)} Players returned,')
+
+        results = sf.factories[Player].search(input('please be more specific: '))
+        for identifier in results:
+            print('1 Player found in Registry for this ID:')
+            print(f'{results[identifier].last_name},'
+                  f' {results[identifier].first_name}:'
+                  f' {results[identifier].identifier_pod}\n'
+                  f'-> {results[identifier].birthdate_pod},'
+                  f' {results[identifier].gender_pod.title()},'
+                  f' {results[identifier].ranking}')
+    if len(results) == 0:
+        print("No Player found in Registry for this ID")
+        return results
+    else:
+        return results
