@@ -4,8 +4,9 @@ import re
 from datetime import date
 from uuid import UUID
 
-from constants import ALPHABETICAL_STRING_RULE, RANKING_RANGE, ALPHA_NUMERICAL_STRING_RULE, PLAYER_FACTORY
+from constants import ALPHABETICAL_STRING_RULE, RANKING_RANGE, ALPHA_NUMERICAL_STRING_RULE
 
+from models.superfactory import super_factory as sf
 from models.player import Player
 
 class GenericInputs:
@@ -179,8 +180,8 @@ class GenericInputs:
 
 
     @property
-    def ask_identifiers_list(self) -> list: # pas generique actuellement....
-        # liste d'UUID de Players et le nombre est fixé à 8 joueurs : nom de fonction pas explicite
+    def ask_identifiers_list(self) -> list: # pas generique actuellement...!
+        # liste d'UUID de Players et le nombre est fixé à 8 joueurs : mal nommée non explicite
         """
         This method asks for a list of 8 players for a tournament
         """
@@ -315,8 +316,8 @@ class GenericInputs:
         pass
 
 
-def search_one_player_in_registry():
-    results = PLAYER_FACTORY.search(input('Search a player by id : '))
+def search_one_player_in_registry(): # pas générique !
+    results = sf.factories[Player].search(input('Search a player by id : '))
     while len(results) > 1:
         for identifier in results:
             print( f'{results[identifier].last_name},'
@@ -327,7 +328,7 @@ def search_one_player_in_registry():
                     f' {results[identifier].ranking}\n')
         print(f'{len(results)} Players returned,')
 
-        results = PLAYER_FACTORY.search(input('please be more specific: '))
+        results = sf.factories[Player].search(input('please be more specific: '))
         for identifier in results:
             print('1 Player found in Registry for this ID:')
             print(f'{results[identifier].last_name},'

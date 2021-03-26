@@ -10,7 +10,6 @@ it redirects to the Home Menu file in the views directory.
 from controllers import menu_controller
 
 from models.superfactory import super_factory as sf
-from models.factory import Factory
 from models.player import Player
 from models.tournament import Tournament
 from tests import sample_values as test_sample
@@ -26,7 +25,7 @@ def main():
     ## simuler la fonction load : remplir les factories avec des boucles for similaires aux tests (au démarrage de l'application on charge l'état)
     # instanciation des objets via factory (rounds dans tournoi, matches dans dans round (et player ?)
     print(sf.factories[Player].registry)
-    print(Factory(Tournament).registry)
+    print(sf.factories[Tournament].registry)
     [player_factory.create(**player_dict) for player_dict in test_sample.players_list]
     [tournament_factory.create(**tournament_dict) for tournament_dict in test_sample.tournaments_list]  # ca instancie les rounds et les matchs qui vivent dans Tournament
     # tests/verifs
@@ -41,7 +40,7 @@ def main():
           f"-> {t} tournaments imported\n"
           f"---")
 
-    print(sf.factories[Player].registry)  # c'est cette synthaxe qu'il faut utiliser pour search!
+    print(sf.factories[Player].registry)
     print(sf.factories[Tournament].registry)
     # ouverture du menu
     menu_controller.to_home_menu()

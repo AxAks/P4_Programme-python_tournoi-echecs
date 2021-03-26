@@ -2,10 +2,6 @@
 
 import re
 
-from models.superfactory import super_factory as sf
-from models.player import Player
-from models.tournament import Tournament
-
 """
 This file contains all the constants used in the project.
 """
@@ -30,5 +26,3 @@ MATCH_PROPERTIES = ['player1_id', 'player2_id', 'player1_score', 'player2_score'
 
 EMPTY_SEARCH_STRINGS = ['', ' ', '-', '_', '.', '()']
 
-PLAYER_FACTORY = sf.factories[Player]
-PLAYER_FACTORY = sf.factories[Tournament]
