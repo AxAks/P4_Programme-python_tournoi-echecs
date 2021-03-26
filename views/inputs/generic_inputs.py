@@ -233,7 +233,7 @@ class GenericInputs:
             except ValueError:
                 print(wrong_input)
                 _input = input(input_info)
-        return _input
+        return _input # retourne "2" au lieu de BLITZ (l'int au leiu du str)
 
     @property
     def ask_description(self) -> str:
