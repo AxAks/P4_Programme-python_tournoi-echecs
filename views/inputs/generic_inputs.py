@@ -320,27 +320,29 @@ class GenericInputs:
 def search_one_player(): # pas générique !
     results = sf.factories[Player].search(input('Search a player by id : '))
     while len(results) > 1:
+        print(f'Results - '
+              f'{len(results)} Players returned:')
         for identifier in results:
-            print(f'Results:\n'
+            print(
                   f'{results[identifier].last_name},' # les prints sont dans les views !!! 
                   f' {results[identifier].first_name}:'
                   f' {results[identifier].identifier_pod}\n'
                   f'-> {results[identifier].birthdate_pod},'
                   f' {results[identifier].gender_pod.title()},'
                   f' {results[identifier].ranking}\n')
-        print(f'{len(results)} Players returned,')
 
-        results = sf.factories[Player].search(input('please be more specific: '))
+        results = sf.factories[Player].search(input('Please be more specific: '))
         print('---')
-        for identifier in results:
-            print('1 Player found in Registry for this ID:')
-            print(f'Results:'
-                  f'{results[identifier].last_name},'
-                  f' {results[identifier].first_name}:'
-                  f' {results[identifier].identifier_pod}\n'
-                  f'-> {results[identifier].birthdate_pod},'
-                  f' {results[identifier].gender_pod.title()},'
-                  f' {results[identifier].ranking}')
+        if len(results) == 1:
+            for identifier in results:
+                print('1 Player found in Registry for this ID:')
+                print(f'Result:\n'
+                      f'{results[identifier].last_name},'
+                      f' {results[identifier].first_name}:'
+                      f' {results[identifier].identifier_pod}\n'
+                      f'-> {results[identifier].birthdate_pod},'
+                      f' {results[identifier].gender_pod.title()},'
+                      f' {results[identifier].ranking}')
     if len(results) == 0:
         print("No Player found in Registry for this ID")
         return results
