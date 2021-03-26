@@ -191,9 +191,9 @@ class GenericInputs:
         n = 1
         print("Please, select players to add")
         while n < 9:
-            player_dict = search_one_player_in_registry()
+            player_dict = search_one_player()
             if len(player_dict) == 0:
-               player_dict = search_one_player_in_registry()
+               player_dict = search_one_player()
             for key in player_dict:
                 if key not in tournament_players_identifier:
                     tournament_players_identifier[key] = player_dict[key]
@@ -318,7 +318,7 @@ class GenericInputs:
         pass
 
 
-def search_one_player_in_registry(): # pas générique !
+def search_one_player(): # pas générique !
     results = sf.factories[Player].search(input('Search a player by id : '))
     while len(results) > 1:
         for identifier in results:
@@ -345,7 +345,7 @@ def search_one_player_in_registry(): # pas générique !
     else:
         return results
 
-def search_one_tournament_in_registry(): # pas générique !, pas utilisé ! pas testé,
+def search_one_tournament(): # pas générique !, pas utilisé ! pas testé,
     results = sf.factories[Tournament].search(input('Search a Tournament by name, location or dates: '))
     while len(results) > 1:
         for identifier in results:
