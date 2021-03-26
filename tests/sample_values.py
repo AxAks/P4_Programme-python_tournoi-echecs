@@ -123,7 +123,7 @@ tournament35_dict = {
         '4f4e8869-fbd2-48d7-b759-fafd725df22f',
         '1bcb740a-3ca1-49e8-889f-30ca3c1bc293'],
     'time_control': 'BULLET',
-    'description': 'a very nice tournament with four outstanding players',
+    'description': 'a tournament for beginners',
     'rounds_list': [
         {'name': 'Round 1',
          'matches': [
@@ -165,7 +165,7 @@ tournament343_dict = {
         '4f4e8869-fbd2-48d7-b759-fafd725df22f',
         '1bcb740a-3ca1-49e8-889f-30ca3c1bc293'],
     'time_control': 'BULLET',
-    'description': 'a very nice tournament with four outstanding players',
+    'description': 'a tournament blabla',
     'rounds_list': [
         {'name': 'Round 1',
          'matches': [

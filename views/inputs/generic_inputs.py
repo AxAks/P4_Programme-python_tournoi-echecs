@@ -8,6 +8,8 @@ from constants import ALPHABETICAL_STRING_RULE, RANKING_RANGE, ALPHA_NUMERICAL_S
 
 from models.superfactory import super_factory as sf
 from models.player import Player
+from models.tournament import Tournament
+
 
 class GenericInputs:
     """
@@ -339,6 +341,31 @@ def search_one_player_in_registry(): # pas générique !
                   f' {results[identifier].ranking}')
     if len(results) == 0:
         print("No Player found in Registry for this ID")
+        return results
+    else:
+        return results
+
+def search_one_tournament_in_registry(): # pas générique !, pas utilisé ! pas testé,
+    results = sf.factories[Tournament].search(input('Search a Tournament by name, location or dates: '))
+    while len(results) > 1:
+        for identifier in results:
+            print( f'{results[identifier].name},'
+                    f' {results[identifier].location}:'
+                    f' {results[identifier].start_date_pod}'
+                    f' {results[identifier].end_date_pod}\n'
+                    f'-> {results[identifier].description}')
+        print(f'{len(results)} Players returned')
+
+        results = sf.factories[Player].search(input('please be more specific: '))
+        for identifier in results:
+            print('1 Tournament found in Registry for this research:')
+            print( f'{results[identifier].name},'
+                    f' {results[identifier].location}:'
+                    f' {results[identifier].start_date_pod}'
+                    f' {results[identifier].end_date_pod}\n'
+                    f'-> {results[identifier].description}')
+    if len(results) == 0:
+        print("No Tournament found in Registry for this research")
         return results
     else:
         return results
