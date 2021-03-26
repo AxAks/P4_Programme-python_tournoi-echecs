@@ -52,3 +52,4 @@ print('---')
 # Inputs/Prints
 
 generic_inputs.search_one_player()
+generic_inputs.search_one_tournament()

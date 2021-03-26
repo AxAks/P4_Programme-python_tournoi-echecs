@@ -317,32 +317,32 @@ class GenericInputs:
         pass
 
 
-def search_one_player(): # pas générique !
+def search_one_player():  # pas générique !
     results = sf.factories[Player].search(input('Search a player by id : '))
     while len(results) > 1:
         print(f'Results - '
-              f'{len(results)} Players returned:')
+              f'{len(results)} players returned:')
         for identifier in results:
             print(
-                  f'{results[identifier].last_name},' # les prints sont dans les views !!! 
+                  f'{results[identifier].last_name},'  # les prints sont dans les views !!! 
                   f' {results[identifier].first_name}:'
-                  f' {results[identifier].identifier_pod}\n'
-                  f'-> {results[identifier].birthdate_pod},'
+                  f' {results[identifier].identifier}\n'
+                  f'-> {results[identifier].birthdate},'
                   f' {results[identifier].gender_pod.title()},'
                   f' {results[identifier].ranking}\n')
 
         results = sf.factories[Player].search(input('Please be more specific: '))
         print('---')
-        if len(results) == 1:
-            for identifier in results:
-                print('1 Player found in Registry for this ID:')
-                print(f'Result:\n'
-                      f'{results[identifier].last_name},'
-                      f' {results[identifier].first_name}:'
-                      f' {results[identifier].identifier_pod}\n'
-                      f'-> {results[identifier].birthdate_pod},'
-                      f' {results[identifier].gender_pod.title()},'
-                      f' {results[identifier].ranking}')
+    if len(results) == 1:
+        for identifier in results:
+            print('1 Player found in Registry for this ID:')
+            print(f'Result:\n'
+                  f'{results[identifier].last_name},'
+                  f' {results[identifier].first_name}'
+                  f' {results[identifier].identifier}\n'
+                  f'-> {results[identifier].birthdate},'
+                  f' {results[identifier].gender_pod.title()},'
+                  f' {results[identifier].ranking}')
     if len(results) == 0:
         print("No Player found in Registry for this ID")
         return results
@@ -350,25 +350,28 @@ def search_one_player(): # pas générique !
         return results
 
 
-def search_one_tournament(): # pas générique !, pas utilisé ! pas testé,
-    results = sf.factories[Tournament].search(input('Search a Tournament by name, location or dates: '))
+def search_one_tournament():  # pas générique !, pas utilisé ! pas testé,
+    results = sf.factories[Tournament].search(input('Search a tournament by name, location or dates: '))
     while len(results) > 1:
+        print(f'Results - '
+              f'{len(results)} Tournaments returned:')
         for identifier in results:
-            print(f'{results[identifier].name},' # les prints sont dans les views !!!
-                  f' {results[identifier].location}:'
-                  f' {results[identifier].start_date_pod}'
-                  f' {results[identifier].end_date_pod}\n'
+            print(f'{results[identifier].name}, '  # les prints sont dans les views !!!
+                  f' {results[identifier].location}, '
+                  f' {results[identifier].start_date}, '
+                  f' {results[identifier].end_date}\n'
                   f'-> {results[identifier].description}')
-        print(f'{len(results)} Players returned')
 
-        results = sf.factories[Player].search(input('please be more specific: '))
+        results = sf.factories[Tournament].search(input('please be more specific: '))
         print('---')
+    if len(results) == 1:
         for identifier in results:
-            print('1 Tournament found in Registry for this research:') # les prints sont dans les views !!!
-            print(f'{results[identifier].name},'
-                  f' {results[identifier].location}:'
-                  f' {results[identifier].start_date_pod}'
-                  f' {results[identifier].end_date_pod}\n'
+            print('1 Tournament found in Registry for this research:')  # les prints sont dans les views !!!
+            print(f'Result:\n'
+                  f'{results[identifier].name}, '
+                  f' {results[identifier].location}, '
+                  f' {results[identifier].start_date}, '
+                  f' {results[identifier].end_date}\n'
                   f'-> {results[identifier].description}')
     if len(results) == 0:
         print("No Tournament found in Registry for this research")
