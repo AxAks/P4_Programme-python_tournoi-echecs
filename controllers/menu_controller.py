@@ -2,6 +2,8 @@
 """
 manage menus via controllers
 """
+import sys
+
 from views.forms.new_tournament_form import NewTournamentForm
 from views.menus.player_menu import PlayerMenu
 from views.menus.tournament_menu import TournamentMenu
@@ -18,11 +20,24 @@ from views.menus.list_tournaments_menu import ListTournamentsMenu
 
 
 # redirections menu
+
 def to_home_menu():
     """
     This function redirects to the Home menu
     """
     HomeMenu().run()
+
+
+def load():
+    print(f'Program state loaded via "database_file"(funct to write)')
+
+
+def save():
+    print('Program state saved(funct to write)')
+
+
+def quit():
+    sys.exit(0)
 
 
 def to_player_menu():
@@ -67,3 +82,4 @@ def to_new_tournament_form():
     This function redirects to the Tournament Creation Form
     """
     NewTournamentForm().run()
+

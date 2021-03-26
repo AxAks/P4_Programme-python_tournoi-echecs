@@ -2,7 +2,6 @@
 
 import re
 from datetime import date
-from uuid import UUID
 
 from constants import ALPHABETICAL_STRING_RULE, RANKING_RANGE, ALPHA_NUMERICAL_STRING_RULE
 
@@ -25,8 +24,9 @@ class GenericInputs:
             try:
                 method = getattr(my_cls, method_name)
                 print(f'{arg.replace("_", " ").title()} is  : "{method}"') # un vieux print illisible pour identifier list de tournament ...
-            except Exception as e:
-                raise Exception(e)
+            except AttributeError:
+                raise Exception()
+                    # il faut gérer ces exceptions (retenter la demande)
         return method #f'ask{arg}()' #pb si deux objets ont des attributs identiques -> surement qu'ils font la meme chose, à voir
 
     @property
@@ -180,7 +180,6 @@ class GenericInputs:
                 _input = input(input_info)
         return _input
 
-
     @property
     def ask_identifiers_list(self) -> list: # pas generique actuellement...!
         # liste d'UUID de Players et le nombre est fixé à 8 joueurs : mal nommée non explicite
@@ -192,14 +191,14 @@ class GenericInputs:
         print("Please, select players to add")
         while n < 9:
             player_dict = search_one_player()
-            if len(player_dict) == 0:
-               player_dict = search_one_player() # utile ? à testé !! (pb prints entre les deux fonctions)
+            # if len(player_dict) == 0:
+            #    player_dict = search_one_player() # utile ? à testé !! (pb prints entre les deux fonctions)
             for key in player_dict:
                 if key not in tournament_players_identifier:
                     tournament_players_identifier[key] = player_dict[key]
                     print(f"Player {n}/8 added")
-                    print(f"{player_dict[key].last_name_pod}, "
-                          f"{player_dict[key].first_name_pod}: "
+                    print(f"{player_dict[key].last_name}, "
+                          f"{player_dict[key].first_name}: "
                           f"{player_dict[key].identifier_pod}")
                     n += 1
                 else:
@@ -322,18 +321,21 @@ def search_one_player(): # pas générique !
     results = sf.factories[Player].search(input('Search a player by id : '))
     while len(results) > 1:
         for identifier in results:
-            print( f'{results[identifier].last_name},'
-                    f' {results[identifier].first_name}:'
-                    f' {results[identifier].identifier_pod}\n'
-                    f'-> {results[identifier].birthdate_pod},'
-                    f' {results[identifier].gender_pod.title()},'
-                    f' {results[identifier].ranking}\n')
+            print(f'Results:\n'
+                  f'{results[identifier].last_name},' # les prints sont dans les views !!! 
+                  f' {results[identifier].first_name}:'
+                  f' {results[identifier].identifier_pod}\n'
+                  f'-> {results[identifier].birthdate_pod},'
+                  f' {results[identifier].gender_pod.title()},'
+                  f' {results[identifier].ranking}\n')
         print(f'{len(results)} Players returned,')
 
         results = sf.factories[Player].search(input('please be more specific: '))
+        print('---')
         for identifier in results:
             print('1 Player found in Registry for this ID:')
-            print(f'{results[identifier].last_name},'
+            print(f'Results:'
+                  f'{results[identifier].last_name},'
                   f' {results[identifier].first_name}:'
                   f' {results[identifier].identifier_pod}\n'
                   f'-> {results[identifier].birthdate_pod},'
@@ -345,25 +347,27 @@ def search_one_player(): # pas générique !
     else:
         return results
 
+
 def search_one_tournament(): # pas générique !, pas utilisé ! pas testé,
     results = sf.factories[Tournament].search(input('Search a Tournament by name, location or dates: '))
     while len(results) > 1:
         for identifier in results:
-            print( f'{results[identifier].name},'
-                    f' {results[identifier].location}:'
-                    f' {results[identifier].start_date_pod}'
-                    f' {results[identifier].end_date_pod}\n'
-                    f'-> {results[identifier].description}')
+            print(f'{results[identifier].name},' # les prints sont dans les views !!!
+                  f' {results[identifier].location}:'
+                  f' {results[identifier].start_date_pod}'
+                  f' {results[identifier].end_date_pod}\n'
+                  f'-> {results[identifier].description}')
         print(f'{len(results)} Players returned')
 
         results = sf.factories[Player].search(input('please be more specific: '))
+        print('---')
         for identifier in results:
-            print('1 Tournament found in Registry for this research:')
-            print( f'{results[identifier].name},'
-                    f' {results[identifier].location}:'
-                    f' {results[identifier].start_date_pod}'
-                    f' {results[identifier].end_date_pod}\n'
-                    f'-> {results[identifier].description}')
+            print('1 Tournament found in Registry for this research:') # les prints sont dans les views !!!
+            print(f'{results[identifier].name},'
+                  f' {results[identifier].location}:'
+                  f' {results[identifier].start_date_pod}'
+                  f' {results[identifier].end_date_pod}\n'
+                  f'-> {results[identifier].description}')
     if len(results) == 0:
         print("No Tournament found in Registry for this research")
         return results

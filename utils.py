@@ -16,11 +16,3 @@ def check_uuid4_format(string_to_check: str) -> bool:
         valid_uuid4 = True
     except ValueError:
         print('Invalid uuid')
-
-
-
-
-
-
-
-
