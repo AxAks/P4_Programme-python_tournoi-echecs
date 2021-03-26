@@ -4,9 +4,8 @@ import re
 from datetime import date
 from uuid import UUID
 
-from constants import ALPHABETICAL_STRING_RULE, RANKING_RANGE, ALPHA_NUMERICAL_STRING_RULE
+from constants import ALPHABETICAL_STRING_RULE, RANKING_RANGE, ALPHA_NUMERICAL_STRING_RULE, PLAYER_FACTORY
 
-from models.superfactory import super_factory as sf
 from models.player import Player
 
 class GenericInputs:
@@ -317,7 +316,7 @@ class GenericInputs:
 
 
 def search_one_player_in_registry():
-    results = sf.factories[Player].search(input('Search a player by id : '))
+    results = PLAYER_FACTORY.search(input('Search a player by id : '))
     while len(results) > 1:
         for identifier in results:
             print( f'{results[identifier].last_name},'
@@ -328,7 +327,7 @@ def search_one_player_in_registry():
                     f' {results[identifier].ranking}\n')
         print(f'{len(results)} Players returned,')
 
-        results = sf.factories[Player].search(input('please be more specific: '))
+        results = PLAYER_FACTORY.search(input('please be more specific: '))
         for identifier in results:
             print('1 Player found in Registry for this ID:')
             print(f'{results[identifier].last_name},'
