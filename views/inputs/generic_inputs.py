@@ -193,7 +193,7 @@ class GenericInputs:
         while n < 9:
             player_dict = search_one_player()
             if len(player_dict) == 0:
-               player_dict = search_one_player()
+               player_dict = search_one_player() # utile ? à testé !! (pb prints entre les deux fonctions)
             for key in player_dict:
                 if key not in tournament_players_identifier:
                     tournament_players_identifier[key] = player_dict[key]

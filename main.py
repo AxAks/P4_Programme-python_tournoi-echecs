@@ -13,7 +13,6 @@ from models.superfactory import super_factory as sf
 from models.player import Player
 from models.tournament import Tournament
 from tests import sample_values as test_sample
-from views.inputs.generic_inputs import search_one_tournament_in_registry
 
 
 def main():
