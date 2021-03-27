@@ -7,14 +7,13 @@ the file is located at the root of the project,
 it redirects to the Home Menu file in the views directory.
 """
 
-from controllers import menu_controller
-from models.factory import Factory
-
 from models.superfactory import super_factory as sf
 from models.player import Player
 from models.tournament import Tournament
-from tests import sample_values as test_sample  # à supprimer plus tard
 
+from controllers import menu_controller
+
+from tests import sample_values as test_sample  # à supprimer plus tard
 
 
 def main():

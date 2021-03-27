@@ -7,7 +7,6 @@ This file contains reusable general tool functions
 from uuid import UUID
 
 
-
 def check_uuid4_format(string_to_check: str) -> bool:
 
     valid_uuid4 = False
