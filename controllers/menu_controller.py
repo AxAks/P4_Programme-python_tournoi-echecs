@@ -65,8 +65,8 @@ def save():  # à continuer, bien tester et checker si erreurs et si on peut ch
         [sf.factories[Player].registry[key].serialize() for key in sf.factories[Player].registry]
     serialized_tournament_instances = \
         [sf.factories[Tournament].registry[key].serialize() for key in sf.factories[Tournament].registry]
-    players_table = db_test.table('players')
-    tournaments_table = db_test.table('tournaments')
+    players_table = db.table('players')
+    tournaments_table = db.table('tournaments')
     players_table.truncate()
     tournaments_table.truncate()
     players_table.insert_multiple(serialized_player_instances)
