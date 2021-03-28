@@ -39,7 +39,6 @@ from views.menus.list_tournaments_menu import ListTournamentsMenu
 
 
 db = TinyDB('db.json', ensure_ascii=False)
-db_test = TinyDB('db_test.json', ensure_ascii=False)
 
 
 # Fonctions générales
