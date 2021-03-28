@@ -72,18 +72,18 @@ class Menu:
         print(self.exiting_message)
         menu_controller.quit()
 
-    def load(self) -> None:  # on chargera depuis TinyDB/JSon file : deserialisation de tous les Players et Tournaments (instanciation via creators)
+    def load(self) -> None:
         """
         This method directs to the controller
         to load a previously saved state of the program from a database file at any time.
         """
         menu_controller.load()
+        print(f'Program state loaded from file')
 
-
-    def save(self) -> None:  # on enregistrera dans TinyDB apres serialisation de tous les Players et Tournaments (via les registres)
+    def save(self) -> None:
         """
         This method directs to the controller to save the state of the program at any at any point in the menu.
         """
         print(f'Saving current program state')
         menu_controller.save()
-        print('Program state saved')  # passer le print dans Menu().save() quand fonction ecrite
+        print('Program state saved')

@@ -53,7 +53,6 @@ def load():  # à continuer, bien tester et checker si erreurs et si on peut ch
     [sf.factories[Player].create(**serialized_player) for serialized_player in serialized_players]
     serialized_tournaments = tournaments_table.all()
     [sf.factories[Tournament].create(**serialized_tournament) for serialized_tournament in serialized_tournaments]
-    print(f'Program state loaded via "db.json"(funct to write)')  # passer le print dans Menu().load() quand fonction ecrite
 
 
 def save():  # à continuer, bien tester et checker si erreurs et si on peut choisir le nom du fichier sauvegardé
