@@ -101,7 +101,7 @@ tournament24_dict = {
     'location': 'Geneve',
     'start_date': '1987-02-28',
     'end_date': '1987-02-28',
-    'players_identifier': [
+    'identifiers_list': [
         '3be40089-64ff-48c2-8e6e-bc005ad378d2',
         'ce0258eb-cfeb-45e6-a56d-8f5d7260bd9b',
         '4f4e8869-fbd2-48d7-b759-fafd725df22f',
@@ -117,7 +117,7 @@ tournament35_dict = {
     'location': 'Genève',
     'start_date': '1987-01-21',
     'end_date': '1987-01-22',
-    'players_identifier': [
+    'identifiers_list': [
         '3be40089-64ff-48c2-8e6e-bc005ad378d2',
         'ce0258eb-cfeb-45e6-a56d-8f5d7260bd9b',
         '4f4e8869-fbd2-48d7-b759-fafd725df22f',
@@ -159,7 +159,7 @@ tournament343_dict = {
     'location': 'Genève',
     'start_date': '2021-02-28',
     'end_date': '2021-02-28',
-    'players_identifier': [
+    'identifiers_list': [
         '3be40089-64ff-48c2-8e6e-bc005ad378d2',
         'ce0258eb-cfeb-45e6-a56d-8f5d7260bd9b',
         '4f4e8869-fbd2-48d7-b759-fafd725df22f',

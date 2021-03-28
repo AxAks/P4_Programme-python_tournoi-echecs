@@ -3,19 +3,44 @@
 """
 Controller file for Tournament
 """
+from models.tournament import Tournament
+from models.superfactory import super_factory as sf
 
 
-class TournamentFactory:  # est ce que je mets tout ca dans une classe (cf Factory Method)???
+def sort_by_name():
     """
-    Subclass of Factory to create and manage Tournament instances
-    à continuer ...
+    This function lists the tournament instances alphabetically sorted by name
     """
-    """
-    tournament_factory = Factory(Tournament)  # copié des tests, à voir si je peux en faire quelque chose
-    """
+    tournaments_list = []
+    for identifier in sf.factories[Tournament].registry:
+        tournament_obj = sf.factories[Tournament].registry[identifier]
+        tournaments_list.append(tournament_obj)
+    sorted_by_name = sorted(tournaments_list, key=lambda x: x.name)
+    return sorted_by_name
 
-    def create_tournament(self):
-        pass
+
+def sort_by_location():
+    """
+    This function lists the tournament instances alphabetically sorted by location
+    """
+    tournaments_list = []
+    for identifier in sf.factories[Tournament].registry:
+        tournament_obj = sf.factories[Tournament].registry[identifier]
+        tournaments_list.append(tournament_obj)
+    sorted_by_location = sorted(tournaments_list, key=lambda x: x.location)
+    return sorted_by_location
+
+
+def sort_by_start_date():
+    """
+    This function lists the tournament instances sorted by reverse chronological start date
+    """
+    tournaments_list = []
+    for identifier in sf.factories[Tournament].registry:
+        tournament_obj = sf.factories[Tournament].registry[identifier]
+        tournaments_list.append(tournament_obj)
+    sorted_by_start_date = sorted(tournaments_list, key=lambda x: x.start_date, reverse=True)
+    return sorted_by_start_date
 
 # attention ! l'idée est de pouvoir faire des tournois sur plusieurs jours : date_debut, date_fin et par defaut date_debut = date_fin (1 jour)
 # -> à faire dans les inputs je pense.

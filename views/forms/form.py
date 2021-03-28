@@ -13,10 +13,11 @@ class Form(Menu):
     This class is a parent Class for all Forms
     It enables the user to enter data and return the data as dicts.
     """
-    def __init__(self, program_name, menu_name, previous_page, root_page, exiting_message):
+    def __init__(self, program_name, menu_name, previous_page, root_page, exiting_message, properties):
         super().__init__(program_name=program_name, menu_name=menu_name,
                          previous_page=previous_page, root_page=root_page,
                          exiting_message=exiting_message)
+        self.properties = properties
 
     #add_new ne veut rien dire renommer en submit ou run  par exemple
     def add_new(self, properties) -> dict:   # essayer de rendre add_new_tournament et add_new_player générique !! cf ask_properties() dans class GenericInputs()

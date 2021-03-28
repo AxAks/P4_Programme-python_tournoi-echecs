@@ -1,7 +1,7 @@
 # coding=utf-8
+import operator
 
 from models.player import Player
-from views.menus.player_menu import PlayerMenu
 from models.superfactory import super_factory as sf
 """
 Controller file for Player
@@ -14,13 +14,27 @@ Controller : link between Models (Classes) and Views
 plusieurs fichiers controller à écrire : scinder
 """
 
+def sort_by_last_name():
+    players_list = []
+    for uuid in sf.factories[Player].registry:
+        player_obj = sf.factories[Player].registry[uuid]
+        players_list.append(player_obj)# on a une liste d'objects
+    sorted_by_last_name = sorted(players_list, key=lambda x: x.last_name)
+    return sorted_by_last_name
 
-# pas utilisé pour le moment !
-class PlayerController(Player, PlayerMenu):
-    def __init__(self):
-        super().__init__()
+
+
+def sort_by_ranking():
+    players_list = []
+    for uuid in sf.factories[Player].registry:
+        player_obj = sf.factories[Player].registry[uuid]
+        players_list.append(player_obj)# on a une liste d'objects
+    sorted_by_ranking = sorted(players_list, key=lambda x: x.ranking, reverse=True)
+    return sorted_by_ranking
+
 
 
 def search_by_id():
-    return sf.factories[Player].search
+    _input = input('Enter a Player ID: ')
+    return sf.factories[Player].search(_input)
 

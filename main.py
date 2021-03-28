@@ -17,10 +17,12 @@ def main():
     """
     This function launches the program
     It creates the Factories for Player and Tournament
+    loads the registries form the database file
     and then directs to the Home menu
     """
     sf.create_factory(Player)
     sf.create_factory(Tournament)
+    menu_controller.load()
     menu_controller.to_home_menu()
 
 
