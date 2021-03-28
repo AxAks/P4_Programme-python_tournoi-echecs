@@ -5,6 +5,7 @@ from typing import Union
 from uuid import UUID
 from models.model import Model
 
+from constants import MATCH_PROPERTIES
 
 class Match(Model):
     """
@@ -30,7 +31,7 @@ class Match(Model):
         - player1_score: integer or Score
         - player2_score: integer or Score
         """
-        super().__init__(('player1_id', 'player2_id', 'player1_score', 'player2_score'), **params)
+        super().__init__(MATCH_PROPERTIES, **params)
 
     @property
     def player1_id(self) -> UUID:

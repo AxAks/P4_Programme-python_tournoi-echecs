@@ -7,7 +7,7 @@ from typing import Union
 from uuid import uuid4, UUID
 from enum import Enum
 
-from constants import MINIMUM_AGE, ALPHABETICAL_STRING_RULE, RANKING_RANGE
+from constants import MINIMUM_AGE, ALPHABETICAL_STRING_RULE, RANKING_RANGE, PLAYER_PROPERTIES
 from models.model import Model
 
 
@@ -29,7 +29,7 @@ class Player(Model):
         - gender: string or Gender
         - ranking: int
         """
-        super().__init__(('identifier', 'last_name', 'first_name', 'birthdate', 'gender', 'ranking'), **data)
+        super().__init__(PLAYER_PROPERTIES, **data)
 
     @property
     def identifier(self) -> UUID:

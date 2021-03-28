@@ -16,7 +16,7 @@ class NewTournamentForm(Form):  # faire heriter de Menu aussi ? (fonction de na
     This class asks the required data for the creation of a Tournament instance
     and returns a dict.
     """
-    def __init__(self, program_name='Chess Tournament Manager', menu_name='New Tournament Form'):
+    def __init__(self):
         super().__init__(program_name='Chess Tournament Manager', menu_name='New Tournament Form',
                          previous_page=tournament_menu.TournamentMenu(),
                          root_page=False, exiting_message='Leaving Form')

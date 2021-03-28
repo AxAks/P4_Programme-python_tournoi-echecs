@@ -7,7 +7,7 @@ from enum import Enum
 from typing import Union
 from uuid import UUID
 
-from constants import ALPHA_NUMERICAL_STRING_RULE, ALPHABETICAL_STRING_RULE
+from constants import ALPHA_NUMERICAL_STRING_RULE, ALPHABETICAL_STRING_RULE, TOURNAMENT_PROPERTIES
 
 from models.model import Model
 from models.round import Round
@@ -34,8 +34,7 @@ class Tournament(Model):
         - rounds_list: list[dict] or list[Round]
         - rounds: integer
         """
-        super().__init__(('name', 'location', 'start_date', 'end_date', 'players_identifier',
-                         'time_control', 'description', 'rounds_list', 'rounds'), **data)
+        super().__init__(TOURNAMENT_PROPERTIES, **data)
 
     @property
     def identifier(self) -> str:

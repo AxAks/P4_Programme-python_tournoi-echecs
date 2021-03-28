@@ -5,7 +5,7 @@ import re
 from typing import Union
 from datetime import datetime
 
-from constants import ALPHA_NUMERICAL_STRING_RULE
+from constants import ALPHA_NUMERICAL_STRING_RULE, ROUND_PROPERTIES
 
 from models.model import Model
 from models.match import Match
@@ -25,7 +25,7 @@ class Round(Model):
         - end_time: datetime or string  # doit etre automatiquement enregisté lors de la fin de saisie des infos du round
         - start_time: datetime or string  # start_time = datetime.now() # end_time = datetime de la fin de round
         """
-        super().__init__(('name', 'matches', 'end_time', 'start_time'), **params)
+        super().__init__(ROUND_PROPERTIES, **params)
 
     @property
     def name(self) -> str:
