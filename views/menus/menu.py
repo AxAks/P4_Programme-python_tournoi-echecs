@@ -59,9 +59,7 @@ class Menu:
         if the screen is the root menu, it directs to the controller to make the program quit.
         """
         if self.root_page:
-            print(self.exiting_message)
-            self.save()
-            menu_controller.quit()
+            self.quit()
         else:
             self.previous_page.run()
 
@@ -71,6 +69,7 @@ class Menu:
         It calls the save function before quitting to save the state of the program.
         """
         self.save()
+        print(self.exiting_message)
         menu_controller.quit()
 
     def load(self, database_file) -> None:  # on chargera depuis TinyDB/JSon file : deserialisation de tous les Players et Tournaments (instanciation via creators)
@@ -87,4 +86,4 @@ class Menu:
         """
         print(f'Saving current program state')
         menu_controller.save()
-        print('Program state saved(funct to write)')  # passer le print dans Menu().save() quand fonction ecrite
+        print('Program state saved')  # passer le print dans Menu().save() quand fonction ecrite

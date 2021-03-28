@@ -41,7 +41,7 @@ from views.menus.list_tournaments_menu import ListTournamentsMenu
 # serialized_tournaments = tournaments_table.all()
 
 
-db = TinyDB('db.json', ensure_ascii=False) # pb chemin de la DB JSon, je la mets où (dans le code et dans le projet ?)
+db = TinyDB('db.json', ensure_ascii=False)  # pb chemin de la DB JSon, je la mets où (dans le code et dans le projet ?), le mieux est à la base du projet
 
 # Fonctions générales
 

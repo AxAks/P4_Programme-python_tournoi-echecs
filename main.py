@@ -27,15 +27,5 @@ def main():
     # lancement du menu
     menu_controller.to_home_menu()
 
-    # à mettre dans la fonction save() quand OK
-    # simuler la fonction save() : on serialize tout avec des boucles for similaires aux tests et on sauve dans TinyDB
-    serialized_player_instances = [player_factory.registry[key].serialize() for key in player_factory.registry]
-    [print(serialized_player_instance) for serialized_player_instance in serialized_player_instances]
-    print(serialized_player_instances)
-    serialized_tournament_instances = [tournament_factory.registry[key].serialize() for key in
-                                       tournament_factory.registry]
-    [print(serialized_tournament_instance) for serialized_tournament_instance in serialized_tournament_instances]
-
-
 if __name__ == '__main__':
     main()
