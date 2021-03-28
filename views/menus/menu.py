@@ -72,7 +72,7 @@ class Menu:
         print(self.exiting_message)
         menu_controller.quit()
 
-    def load(self, database_file) -> None:  # on chargera depuis TinyDB/JSon file : deserialisation de tous les Players et Tournaments (instanciation via creators)
+    def load(self) -> None:  # on chargera depuis TinyDB/JSon file : deserialisation de tous les Players et Tournaments (instanciation via creators)
         """
         This method directs to the controller
         to load a previously saved state of the program from a database file at any time.

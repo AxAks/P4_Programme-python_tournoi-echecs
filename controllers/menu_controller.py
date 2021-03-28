@@ -29,33 +29,46 @@ from views.menus.list_tournaments_menu import ListTournamentsMenu
 # quand on manipule Modeles et Views, on met dans le controller.
 
 
-
-
-
-
-
-
 #Pour recharger les joueurs sérialisés, tu peux faire ceci :
 
 # serialized_players = players_table.all()
 # serialized_tournaments = tournaments_table.all()
 
 
-db = TinyDB('db.json', ensure_ascii=False)  # pb chemin de la DB JSon, je la mets où (dans le code et dans le projet ?), le mieux est à la base du projet
+  # pb chemin de la DB JSon, je la mets où (dans le code et dans le projet ?), le mieux est à la base du projet
+
+
+db = TinyDB('db.json', ensure_ascii=False)
+db_test = TinyDB('db_test.json', ensure_ascii=False)
+
 
 # Fonctions générales
+def load():  # à continuer, bien tester et checker si erreurs et si on peut choisir le fichier à loader
+    """
+    This method loads dicts for players and tournaments from a json file database using tinyDB.
+    It then deserializes the dicts to get python objects instances
+    """
+    players_table = db.table('players')
+    tournaments_table = db.table('tournaments')
+    serialized_players = players_table.all()
+    [sf.factories[Player].create(**serialized_player) for serialized_player in serialized_players]
+    serialized_tournaments = tournaments_table.all()
+    [sf.factories[Tournament].create(**serialized_tournament) for serialized_tournament in serialized_tournaments]
+    print(f'Program state loaded via "db.json"(funct to write)')  # passer le print dans Menu().load() quand fonction ecrite
 
-def load():
-    print(f'Program state loaded via "database_file"(funct to write)')  # passer le print dans Menu().load() quand fonction ecrite
 
-
-def save():
+def save():  # à continuer, bien tester et checker si erreurs et si on peut choisir le nom du fichier sauvegardé
+    """
+    This function saves the program state using tinyDB.
+    It serializes the instances of Player et Tournament
+    and create a db.json file to store them as dicts
+    """
     serialized_player_instances = \
         [sf.factories[Player].registry[key].serialize() for key in sf.factories[Player].registry]
     serialized_tournament_instances = \
         [sf.factories[Tournament].registry[key].serialize() for key in sf.factories[Tournament].registry]
-    players_table = db.table('players')
-    tournaments_table = db.table('tournaments')
+    players_table = db_test.table('players')
+    tournaments_table = db_test.table('tournaments')
     players_table.truncate()
     tournaments_table.truncate()
     players_table.insert_multiple(serialized_player_instances)
@@ -63,6 +76,9 @@ def save():
 
 
 def quit():
+    """
+    This function exits the program
+    """
     sys.exit(0)
 
 
@@ -73,6 +89,7 @@ def to_home_menu():
     This function redirects to the Home menu
     """
     HomeMenu().run()
+
 
 def to_player_menu():
     """
