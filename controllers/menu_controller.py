@@ -29,15 +29,6 @@ from views.menus.list_tournaments_menu import ListTournamentsMenu
 # quand on manipule Modeles et Views, on met dans le controller.
 
 
-#Pour recharger les joueurs sérialisés, tu peux faire ceci :
-
-# serialized_players = players_table.all()
-# serialized_tournaments = tournaments_table.all()
-
-
-  # pb chemin de la DB JSon, je la mets où (dans le code et dans le projet ?), le mieux est à la base du projet
-
-
 db = TinyDB('db.json', ensure_ascii=False)
 
 
