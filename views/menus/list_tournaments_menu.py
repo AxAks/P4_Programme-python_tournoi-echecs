@@ -12,7 +12,8 @@ class ListTournamentsMenu(Menu):
         super().__init__(program_name='Chess Tournament Manager', menu_name='Tournaments Reports Menu',
                          previous_page=tournament_menu.TournamentMenu())
         specific_menu_choices = [self.sort_by_name, self.sort_by_location,
-                                 self.sort_by_start_date, self.search_by_id]
+                                 self.sort_by_start_date, self.search_by_id, self.display_tournament_players,
+                                 self.display_tournament_rounds, self.display_tournament_matches]
         [self.choices.append(choice) for choice in specific_menu_choices]
 
     def sort_by_name(self):  # à reprendre à cause des listes : players, rounds (et match ?)
@@ -67,4 +68,13 @@ class ListTournamentsMenu(Menu):
                   f'{tournament_obj.rounds}')
 
     def search_by_id(self):
-        pass
+        print(tournament_controller.search_by_id())  # comment est ce que j'entre la key pour acceder à l'objet
+
+    def display_tournament_players(self):
+        tournament_controller.display_tournament_players()
+
+    def display_tournament_rounds(self):
+        tournament_controller.display_tournament_rounds()
+
+    def display_tournament_matches(self):
+        tournament_controller.display_tournament_matches()

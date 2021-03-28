@@ -47,7 +47,7 @@ class ListPlayerMenu(Menu):
                   f'{player_obj.gender_pod}')
 
     def search_by_id(self):
-        pass
+        print(player_controller.search_by_id())  # comment est ce que j'entre la key pour acceder à l'objet
 
     def search_by_last_name(self):
         pass

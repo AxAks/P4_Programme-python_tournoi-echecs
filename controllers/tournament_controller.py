@@ -42,6 +42,20 @@ def sort_by_start_date():
     sorted_by_start_date = sorted(tournaments_list, key=lambda x: x.start_date, reverse=True)
     return sorted_by_start_date
 
+def search_by_id():  # marche pas mauvais affichage
+    _input = input('Search a tournament by name, Location or dates: ')
+    print(sf.factories[Tournament].search(_input))
+
+
+def display_tournament_players():
+    pass
+
+def display_tournament_rounds():
+    pass
+
+def display_tournament_matches():
+    pass
+
 # attention ! l'idée est de pouvoir faire des tournois sur plusieurs jours : date_debut, date_fin et par defaut date_debut = date_fin (1 jour)
 # -> à faire dans les inputs je pense.
 

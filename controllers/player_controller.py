@@ -33,8 +33,7 @@ def sort_by_ranking():
     return sorted_by_ranking
 
 
-
-def search_by_id():
+def search_by_id():  # marche pas mauvais affichage
     _input = input('Enter a Player ID: ')
     return sf.factories[Player].search(_input)
 
