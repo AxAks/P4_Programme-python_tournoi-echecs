@@ -17,7 +17,10 @@ class GenericInputs:
     def __init__(self):
         pass
 
-    def ask_properties(self, *args):  # fonctionne un peu mais pas fini : comment est ce que je lui passe les args   # appelé par Form.add_new, doit etre generique et renvoyer vers une fonction particuliere selon l'objet
+    def ask_properties(self, *args):# fonctionne un peu mais pas fini : comment est ce que je lui passe les args   # appelé par Form.add_new, doit etre generique et renvoyer vers une fonction particuliere selon l'objet
+        """
+        This generic method is used to ask the Player and Tournament in the forms.
+        """
         for arg in args:
             method_name = f'ask_{arg}'
             my_cls = GenericInputs() # voir comment rendre la classe variable ou générique Player, Tournament, (Round et Match)

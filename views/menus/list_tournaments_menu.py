@@ -1,7 +1,8 @@
 # coding=utf-8
+
 from controllers import tournament_controller
 from views.menus.menu import Menu
-from views.menus import tournament_menu   # import du module plutot que la classe pour eviter le pb d'import circulaire
+from views.menus import tournament_menu
 
 
 class ListTournamentsMenu(Menu):
