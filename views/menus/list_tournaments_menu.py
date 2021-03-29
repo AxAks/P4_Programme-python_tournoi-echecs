@@ -28,7 +28,7 @@ class ListTournamentsMenu(Menu):
             print(f'{tournament_obj.name}, '
                   f'{tournament_obj.location}, {tournament_obj.start_date} {tournament_obj.end_date}: \n'
                   f' {tournament_obj.identifiers_list}, '
-                  f' {tournament_obj.time_control}, '
+                  f' {tournament_obj.time_control_pod}, '
                   f'{tournament_obj.description}, '
                   f'{tournament_obj.rounds_list}, ' 
                   f'{tournament_obj.rounds}')
@@ -45,7 +45,7 @@ class ListTournamentsMenu(Menu):
             print(f'{tournament_obj.name}, '
                   f'{tournament_obj.location}, {tournament_obj.start_date} {tournament_obj.end_date}: \n'
                   f' {tournament_obj.identifiers_list}, '
-                  f' {tournament_obj.time_control}, '
+                  f' {tournament_obj.time_control_pod}, '
                   f'{tournament_obj.description}, '
                   f'{tournament_obj.rounds_list}, '
                   f'{tournament_obj.rounds}')
@@ -62,7 +62,7 @@ class ListTournamentsMenu(Menu):
             print(f'{tournament_obj.name}, '
                   f'{tournament_obj.location}, {tournament_obj.start_date} {tournament_obj.end_date}: \n'
                   f' {tournament_obj.identifiers_list}, '
-                  f' {tournament_obj.time_control}, '
+                  f' {tournament_obj.time_control_pod}, '
                   f'{tournament_obj.description}, '
                   f'{tournament_obj.rounds_list}, '
                   f'{tournament_obj.rounds}')
@@ -80,10 +80,11 @@ class ListTournamentsMenu(Menu):
             print(f'{tournament_obj.name}, '
                   f'{tournament_obj.location}, {tournament_obj.start_date} {tournament_obj.end_date}: \n'
                   f' {tournament_obj.identifiers_list}, '
-                  f' {tournament_obj.time_control}, '
+                  f' {tournament_obj.time_control_pod}, '
                   f'{tournament_obj.description}, '
                   f'{tournament_obj.rounds_list}, '
                   f'{tournament_obj.rounds}')
+
 
     def display_tournament_players(self):
         tournament_controller.display_tournament_players()
