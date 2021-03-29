@@ -2,7 +2,7 @@
 from controllers import player_controller
 from models.player import Player
 from views.menus.menu import Menu
-import views.menus.player_menu as player_menu  # import du module plutot que la classe pour eviter le pb d'import circulaire
+import views.menus.player_menu as player_menu
 
 
 class ListPlayerMenu(Menu):
@@ -47,7 +47,20 @@ class ListPlayerMenu(Menu):
                   f'{player_obj.gender_pod}')
 
     def search_by_id(self):
-        print(player_controller.search_by_id())  # comment est ce que j'entre la key pour acceder à l'objet
+        """
+        This method directs to the player controller
+        to get a list of players matching the given id.
+        It then displays this list.
+        """
+        _input = input('Search a player by ID: ')
+        results = player_controller.search_by_id(_input)
+        print('Players found:')
+        for player_obj in results:
+            print(f'{player_obj.identifier}, '
+                  f'{player_obj.last_name}, {player_obj.first_name}: '
+                  f' {player_obj.birthdate}, '
+                  f' {player_obj.ranking}, '
+                  f'{player_obj.gender_pod}')
 
     def search_by_last_name(self):
         pass

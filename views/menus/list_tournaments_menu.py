@@ -68,7 +68,22 @@ class ListTournamentsMenu(Menu):
                   f'{tournament_obj.rounds}')
 
     def search_by_id(self):
-        print(tournament_controller.search_by_id())  # comment est ce que j'entre la key pour acceder à l'objet
+        """
+         This method directs to the tournament controller
+         to get a list of tournaments matching the given information.
+         It then displays this list.
+         """
+        _input = input('Search a tournament by Name, Location or dates: ')
+        results = tournament_controller.search_by_id(_input)
+        print('Tournaments found:')
+        for tournament_obj in results:
+            print(f'{tournament_obj.name}, '
+                  f'{tournament_obj.location}, {tournament_obj.start_date} {tournament_obj.end_date}: \n'
+                  f' {tournament_obj.identifiers_list}, '
+                  f' {tournament_obj.time_control}, '
+                  f'{tournament_obj.description}, '
+                  f'{tournament_obj.rounds_list}, '
+                  f'{tournament_obj.rounds}')
 
     def display_tournament_players(self):
         tournament_controller.display_tournament_players()

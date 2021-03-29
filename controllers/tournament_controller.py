@@ -3,6 +3,7 @@
 """
 Controller file for Tournament
 """
+
 from models.tournament import Tournament
 from models.superfactory import super_factory as sf
 
@@ -42,9 +43,18 @@ def sort_by_start_date():
     sorted_by_start_date = sorted(tournaments_list, key=lambda x: x.start_date, reverse=True)
     return sorted_by_start_date
 
-def search_by_id():  # marche pas mauvais affichage
-    _input = input('Search a tournament by name, Location or dates: ')
-    print(sf.factories[Tournament].search(_input))
+
+def search_by_id(search):
+    """
+    This function lists the tournament instances matching the given input
+    (identifier: Name, Location, Start date, End date)
+    """
+    results = sf.factories[Tournament].search(search)
+    found_tournaments_list = []
+    for identifier in results:
+        tournament_obj = sf.factories[Tournament].registry[identifier]
+        found_tournaments_list.append(tournament_obj)
+    return found_tournaments_list
 
 
 def display_tournament_players():
