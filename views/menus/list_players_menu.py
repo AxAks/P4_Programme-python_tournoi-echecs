@@ -54,13 +54,16 @@ class ListPlayerMenu(Menu):
         """
         _input = input('Search a player by ID: ')
         results = player_controller.search_by_id(_input)
-        print('Players found:')
-        for player_obj in results:
-            print(f'{player_obj.identifier}, '
-                  f'{player_obj.last_name}, {player_obj.first_name}: '
-                  f' {player_obj.birthdate}, '
-                  f' {player_obj.ranking}, '
-                  f'{player_obj.gender_pod}')
+        if len(results) != 0:
+            print('Players found:')
+            for player_obj in results:
+                print(f'{player_obj.identifier}, '
+                      f'{player_obj.last_name}, {player_obj.first_name}: '
+                      f' {player_obj.birthdate}, '
+                      f' {player_obj.ranking}, '
+                      f'{player_obj.gender_pod}')
+        else:
+            print('No Player found !')
 
     def search_by_last_name(self):
         pass

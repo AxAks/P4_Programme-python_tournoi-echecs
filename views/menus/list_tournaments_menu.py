@@ -76,16 +76,18 @@ class ListTournamentsMenu(Menu):
         """
         _input = input('Search a tournament by Name, Location or dates: ')
         results = tournament_controller.search_by_id(_input)
-        print('Tournaments found:')
-        for tournament_obj in results:
-            print(f'{tournament_obj.name}, '
-                  f'{tournament_obj.location}, {tournament_obj.start_date} {tournament_obj.end_date}: \n'
-                  f' {tournament_obj.identifiers_list}, '
-                  f' {tournament_obj.time_control_pod}, '
-                  f'{tournament_obj.description}, '
-                  f'{tournament_obj.rounds_list}, '
-                  f'{tournament_obj.rounds}')
-
+        if len(results) != 0:
+            print('Tournaments found:')
+            for tournament_obj in results:
+                print(f'{tournament_obj.name}, '
+                      f'{tournament_obj.location}, {tournament_obj.start_date} {tournament_obj.end_date}: \n'
+                      f'{tournament_obj.identifiers_list}, '
+                      f'{tournament_obj.time_control_pod}, '
+                      f'{tournament_obj.description}, '
+                      f'{tournament_obj.rounds_list}, '
+                      f'{tournament_obj.rounds}')
+        else:
+            print('No Tournaments found !')
 
     def display_tournament_players(self):
         """

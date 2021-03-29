@@ -17,20 +17,33 @@ class GenericInputs:
     def __init__(self):
         pass
 
-    def ask_properties(self, *args):# fonctionne un peu mais pas fini : comment est ce que je lui passe les args   # appelé par Form.add_new, doit etre generique et renvoyer vers une fonction particuliere selon l'objet
+    def ask_properties(self, *args):  # fonctionne un peu mais pas fini : comment est ce que je lui passe les args   # appelé par Form.add_new, doit etre generique et renvoyer vers une fonction particuliere selon l'objet
         """
         This generic method is used to ask the Player and Tournament in the forms.
         """
         for arg in args:
             method_name = f'ask_{arg}'
-            my_cls = GenericInputs() # voir comment rendre la classe variable ou générique Player, Tournament, (Round et Match)
+            my_cls = GenericInputs()  # voir comment rendre la classe variable ou générique Player, Tournament, (Round et Match)
+            method = getattr(my_cls, method_name)
             try:
-                method = getattr(my_cls, method_name)
                 print(f'{arg.replace("_", " ").title()} is  : "{method}"') # un vieux print illisible pour identifier list de tournament ...
             except AttributeError:
-                raise Exception()
-                    # il faut gérer ces exceptions (retenter la demande)
-        return method #f'ask{arg}()' #pb si deux objets ont des attributs identiques -> surement qu'ils font la meme chose, à voir
+                raise Exception()  # il faut gérer ces exceptions (retenter la demande)
+        return method  # f'ask{arg}()' #pb si deux objets ont des attributs identiques -> surement qu'ils font la meme chose, à voir
+
+        """
+            if arg != 'identifiers_list':
+                try:
+                    print(f'{arg.replace("_", " ").title()} is  :')
+                    for uuid in method:
+                        print(f'{method[uuid].identifier}, '
+                              f'{method[uuid].last_name}, {method[uuid].first_name}: '
+                              f' {method[uuid].birthdate}, '
+                              f' {method[uuid].ranking}, '
+                              f'{method[uuid].gender_pod}')
+                except AttributeError:
+                    raise Exception()
+            """
 
     @property
     def ask_last_name(self) -> str:
@@ -237,7 +250,7 @@ class GenericInputs:
             except ValueError:
                 print(wrong_input)
                 _input = input(input_info)
-        return _input # retourne "2" au lieu de BLITZ (l'int au leiu du str)
+        return _input # retourne "2" au lieu de BLITZ (l'int au lieu du str)
 
     @property
     def ask_description(self) -> str:
