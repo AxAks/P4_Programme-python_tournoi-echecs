@@ -69,10 +69,10 @@ class ListTournamentsMenu(Menu):
 
     def search_by_id(self):
         """
-         This method directs to the tournament controller
-         to get a list of tournaments matching the given information.
-         It then displays this list.
-         """
+        This method directs to the tournament controller
+        to get a list of tournaments matching the given information.
+        It then displays this list.
+        """
         _input = input('Search a tournament by Name, Location or dates: ')
         results = tournament_controller.search_by_id(_input)
         print('Tournaments found:')
@@ -87,10 +87,28 @@ class ListTournamentsMenu(Menu):
 
 
     def display_tournament_players(self):
+        """
+        This method directs to the tournament controller
+        to get the list of players for a given tournament.
+        It then displays this list.
+        """
+        # à faire
         tournament_controller.display_tournament_players()
 
     def display_tournament_rounds(self):
+        """
+        This method directs to the tournament controller
+        to get the list of rounds for a given tournament.
+        It then displays this list.
+        """
+        #  à faire
         tournament_controller.display_tournament_rounds()
 
     def display_tournament_matches(self):
+        """
+        This method directs to the tournament controller
+        to get the list of matches for a given tournament.
+        It then displays this list.
+        """
+        #  à faire
         tournament_controller.display_tournament_matches()

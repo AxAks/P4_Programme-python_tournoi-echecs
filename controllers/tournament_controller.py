@@ -58,12 +58,26 @@ def search_by_id(search):
 
 
 def display_tournament_players():
+    """
+    This function lists all the players of a given tournament
+    """
+    #  à faire
     pass
+
 
 def display_tournament_rounds():
+    """
+    This function lists all the rounds of a given tournament
+    """
+    #  à faire
     pass
 
+
 def display_tournament_matches():
+    """
+    This function lists all the matches of a given tournament
+    """
+    #  à faire
     pass
 
 # attention ! l'idée est de pouvoir faire des tournois sur plusieurs jours : date_debut, date_fin et par defaut date_debut = date_fin (1 jour)
