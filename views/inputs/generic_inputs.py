@@ -5,7 +5,7 @@ from datetime import date
 
 from constants import ALPHABETICAL_STRING_RULE, RANKING_RANGE, ALPHA_NUMERICAL_STRING_RULE
 
-from models.superfactory import super_factory as sf
+from models.models_utils.superfactory import super_factory as sf
 from models.player import Player
 from models.tournament import Tournament
 

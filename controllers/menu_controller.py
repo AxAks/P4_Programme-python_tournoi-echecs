@@ -7,7 +7,7 @@ import sys
 from tinydb import TinyDB
 
 from models.player import Player
-from models.superfactory import super_factory as sf
+from models.models_utils.superfactory import super_factory as sf
 from models.tournament import Tournament
 
 from views.forms.new_tournament_form import NewTournamentForm

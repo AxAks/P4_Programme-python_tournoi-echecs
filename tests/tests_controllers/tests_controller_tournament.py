@@ -5,7 +5,7 @@ File for different tests on the features of the tournament controller
 """
 
 # from controllers.tournament_controller import TournamentFactory
-from models.factory import Factory
+from models.models_utils.factory import Factory
 from models.tournament import Tournament
 from tests import sample_values as test_sample
 

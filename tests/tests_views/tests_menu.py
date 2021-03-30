@@ -5,13 +5,11 @@ Test file for menus
 """
 from controllers import menu_controller
 from tests import sample_values as test_sample
-from models.superfactory import super_factory as sf
+from models.models_utils.superfactory import super_factory as sf
 from models.player import Player
 from models.tournament import Tournament
-from views.inputs import generic_inputs
 
 # Mise en place des factories au démarrage
-from views.menus.menu import Menu
 
 player_factory = sf.create_factory(Player)
 tournament_factory = sf.create_factory(Tournament)

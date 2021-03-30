@@ -5,7 +5,7 @@ Controller file for Tournament
 """
 
 from models.tournament import Tournament
-from models.superfactory import super_factory as sf
+from models.models_utils.superfactory import super_factory as sf
 
 
 def sort_by_name():

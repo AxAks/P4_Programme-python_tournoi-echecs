@@ -1,8 +1,7 @@
 # coding=utf-8
-import operator
 
 from models.player import Player
-from models.superfactory import super_factory as sf
+from models.models_utils.superfactory import super_factory as sf
 """
 Controller file for Player
 """

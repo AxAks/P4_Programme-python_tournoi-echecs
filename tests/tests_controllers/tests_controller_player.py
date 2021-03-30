@@ -1,6 +1,6 @@
 # coding=utf-8
 
-from models.factory import Factory
+from models.models_utils.factory import Factory
 from models.player import Player
 from tests import sample_values as test_sample
 

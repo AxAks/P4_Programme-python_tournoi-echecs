@@ -1,6 +1,6 @@
 # coding=utf-8
 
-from models.factory import Factory
+from models.models_utils.factory import Factory
 
 
 class SuperFactory:

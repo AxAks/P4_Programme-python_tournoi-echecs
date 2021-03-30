@@ -7,7 +7,7 @@ the file is located at the root of the project,
 it redirects to the Home Menu file in the views directory.
 """
 
-from models.superfactory import super_factory as sf
+from models.models_utils.superfactory import super_factory as sf
 from models.player import Player
 from models.tournament import Tournament
 from controllers import menu_controller
