@@ -333,7 +333,7 @@ class GenericInputs:
         pass
 
 
-def search_one_player():  # pas générique !
+def search_one_player():  # pas générique ! (plutot dans views ?)
     results = sf.factories[Player].search(input('Search a player by id : '))
     while len(results) > 1:
         print(f'Results - '
