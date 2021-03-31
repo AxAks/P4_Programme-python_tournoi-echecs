@@ -4,19 +4,12 @@ manage menus via controllers
 """
 import sys
 
-from tinydb import TinyDB
-
 from models.player import Player
-from models.models_utils.superfactory import super_factory as sf
 from models.tournament import Tournament
 
 from views.forms.new_tournament_form import NewTournamentForm
-from views.menus.player_menu import PlayerMenu
-from views.menus.tournament_menu import TournamentMenu
-from views.menus.home_menu import HomeMenu
 from views.forms.new_player_form import NewPlayerForm
-from views.menus.list_players_menu import ListPlayerMenu
-from views.menus.list_tournaments_menu import ListTournamentsMenu
+
 
 
 # passer par le controller pour afficher les menus
@@ -29,21 +22,11 @@ from views.menus.list_tournaments_menu import ListTournamentsMenu
 # quand on manipule Modeles et Views, on met dans le controller.
 
 
-db = TinyDB('db.json', ensure_ascii=False)
+
 
 
 # Fonctions générales
-def load():  # à continuer, bien tester et checker si erreurs et si on peut choisir le fichier à loader
-    """
-    This method loads dicts for players and tournaments from a json file database using tinyDB.
-    It then deserializes the dicts to get python objects instances
-    """
-    players_table = db.table('players')
-    tournaments_table = db.table('tournaments')
-    serialized_players = players_table.all()
-    [sf.factories[Player].create(**serialized_player) for serialized_player in serialized_players]
-    serialized_tournaments = tournaments_table.all()
-    [sf.factories[Tournament].create(**serialized_tournament) for serialized_tournament in serialized_tournaments]
+
 
 
 def save():  # à continuer, bien tester et checker si erreurs et si on peut choisir le nom du fichier sauvegardé

@@ -15,7 +15,6 @@ class Menu:
         self.previous_page = previous_page
         self.root_page = root_page
         self.exiting_message = exiting_message
-        self.choices = [self.home, self.back,  self.load, self.save, self.quit]
 
     def menu(self) -> None:
         """
@@ -46,47 +45,6 @@ class Menu:
             action = self.choices[choice]
             action()
 
-    def home(self) -> None:
-        """
-        This method enables to go back to Home page
-        from any point of the program menu.
-        """
-        menu_controller.to_home_menu()
-
-    def back(self) -> None:
-        """
-        This method enables to go back to the previous screen
-        if the screen is the root menu, it directs to the controller to make the program quit.
-        """
-        if self.root_page:
-            self.quit()
-        else:
-            self.previous_page.run()
-
-    def quit(self) -> None:
-        """
-        This method directs to the controller to quit the program at any point in the menu
-        It calls the save function before quitting to save the state of the program.
-        """
-        self.save()
-        print(self.exiting_message)
-        menu_controller.quit()
-
-    def load(self) -> None:
-        """
-        This method directs to the controller
-        to load a previously saved state of the program from a database file at any time.
-        """
-        menu_controller.load()
-        print(f'Program state loaded from file')
-
-    def save(self) -> None:
-        """
-        This method directs to the controller to save the state of the program at any at any point in the menu.
-        """
-        print(f'Saving current program state')
-        menu_controller.save()
-        print('Program state saved')
-
-    def show(self):
-        pass
+    def show(self, choices):
+        for choice in choices:
+            return choice
