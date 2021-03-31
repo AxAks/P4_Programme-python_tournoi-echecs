@@ -12,6 +12,27 @@ for the organization of chess tournaments using the swiss-system.
 4. [Use](#use)
 5. [Generation of a code review report](#generation_of_a_code_review_report)
 
+## 1. Prerequisites <a name="prerequisites"></a>
+
+- python 3.9
+- virtualenv
+
+à suivre ...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ## penser à WINDOWS MAC et LINUX !!!
 ## Informations claires sur Comment executer/lancer le programme, l'utiliser, générer un fichier flake8-html de verification du code

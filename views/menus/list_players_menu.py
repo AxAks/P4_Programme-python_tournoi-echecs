@@ -63,8 +63,7 @@ class ListPlayerMenu(Menu):
                       f' {player_obj.ranking}, '
                       f'{player_obj.gender_pod}')
         else:
-            print('No Player found !')
+            print('No Player found')
 
     def search_by_last_name(self):
         pass
-

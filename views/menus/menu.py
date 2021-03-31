@@ -87,3 +87,6 @@ class Menu:
         print(f'Saving current program state')
         menu_controller.save()
         print('Program state saved')
+
+    def show(self):
+        pass
