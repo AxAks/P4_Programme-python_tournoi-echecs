@@ -1,7 +1,5 @@
 # coding=utf-8
 
-from controllers import menu_controller
-
 
 class Menu:
     """
