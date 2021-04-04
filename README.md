@@ -13,6 +13,7 @@ for the organization of chess tournaments using the swiss-system.
 5. [Usage](#usage)
 6. [Generation of a code review report](#generation_of_a_code_review_report)
 
+a retirer !
 un fichier README.md contenant des instructions claires sur la manière 
 d'exécuter le programme, de l'utiliser et de générer un nouveau fichier flake8-html.
 voir mise en page de P2 !!
@@ -128,8 +129,51 @@ $ python main.py
 
 ## 5. Usage <a name="usage"></a>
 
-à suivre ...
+Homepage Menu
+- Players Menu
+-- Add player
+-- List all players 
+--- sorted by last name
+--- sorted by ranking
+  
+- Tournaments Menu
+-- List all tournaments
+-- select a tournament
+-- List all players for a tournament
+--- sorted by last name
+--- sorted by "result" (during the tournament)
+-- List all rounds for a tournament
+-- List all matches for a tournament
+
+-- Add tournament 
+--- add players to tournament
+-- resume tournament 
+---- Add round to a tournament (during a tournament)
+----- Add match to a round (during a tournament)
+
+
+- Start a new tournament
+  - add players (8)
+  - generate pairs for game (1st round)
+  - Enter rounds results (Round 1 : match 1, match 2, match 3, match 4)
+  - new pairs for next rounds 
+  - Results for next rounds
 
 ## 6. Generation of a code review report <a name="generation_of_a_code_review_report"></a>
+à relire et rédiger...
 
-à suivre ...
+Pour lancer  flake8_html:
+in the root of the project 
+
+variantes de:  
+$ flake8 --format=html --htmldir=flake-report . -v  
+htmldir = name of the directory to be created to store the report.  
+-v = verbose (not necessary)  
+see more options here:  
+https://flake8.pycqa.org/en/latest/user/options.html  
+note: setup.cfg file excluding files from the analysis 
+and setting te limit to 119 characters per line  
+
+to read the reports:  
+- browse files to the 'flake-report' directory
+- open the file index.html in a webbrowser

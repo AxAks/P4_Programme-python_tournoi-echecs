@@ -1,4 +1,13 @@
 # coding=utf-8
+from tinydb import TinyDB
+
+from models.models_utils.superfactory import super_factory as sf
+from models.player import Player
+from models.tournament import Tournament
+
+
+db = TinyDB('db.json', ensure_ascii=False)
+
 
 def save() -> None:
     """
