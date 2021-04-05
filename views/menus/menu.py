@@ -1,4 +1,8 @@
 # coding=utf-8
+import sys
+
+from controllers import home_controller
+from models.models_utils import data
 
 
 class Menu:
@@ -13,36 +17,46 @@ class Menu:
         self.previous_page = previous_page
         self.root_page = root_page
         self.exiting_message = exiting_message
+        self.choices = [self.home, self.back,  self.load, self.save, self.quit]
 
-    def menu(self) -> None:
+    def show(self) -> None:
         """
         This method displays the different options of the menu.
         """
+        print('========================')
+        print(self.program_name, '\n', self.menu_name)
+        print('========================')
         for choice in self.choices:
             reformatted_choice_str = choice.__name__.replace('_', ' ').title()
             print(f"{self.choices.index(choice)}: {reformatted_choice_str}")
-
-    def run(self) -> None:
+        print('========================')
+    def home(self):
         """
-        This method displays the menu and responds to choices made.
+        This method leads to the Home Menu
         """
-        while True:
-            print(self.program_name, '\n', self.menu_name, '\n')
-            valid_choices = range(len(self.choices))
-            choice = -1
-            while choice not in valid_choices:
-                self.menu()
-                _input = input('\nEnter an option: ')
-                try:
-                    choice = int(_input)
-                    if choice not in valid_choices:
-                        print(f'-> "{choice}" is not a valid choice <-')
-                except ValueError:
-                    print(f'-> "{_input}" is not a valid choice <-')
+        home_controller.run()
 
-            action = self.choices[choice]
-            action()
+    def back(self) -> None:
+        """
+        This method enables to go back to the previous screen
+        if the screen is the root menu, it directs to the controller to make the program quit.
+        """
+        if self.root_page:
+            self.quit()
+        else:
+            self.previous_page.run()
 
-    def show(self, choices):
-        for choice in choices:
-            return choice
+    def quit(self) -> None:
+        """
+        This method directs to the controller to quit the program at any point in the menu
+        It calls the save function before quitting to save the state of the program.
+        """
+        data.save()
+        print(self.exiting_message)
+        sys.exit(0)
+
+    def load(self):
+        data.load()
+
+    def save(self):
+        data.save()

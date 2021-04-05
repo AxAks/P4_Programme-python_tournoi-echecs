@@ -6,7 +6,27 @@ Controller file for Tournament
 
 from models.tournament import Tournament
 from models.models_utils.superfactory import super_factory as sf
+from views.menus.tournament_menu import TournamentMenu
 
+
+def run():
+    """
+    This method displays the menu and responds to choices made.
+    """
+    valid_choices = range(len(TournamentMenu().choices))
+    choice = -1
+    while choice not in valid_choices:
+        TournamentMenu().show()
+        _input = input('\nEnter an option: ')
+        try:
+            choice = int(_input)
+            if choice not in valid_choices:
+                print(f'-> "{choice}" is not a valid choice <-')
+        except ValueError:
+            print(f'-> "{_input}" is not a valid choice <-')
+
+    action = TournamentMenu().choices[choice]
+    action()
 
 def sort_by_name():
     """

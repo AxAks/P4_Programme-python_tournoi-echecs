@@ -27,16 +27,7 @@ class NewPlayerForm(Form):
 
     def add_new_player(self) -> dict:  # à passer en tant que add_new (générique) dans Form
         print(self.program_name, '\n', self.menu_name, '\n')
-        ask_properties_dict = {}
-        for _property in PLAYER_PROPERTIES:
-            if _property != 'identifier':
-                ask_properties_dict[_property] = GenericInputs().ask_properties(_property)
-            else:
-                continue
-        new_player_dict = {}
-        for key in ask_properties_dict:
-            new_player_dict[key] = ask_properties_dict[key]
-        return new_player_dict
+
         """
         print(f'\nNew Player Information\n', new_player_dict)  # pas dans les views
         new_player = Factory(Player).create(**new_player_dict)

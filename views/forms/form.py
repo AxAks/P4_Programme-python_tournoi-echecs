@@ -4,7 +4,6 @@
 Generic Class for Forms
 """
 
-from views.inputs.generic_inputs import GenericInputs
 
 
 class Form:
