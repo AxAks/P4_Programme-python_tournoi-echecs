@@ -160,7 +160,7 @@ class Player(Model):
         """
         # This getter returns the gender as a string.
         """
-        return self.__gender.name.title()
+        return self.__gender.name
 
     @gender.setter
     def gender(self, value: Union[str, Gender]):
