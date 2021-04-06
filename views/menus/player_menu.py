@@ -41,6 +41,8 @@ class PlayerMenu(Menu):
     def sort_by_ranking(self):
         print('All Players by ranking: ')
         for player in player_controller.PlayerCtrl().sort_by_ranking():
-            print(f'{player.last_name}, {player.first_name}, {player.identifier_pod},\n'
-                  f'{player.birthdate_pod}, {player.gender_pod}, {player.ranking}')
+            print(f'{player.last_name}, {player.first_name}, {player.identifier_pod},'
+                  f' {player.birthdate_pod}, {player.gender_pod}\n'
+                  f'-> {player.ranking}'
+                  )
         player_controller.PlayerCtrl().run()

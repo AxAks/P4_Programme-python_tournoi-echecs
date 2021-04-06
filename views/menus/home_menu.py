@@ -28,4 +28,4 @@ class HomeMenu(Menu):
         """
         This method directs to the Tournaments Menu via the Tournament controller
         """
-        TournamentCtrl.run()
+        TournamentCtrl().run()

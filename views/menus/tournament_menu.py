@@ -19,7 +19,12 @@ class TournamentMenu(Menu):
         [self.choices.append(choice) for choice in specific_menu_choices]
 
     def add(self):
-        pass
+        tournament = tournament_controller.TournamentCtrl().add_tournament()
+        print(f'New Tournament registered:\n'
+              f'{tournament.name}, {tournament.location},\n'
+              f'{tournament.start_date}, {tournament.end_date}, {tournament.identifiers_list},'
+              f' {tournament.time_control}, {tournament.description}')
+        tournament_controller.TournamentCtrl().run()
 
     def resume(self):
         pass

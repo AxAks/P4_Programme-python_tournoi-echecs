@@ -6,6 +6,7 @@ Controller file for Tournament
 from controllers.controller import Controller
 from models.tournament import Tournament
 from models.models_utils.superfactory import super_factory as sf
+from views.forms.add_tournament_form import NewTournamentForm
 from views.menus.tournament_menu import TournamentMenu
 
 
@@ -32,6 +33,14 @@ class TournamentCtrl(Controller):
         action = TournamentMenu().choices[choice]
         action()
 
+    def add_tournament(self) -> Tournament:
+        """
+        this method creates a new player entry in the registry.
+        """
+        new_tournament_dict = NewTournamentForm().add_new_tournament()
+        new_tournament = sf.factories[Tournament].create(**new_tournament_dict)
+        return new_tournament
+
     def sort_by_name(self):
         """
         This function lists the tournament instances alphabetically sorted by name
@@ -42,7 +51,6 @@ class TournamentCtrl(Controller):
             tournaments_list.append(tournament_obj)
         sorted_by_name = sorted(tournaments_list, key=lambda x: x.name)
         return sorted_by_name
-
 
     def sort_by_location(self):
         """
@@ -55,7 +63,6 @@ class TournamentCtrl(Controller):
         sorted_by_location = sorted(tournaments_list, key=lambda x: x.location)
         return sorted_by_location
 
-
     def sort_by_start_date(self):
         """
         This function lists the tournament instances sorted by reverse chronological start date
@@ -66,7 +73,6 @@ class TournamentCtrl(Controller):
             tournaments_list.append(tournament_obj)
         sorted_by_start_date = sorted(tournaments_list, key=lambda x: x.start_date, reverse=True)
         return sorted_by_start_date
-
 
     def search_by_id(self, search):
         """
@@ -80,7 +86,6 @@ class TournamentCtrl(Controller):
             found_tournaments_list.append(tournament_obj)
         return found_tournaments_list
 
-
     def display_tournament_players(self):
         """
         This function lists all the players of a given tournament
@@ -88,14 +93,12 @@ class TournamentCtrl(Controller):
         #  à faire
         pass
 
-
     def display_tournament_rounds(self):
         """
         This function lists all the rounds of a given tournament
         """
         #  à faire
         pass
-
 
     def display_tournament_matches(self):
         """

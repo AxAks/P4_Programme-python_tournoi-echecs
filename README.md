@@ -131,10 +131,10 @@ $ python main.py
 
 Homepage Menu
 - Players Menu
--- Add player
--- List all players 
---- sorted by last name
---- sorted by ranking
+-- Add player (OK)
+-- List all players  
+--- sorted by last name (OK)
+--- sorted by ranking (OK)
   
 - Tournaments Menu
 -- List all tournaments

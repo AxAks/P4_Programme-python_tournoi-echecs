@@ -2,7 +2,7 @@
 
 """
 Form file for the creation of a new player in the database.
-"""q
+"""
 from views.forms.form import Form
 from views.inputs.get_properties import GetProperties
 #from views.inputs.player_inputs import PlayerInputs
