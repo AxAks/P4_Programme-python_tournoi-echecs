@@ -8,10 +8,10 @@ from uuid import UUID
 from constants import ALPHABETICAL_STRING_RULE, RANKING_RANGE
 
 from models.factory import Factory
-from views.inputs import GenericInputs
+from views.inputs import GetProperties
 
 
-class PlayerInputs(GenericInputs):
+class PlayerInputs(GetProperties):
 """
     #Class listing all possible inputs related to players
 """

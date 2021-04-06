@@ -7,10 +7,10 @@ from uuid import UUID
 from constants import ALPHABETICAL_STRING_RULE, ALPHA_NUMERICAL_STRING_RULE
 
 # generic inputs
-from views.inputs.generic_inputs import GenericInputs
+from views.inputs.get_properties import GetProperties
 
 
-class TournamentInputs(GenericInputs):
+class TournamentInputs(GetProperties):
     """
     Class listing all possible inputs related to Tournament
     """

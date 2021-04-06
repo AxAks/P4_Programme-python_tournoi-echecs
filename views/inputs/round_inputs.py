@@ -6,10 +6,10 @@
 
 # Round: pour entrer les resultats d'un round
 # 'name', 'matches', 'end_time', 'start_time'
-from views.inputs.generic_inputs import GenericInputs
+from views.inputs.get_properties import GetProperties
 
 
-class RoundInputs(GenericInputs):
+class RoundInputs(GetProperties):
     """
     Class listing all possible inputs related to Round
     """

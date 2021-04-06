@@ -4,10 +4,10 @@
 # Match: pour entrer les resultats d'un match
 # 'player1_id', 'player2_id', 'player1_score', 'player2_score'
 
-from views.inputs.generic_inputs import GenericInputs
+from views.inputs.get_properties import GetProperties
 
 
-class MatchInputs(GenericInputs):
+class MatchInputs(GetProperties):
     """
     Class listing all possible inputs related to Match
     """

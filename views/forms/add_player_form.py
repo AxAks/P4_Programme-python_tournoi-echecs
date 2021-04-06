@@ -2,9 +2,9 @@
 
 """
 Form file for the creation of a new player in the database.
-"""
+"""q
 from views.forms.form import Form
-from views.inputs.generic_inputs import GenericInputs
+from views.inputs.get_properties import GetProperties
 #from views.inputs.player_inputs import PlayerInputs
 from constants import PLAYER_PROPERTIES
 
@@ -21,7 +21,7 @@ class NewPlayerForm(Form):
         ask_properties_dict = {}
         for _property in PLAYER_PROPERTIES:
             if _property != 'identifier':
-                ask_properties_dict[_property] = GenericInputs().ask_properties(_property)
+                ask_properties_dict[_property] = GetProperties().ask_properties(_property)
             else:
                 continue
         new_player_dict = {}
