@@ -6,7 +6,7 @@ from the terminal : python main.py
 the file is located at the root of the project,
 it redirects to the Home Menu file in the views directory.
 """
-from controllers import home_controller
+from controllers.home_controller import HomeCtrl
 from models.models_utils import data
 from models.models_utils.superfactory import super_factory as sf
 from models.player import Player
@@ -23,7 +23,7 @@ def main():
     sf.create_factory(Player)
     sf.create_factory(Tournament)
     data.load()
-    home_controller.run()
+    HomeCtrl().run()
 
 
 if __name__ == '__main__':

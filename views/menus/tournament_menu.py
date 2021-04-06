@@ -10,7 +10,7 @@ class TournamentMenu(Menu):
     def __init__(self):
 
         super().__init__(program_name='Chess Tournament Manager', menu_name='Tournaments Menu',
-                         root_page=False, previous_page_ctrl=home_controller,
+                         root_page=False, previous_page_ctrl=home_controller.HomeCtrl,
                          exiting_message='Now Leaving Chess Tournament Manager')
         specific_menu_choices = [self.add, self.resume, self.add_round, self.add_match,
                                  self.list, self.select, self.list_players_by_last_name, self.list_players_by_result,

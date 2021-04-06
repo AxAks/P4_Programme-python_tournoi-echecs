@@ -1,5 +1,6 @@
 # coding=utf-8
-from controllers import player_controller, tournament_controller
+from controllers.player_controller import PlayerCtrl
+from controllers.tournament_controller import TournamentCtrl
 from views.menus.menu import Menu
 
 
@@ -16,7 +17,7 @@ class HomeMenu(Menu):
         [self.choices.append(choice) for choice in specific_menu_choices]
 
     def manage_players(self):
-        player_controller.run()
+        PlayerCtrl().run()
 
     def manage_tournaments(self):
-        tournament_controller.run()
+        TournamentCtrl.run()

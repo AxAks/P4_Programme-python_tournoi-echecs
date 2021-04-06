@@ -35,7 +35,7 @@ class Menu:
         """
         This method leads to the Home Menu
         """
-        home_controller.run()
+        home_controller.HomeCtrl.run()
 
     def back(self) -> None:
         """
@@ -45,7 +45,7 @@ class Menu:
         if self.root_page:
             self.quit()
         else:
-            self.previous_page_ctrl.run()  # changer pour le controller correspondant run()
+            self.previous_page_ctrl().run()  # changer pour le controller correspondant run()
 
     def quit(self) -> None:
         """
