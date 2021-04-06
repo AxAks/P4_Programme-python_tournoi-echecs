@@ -45,7 +45,7 @@ class Menu:
         if self.root_page:
             self.quit()
         else:
-            self.previous_page.run()
+            self.previous_page.run()  # changer pour le controller correspondant run()
 
     def quit(self) -> None:
         """
