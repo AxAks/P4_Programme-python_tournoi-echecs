@@ -17,7 +17,7 @@ class NewPlayerForm(Form):
     """
     def __init__(self):
         super().__init__(program_name='Chess Tournament Manager', menu_name='New Player Form',
-                         previous_page_ctrl=player_controller, root_page=False, exiting_message='Leaving Form',
+                         previous_page_ctrl=player_controller.PlayerCtrl, root_page=False, exiting_message='Leaving Form',
                          properties=PLAYER_PROPERTIES)
 
         specific_menu_choices = [self.add_new_player]
