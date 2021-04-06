@@ -3,7 +3,6 @@
 """
 Form file for the creation of a new player in the database.
 """
-from controllers import player_controller
 from views.forms.form import Form
 from views.inputs.generic_inputs import GenericInputs
 #from views.inputs.player_inputs import PlayerInputs
