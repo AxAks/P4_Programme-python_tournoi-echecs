@@ -16,11 +16,7 @@ class NewPlayerForm(Form):
     and returns a dict.
     """
     def __init__(self):
-        super().__init__(choices=[],
-                         properties=PLAYER_PROPERTIES)
-
-        specific_menu_choices = [self.add_new_player]
-        [self.choices.append(choice) for choice in specific_menu_choices]
+        super().__init__(properties=PLAYER_PROPERTIES)
 
     def add_new_player(self) -> dict:  # à passer en tant que add_new (générique) dans Form
         ask_properties_dict = {}
