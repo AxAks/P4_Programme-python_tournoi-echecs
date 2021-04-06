@@ -23,6 +23,7 @@ class Menu:
     def show(self) -> None:
         """
         This method displays the different options of the menu.
+        The options are set in the attributes of the class ("choices" and "specific_menu_choices")
         """
         print('========================')
         print(self.program_name, '\n', self.menu_name)
@@ -32,9 +33,9 @@ class Menu:
             print(f"{self.choices.index(choice)}: {reformatted_choice_str}")
         print('========================')
 
-    def home(self):
+    def home(self) -> None:
         """
-        This method leads to the Home Menu
+        This method leads to the Home Menu via the Home controller
         """
         home_controller.HomeCtrl.run()
 
@@ -58,7 +59,7 @@ class Menu:
         print(self.exiting_message)
         Controller().quit()
 
-    def load(self):
+    def load(self) -> None:
         """
         This method directs to the controller to load a program state from the database file at any point in the menu
         It then reloads the current menu screen
@@ -66,7 +67,7 @@ class Menu:
         Controller().load()
         self.current_page_ctrl().run()
 
-    def save(self):
+    def save(self) -> None:
         """
         This method directs to the controller to save the program state at any point in the menu
         It then reloads the current menu screen.

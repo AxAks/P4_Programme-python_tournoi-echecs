@@ -27,11 +27,20 @@ class Controller:
         action = self.menu.choices[choice]
         action()
 
-    def quit(self):
+    def quit(self) -> None:
+        """
+        This method quits the program
+        """
         sys.exit(0)
 
-    def load(self):
+    def load(self) -> None:
+        """
+        This method loads a database file
+        """
         data.load()
 
-    def save(self):
+    def save(self) -> None:
+        """
+        This method saves datas in a database file
+        """
         data.save()
