@@ -1,8 +1,11 @@
 # coding=utf-8
+import sys
+
+from models.models_utils import data
 
 
 class Controller:
-    def __init__(self, menu):
+    def __init__(self, menu=None):
         self.menu = menu
 
     def run(self) -> None:
@@ -23,3 +26,12 @@ class Controller:
 
         action = self.menu.choices[choice]
         action()
+
+    def quit(self):
+        sys.exit(0)
+
+    def load(self):
+        data.load()
+
+    def save(self):
+        data.save()

@@ -2,7 +2,7 @@
 import sys
 
 from controllers import home_controller
-from models.models_utils import data
+from controllers.controller import Controller
 
 
 class Menu:
@@ -11,10 +11,12 @@ class Menu:
     It enables to navigate through the program.
     """
     def __init__(self, program_name, menu_name,
-                 previous_page_ctrl=None, root_page=False, exiting_message='Program Terminated'):
+                 previous_page_ctrl=None, current_page_ctrl=None,
+                 root_page=False, exiting_message='Program Terminated'):
         self.program_name = program_name
         self.menu_name = f'-{menu_name}-'
         self.previous_page_ctrl = previous_page_ctrl
+        self.current_page_ctrl = current_page_ctrl
         self.root_page = root_page
         self.exiting_message = exiting_message
         self.choices = [self.quit, self.home, self.back,  self.load, self.save]
@@ -43,21 +45,31 @@ class Menu:
         if the screen is the root menu, it directs to the controller to make the program quit.
         """
         if self.root_page:
-            self.quit()
+            Controller().quit()
         else:
-            self.previous_page_ctrl().run()  # changer pour le controller correspondant run()
+            self.previous_page_ctrl().run()
 
     def quit(self) -> None:
         """
         This method directs to the controller to quit the program at any point in the menu
         It calls the save function before quitting to save the state of the program.
         """
-        data.save()
+        Controller().save()
         print(self.exiting_message)
-        sys.exit(0)
+        Controller().quit()
 
     def load(self):
-        data.load()
+        """
+        This method directs to the controller to load a program state from the database file at any point in the menu
+        It then reloads the current menu screen
+        """
+        Controller().load()
+        self.current_page_ctrl().run()
 
     def save(self):
-        data.save()
+        """
+        This method directs to the controller to save the program state at any point in the menu
+        It then reloads the current menu screen.
+        """
+        Controller().save()
+        self.current_page_ctrl().run()
