@@ -17,7 +17,7 @@ class PlayerCtrl(Controller):
 
     def add_player(self):
         new_player_dict = NewPlayerForm().add_new_player()
-        new_player = Factory(Player).create(**new_player_dict)
+        new_player = sf.factories[Player].create(**new_player_dict)
         return new_player
 
     def sort_by_last_name(self):

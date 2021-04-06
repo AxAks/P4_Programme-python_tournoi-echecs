@@ -16,7 +16,11 @@ class PlayerMenu(Menu):
         [self.choices.append(choice) for choice in specific_menu_choices]
 
     def add(self):
-        player_controller.PlayerCtrl().add_player()
+        player = player_controller.PlayerCtrl().add_player()
+        print(f'New Player registered:\n'
+              f'{player.last_name}, {player.first_name},\n'
+              f'{player.birthdate_pod}, {player.gender_pod}, {player.ranking}, {player.identifier_pod}')
+        player_controller.PlayerCtrl().run()
 
     def search_by_id(self):
         _input = input('search a player by ID: ')
