@@ -3,7 +3,7 @@
 """
 Form file for the creation of a new tournament in the database.
 """
-
+from controllers import tournament_controller
 from views.forms.form import Form
 from views.inputs.generic_inputs import GenericInputs
 from views.menus import tournament_menu
@@ -17,7 +17,7 @@ class NewTournamentForm(Form):  # héritage en cascade  : Menu -> Form -> .
     """
     def __init__(self):
         super().__init__(program_name='Chess Tournament Manager', menu_name='New Tournament Form',
-                         previous_page=tournament_menu.TournamentMenu(),
+                         previous_page_ctrl=tournament_controller,
                          root_page=False, exiting_message='Leaving Form', properties=TOURNAMENT_PROPERTIES)
 
         specific_menu_choices = [self.add_new_tournament]

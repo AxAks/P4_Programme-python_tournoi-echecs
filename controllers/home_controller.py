@@ -1,6 +1,7 @@
 # coding=utf-8
 from views.menus.home_menu import HomeMenu
 
+
 def run() -> None:
     """
     This method displays the menu and responds to choices made.

@@ -6,7 +6,6 @@ Form file for the creation of a new player in the database.
 from controllers import player_controller
 from views.forms.form import Form
 from views.inputs.generic_inputs import GenericInputs
-from views.menus import player_menu
 #from views.inputs.player_inputs import PlayerInputs
 from constants import PLAYER_PROPERTIES
 
@@ -18,7 +17,7 @@ class NewPlayerForm(Form):
     """
     def __init__(self):
         super().__init__(program_name='Chess Tournament Manager', menu_name='New Player Form',
-                         previous_page=player_controller.run(), root_page=False, exiting_message='Leaving Form',
+                         previous_page_ctrl=player_controller, root_page=False, exiting_message='Leaving Form',
                          properties=PLAYER_PROPERTIES)
 
         specific_menu_choices = [self.add_new_player]

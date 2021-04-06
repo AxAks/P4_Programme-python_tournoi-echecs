@@ -1,21 +1,12 @@
 # coding=utf-8
-from constants import PLAYER_PROPERTIES
 from models.models_utils.factory import Factory
 from models.player import Player
 from models.models_utils.superfactory import super_factory as sf
 from views.forms.add_player_form import NewPlayerForm
-from views.inputs.generic_inputs import GenericInputs
 from views.menus.player_menu import PlayerMenu
 
 """
 Controller file for Player
-"""
-
-"""
-Temp : Just for me !
-Controller : link between Models (Classes) and Views
--  models updates
-plusieurs fichiers controller à écrire : scinder
 """
 
 
@@ -42,7 +33,7 @@ def run():
 def add_player():
     new_player_dict = NewPlayerForm().add_new_player()
     new_player = Factory(Player).create(**new_player_dict)
-    print(new_player.__dict__)
+    return new_player
 
 def sort_by_last_name():
     players_list = []

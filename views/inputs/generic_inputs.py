@@ -31,19 +31,6 @@ class GenericInputs:
                 raise Exception()  # il faut gérer ces exceptions (retenter la demande)
         return method  # f'ask{arg}()' #pb si deux objets ont des attributs identiques -> surement qu'ils font la meme chose, à voir
 
-        """
-            if arg != 'identifiers_list':
-                try:
-                    print(f'{arg.replace("_", " ").title()} is  :')
-                    for uuid in method:
-                        print(f'{method[uuid].identifier}, '
-                              f'{method[uuid].last_name}, {method[uuid].first_name}: '
-                              f' {method[uuid].birthdate}, '
-                              f' {method[uuid].ranking}, '
-                              f'{method[uuid].gender_pod}')
-                except AttributeError:
-                    raise Exception()
-            """
 
     @property
     def ask_last_name(self) -> str:

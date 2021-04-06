@@ -11,13 +11,13 @@ class Menu:
     It enables to navigate through the program.
     """
     def __init__(self, program_name, menu_name,
-                 previous_page=None, root_page=False, exiting_message='Program Terminated'):
+                 previous_page_ctrl=None, root_page=False, exiting_message='Program Terminated'):
         self.program_name = program_name
         self.menu_name = f'-{menu_name}-'
-        self.previous_page = previous_page
+        self.previous_page_ctrl = previous_page_ctrl
         self.root_page = root_page
         self.exiting_message = exiting_message
-        self.choices = [self.home, self.back,  self.load, self.save, self.quit]
+        self.choices = [self.quit, self.home, self.back,  self.load, self.save]
 
     def show(self) -> None:
         """
@@ -45,7 +45,7 @@ class Menu:
         if self.root_page:
             self.quit()
         else:
-            self.previous_page.run()  # changer pour le controller correspondant run()
+            self.previous_page_ctrl.run()  # changer pour le controller correspondant run()
 
     def quit(self) -> None:
         """
