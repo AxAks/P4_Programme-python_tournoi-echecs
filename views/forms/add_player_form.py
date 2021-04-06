@@ -23,7 +23,6 @@ class NewPlayerForm(Form):
         [self.choices.append(choice) for choice in specific_menu_choices]
 
     def add_new_player(self) -> dict:  # à passer en tant que add_new (générique) dans Form
-        #print(self.program_name, '\n', self.menu_name, '\n')
         ask_properties_dict = {}
         for _property in PLAYER_PROPERTIES:
             if _property != 'identifier':
