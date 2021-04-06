@@ -1,6 +1,5 @@
 # coding=utf-8
 from models.models_utils.superfactory import super_factory as sf
-from models.models_utils.factory import Factory
 from models.player import Player
 from controllers.controller import Controller
 from views.forms.add_player_form import NewPlayerForm

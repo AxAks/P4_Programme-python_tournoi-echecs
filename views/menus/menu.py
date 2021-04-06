@@ -1,5 +1,4 @@
 # coding=utf-8
-import sys
 
 from controllers import home_controller
 from controllers.controller import Controller
@@ -45,6 +44,7 @@ class Menu:
         if the screen is the root menu, it directs to the controller to make the program quit.
         """
         if self.root_page:
+            Controller().save()
             Controller().quit()
         else:
             self.previous_page_ctrl().run()
