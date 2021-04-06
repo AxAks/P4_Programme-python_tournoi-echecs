@@ -16,6 +16,7 @@ class PlayerMenu(Menu):
 
     def add(self):
         player_controller.add_player()
+        player_controller.run()
 
     def search_by_id(self):
         _input = input('search a player by ID: ')

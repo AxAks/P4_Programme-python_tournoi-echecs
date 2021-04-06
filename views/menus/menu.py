@@ -30,6 +30,7 @@ class Menu:
             reformatted_choice_str = choice.__name__.replace('_', ' ').title()
             print(f"{self.choices.index(choice)}: {reformatted_choice_str}")
         print('========================')
+
     def home(self):
         """
         This method leads to the Home Menu

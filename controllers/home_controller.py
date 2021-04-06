@@ -9,7 +9,7 @@ def run() -> None:
     choice = -1
     while choice not in valid_choices:
         HomeMenu().show()
-        _input = input('\nEnter an option: ')
+        _input = input('Enter an option: ')
         try:
             choice = int(_input)
             if choice not in valid_choices:

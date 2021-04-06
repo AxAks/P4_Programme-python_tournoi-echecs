@@ -1,5 +1,6 @@
 # coding=utf-8
 from constants import PLAYER_PROPERTIES
+from models.models_utils.factory import Factory
 from models.player import Player
 from models.models_utils.superfactory import super_factory as sf
 from views.forms.add_player_form import NewPlayerForm
@@ -26,7 +27,7 @@ def run():
     choice = -1
     while choice not in valid_choices:
         PlayerMenu().show()
-        _input = input('\nEnter an option: ')
+        _input = input('Enter an option: ')
         try:
             choice = int(_input)
             if choice not in valid_choices:
@@ -39,19 +40,9 @@ def run():
 
 
 def add_player():
-    ask_properties_dict = {}
-    for _property in PLAYER_PROPERTIES:
-        if _property != 'identifier':
-            ask_properties_dict[_property] = GenericInputs().ask_properties(_property)
-        else:
-            continue
-    new_player_dict = {}
-    for key in ask_properties_dict:
-        new_player_dict[key] = ask_properties_dict[key]
-    return new_player_dict
-
-    NewPlayerForm().add_new_player()
-
+    new_player_dict = NewPlayerForm().add_new_player()
+    new_player = Factory(Player).create(**new_player_dict)
+    print(new_player.__dict__)
 
 def sort_by_last_name():
     players_list = []

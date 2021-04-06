@@ -5,7 +5,6 @@ Generic Class for Forms
 """
 
 
-
 class Form:
     """
     This class is a parent Class for all Forms
