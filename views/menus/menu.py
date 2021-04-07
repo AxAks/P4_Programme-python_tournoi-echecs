@@ -2,6 +2,7 @@
 
 from controllers import home_controller
 from controllers.controller import Controller
+from utils import clear_terminal
 
 
 class Menu:
@@ -56,7 +57,7 @@ class Menu:
         It calls the save function before quitting to save the state of the program.
         """
         Controller().save()
-        print(self.exiting_message)
+        print(f'{self.exiting_message}\n')
         Controller().quit()
 
     def load(self) -> None:

@@ -2,6 +2,7 @@
 import sys
 
 from models.models_utils import data
+from utils import clear_terminal
 
 
 class Controller:
@@ -15,6 +16,7 @@ class Controller:
         valid_choices = range(len(self.menu.choices))
         choice = -1
         while choice not in valid_choices:
+            clear_terminal()
             self.menu.show()
             _input = input('Enter an option: ')
             try:
