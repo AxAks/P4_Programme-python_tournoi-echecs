@@ -28,7 +28,7 @@ class Tournament(Model):
         - name: string
         - location: string
         - dates: date or string
-        - players_identifier: list[str] or list[UUID]
+        - identifiers_list: list[str] or list[UUID]
         - time_control: string or Time_control
         - description: string
         - rounds_list: list[dict] or list[Round]
@@ -172,37 +172,37 @@ class Tournament(Model):
             self.__end_date = value
 
     @property
-    def players_identifier(self) -> list[str]:
+    def identifiers_list(self) -> list[str]:
         """
         This getter returns the players' identifier as a list of strings or UUID.
         The controller matches the Player instance through its identifier
         """
-        return [str(player_id) for player_id in self.__players_identifier]
+        return [str(player_id) for player_id in self.__identifiers_list]
 
-    @players_identifier.setter
-    def players_identifier(self, value: Union[list[str], list[UUID]]):
+    @identifiers_list.setter
+    def identifiers_list(self, value: Union[list[str], list[UUID]]):
         """
         This setter checks whether the entered value is list of Player UUIDs or a list of strings
         and sets the attribute as a list of Player UUIDs
         """
         if value is None:
             raise AttributeError()
-        players_identifier_list = []
+        players_identifiers_list = []
         for player_id in value:
             if player_id is None or player_id == '':
                 raise AttributeError()
             if isinstance(player_id, str):
                 try:
                     player_id = UUID(player_id)
-                    players_identifier_list.append(player_id)
-                    self.__players_identifier = players_identifier_list
+                    players_identifiers_list.append(player_id)
+                    self.__identifiers_list = players_identifiers_list
                 except AttributeError:
                     raise AttributeError()
 
             elif isinstance(player_id, UUID):
                 try:
-                    players_identifier_list.append(player_id)
-                    self.__players_identifier = players_identifier_list
+                    players_identifiers_list.append(player_id)
+                    self.__identifiers_list = players_identifiers_list
                 except AttributeError:
                     raise AttributeError()
             else:

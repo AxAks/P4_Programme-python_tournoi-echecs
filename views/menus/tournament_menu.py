@@ -22,7 +22,7 @@ class TournamentMenu(Menu):
         tournament = tournament_controller.TournamentCtrl().add_tournament()
         print(f'New Tournament registered:\n'
               f'{tournament.name}, {tournament.location},\n'
-              f'{tournament.start_date}, {tournament.end_date}, {tournament.players_identifier},'
+              f'{tournament.start_date}, {tournament.end_date}, {tournament.identifiers_list},'
               f' {tournament.time_control}, {tournament.description}')
         tournament_controller.TournamentCtrl().run()
 

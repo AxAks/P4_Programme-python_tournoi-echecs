@@ -24,15 +24,22 @@ class ListTournamentMenu(Menu):
         This method calls the controller to display all registered tournament instances by start date
         """
         print('List of all Tournaments: ')
-        for tournament in list_tournaments_controller.ListTournamentsCtrl().list_all_tournaments():
-            print(f'{tournament.name}, {tournament.location}\n '
-                  f'{tournament.start_date}, {tournament.end_date}')
+        tournaments_list = list_tournaments_controller.ListTournamentsCtrl().list_all_tournaments()
+        if len(tournaments_list) == 0:
+            print('No tournament in the registry')
+        else:
+            for tournament in tournaments_list:
+                print(f'{tournament.name}, {tournament.location}\n '
+                      f'{tournament.start_date}, {tournament.end_date}')
         list_tournaments_controller.ListTournamentsCtrl().run()
 
     def select(self):  # list all tournaments and select one tournament
         pass
 
     def resume(self):  # resume selected tournament
+        """
+        This method enable to resume a tournament
+        """
         pass
 
     def sort_players_by_last_name(self):  # for one selected tournament

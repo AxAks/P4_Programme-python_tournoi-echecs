@@ -35,7 +35,7 @@ class PlayerCtrl(Controller):
 
     def sort_by_ranking(self) -> list:
         """
-        This method returns a lsit of all players in the registry sorted by ranking
+        This method returns a list of all players in the registry sorted by ranking
         """
         players_list = []
         for uuid in sf.factories[Player].registry:

@@ -149,7 +149,7 @@ class GetProperties:
             #    player_dict = search_one_player() # utile ? à testé !! (pb prints entre les deux fonctions)
             for key in player_dict:
                 if key not in tournament_players_identifier:
-                    tournament_players_identifier[key] = player_dict[key]
+                    tournament_players_identifier[str(key)] = player_dict[key]
                     print(f"Player {n}/8 added")
                     print(f"{player_dict[key].last_name}, "
                           f"{player_dict[key].first_name}: "
@@ -273,14 +273,15 @@ class GetProperties:
         pass
 
 
-def search_one_player():  # pas générique ! (plutot dans views ?)
-    results = sf.factories[Player].search(input('Search a player by id : '))
+def search_one_player():  # pas générique ! (à scinder entre Models(player_manager qui hérite de Factory?, controllers et views)
+    _input = input('Search a player by id : ')
+    results = sf.factories[Player].search(_input)
     while len(results) > 1:
         print(f'Results - '
               f'{len(results)} players returned:')
-        for identifier in results:
+        for identifier in results:  # print dans les views
             print(
-                  f'{results[identifier].last_name},'  # les prints sont dans les views !!! 
+                  f'{results[identifier].last_name},'
                   f' {results[identifier].first_name}:'
                   f' {results[identifier].identifier}\n'
                   f'-> {results[identifier].birthdate},'
@@ -290,7 +291,7 @@ def search_one_player():  # pas générique ! (plutot dans views ?)
         results = sf.factories[Player].search(input('Please be more specific: '))
         print('---')
     if len(results) == 1:
-        for identifier in results:
+        for identifier in results:  # print dans les views
             print('1 Player found in Registry for this ID:')
             print(f'Result:\n'
                   f'{results[identifier].last_name},'
@@ -306,8 +307,9 @@ def search_one_player():  # pas générique ! (plutot dans views ?)
         return results
 
 
-def search_one_tournament():  # pas générique !, pas utilisé ! pas testé,
-    results = sf.factories[Tournament].search(input('Search a tournament by name, location or dates: '))
+def search_one_tournament():  # pas générique ! (à scinder entre Models(tournament_manager qui hérite de Factory?, controllers et views),pas testé
+    _input = input('Search a tournament by name, location or dates: ')
+    results = sf.factories[Tournament].search(_input)
     while len(results) > 1:
         print(f'Results - '
               f'{len(results)} Tournaments returned:')
