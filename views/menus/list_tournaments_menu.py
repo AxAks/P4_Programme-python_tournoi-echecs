@@ -1,4 +1,5 @@
 # coding=utf-8
+
 from controllers import tournaments_controller, list_tournaments_controller
 from views.menus.menu import Menu
 

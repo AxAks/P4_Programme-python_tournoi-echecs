@@ -1,4 +1,5 @@
 # coding=utf-8
+
 from models.models_utils.player_manager import list_all_players
 from models.models_utils.superfactory import super_factory as sf
 from models.player import Player
@@ -40,7 +41,7 @@ class PlayerCtrl(Controller):
         sorted_by_ranking = sorted(players_list, key=lambda x: x.ranking, reverse=True)
         return sorted_by_ranking
 
-    def search_by_id(self, search) -> list:
+    def search_by_id(self, search) -> list:  # voir player manager : search_one_player
         """
         This method lists the player instances matching the given input (id)
         """

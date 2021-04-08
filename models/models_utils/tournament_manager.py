@@ -10,7 +10,9 @@ class TournamentManager(Factory):
         pass
 
 
-def search_one_tournament():  # pas générique ! (à scinder entre Models(tournament_manager qui hérite de Factory?, controllers et views),pas testé
+def search_one_tournament():
+    # pas générique ! (à scinder entre Models(tournament_manager qui hérite de Factory?, controllers et views),pas testé
+    # + voir list tournament controller : search_by_id
     _input = input('Search a tournament by name, location or dates: ')
     results = sf.factories[Tournament].search(_input)
     while len(results) > 1:

@@ -10,7 +10,9 @@ class PlayerManager(Factory):
         pass
 
 
-def search_one_player():  # pas générique ! (à scinder entre Models(player_manager qui hérite de Factory?, controllers et views)
+def search_one_player():
+    # pas générique ! (à scinder entre Models(player_manager qui hérite de Factory?, controllers et views)
+    # + voir players_controller : search_by_id
     _input = input('Search a player by id : ')
     results = sf.factories[Player].search(_input)
     while len(results) > 1:
