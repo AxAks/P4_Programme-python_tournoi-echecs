@@ -9,6 +9,7 @@ class Menu:
     This class is a parent Class for all Menu screens
     It enables to navigate through the program.
     """
+
     def __init__(self, program_name, menu_name,
                  previous_page_ctrl=None, current_page_ctrl=None,
                  root_page=False, exiting_message='Program Terminated'):

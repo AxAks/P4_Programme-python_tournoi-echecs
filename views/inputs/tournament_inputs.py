@@ -14,6 +14,7 @@ class TournamentInputs(GetProperties):
     """
     Class listing all possible inputs related to Tournament
     """
+
     def __init__(self):
         super().init()
 

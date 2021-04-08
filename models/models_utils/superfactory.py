@@ -4,6 +4,7 @@ from models.models_utils.factory import Factory
 
 
 class SuperFactory:
+
     def __init__(self):
         self.factories = {}
 

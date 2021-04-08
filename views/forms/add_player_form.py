@@ -5,7 +5,6 @@ Form file for the creation of a new player in the database.
 """
 from views.forms.form import Form
 from views.inputs.get_properties import GetProperties
-#from views.inputs.player_inputs import PlayerInputs
 from constants import PLAYER_PROPERTIES
 
 
@@ -14,6 +13,7 @@ class NewPlayerForm(Form):
     This class asks the required data for the creation of a player instance.
     and returns a dict.
     """
+
     def __init__(self):
         super().__init__(properties=PLAYER_PROPERTIES)
 

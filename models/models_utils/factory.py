@@ -13,6 +13,7 @@ class Factory:
     This Class creates specific Factories based on the object's type
     The instances are registered in a registry and can be searched for.
     """
+
     def __init__(self, obj_type):
         self.registry = {}
         self.obj_type = obj_type

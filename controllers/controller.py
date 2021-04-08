@@ -1,4 +1,5 @@
 # coding=utf-8
+
 import sys
 
 from models.models_utils import data
@@ -6,6 +7,10 @@ from utils import clear_terminal
 
 
 class Controller:
+    """
+    General parent class for all controllers.
+    """
+
     def __init__(self, menu=None):
         self.menu = menu
 

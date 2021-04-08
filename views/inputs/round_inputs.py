@@ -1,7 +1,6 @@
 # coding=utf-8
 
 
-
 # defs à reprendre et reutiliser autre part !!!!!
 
 # Round: pour entrer les resultats d'un round
@@ -13,6 +12,7 @@ class RoundInputs(GetProperties):
     """
     Class listing all possible inputs related to Round
     """
+
     def __init__(self):
         super().init()
 

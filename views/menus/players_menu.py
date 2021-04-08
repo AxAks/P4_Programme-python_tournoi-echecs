@@ -7,13 +7,15 @@ class PlayersMenu(Menu):
     """
     This class is the Menu for Player management.
     """
+
     def __init__(self):
 
         super().__init__(program_name='Chess Tournament Manager', menu_name='Players Menu',
                          root_page=False, previous_page_ctrl=home_controller.HomeCtrl,
                          current_page_ctrl=players_controller.PlayerCtrl,
                          exiting_message='Now Leaving Chess Tournament Manager')
-        specific_menu_choices = [self.add_player, self.search_by_id, self.sort_by_last_name, self.sort_by_ranking]
+        specific_menu_choices = [self.add_player, self.search_by_id,
+                                 self.display_by_last_name, self.display_by_ranking]
         [self.choices.append(choice) for choice in specific_menu_choices]
 
     def add_player(self) -> None:
@@ -39,7 +41,7 @@ class PlayersMenu(Menu):
                   f'{player.birthdate_pod}, {player.gender_pod}, {player.ranking}')
         self.current_page_ctrl().run()
 
-    def sort_by_last_name(self) -> None:
+    def display_by_last_name(self) -> None:
         """
         This method calls the controller to sort all player instances by last name
         """
@@ -51,7 +53,7 @@ class PlayersMenu(Menu):
                   f'{player.birthdate_pod}, {player.gender_pod}, {player.ranking}')
         self.current_page_ctrl().run()
 
-    def sort_by_ranking(self) -> None:
+    def display_by_ranking(self) -> None:
         """
         This method calls the controller to sort all player instances by ranking
         """

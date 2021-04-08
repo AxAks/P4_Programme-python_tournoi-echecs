@@ -11,6 +11,7 @@ class MatchInputs(GetProperties):
     """
     Class listing all possible inputs related to Match
     """
+
     def __init__(self):
         super().init()
 

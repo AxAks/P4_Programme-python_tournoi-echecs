@@ -13,6 +13,7 @@ class TournamentCtrl(Controller):
     """
     Controller class for the Tournament Menu
     """
+
     def __init__(self):
         self.menu = TournamentsMenu()
 

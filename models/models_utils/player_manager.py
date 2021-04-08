@@ -6,11 +6,12 @@ from models.player import Player
 
 
 class PlayerManager(Factory):
+
     def __init__(self):
         pass
 
-
 def search_one_player():
+    # pas dans la classe ! function et non methode
     # pas générique ! (à scinder entre Models(player_manager qui hérite de Factory?, controllers et views)
     # + voir players_controller : search_by_id
     _input = input('Search a player by id : ')

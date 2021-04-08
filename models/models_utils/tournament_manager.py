@@ -6,11 +6,13 @@ from models.tournament import Tournament
 
 
 class TournamentManager(Factory):
+
     def __init__(self):
         pass
 
 
 def search_one_tournament():
+    # pas dans la classe, function et non methode
     # pas générique ! (à scinder entre Models(tournament_manager qui hérite de Factory?, controllers et views),pas testé
     # + voir list tournament controller : search_by_id
     _input = input('Search a tournament by name, location or dates: ')
@@ -43,7 +45,7 @@ def search_one_tournament():
         return results
 
 
-def list_registered_tournaments():
+def list_registered_tournaments() -> list:
     tournaments_list = []
     for identifier in sf.factories[Tournament].registry:
         tournament_obj = sf.factories[Tournament].registry[identifier]

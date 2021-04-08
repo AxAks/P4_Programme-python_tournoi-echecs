@@ -6,9 +6,12 @@ from views.menus.tournament_infos_menu import TournamentInfosMenu
 from models.models_utils.superfactory import super_factory as sf
 
 class TournamentInfosCtrl(Controller):
+    """
+
+    """
+
     def __init__(self):
         self.menu = TournamentInfosMenu()
-
 
     # à rediger !
     def sort_players_by_last_name(self):

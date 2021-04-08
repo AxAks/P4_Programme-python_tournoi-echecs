@@ -12,6 +12,7 @@ class GetProperties:
     """
     Class for all inputs
     """
+
     def __init__(self):
         pass
 

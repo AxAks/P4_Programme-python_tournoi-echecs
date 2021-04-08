@@ -7,6 +7,7 @@ class TournamentsMenu(Menu):
     """
     This class is the Menu for Tournaments management.
     """
+
     def __init__(self):
         super().__init__(program_name='Chess Tournament Manager', menu_name='Tournaments Menu',
                          root_page=False, previous_page_ctrl=home_controller.HomeCtrl,

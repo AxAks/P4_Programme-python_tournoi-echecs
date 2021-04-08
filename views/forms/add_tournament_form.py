@@ -10,15 +10,16 @@ from views.menus import tournaments_menu
 from constants import TOURNAMENT_PROPERTIES
 
 
-class NewTournamentForm(Form):  # héritage en cascade  : Menu -> Form -> .
+class NewTournamentForm(Form):
     """
     This class asks the required data for the creation of a Tournament instance
     and returns a dict.
     """
+
     def __init__(self):
         super().__init__(properties=TOURNAMENT_PROPERTIES)
 
-    def add_new_tournament(self) -> dict: #  à passer en tnat que add_new dans Form
+    def add_new_tournament(self) -> dict: #  à passer en tant que add_new dans Form
         """
         This method asks all the required info about a specific tournament.
         It returns the info as a dict

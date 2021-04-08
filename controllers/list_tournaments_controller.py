@@ -11,10 +11,11 @@ class ListTournamentsCtrl(Controller):
     """
     Controller class for the menu that lists Tournaments
     """
+
     def __init__(self):
         self.menu = ListTournamentsMenu()
 
-    def sort_by_start_date(self):
+    def sort_by_start_date(self) -> list:
         """
         This function lists the tournament instances sorted by start date
         """
@@ -22,7 +23,7 @@ class ListTournamentsCtrl(Controller):
         sorted_by_start_date = sorted(tournaments_list, key=lambda x: x.start_date)
         return sorted_by_start_date
 
-    def sort_by_name(self):
+    def sort_by_name(self) -> list:
         """
         This function lists the tournament instances alphabetically sorted by name
         """
@@ -30,7 +31,7 @@ class ListTournamentsCtrl(Controller):
         sorted_by_name = sorted(tournaments_list, key=lambda x: x.name)
         return sorted_by_name
 
-    def sort_by_location(self):
+    def sort_by_location(self) -> list:
         """
         This function lists the tournament instances alphabetically sorted by location
         """
@@ -38,7 +39,7 @@ class ListTournamentsCtrl(Controller):
         sorted_by_location = sorted(tournaments_list, key=lambda x: x.location)
         return sorted_by_location
 
-    def search_by_id(self, search):  # voir tournament manager : search_one_tournament
+    def search_by_id(self, search) -> list:  # voir tournament manager : search_one_tournament
         """
         This function lists the tournament instances matching the given input
         (identifier: Name, Location, Start date, End date)
