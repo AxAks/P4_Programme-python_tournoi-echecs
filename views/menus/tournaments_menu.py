@@ -1,4 +1,5 @@
 # coding=utf-8
+
 from controllers import home_controller, tournaments_controller
 from views.menus.menu import Menu
 
@@ -16,7 +17,7 @@ class TournamentsMenu(Menu):
         specific_menu_choices = [self.add_tournament, self.to_tournaments_list]
         [self.choices.append(choice) for choice in specific_menu_choices]
 
-    def add_tournament(self):
+    def add_tournament(self) -> None:
         tournament = tournaments_controller.TournamentCtrl().add_tournament()
         print(f'New Tournament registered:\n'
               f'{tournament.name}, {tournament.location},\n'
@@ -24,7 +25,7 @@ class TournamentsMenu(Menu):
               f' {tournament.time_control}, {tournament.description}')
         self.current_page_ctrl().run()
 
-    def to_tournaments_list(self):
+    def to_tournaments_list(self) -> None:
         """
         This method calls the controller to redirect to the Tournament Lists Menu.
         """

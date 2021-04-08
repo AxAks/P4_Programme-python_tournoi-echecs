@@ -1,8 +1,5 @@
 # coding=utf-8
 
-"""
-Form file for the creation of a new player in the database.
-"""
 from views.forms.form import Form
 from views.inputs.get_properties import GetProperties
 from constants import PLAYER_PROPERTIES

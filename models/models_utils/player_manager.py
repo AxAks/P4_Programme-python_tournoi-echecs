@@ -10,7 +10,8 @@ class PlayerManager(Factory):
     def __init__(self):
         pass
 
-def search_one_player():
+
+def search_one_player() -> list[Player]:
     # pas dans la classe ! function et non methode
     # pas générique ! (à scinder entre Models(player_manager qui hérite de Factory?, controllers et views)
     # + voir players_controller : search_by_id
@@ -47,7 +48,7 @@ def search_one_player():
         return results
 
 
-def list_all_players():
+def list_registered_players() -> list[Player]:
     players_list = []
     for uuid in sf.factories[Player].registry:
         player_obj = sf.factories[Player].registry[uuid]

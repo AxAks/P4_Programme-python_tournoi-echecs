@@ -3,7 +3,7 @@
 import re
 
 """
-This file contains all the constants used in the project.
+This file contains the project-wide constants.
 """
 
 # Class Player

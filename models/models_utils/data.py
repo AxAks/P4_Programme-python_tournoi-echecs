@@ -8,7 +8,7 @@ from models.tournament import Tournament
 
 db = TinyDB('db.json', ensure_ascii=False)
 
-def save() -> None:  # à continuer, bien tester et checker si erreurs et si on peut choisir le nom du fichier sauvegardé
+def save() -> None:  # à continuer, voir si on peut choisir le nom du fichier où sauvegarder
     """
     This function saves the state of the program state using tinyDB.
     It serializes the instances of Player et Tournament
@@ -28,7 +28,7 @@ def save() -> None:  # à continuer, bien tester et checker si erreurs et si on
     print('Program state saved')
 
 
-def load():  # à continuer, bien tester et checker si erreurs et si on peut choisir le fichier à loader
+def load() -> None:  # à continuer, voir si on peut choisir le fichier à loader, utile ?
     """
     This method loads dicts for players and tournaments previously saved state of the program
     through a json file database using tinyDB.

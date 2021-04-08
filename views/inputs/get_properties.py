@@ -3,14 +3,14 @@
 from datetime import date
 
 from constants import RANKING_RANGE
+
 from models.models_utils import player_manager
-
-
 from views.inputs.generic_inputs import ask_alphabetical_string, ask_alphanumerical_string, ask_iso_date
+
 
 class GetProperties:
     """
-    Class for all inputs
+    Class used in the forms for the input an registering of a new instance.
     """
 
     def __init__(self):

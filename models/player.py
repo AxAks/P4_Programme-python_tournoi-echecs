@@ -8,6 +8,7 @@ from uuid import uuid4, UUID
 from enum import Enum
 
 from constants import MINIMUM_AGE, ALPHABETICAL_STRING_RULE, RANKING_RANGE, PLAYER_PROPERTIES
+
 from models.model import Model
 
 

@@ -11,7 +11,7 @@ class TournamentManager(Factory):
         pass
 
 
-def search_one_tournament():
+def search_one_tournament() -> list[Tournament]:
     # pas dans la classe, function et non methode
     # pas générique ! (à scinder entre Models(tournament_manager qui hérite de Factory?, controllers et views),pas testé
     # + voir list tournament controller : search_by_id
@@ -45,7 +45,7 @@ def search_one_tournament():
         return results
 
 
-def list_registered_tournaments() -> list:
+def list_registered_tournaments() -> list[Tournament]:
     tournaments_list = []
     for identifier in sf.factories[Tournament].registry:
         tournament_obj = sf.factories[Tournament].registry[identifier]

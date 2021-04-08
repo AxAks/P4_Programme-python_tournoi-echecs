@@ -19,7 +19,7 @@ class ListTournamentsMenu(Menu):
                                  self.search_by_id, self.select_one]
         [self.choices.append(choice) for choice in specific_menu_choices]
 
-    def display_by_start_date(self) -> None:  # list all tournaments
+    def display_by_start_date(self) -> None:
         """
         This method calls the controller to display all registered tournament instances by start date
         """
@@ -31,8 +31,8 @@ class ListTournamentsMenu(Menu):
             print('No tournament in the registry')
         else:
             for tournament in tournaments_list:
-                print(f'{tournament.start_date}, {tournament.end_date}\n'
-                      f'-> {tournament.name}, {tournament.location}')
+                print(f'- from {tournament.start_date} to {tournament.end_date}\n'
+                      f'-> {tournament.name} in {tournament.location}')
         self.current_page_ctrl().run()
 
     def display_by_name(self) -> None:
@@ -44,8 +44,8 @@ class ListTournamentsMenu(Menu):
             print('No tournament in the registry')
         else:
             for tournament in tournaments_list:
-                print(f'{tournament.name}, {tournament.location}\n '
-                      f'-> {tournament.start_date}, {tournament.end_date}')
+                print(f'- {tournament.name} in {tournament.location}\n '
+                      f'-> from {tournament.start_date} to {tournament.end_date}')
         self.current_page_ctrl().run()
 
     def display_by_location(self) -> None:
@@ -57,8 +57,8 @@ class ListTournamentsMenu(Menu):
             print('No tournament in the registry')
         else:
             for tournament in tournaments_list:
-                print(f'{tournament.location}, {tournament.name}\n '
-                      f'->{tournament.start_date}, {tournament.end_date}')
+                print(f'- {tournament.location}, {tournament.name}\n '
+                      f'-> from {tournament.start_date} to {tournament.end_date}')
         self.current_page_ctrl().run()
 
     def search_by_id(self) -> None:  # à détailler, affiche actuellement l'objet, print les attributs! et verifier le focntionnement !
@@ -66,7 +66,7 @@ class ListTournamentsMenu(Menu):
         print(self.current_page_ctrl().search_by_id(search))
         self.current_page_ctrl().run()
 
-    def select_one(self):  #  prints and select one tournament
+    def select_one(self) -> None:  #  prints and select one tournament
         print(self.current_page_ctrl().select_one())
         self.current_page_ctrl().select_one()  # pas encore fait en fait, à faire !
         self.current_page_ctrl().run()  # à voir

@@ -1,6 +1,6 @@
 # coding=utf-8
 
-from models.models_utils.player_manager import list_all_players
+from models.models_utils.player_manager import list_registered_players
 from models.models_utils.superfactory import super_factory as sf
 from models.player import Player
 from controllers.controller import Controller
@@ -39,7 +39,7 @@ class PlayerCtrl(Controller):
         """
         This method returns a list of all players in the registry sorted by last name
         """
-        players_list = list_all_players()
+        players_list = list_registered_players()
         sorted_by_last_name = sorted(players_list, key=lambda x: x.last_name)
         return sorted_by_last_name
 
@@ -47,6 +47,6 @@ class PlayerCtrl(Controller):
         """
         This method returns a list of all players in the registry sorted by ranking
         """
-        players_list = list_all_players()
+        players_list = list_registered_players()
         sorted_by_ranking = sorted(players_list, key=lambda x: x.ranking, reverse=True)
         return sorted_by_ranking

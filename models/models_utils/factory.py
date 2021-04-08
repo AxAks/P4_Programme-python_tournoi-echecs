@@ -18,7 +18,7 @@ class Factory:
         self.registry = {}
         self.obj_type = obj_type
 
-    def create(self, **params):
+    def create(self, **params) -> Any:
         """
         This method creates new objects through the specific factory
         and adds them to a registry if the identifier is not already registered
