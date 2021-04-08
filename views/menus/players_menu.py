@@ -3,7 +3,7 @@ from controllers import player_controller, home_controller
 from views.menus.menu import Menu
 
 
-class PlayerMenu(Menu):
+class PlayersMenu(Menu):
     """
     This class is the Menu for Player management.
     """
@@ -20,41 +20,47 @@ class PlayerMenu(Menu):
         """
         This method calls the controller to create a player instance
         """
-        player = player_controller.PlayerCtrl().add_player()
+        player = self.current_page_ctrl().add_player()
         print(f'New Player registered:\n'
               f'{player.last_name}, {player.first_name},\n'
               f'{player.birthdate_pod}, {player.gender_pod}, {player.ranking}, {player.identifier_pod}')
-        player_controller.PlayerCtrl().run()
+        self.current_page_ctrl().run()
 
     def search_by_id(self) -> None:
         """
         This method calls the controller to find one or more player instances in the registry
         """
+        print('========================')
         _input = input('search a player by ID: ')
+        print('========================')
         print('Players found: ')
-        for player in player_controller.PlayerCtrl().search_by_id(_input):
+        for player in self.current_page_ctrl().search_by_id(_input):
             print(f'{player.last_name}, {player.first_name}, {player.identifier_pod},\n'
                   f'{player.birthdate_pod}, {player.gender_pod}, {player.ranking}')
-        player_controller.PlayerCtrl().run()
+        self.current_page_ctrl().run()
 
     def sort_by_last_name(self) -> None:
         """
         This method calls the controller to sort all player instances by last name
         """
+        print('========================')
         print('All Players by last name: ')
-        for player in player_controller.PlayerCtrl().sort_by_last_name():
-            print(f'{player.last_name}, {player.first_name}, {player.identifier_pod},\n'
+        print('========================')
+        for player in self.current_page_ctrl().sort_by_last_name():
+            print(f'- {player.last_name}, {player.first_name}, {player.identifier_pod},\n'
                   f'{player.birthdate_pod}, {player.gender_pod}, {player.ranking}')
-        player_controller.PlayerCtrl().run()
+        self.current_page_ctrl().run()
 
     def sort_by_ranking(self) -> None:
         """
         This method calls the controller to sort all player instances by ranking
         """
+        print('========================')
         print('All Players by ranking: ')
-        for player in player_controller.PlayerCtrl().sort_by_ranking():
-            print(f'{player.last_name}, {player.first_name}, {player.identifier_pod},'
+        print('========================')
+        for player in self.current_page_ctrl().sort_by_ranking():
+            print(f'- {player.last_name}, {player.first_name}, {player.identifier_pod},'
                   f' {player.birthdate_pod}, {player.gender_pod}\n'
                   f'-> {player.ranking}'
                   )
-        player_controller.PlayerCtrl().run()
+        self.current_page_ctrl().run()

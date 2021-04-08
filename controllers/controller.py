@@ -16,7 +16,6 @@ class Controller:
         valid_choices = range(len(self.menu.choices))
         choice = -1
         while choice not in valid_choices:
-            clear_terminal()
             self.menu.show()
             _input = input('Enter an option: ')
             try:
@@ -25,7 +24,7 @@ class Controller:
                     print(f'-> "{choice}" is not a valid choice <-')
             except ValueError:
                 print(f'-> "{_input}" is not a valid choice <-')
-
+        clear_terminal()  # pb avec les retours de print, affichés au dessus du menu, j'aimerais que les resultats s'affiche en dessous !
         action = self.menu.choices[choice]
         action()
 

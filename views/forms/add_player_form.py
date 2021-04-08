@@ -28,4 +28,3 @@ class NewPlayerForm(Form):
         for key in ask_properties_dict:
             new_player_dict[key] = ask_properties_dict[key]
         return new_player_dict
-

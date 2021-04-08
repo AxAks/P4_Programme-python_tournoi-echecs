@@ -6,7 +6,7 @@ Form file for the creation of a new tournament in the database.
 from controllers import tournament_controller
 from views.forms.form import Form
 from views.inputs.get_properties import GetProperties
-from views.menus import tournament_menu
+from views.menus import tournaments_menu
 from constants import TOURNAMENT_PROPERTIES
 
 

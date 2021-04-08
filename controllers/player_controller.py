@@ -2,8 +2,9 @@
 from models.models_utils.superfactory import super_factory as sf
 from models.player import Player
 from controllers.controller import Controller
+from views.menus.players_menu import PlayersMenu
 from views.forms.add_player_form import NewPlayerForm
-from views.menus.player_menu import PlayerMenu
+
 
 """
 Controller file for Player
@@ -12,7 +13,7 @@ Controller file for Player
 
 class PlayerCtrl(Controller):
     def __init__(self):
-        self.menu = PlayerMenu()
+        self.menu = PlayersMenu()
 
     def add_player(self) -> Player:
         """

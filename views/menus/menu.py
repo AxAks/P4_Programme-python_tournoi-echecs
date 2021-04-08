@@ -2,7 +2,6 @@
 
 from controllers import home_controller
 from controllers.controller import Controller
-from utils import clear_terminal
 
 
 class Menu:
@@ -43,11 +42,10 @@ class Menu:
     def back(self) -> None:
         """
         This method enables to go back to the previous screen
-        if the screen is the root menu, it directs to the controller to make the program quit.
+        if the screen is the root menu, it calls the quit method to make the program quit.
         """
         if self.root_page:
-            Controller().save()
-            Controller().quit()
+            self.quit()
         else:
             self.previous_page_ctrl().run()
 

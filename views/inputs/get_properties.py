@@ -3,10 +3,9 @@
 from datetime import date
 
 from constants import RANKING_RANGE
+from models.models_utils import player_manager
 
-from models.models_utils.superfactory import super_factory as sf
-from models.player import Player
-from models.tournament import Tournament
+
 from views.inputs.generic_inputs import ask_alphabetical_string, ask_alphanumerical_string, ask_iso_date
 
 class GetProperties:
@@ -27,9 +26,8 @@ class GetProperties:
             try:
                 print(f'{arg.replace("_", " ").title()} is  : "{method}"') # un vieux print illisible pour identifier list de tournament ...
             except AttributeError:
-                raise Exception()  # il faut gérer ces exceptions (retenter la demande)
-        return method  # f'ask{arg}()' #pb si deux objets ont des attributs identiques -> surement qu'ils font la meme chose, à voir
-
+                raise Exception()
+        return method
 
     @property
     def ask_last_name(self, input_info="Enter Last Name: ") -> str:
@@ -37,7 +35,6 @@ class GetProperties:
         This method asks for the player's last name
         and checks the formatting of the string
         """
-        # extraire le input_info en argument pour pouvoir le changer
         return ask_alphabetical_string(input_info)
 
     @property
@@ -144,7 +141,7 @@ class GetProperties:
         n = 1
         print("Please, select players to add")
         while n < 9:
-            player_dict = search_one_player()
+            player_dict = player_manager.search_one_player()
             # if len(player_dict) == 0:
             #    player_dict = search_one_player() # utile ? à testé !! (pb prints entre les deux fonctions)
             for key in player_dict:
@@ -212,7 +209,7 @@ class GetProperties:
     @property
     def ask_identifier(self):  # _player1
         """
-        This method asks for player1's ID at the begining of a match/round
+        This method asks for player1's ID at the beginning of a match/round
         """
         return input("Select Player1: ")
 
@@ -221,7 +218,7 @@ class GetProperties:
     @property
     def ask_identifier(self):  # _player2  + # en fait on le recupere de generate_matchups()
         """
-        This method asks for player2's ID at the begining of a match/round
+        This method asks for player2's ID at the beginning of a match/round
         """
         return input("Select Player2: ")
 
@@ -272,67 +269,3 @@ class GetProperties:
     def ask_start_time(self):  # doit etre renseigné automatiquement en fait !
         pass
 
-
-def search_one_player():  # pas générique ! (à scinder entre Models(player_manager qui hérite de Factory?, controllers et views)
-    _input = input('Search a player by id : ')
-    results = sf.factories[Player].search(_input)
-    while len(results) > 1:
-        print(f'Results - '
-              f'{len(results)} players returned:')
-        for identifier in results:  # print dans les views
-            print(
-                  f'{results[identifier].last_name},'
-                  f' {results[identifier].first_name}:'
-                  f' {results[identifier].identifier}\n'
-                  f'-> {results[identifier].birthdate},'
-                  f' {results[identifier].gender_pod.title()},'
-                  f' {results[identifier].ranking}\n')
-
-        results = sf.factories[Player].search(input('Please be more specific: '))
-        print('---')
-    if len(results) == 1:
-        for identifier in results:  # print dans les views
-            print('1 Player found in Registry for this ID:')
-            print(f'Result:\n'
-                  f'{results[identifier].last_name},'
-                  f' {results[identifier].first_name}'
-                  f' {results[identifier].identifier}\n'
-                  f'-> {results[identifier].birthdate},'
-                  f' {results[identifier].gender_pod.title()},'
-                  f' {results[identifier].ranking}')
-    if len(results) == 0:
-        print("No Player found in Registry for this ID")
-        return results
-    else:
-        return results
-
-
-def search_one_tournament():  # pas générique ! (à scinder entre Models(tournament_manager qui hérite de Factory?, controllers et views),pas testé
-    _input = input('Search a tournament by name, location or dates: ')
-    results = sf.factories[Tournament].search(_input)
-    while len(results) > 1:
-        print(f'Results - '
-              f'{len(results)} Tournaments returned:')
-        for identifier in results:
-            print(f'{results[identifier].name}, '  # les prints sont dans les views !!!
-                  f' {results[identifier].location}, '
-                  f' {results[identifier].start_date}, '
-                  f' {results[identifier].end_date}\n'
-                  f'-> {results[identifier].description}')
-
-        results = sf.factories[Tournament].search(input('please be more specific: '))
-        print('---')
-    if len(results) == 1:
-        for identifier in results:
-            print('1 Tournament found in Registry for this research:')  # les prints sont dans les views !!!
-            print(f'Result:\n'
-                  f'{results[identifier].name}, '
-                  f' {results[identifier].location}, '
-                  f' {results[identifier].start_date}, '
-                  f' {results[identifier].end_date}\n'
-                  f'-> {results[identifier].description}')
-    if len(results) == 0:
-        print("No Tournament found in Registry for this research")
-        return results
-    else:
-        return results
