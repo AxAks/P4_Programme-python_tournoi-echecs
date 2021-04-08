@@ -1,5 +1,5 @@
 # coding=utf-8
-from controllers import list_tournaments_controller, tournament_infos_controller, select_tournament_controller
+from controllers import list_tournaments_controller, tournament_infos_controller
 from views.menus.menu import Menu
 
 
@@ -11,8 +11,8 @@ class TournamentInfosMenu(Menu):
     """
     def __init__(self):
         super().__init__(program_name='Chess Tournament Manager', menu_name='Tournaments Menu',
-                         root_page=False, previous_page_ctrl=select_tournament_controller.SelectTournamentCtrl,
-                         current_page_ctrl=tournament_infos_controller.TournamentsInfosCtrl,
+                         root_page=False, previous_page_ctrl=list_tournaments_controller.ListTournamentsCtrl,
+                         current_page_ctrl=tournament_infos_controller.TournamentInfosCtrl,
                          exiting_message='Now Leaving Chess Tournament Manager')
         specific_menu_choices = [self.resume,
                                  self.sort_players_by_last_name, self.sort_players_by_result,

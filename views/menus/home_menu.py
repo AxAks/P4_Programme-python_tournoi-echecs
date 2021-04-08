@@ -1,7 +1,7 @@
 # coding=utf-8
 from controllers import home_controller
-from controllers.player_controller import PlayerCtrl
-from controllers.tournament_controller import TournamentCtrl
+from controllers.players_controller import PlayerCtrl
+from controllers.tournaments_controller import TournamentCtrl
 from views.menus.menu import Menu
 
 

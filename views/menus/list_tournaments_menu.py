@@ -1,20 +1,19 @@
 # coding=utf-8
-from controllers import tournament_controller, list_tournaments_controller
+from controllers import tournaments_controller, list_tournaments_controller
 from views.menus.menu import Menu
 
 
 class ListTournamentsMenu(Menu):
     """
     This class is the Menu listing all Tournaments management.
-    It enables to resume a tournament
-    or select one and list infos about the selected tournament
+    It also enables to select one of them in order to list or update its information.
     """
     def __init__(self):
         super().__init__(program_name='Chess Tournament Manager', menu_name='Tournaments Menu',
-                         root_page=False, previous_page_ctrl=tournament_controller.TournamentCtrl,
+                         root_page=False, previous_page_ctrl=tournaments_controller.TournamentCtrl,
                          current_page_ctrl=list_tournaments_controller.ListTournamentsCtrl,
                          exiting_message='Now Leaving Chess Tournament Manager')
-        specific_menu_choices = [self.list_all, self.select]
+        specific_menu_choices = [self.list_all, self.select_one] # à jouter ? sort_by, search_by, etc ... ?
         [self.choices.append(choice) for choice in specific_menu_choices]
 
     def list_all(self): # list all tournaments
@@ -32,5 +31,5 @@ class ListTournamentsMenu(Menu):
         self.current_page_ctrl().run()
 
     def select_one(self):  #  prints and select one tournament
-        print(self.current_page_ctrl().select())
-        return self.current_page_ctrl().select()
+        print(self.current_page_ctrl().select_one())
+        return self.current_page_ctrl().select_one()  # pas encore fait en fait

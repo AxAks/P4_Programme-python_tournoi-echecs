@@ -1,5 +1,5 @@
 # coding=utf-8
-from controllers import player_controller, home_controller
+from controllers import players_controller, home_controller
 from views.menus.menu import Menu
 
 
@@ -11,7 +11,7 @@ class PlayersMenu(Menu):
 
         super().__init__(program_name='Chess Tournament Manager', menu_name='Players Menu',
                          root_page=False, previous_page_ctrl=home_controller.HomeCtrl,
-                         current_page_ctrl=player_controller.PlayerCtrl,
+                         current_page_ctrl=players_controller.PlayerCtrl,
                          exiting_message='Now Leaving Chess Tournament Manager')
         specific_menu_choices = [self.add, self.search_by_id, self.sort_by_last_name, self.sort_by_ranking]
         [self.choices.append(choice) for choice in specific_menu_choices]
