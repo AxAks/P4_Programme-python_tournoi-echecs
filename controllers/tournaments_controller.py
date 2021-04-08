@@ -1,39 +1,20 @@
 # coding=utf-8
 
-"""
-Controller file for Tournament
-"""
-from controllers import list_tournaments_controller
-from controllers.controller import Controller
+from utils import clear_terminal
 from models.tournament import Tournament
 from models.models_utils.superfactory import super_factory as sf
-from utils import clear_terminal
+from controllers import list_tournaments_controller
+from controllers.controller import Controller
 from views.forms.add_tournament_form import NewTournamentForm
 from views.menus.tournaments_menu import TournamentsMenu
 
 
 class TournamentCtrl(Controller):
+    """
+    Controller class for the Tournament Menu
+    """
     def __init__(self):
         self.menu = TournamentsMenu()
-
-    def run(self):
-        """
-        This method displays the menu and responds to choices made.
-        """
-        valid_choices = range(len(TournamentsMenu().choices))
-        choice = -1
-        while choice not in valid_choices:
-            TournamentsMenu().show()
-            _input = input('Enter an option: ')
-            try:
-                choice = int(_input)
-                if choice not in valid_choices:
-                    print(f'-> "{choice}" is not a valid choice <-')
-            except ValueError:
-                print(f'-> "{_input}" is not a valid choice <-')
-
-        action = TournamentsMenu().choices[choice]
-        action()
 
     def add_tournament(self) -> Tournament:
         """

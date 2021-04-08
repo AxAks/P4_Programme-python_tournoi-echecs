@@ -39,3 +39,11 @@ def search_one_tournament():  # pas générique ! (à scinder entre Models(tour
         return results
     else:
         return results
+
+
+def list_registered_tournaments():
+    tournaments_list = []
+    for identifier in sf.factories[Tournament].registry:
+        tournament_obj = sf.factories[Tournament].registry[identifier]
+        tournaments_list.append(tournament_obj)
+    return tournaments_list

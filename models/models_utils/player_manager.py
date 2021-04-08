@@ -42,3 +42,11 @@ def search_one_player():  # pas générique ! (à scinder entre Models(player_m
         return results
     else:
         return results
+
+
+def list_all_players():
+    players_list = []
+    for uuid in sf.factories[Player].registry:
+        player_obj = sf.factories[Player].registry[uuid]
+        players_list.append(player_obj)
+    return players_list

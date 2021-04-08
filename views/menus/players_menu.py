@@ -13,10 +13,10 @@ class PlayersMenu(Menu):
                          root_page=False, previous_page_ctrl=home_controller.HomeCtrl,
                          current_page_ctrl=players_controller.PlayerCtrl,
                          exiting_message='Now Leaving Chess Tournament Manager')
-        specific_menu_choices = [self.add, self.search_by_id, self.sort_by_last_name, self.sort_by_ranking]
+        specific_menu_choices = [self.add_player, self.search_by_id, self.sort_by_last_name, self.sort_by_ranking]
         [self.choices.append(choice) for choice in specific_menu_choices]
 
-    def add(self) -> None:
+    def add_player(self) -> None:
         """
         This method calls the controller to create a player instance
         """

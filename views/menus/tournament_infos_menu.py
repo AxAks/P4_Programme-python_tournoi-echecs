@@ -33,7 +33,7 @@ class TournamentInfosMenu(Menu):
                       f'{tournament.start_date}, {tournament.end_date}')
         list_tournaments_controller.ListTournamentsCtrl().run()
 
-    def resume(self):  # list all tournaments and select one tournament
+    def resume(self):  # list all tournaments and select one tournament # à virer !?
         pass
 
     def sort_players_by_last_name(self):  # for one selected tournament

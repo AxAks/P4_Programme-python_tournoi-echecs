@@ -24,7 +24,7 @@ class Controller:
                     print(f'-> "{choice}" is not a valid choice <-')
             except ValueError:
                 print(f'-> "{_input}" is not a valid choice <-')
-        clear_terminal()  # pb avec les retours de print, affichés au dessus du menu, j'aimerais que les resultats s'affiche en dessous !
+        clear_terminal()
         action = self.menu.choices[choice]
         action()
 

@@ -1,19 +1,24 @@
 # coding=utf-8
+
 from models.models_utils.superfactory import super_factory as sf
+from models.models_utils.tournament_manager import list_registered_tournaments
 from models.tournament import Tournament
 from controllers.controller import Controller
 from views.menus.list_tournaments_menu import ListTournamentsMenu
 
 
 class ListTournamentsCtrl(Controller):
+    """
+    Controller class for the menu that lists Tournaments
+    """
     def __init__(self):
         self.menu = ListTournamentsMenu()
 
-    def list_all_tournaments(self):
-        tournaments_list = []
-        for identifier in sf.factories[Tournament].registry:
-            tournament_obj = sf.factories[Tournament].registry[identifier]
-            tournaments_list.append(tournament_obj)
+    def sort_by_start_date(self):
+        """
+        This function lists the tournament instances sorted by start date
+        """
+        tournaments_list = list_registered_tournaments()
         sorted_by_start_date = sorted(tournaments_list, key=lambda x: x.start_date)
         return sorted_by_start_date
 
@@ -21,10 +26,7 @@ class ListTournamentsCtrl(Controller):
         """
         This function lists the tournament instances alphabetically sorted by name
         """
-        tournaments_list = []
-        for identifier in sf.factories[Tournament].registry:
-            tournament_obj = sf.factories[Tournament].registry[identifier]
-            tournaments_list.append(tournament_obj)
+        tournaments_list = list_registered_tournaments()
         sorted_by_name = sorted(tournaments_list, key=lambda x: x.name)
         return sorted_by_name
 
@@ -32,23 +34,9 @@ class ListTournamentsCtrl(Controller):
         """
         This function lists the tournament instances alphabetically sorted by location
         """
-        tournaments_list = []
-        for identifier in sf.factories[Tournament].registry:
-            tournament_obj = sf.factories[Tournament].registry[identifier]
-            tournaments_list.append(tournament_obj)
+        tournaments_list = list_registered_tournaments()
         sorted_by_location = sorted(tournaments_list, key=lambda x: x.location)
         return sorted_by_location
-
-    def sort_by_start_date(self): # doublon avec list_all_tournaments (seul l'ordre change, voir lequel je prends)
-        """
-        This function lists the tournament instances sorted by reverse chronological start date
-        """
-        tournaments_list = []
-        for identifier in sf.factories[Tournament].registry:
-            tournament_obj = sf.factories[Tournament].registry[identifier]
-            tournaments_list.append(tournament_obj)
-        sorted_by_start_date = sorted(tournaments_list, key=lambda x: x.start_date, reverse=True)
-        return sorted_by_start_date
 
     def search_by_id(self, search):
         """
@@ -62,5 +50,8 @@ class ListTournamentsCtrl(Controller):
             found_tournaments_list.append(tournament_obj)
         return found_tournaments_list
 
-    def select_one(self): # returns selected tournament
+    def select_one(self):  # returns selected tournament
+        """
+        This function enables to select a specific tournament in the registered tournaments list
+        """
         pass
