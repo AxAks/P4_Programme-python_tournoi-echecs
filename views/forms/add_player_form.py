@@ -1,8 +1,12 @@
 # coding=utf-8
 
+from datetime import date
+
+from constants import PLAYER_PROPERTIES, RANKING_RANGE
+from models.player import Player
+
 from views.forms.form import Form
-from views.inputs.get_properties import GetProperties
-from constants import PLAYER_PROPERTIES
+from views.inputs.generic_inputs import ask_alphabetical_string, ask_iso_date
 
 
 class NewPlayerForm(Form):
@@ -12,16 +16,79 @@ class NewPlayerForm(Form):
     """
 
     def __init__(self):
-        super().__init__(properties=PLAYER_PROPERTIES)
+        super().__init__(properties=PLAYER_PROPERTIES, cls=self)
 
     def add_new_player(self) -> dict:  # à passer en tant que add_new (générique) dans Form
-        ask_properties_dict = {}
-        for _property in PLAYER_PROPERTIES:
-            if _property != 'identifier':
-                ask_properties_dict[_property] = GetProperties().ask_properties(_property)
-            else:
-                continue
         new_player_dict = {}
-        for key in ask_properties_dict:
-            new_player_dict[key] = ask_properties_dict[key]
+        for _property in self.properties:
+            if _property != 'identifier':
+                new_player_dict[_property] = self.ask_property(_property)
         return new_player_dict
+
+    def ask_last_name(self, input_info="Enter Last Name: ") -> str:
+        """
+        This method asks for the player's last name
+        and checks the formatting of the string
+        """
+        return ask_alphabetical_string(input_info)
+
+    def ask_first_name(self, input_info="Enter First Name: ") -> str:
+        """
+        This method asks for the player's first name
+        and checks the formatting of the string
+        """
+        return ask_alphabetical_string(input_info)
+
+    def ask_birthdate(self, input_info="Enter Player Birthdate(YYYY-MM-DD): ") -> date:
+        """
+        This method asks for the player's birthdate,
+        checks the format of the string entered
+        and forces it into a date format
+        """
+        return ask_iso_date(input_info)
+
+    def ask_gender(self) -> str:
+        """
+        This method asks for the player's gender using digits
+        and returns a formatted string
+        """
+        valid_gender = False
+        choices_info = '(1: MALE, 2: FEMALE)'
+        input_info = f'Enter Player Gender {choices_info}: '
+        wrong_input = 'Invalid choice (1 or 2), please retry...'
+
+        _input = input(input_info)
+        while not valid_gender:
+            try:
+                _input = int(_input)
+                if _input in (1, 2):
+                    if _input == 1:
+                        _input = 'MALE'
+                    else:
+                        _input = 'FEMALE'
+                    valid_gender = True
+                else:
+                    print(wrong_input)
+                    _input = input(input_info)
+            except ValueError:
+                print(wrong_input)
+                _input = input(input_info)
+        return _input
+
+    def ask_ranking(self) -> int:
+        """
+        This method asks a ranking between 100 and 3000
+        """
+        valid_ranking = False
+        input_info = "Enter Player Ranking: "
+        wrong_input = 'Ranking must be a digit between 100 and 3000, please retry...'
+        while valid_ranking is False:
+            try:
+                _input = int(input(input_info))
+                if _input in RANKING_RANGE:
+                    valid_ranking = True
+                else:
+                    print(wrong_input)
+            except ValueError:
+                print(wrong_input)
+        return _input
