@@ -1,11 +1,5 @@
 # coding=utf-8
 
-"""
-Generic Class for Forms
-"""
-from views.forms import add_player_form
-
-
 class Form:
     """
     This class is a parent Class for all Forms
@@ -21,7 +15,7 @@ class Form:
         This generic method is used to ask the Player and Tournament in the forms.
         """
         method_name = f'ask_{property_name}'
-        method = getattr(self.cls, method_name)  # voir comment rendre la classe variable ou générique Player, Tournament, (Round et Match)
+        method = getattr(self.cls, method_name)
         attribute = method()
         try:
             print(f'{property_name.replace("_", " ").title()} is  : "{attribute}"') # un vieux print illisible pour identifier list de tournament ...

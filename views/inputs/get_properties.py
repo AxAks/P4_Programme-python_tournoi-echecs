@@ -11,16 +11,6 @@ class GetProperties:
     Class used in the forms for the input an registering of a new instance.
     """
 
-    def __init__(self):
-        pass
-
-
-
-
-    # -> on pourrait passer tout ca dans PlayerInputs !
-    # -> et generate_matchups dans Tournament_controller
-
-    # en fait on le recupere de generate_matchups() + c'est la meme methode deux fois, seul le numero de joueur change (1 ou 2)
     # et également ask_identifier ou search_by_id dans player_inputs
     @property
     def ask_identifier(self):  # _player1

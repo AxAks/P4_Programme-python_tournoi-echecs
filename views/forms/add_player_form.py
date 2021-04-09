@@ -17,7 +17,7 @@ class NewPlayerForm(Form):
     def __init__(self):
         super().__init__(properties=PLAYER_PROPERTIES, cls=self)
 
-    def add_new_player(self) -> dict:  # à passer en tant que add_new (générique) dans Form
+    def add_new_player(self) -> dict:  # à passer en tant que add_new (générique) dans Form, si possible, si générique
         new_player_dict = {}
         for _property in self.properties:
             if _property != 'identifier':

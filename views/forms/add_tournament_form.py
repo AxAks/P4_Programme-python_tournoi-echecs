@@ -3,9 +3,15 @@ from datetime import date
 
 from constants import TOURNAMENT_PROPERTIES
 
-from models.models_utils import player_manager
+from models.models_utils import player_manager, data
 from views.inputs.generic_inputs import ask_alphanumerical_string, ask_alphabetical_string, ask_iso_date
 from views.forms.form import Form
+
+
+from models.models_utils import data
+from models.player import Player
+from models.tournament import Tournament
+from models.models_utils.superfactory import super_factory as sf
 
 
 class NewTournamentForm(Form):
@@ -15,7 +21,7 @@ class NewTournamentForm(Form):
     """
 
     def __init__(self):
-        super().__init__(properties=TOURNAMENT_PROPERTIES)
+        super().__init__(properties=TOURNAMENT_PROPERTIES, cls=self)
 
     def add_new_tournament(self) -> dict: #  à passer en tant que add_new dans Form
         """
@@ -62,10 +68,8 @@ class NewTournamentForm(Form):
         print("Please, select players to add")
         while n < 9:
             player_dict = player_manager.search_one_player()
-            # if len(player_dict) == 0:
-            #    player_dict = search_one_player() # utile ? à testé !! (pb prints entre les deux fonctions)
             for key in player_dict:
-                if key not in tournament_players_identifier:
+                if str(key) not in tournament_players_identifier: # pb il accepte les doublons de joueurs, la verif ne fonctionne plus
                     tournament_players_identifier[str(key)] = player_dict[key]
                     print(f"Player {n}/8 added")
                     print(f"{player_dict[key].last_name}, "
@@ -115,3 +119,4 @@ class NewTournamentForm(Form):
             print('Description cannot be empty, please retry...')
             _input = input(input_info)
         return _input
+

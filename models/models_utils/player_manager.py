@@ -19,8 +19,8 @@ def search_one_player() -> list[Player]:
     results = sf.factories[Player].search(_input)
     while len(results) > 1:
         print(f'Results - '
-              f'{len(results)} players returned:')
-        for identifier in results:  # print dans les views
+              f'{len(results)} players returned:')  # print dans les views
+        for identifier in results:
             print(
                   f'{results[identifier].last_name},'
                   f' {results[identifier].first_name}:'
@@ -31,8 +31,8 @@ def search_one_player() -> list[Player]:
 
         results = sf.factories[Player].search(input('Please be more specific: '))
         print('---')
-    if len(results) == 1:
-        for identifier in results:  # print dans les views
+    if len(results) == 1:  # print dans les views
+        for identifier in results:
             print('1 Player found in Registry for this ID:')
             print(f'Result:\n'
                   f'{results[identifier].last_name},'
