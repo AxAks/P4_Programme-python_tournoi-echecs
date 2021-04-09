@@ -1,7 +1,6 @@
 # coding=utf-8
-
 from models.models_utils.superfactory import super_factory as sf
-from models.models_utils.tournament_manager import list_registered_tournaments
+from models.models_utils.tournament_manager import TournamentManager
 from models.tournament import Tournament
 from controllers.controller import Controller
 from views.menus.list_tournaments_menu import ListTournamentsMenu
@@ -19,7 +18,7 @@ class ListTournamentsCtrl(Controller):
         """
         This function lists the tournament instances sorted by start date
         """
-        tournaments_list = list_registered_tournaments()
+        tournaments_list = TournamentManager().list_registered_tournaments()
         sorted_by_start_date = sorted(tournaments_list, key=lambda x: x.start_date)
         return sorted_by_start_date
 
@@ -27,7 +26,7 @@ class ListTournamentsCtrl(Controller):
         """
         This function lists the tournament instances alphabetically sorted by name
         """
-        tournaments_list = list_registered_tournaments()
+        tournaments_list = TournamentManager().list_registered_tournaments()
         sorted_by_name = sorted(tournaments_list, key=lambda x: x.name)
         return sorted_by_name
 
@@ -35,7 +34,7 @@ class ListTournamentsCtrl(Controller):
         """
         This function lists the tournament instances alphabetically sorted by location
         """
-        tournaments_list = list_registered_tournaments()
+        tournaments_list = TournamentManager().list_registered_tournaments()
         sorted_by_location = sorted(tournaments_list, key=lambda x: x.location)
         return sorted_by_location
 
@@ -55,4 +54,4 @@ class ListTournamentsCtrl(Controller):
         """
         This function enables to select a specific tournament in the registered tournaments list
         """
-        pass
+        return TournamentManager().search_one_tournament()

@@ -1,6 +1,8 @@
 # coding=utf-8
 
 from models.models_utils.superfactory import super_factory as sf
+from models.models_utils.player_manager import list_registered_players
+from models.player import Player
 from models.tournament import Tournament
 from controllers.controller import Controller
 from views.menus.tournament_infos_menu import TournamentInfosMenu
@@ -11,15 +13,23 @@ class TournamentInfosCtrl(Controller):
     Controller class for a specific Tournament Menu Page once the tournament is selected.
     """
 
-    def __init__(self):
+    def __init__(self, selected_tournament):
         self.menu = TournamentInfosMenu()
+        self.selected_tournament = selected_tournament
 
     # à rediger !
     def sort_players_by_last_name(self) -> list:  # voir comment utiliser serialize() ici
         """
         This function lists all the players of a given tournament by last name
         """
-        pass
+        """
+        This method returns a list of all players in the registry sorted by last name
+        """
+        players_list = []
+        for identifier in self.selected_tournament.identifier_list:
+            players_list.append(sf.factories[Player].search(identifier))
+        sorted_by_last_name = sorted(players_list, key=lambda x: x.last_name)
+        return sorted_by_last_name
 
     def sort_players_by_result(self) -> list:  # voir comment utiliser serialize() ici
         """
@@ -27,13 +37,13 @@ class TournamentInfosCtrl(Controller):
         """
         pass
 
-    def list_rounds(self) -> list:  # voir comment utiliser serialize() ici
+    def display_rounds(self) -> list:  # voir comment utiliser serialize() ici
         """
         This function lists all the rounds of a given tournament
         """
         pass
 
-    def list_matches(self) -> list:  # voir comment utiliser serialize() ici
+    def display_matches(self) -> list:  # voir comment utiliser serialize() ici
         """
         This function lists all the matches of a given tournament
         """

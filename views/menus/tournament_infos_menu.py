@@ -16,22 +16,25 @@ class TournamentInfosMenu(Menu):
                          exiting_message='Now Leaving Chess Tournament Manager')
         specific_menu_choices = [self.resume,
                                  self.sort_players_by_last_name, self.sort_players_by_result,
-                                 self.list_rounds, self.list_matches, self.add_round, self.add_match]
+                                 self.display_rounds, self.display_matches, self.add_round, self.add_match]
         [self.choices.append(choice) for choice in specific_menu_choices]
 
     def resume(self):  # list all tournaments and select one tournament # à virer !?
         pass
 
-    def sort_players_by_last_name(self) -> None:  # for one selected tournament
-        pass
+    def sort_players_by_last_name(self, selected_tournament) -> None:  # for one selected tournament
+        players_list = self.current_page_ctrl().sort_players_by_last_name(selected_tournament)
+        for player in players_list:
+            print(f'- {player.last_name}, {player.first_name}, {player.identifier_pod},\n'
+                  f'{player.birthdate_pod}, {player.gender_pod}, {player.ranking}')
 
     def sort_players_by_result(self) -> None:  # for one selected tournament
         pass
 
-    def list_rounds(self) -> None:  # for one selected tournament
+    def display_rounds(self) -> None:  # for one selected tournament
         pass
 
-    def list_matches(self) -> None:  # for one selected tournament
+    def display_matches(self) -> None:  # for one selected tournament
         pass
 
     def add_round(self) -> None:

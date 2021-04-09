@@ -11,8 +11,9 @@ class Controller:
     General parent class for all controllers.
     """
 
-    def __init__(self, menu=None):
+    def __init__(self, menu=None, selected_tournament=None,):
         self.menu = menu
+        self.selected_tournament = selected_tournament
 
     def run(self) -> None:
         """
@@ -47,6 +48,6 @@ class Controller:
 
     def save(self) -> None:
         """
-        This method saves datas in a database file
+        This method saves data in a database file
         """
         data.save()

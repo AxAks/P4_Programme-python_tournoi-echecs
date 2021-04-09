@@ -1,6 +1,7 @@
 # coding=utf-8
 
-class Form:
+
+class Form():
     """
     This class is a parent Class for all Forms
     It enables the user to enter data and return the data as dicts.

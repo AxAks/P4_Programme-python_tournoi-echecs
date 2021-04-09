@@ -1,6 +1,7 @@
 # coding=utf-8
 
 from controllers import tournaments_controller, list_tournaments_controller
+from controllers.tournament_infos_controller import TournamentInfosCtrl
 from views.menus.menu import Menu
 
 
@@ -66,7 +67,6 @@ class ListTournamentsMenu(Menu):
         print(self.current_page_ctrl().search_by_id(search))
         self.current_page_ctrl().run()
 
-    def select_one(self) -> None:  #  prints and select one tournament
-        print(self.current_page_ctrl().select_one())
-        self.current_page_ctrl().select_one()  # pas encore fait en fait, à faire !
-        self.current_page_ctrl().run()  # à voir
+    def select_one(self) -> None:  # prints and select one tournament
+        selected_tournament = self.current_page_ctrl().select_one()  # pas encore fait en fait, à faire !
+        TournamentInfosCtrl(selected_tournament).run()
