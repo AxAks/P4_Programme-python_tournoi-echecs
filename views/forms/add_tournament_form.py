@@ -103,7 +103,7 @@ class NewTournamentForm(Form):
             except ValueError:
                 print(wrong_input)
                 _input = input(input_info)
-        return _input # retourne "2" au lieu de BLITZ (l'int au lieu du str)
+        return _input  # retourne "2" au lieu de BLITZ (l'int au lieu du str)
 
     def ask_description(self) -> str:
         """
