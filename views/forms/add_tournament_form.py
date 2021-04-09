@@ -8,12 +8,6 @@ from views.inputs.generic_inputs import ask_alphanumerical_string, ask_alphabeti
 from views.forms.form import Form
 
 
-from models.models_utils import data
-from models.player import Player
-from models.tournament import Tournament
-from models.models_utils.superfactory import super_factory as sf
-
-
 class NewTournamentForm(Form):
     """
     This class asks the required data for the creation of a Tournament instance
