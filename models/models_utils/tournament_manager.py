@@ -11,7 +11,7 @@ class TournamentManager(Factory):
     def __init__(self):
         pass
 
-    def search_one_tournament(self) -> Union[dict[Tournament], Tournament]:
+    def search_one_tournament(self) -> Union[dict[Tournament], Tournament]:  # A revoir réécrire !!
         # pas dans la classe, function et non methode
         # pas générique ! (à scinder entre Models(tournament_manager qui hérite de Factory?, controllers et views),pas testé
         # + voir list tournament controller : search_by_id

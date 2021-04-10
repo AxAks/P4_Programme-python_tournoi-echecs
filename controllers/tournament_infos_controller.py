@@ -50,7 +50,6 @@ class TournamentInfosCtrl(Controller):
         pass
 
 
-
     #  Comment gère t-on la reference à Tournament dans Round ? à voir -> Round n'existe pas hors de Tournament
     #-> dans le controller Tournament !? à voir
 

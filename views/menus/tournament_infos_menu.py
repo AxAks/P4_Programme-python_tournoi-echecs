@@ -39,15 +39,21 @@ class TournamentInfosMenu(Menu):
         print(f'All Rounds for "{self.data.name}": ')
         print('========================')
         for _round in rounds_list:
-            print(f'- {_round.name}, {_round.start_time}, {_round.end_time}')
+            print(f'-> {_round.name}: from {_round.start_time} to {_round.end_time}')
+            n = 1
             for match in _round.matches:
-                print(f'{match.player1_id}: {match.player1_score_pod},\n'
-                      f'{match.player2_id}: {match.player2_score_pod}\n'
-                      f'---')
+                print(f'Match {n}:\n'
+                      f'- {match.player1_id}: {match.player1_score_pod}\n'
+                      f'- {match.player2_id}: {match.player2_score_pod}')
+                n += 1
         self.current_page_ctrl(self.data).run()
 
     def display_matches(self) -> None:  # for one selected tournament
-        pass
+        matches_list = self.current_page_ctrl(self.data).display_matches()
+        print('========================')
+        print(f'All Matches for "{self.data.name}": ')
+        print('========================')
+
 
     def add_round(self) -> None:
         pass

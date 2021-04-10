@@ -33,7 +33,8 @@ class PlayerCtrl(Controller):
         for uuid in results:
             player_obj = sf.factories[Player].registry[uuid]
             found_players_list.append(player_obj)
-        return found_players_list
+        ordered_by_id = sorted(found_players_list, key=lambda x: x.identifier)
+        return ordered_by_id
 
     def sort_by_last_name(self) -> list:
         """

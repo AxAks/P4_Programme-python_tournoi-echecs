@@ -34,11 +34,13 @@ class PlayersMenu(Menu):
         This method calls the controller to find one or more player instances in the registry
         """
         print('========================')
-        _input = input('search a player by ID: ')
+        search = input('search a player by ID: ')
+        players = self.current_page_ctrl().search_by_id(search)
         print('========================')
-        print('Players found: ')
-        for player in self.current_page_ctrl().search_by_id(_input):
-            print(f'{player.last_name}, {player.first_name}, {player.identifier_pod},\n'
+        print('Player Search Results: ')
+        print('========================')
+        for player in players:
+            print(f'{player.identifier_pod}, {player.last_name}, {player.first_name},\n'
                   f'{player.birthdate_pod}, {player.gender_pod}, {player.ranking}')
         self.current_page_ctrl().run()
 

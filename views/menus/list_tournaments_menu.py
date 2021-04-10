@@ -38,7 +38,7 @@ class ListTournamentsMenu(Menu):
 
     def display_by_name(self) -> None:
         print('========================')
-        print('List of all Tournaments sorted by Start Date: ')
+        print('List of all Tournaments by Start Date: ')
         print('========================')
         tournaments_list = self.current_page_ctrl().sort_by_name()
         if len(tournaments_list) == 0:
@@ -51,7 +51,7 @@ class ListTournamentsMenu(Menu):
 
     def display_by_location(self) -> None:
         print('========================')
-        print('List of all Tournaments sorted by Location: ')
+        print('List of all Tournaments by Location: ')
         print('========================')
         tournaments_list = self.current_page_ctrl().sort_by_location()
         if len(tournaments_list) == 0:
@@ -63,13 +63,24 @@ class ListTournamentsMenu(Menu):
         self.current_page_ctrl().run()
 
     def search_by_id(self) -> None:
+        """
+        This method calls the controller to find one or more Tournament instances in the registry
+        """
+        print('========================')
         search = input('Search a Tournament by Name, Location or dates : ')
         tournaments = self.current_page_ctrl().search_by_id(search)
+        print('========================')
+        print('Tournament Search Results: ')
+        print('========================')
         for tournament in tournaments:
             print(f'- {tournament.location}, {tournament.name}\n'
                   f'-> from {tournament.start_date} to {tournament.end_date}')
         self.current_page_ctrl().run()
 
-    def select_one(self) -> None:  # prints and select one tournament
-        selected_tournament = self.current_page_ctrl().select_one()  # pas encore fait en fait, à faire !
+    def select_one(self) -> None:
+        """
+        This method enables to pick a tournament
+        and be redirected this the Menu for this specific tournament.
+        """
+        selected_tournament = self.current_page_ctrl().select_one()
         TournamentInfosCtrl(selected_tournament).run()
