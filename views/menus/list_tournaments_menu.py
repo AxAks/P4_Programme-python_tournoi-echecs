@@ -62,9 +62,12 @@ class ListTournamentsMenu(Menu):
                       f'-> from {tournament.start_date} to {tournament.end_date}')
         self.current_page_ctrl().run()
 
-    def search_by_id(self) -> None:  # à détailler, affiche actuellement l'objet, print les attributs! et verifier le focntionnement !
+    def search_by_id(self) -> None:
         search = input('Search a Tournament by Name, Location or dates : ')
-        print(self.current_page_ctrl().search_by_id(search))
+        tournaments = self.current_page_ctrl().search_by_id(search)
+        for tournament in tournaments:
+            print(f'- {tournament.location}, {tournament.name}\n'
+                  f'-> from {tournament.start_date} to {tournament.end_date}')
         self.current_page_ctrl().run()
 
     def select_one(self) -> None:  # prints and select one tournament

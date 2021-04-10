@@ -50,7 +50,7 @@ class ListTournamentsCtrl(Controller):
             found_tournaments_list.append(tournament_obj)
         return found_tournaments_list
 
-    def select_one(self):  # returns selected tournament, à faire
+    def select_one(self):
         """
         This function enables to select a specific tournament in the registered tournaments list
         """

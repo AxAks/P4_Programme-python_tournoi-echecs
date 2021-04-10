@@ -12,3 +12,15 @@ class HomeCtrl(Controller):
 
     def __init__(self):
         self.menu = HomeMenu()
+
+    def start_tournament(self):
+        """
+
+        """
+        pass
+
+    def resume_tournament(self):
+        """
+
+        """
+        pass

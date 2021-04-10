@@ -10,11 +10,12 @@ class Menu:
     It enables to navigate through the program.
     """
 
-    def __init__(self, program_name, menu_name,
+    def __init__(self, program_name, menu_name, data=None,
                  previous_page_ctrl=None, current_page_ctrl=None,
                  root_page=False, exiting_message='Program Terminated'):
         self.program_name = program_name
         self.menu_name = f'-{menu_name}-'
+        self.data = data
         self.previous_page_ctrl = previous_page_ctrl
         self.current_page_ctrl = current_page_ctrl
         self.root_page = root_page

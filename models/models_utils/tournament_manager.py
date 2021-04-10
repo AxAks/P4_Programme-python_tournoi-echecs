@@ -1,4 +1,5 @@
 # coding=utf-8
+from typing import Union
 
 from models.models_utils.superfactory import super_factory as sf
 from models.models_utils.factory import Factory
@@ -10,7 +11,7 @@ class TournamentManager(Factory):
     def __init__(self):
         pass
 
-    def search_one_tournament(self) -> list[Tournament]:
+    def search_one_tournament(self) -> Union[dict[Tournament], Tournament]:
         # pas dans la classe, function et non methode
         # pas générique ! (à scinder entre Models(tournament_manager qui hérite de Factory?, controllers et views),pas testé
         # + voir list tournament controller : search_by_id
@@ -37,10 +38,10 @@ class TournamentManager(Factory):
                       f' {results[identifier].start_date}, '
                       f' {results[identifier].end_date}\n'
                       f'-> {results[identifier].description}')
+                player_obj = results[identifier]
+                return player_obj
         if len(results) == 0:
             print("No Tournament found in Registry for this research")
-            return results
-        else:
             return results
 
     def list_registered_tournaments(self) -> list[Tournament]:

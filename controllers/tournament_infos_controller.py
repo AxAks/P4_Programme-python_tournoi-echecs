@@ -1,4 +1,5 @@
 # coding=utf-8
+from uuid import UUID
 
 from models.models_utils.superfactory import super_factory as sf
 from models.models_utils.player_manager import list_registered_players
@@ -14,36 +15,35 @@ class TournamentInfosCtrl(Controller):
     """
 
     def __init__(self, selected_tournament):
-        self.menu = TournamentInfosMenu()
-        self.selected_tournament = selected_tournament
+        self.menu = TournamentInfosMenu(selected_tournament)
+        self.data = selected_tournament
 
     # à rediger !
-    def sort_players_by_last_name(self) -> list:  # voir comment utiliser serialize() ici
+    def sort_players_by_last_name(self) -> list:
         """
-        This function lists all the players of a given tournament by last name
-        """
-        """
-        This method returns a list of all players in the registry sorted by last name
+        This method lists all the players of a given tournament by last name
         """
         players_list = []
-        for identifier in self.selected_tournament.identifier_list:
-            players_list.append(sf.factories[Player].search(identifier))
+        for identifier in self.data.identifiers_list:
+            player_obj = sf.factories[Player].search(identifier)
+            players_list.append(player_obj[UUID(identifier)])
         sorted_by_last_name = sorted(players_list, key=lambda x: x.last_name)
         return sorted_by_last_name
 
-    def sort_players_by_result(self) -> list:  # voir comment utiliser serialize() ici
+    def sort_players_by_result(self) -> list:
         """
         This function lists all the players of a given tournament by result
         """
         pass
 
-    def display_rounds(self) -> list:  # voir comment utiliser serialize() ici
+    def display_rounds(self) -> list:
         """
         This function lists all the rounds of a given tournament
         """
-        pass
+        return self.data.rounds_list
 
-    def display_matches(self) -> list:  # voir comment utiliser serialize() ici
+
+    def display_matches(self) -> list:
         """
         This function lists all the matches of a given tournament
         """

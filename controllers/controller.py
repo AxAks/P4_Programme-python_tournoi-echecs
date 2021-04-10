@@ -11,9 +11,9 @@ class Controller:
     General parent class for all controllers.
     """
 
-    def __init__(self, menu=None, selected_tournament=None,):
+    def __init__(self, menu=None, data=None):
         self.menu = menu
-        self.selected_tournament = selected_tournament
+        self.data = data
 
     def run(self) -> None:
         """
