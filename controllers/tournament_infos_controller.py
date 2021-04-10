@@ -36,18 +36,11 @@ class TournamentInfosCtrl(Controller):
         """
         pass
 
-    def display_rounds(self) -> list:
+    def display_rounds_and_matches(self) -> list:
         """
         This function lists all the rounds of a given tournament
         """
         return self.data.rounds_list
-
-
-    def display_matches(self) -> list:
-        """
-        This function lists all the matches of a given tournament
-        """
-        pass
 
 
     #  Comment gère t-on la reference à Tournament dans Round ? à voir -> Round n'existe pas hors de Tournament
