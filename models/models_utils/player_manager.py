@@ -1,4 +1,5 @@
 # coding=utf-8
+from typing import Union
 
 from models.models_utils.superfactory import super_factory as sf
 from models.models_utils.factory import Factory
@@ -11,7 +12,7 @@ class PlayerManager(Factory):
         pass
 
 
-def search_one_player() -> list[Player]:
+def search_one_player() -> Union[dict[Player], Player]:
     # pas dans la classe ! function et non methode
     # pas générique ! (à scinder entre Models(player_manager qui hérite de Factory?, controllers et views)
     # + voir players_controller : search_by_id
@@ -41,10 +42,10 @@ def search_one_player() -> list[Player]:
                   f'-> {results[identifier].birthdate},'
                   f' {results[identifier].gender_pod.title()},'
                   f' {results[identifier].ranking}')
+            player_obj = results[identifier]
+            return player_obj
     if len(results) == 0:
         print("No Player found in Registry for this ID")
-        return results
-    else:
         return results
 
 

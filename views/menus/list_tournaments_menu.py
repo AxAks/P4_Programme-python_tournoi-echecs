@@ -83,4 +83,14 @@ class ListTournamentsMenu(Menu):
         and be redirected this the Menu for this specific tournament.
         """
         selected_tournament = self.current_page_ctrl().select_one()
+        if selected_tournament == {}:
+            print("No Tournament found in Registry for this research")
+            self.current_page_ctrl().run()
+        else:
+            print('1 Tournament found in Registry for this research:')
+            print(f'- {selected_tournament.name}, '
+                  f'{selected_tournament.location}, '
+                  f'{selected_tournament.start_date}, '
+                  f'{selected_tournament.end_date}\n'
+                  f'-> {selected_tournament.description}')
         TournamentInfosCtrl(selected_tournament).run()

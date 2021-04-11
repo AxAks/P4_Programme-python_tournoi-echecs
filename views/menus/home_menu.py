@@ -20,13 +20,13 @@ class HomeMenu(Menu):
                                  self.manage_players, self.manage_tournaments]
         [self.choices.append(choice) for choice in specific_menu_choices]
 
-    def start_tournament(self):
+    def start_tournament(self):  # à faire !
         """
 
         """
         pass
 
-    def resume_tournament(self):
+    def resume_tournament(self):  # à faire !
         """
 
         """

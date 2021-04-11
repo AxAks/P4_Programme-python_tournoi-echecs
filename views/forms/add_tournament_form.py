@@ -53,7 +53,7 @@ class NewTournamentForm(Form):
         """
         return ask_iso_date(input_info)
 
-    def ask_identifiers_list(self) -> list: # pas generique actuellement...!
+    def ask_identifiers_list(self) -> dict: # pas generique actuellement...!
         # liste d'UUID de Players et le nombre est fixé à 8 joueurs : mal nommée non explicite
         """
         This method asks for a list of 8 players for a tournament
@@ -62,17 +62,18 @@ class NewTournamentForm(Form):
         n = 1
         print("Please, select players to add")
         while n < 9:
-            player_dict = player_manager.search_one_player()
-            for key in player_dict:
-                if str(key) not in tournament_players_identifier: # pb il accepte les doublons de joueurs, la verif ne fonctionne plus
-                    tournament_players_identifier[str(key)] = player_dict[key]
-                    print(f"Player {n}/8 added")
-                    print(f"{player_dict[key].last_name}, "
-                          f"{player_dict[key].first_name}: "
-                          f"{player_dict[key].identifier_pod}")
-                    n += 1
-                else:
-                    print('Player already entered in the list, please retry...')
+            player_obj = player_manager.search_one_player()
+            if player_obj == {}:
+                player_obj = player_manager.search_one_player()
+            if player_obj.identifier_pod not in tournament_players_identifier:
+                tournament_players_identifier[player_obj.identifier_pod] = player_obj
+                print(f"Player {n}/8 added")
+                print(f"{player_obj.last_name}, "
+                      f"{player_obj.first_name}: "
+                      f"{player_obj.identifier_pod}")
+                n += 1
+            else:
+                print('Player already entered in the list, please retry...')
         return tournament_players_identifier
 
     def ask_time_control(self) -> str:

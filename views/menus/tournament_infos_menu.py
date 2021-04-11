@@ -21,6 +21,10 @@ class TournamentInfosMenu(Menu):
         [self.choices.append(choice) for choice in specific_menu_choices]
 
     def sort_players_by_last_name(self) -> None:  # for one selected tournament
+        """
+        This method calls the controller to display the players of the selected tournament
+        sorted by last name.
+        """
         players_list = self.current_page_ctrl(self.data).sort_players_by_last_name()
         print('========================')
         print(f'Players by last name for "{self.data.name}": ')
@@ -31,9 +35,16 @@ class TournamentInfosMenu(Menu):
         self.current_page_ctrl(self.data).run()
 
     def sort_players_by_result(self) -> None:  # for one selected tournament
+        """
+        This method calls the controller to display the players of the selected tournament
+        sorted by results.
+        """
         pass
 
     def display_rounds_and_matches(self) -> None:  # for one selected tournament
+        """
+        This method calls the controller to display the rounds and matches of the selected tournament.
+        """
         rounds_list = self.current_page_ctrl(self.data).display_rounds_and_matches()
         print('========================')
         print(f'All Rounds and Matches for "{self.data.name}": ')
@@ -51,12 +62,18 @@ class TournamentInfosMenu(Menu):
                     n += 1
         self.current_page_ctrl(self.data).run()
 
-    def add_round(self) -> None:
+    def add_round(self) -> None:  # à faire !
+        """
+
+        """
         self.current_page_ctrl(self.data).add_round()
 
         self.current_page_ctrl(self.data).run()
 
-    def add_match(self) -> None:
+    def add_match(self) -> None:  # à faire !
+        """
+
+        """
         self.current_page_ctrl(self.data).add_match()
 
         self.current_page_ctrl(self.data).run()

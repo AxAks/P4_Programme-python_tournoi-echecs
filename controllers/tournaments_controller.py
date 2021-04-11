@@ -26,5 +26,8 @@ class TournamentCtrl(Controller):
         return new_tournament
 
     def to_tournaments_list(self) -> None:
+        """
+        This method redirects to the Tournaments Lists Menu
+        """
         clear_terminal()
         list_tournaments_controller.ListTournamentsCtrl().run()

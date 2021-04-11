@@ -12,12 +12,15 @@ class TournamentsMenu(Menu):
     def __init__(self):
         super().__init__(program_name='Chess Tournament Manager', menu_name='Tournaments Menu',
                          root_page=False, previous_page_ctrl=home_controller.HomeCtrl,
-                         current_page_ctrl =tournaments_controller.TournamentCtrl,
+                         current_page_ctrl=tournaments_controller.TournamentCtrl,
                          exiting_message='Now Leaving Chess Tournament Manager')
         specific_menu_choices = [self.add_tournament, self.to_tournaments_list]
         [self.choices.append(choice) for choice in specific_menu_choices]
 
     def add_tournament(self) -> None:
+        """
+        This method calls the controller to create a new Tournament instance.
+        """
         tournament = tournaments_controller.TournamentCtrl().add_tournament()
         print(f'New Tournament registered:\n'
               f'{tournament.name}, {tournament.location},\n'

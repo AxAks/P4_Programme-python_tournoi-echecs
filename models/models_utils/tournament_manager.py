@@ -12,36 +12,27 @@ class TournamentManager(Factory):
         pass
 
     def search_one_tournament(self) -> Union[dict[Tournament], Tournament]:  # A revoir réécrire !!
-        # pas dans la classe, function et non methode
         # pas générique ! (à scinder entre Models(tournament_manager qui hérite de Factory?, controllers et views),pas testé
         # + voir list tournament controller : search_by_id
         _input = input('Search a tournament by name, location or dates: ')
         results = sf.factories[Tournament].search(_input)
         while len(results) > 1:
-            print(f'Results - '
-                  f'{len(results)} Tournaments returned:')
+            print(f'{len(results)} Tournaments returned:')
             for identifier in results:
-                print(f'{results[identifier].name}, '  # les prints sont dans les views !!!
-                      f' {results[identifier].location}, '
-                      f' {results[identifier].start_date}, '
-                      f' {results[identifier].end_date}\n'
-                      f'-> {results[identifier].description}')
-
-            results = sf.factories[Tournament].search(input('please be more specific: '))
+                tournament_obj = results[identifier]
+                print(f'{tournament_obj.name}, '  #  les prints sont dans les views !!!
+                      f' {tournament_obj.location}, '
+                      f' {tournament_obj.start_date}, '
+                      f' {tournament_obj.end_date}\n'
+                      f'-> {tournament_obj.description}')
+            results = sf.factories[Tournament].search(input(f'Please be more specific: '))
             print('---')
         if len(results) == 1:
             for identifier in results:
-                print('1 Tournament found in Registry for this research:')  # les prints sont dans les views !!!
-                print(f'Result:\n'
-                      f'{results[identifier].name}, '
-                      f' {results[identifier].location}, '
-                      f' {results[identifier].start_date}, '
-                      f' {results[identifier].end_date}\n'
-                      f'-> {results[identifier].description}')
-                player_obj = results[identifier]
-                return player_obj
+                tournament_obj = results[identifier]
+                return tournament_obj
         if len(results) == 0:
-            print("No Tournament found in Registry for this research")
+
             return results
 
     def list_registered_tournaments(self) -> list[Tournament]:
