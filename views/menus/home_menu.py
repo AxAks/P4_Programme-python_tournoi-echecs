@@ -1,7 +1,5 @@
 # coding=utf-8
 from controllers import home_controller
-from controllers.players_controller import PlayerCtrl
-from controllers.tournaments_controller import TournamentCtrl
 from views.menus.menu import Menu
 
 
@@ -34,12 +32,12 @@ class HomeMenu(Menu):
 
     def manage_players(self) -> None:
         """
-        This method directs to the Players Menu via the player controller
+        This method calls the controller to redirect to the Players Menu
         """
-        PlayerCtrl().run()
+        self.current_page_ctrl().manage_players()
 
     def manage_tournaments(self) -> None:
         """
-        This method directs to the Tournaments Menu via the Tournament controller
+        This method calls the controller to redirect to the Tournaments Menu
         """
-        TournamentCtrl().run()
+        self.current_page_ctrl().manage_tournaments()

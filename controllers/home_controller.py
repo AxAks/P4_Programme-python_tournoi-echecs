@@ -1,6 +1,8 @@
 # coding=utf-8
 
 from controllers.controller import Controller
+from controllers import players_controller
+from controllers import tournaments_controller
 from views.menus.home_menu import HomeMenu
 
 
@@ -24,3 +26,15 @@ class HomeCtrl(Controller):
         This method enables to resume a tournament
         """
         pass
+
+    def manage_tournaments(self) -> None:
+        """
+        This method directs to the Tournaments Menu via the Tournament controller
+        """
+        players_controller.PlayerCtrl().run()
+
+    def manage_players(self) -> None:
+        """
+        This method directs to the Players Menu via the player controller
+        """
+        tournaments_controller.TournamentCtrl().run()
