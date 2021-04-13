@@ -21,7 +21,7 @@ class TournamentsMenu(Menu):
         """
         This method calls the controller to create a new Tournament instance.
         """
-        tournament = tournaments_controller.TournamentCtrl().add_tournament()
+        tournament = self.current_page_ctrl().add_tournament()
         print(f'New Tournament registered:\n'
               f'{tournament.name}, {tournament.location},\n'
               f'{tournament.start_date}, {tournament.end_date}, {tournament.identifiers_list},'

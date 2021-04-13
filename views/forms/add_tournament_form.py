@@ -18,7 +18,7 @@ class NewTournamentForm(Form):
     def __init__(self):
         super().__init__(properties=TOURNAMENT_PROPERTIES, cls=self)
 
-    def add_new_tournament(self) -> dict: #  à passer en tant que add_new dans Form
+    def add_new_tournament(self) -> dict: #  à passer en tant que add_new dans Form ?
         """
         This method asks all the required info about a specific tournament.
         It returns the info as a dict

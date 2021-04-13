@@ -17,13 +17,13 @@ class HomeCtrl(Controller):
 
     def start_tournament(self):  # à faire !
         """
-        This method enables to launch a new tournament
+        This method enables to launch and run a new tournament
         """
         pass
 
     def resume_tournament(self):  # à faire !
         """
-        This method enables to resume a tournament
+        This method enables to resume an existing tournament
         """
         pass
 
@@ -31,10 +31,10 @@ class HomeCtrl(Controller):
         """
         This method directs to the Tournaments Menu via the Tournament controller
         """
-        players_controller.PlayerCtrl().run()
+        tournaments_controller.TournamentCtrl().run()
 
     def manage_players(self) -> None:
         """
         This method directs to the Players Menu via the player controller
         """
-        tournaments_controller.TournamentCtrl().run()
+        players_controller.PlayerCtrl().run()

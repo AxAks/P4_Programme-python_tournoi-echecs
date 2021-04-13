@@ -2,7 +2,7 @@
 from uuid import UUID
 
 from models.models_utils.superfactory import super_factory as sf
-from models.models_utils.player_manager import list_registered_players
+from models.models_utils.tournament_manager import TournamentManager
 from models.player import Player
 from models.tournament import Tournament
 from controllers.controller import Controller
@@ -42,7 +42,6 @@ class TournamentInfosCtrl(Controller):
         """
         return self.data.rounds_list
 
-
     #  Comment gère t-on la reference à Tournament dans Round ? à voir -> Round n'existe pas hors de Tournament
     #-> dans le controller Tournament !? à voir
 
@@ -56,9 +55,8 @@ class TournamentInfosCtrl(Controller):
         """
         pass
 
-
     # pour ajouter un match à Round
-    def add_match(self) -> None:  # est ce qu'une méthode est utile ici ? plutot dans controller Tournament je pense
+    def add_match(self, tournament_identifier) -> None:
         """
         This getter enables to add the information of a Match to the list of matches of the Round Object
         """

@@ -14,6 +14,7 @@ class TournamentManager(Factory):
     def search_one_tournament(self) -> Union[dict[Tournament], Tournament]:  # A revoir réécrire !!
         # pas générique ! (à scinder entre Models(tournament_manager qui hérite de Factory?, controllers et views),pas testé
         # + voir list tournament controller : search_by_id
+        print('========================')
         _input = input('Search a tournament by name, location or dates: ')
         results = sf.factories[Tournament].search(_input)
         while len(results) > 1:
@@ -38,6 +39,10 @@ class TournamentManager(Factory):
     def list_registered_tournaments(self) -> list[Tournament]:
         tournaments_list = []
         for identifier in sf.factories[Tournament].registry:
-            tournament_obj = sf.factories[Tournament].registry[identifier]
+            tournament_obj = self.from_identifier_to_tournament_obj(identifier)
             tournaments_list.append(tournament_obj)
         return tournaments_list
+
+    def from_identifier_to_tournament_obj(self, identifier):
+        player_obj = sf.factories[Tournament].registry[identifier]
+        return player_obj

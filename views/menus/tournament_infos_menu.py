@@ -1,5 +1,6 @@
 # coding=utf-8
 from controllers import list_tournaments_controller, tournament_infos_controller
+from models.models_utils.player_manager import PlayerManager
 from views.menus.menu import Menu
 
 
@@ -43,9 +44,9 @@ class TournamentInfosMenu(Menu):
 
     def display_rounds_and_matches(self) -> None:  # for one selected tournament
         """
-        This method calls the controller to display the rounds and matches of the selected tournament.
+        This method calls the controller to display the rounds of the selected tournament.
         """
-        rounds_list = self.current_page_ctrl(self.data).display_rounds_and_matches()
+        rounds_list = self.current_page_ctrl(self.data).display_rounds()
         print('========================')
         print(f'All Rounds and Matches for "{self.data.name}": ')
         print('========================')
@@ -56,9 +57,15 @@ class TournamentInfosMenu(Menu):
                 print(f'-> {_round.name}: from {_round.start_time} to {_round.end_time}')
                 n = 1
                 for match in _round.matches:
-                    print(f'Match {n}:\n'
-                          f'- {match.player1_id}: {match.player1_score_pod}\n'
-                          f'- {match.player2_id}: {match.player2_score_pod}')
+                    player1_obj = PlayerManager().from_identifier_to_player_obj(match.player1_id) # pas dans les views normalement !
+                    player2_obj = PlayerManager().from_identifier_to_player_obj(match.player2_id)
+                    print(f'\nMatch {n}:\n'
+                          f'- {player1_obj.identifier_pod}\n'
+                          f'{player1_obj.last_name}, {player1_obj.first_name}: '
+                          f'{match.player1_score_pod}\n'
+                          f'- {player2_obj.identifier_pod}\n'
+                          f'{player2_obj.last_name}, {player2_obj.first_name}: '
+                          f'{match.player2_score_pod}')
                     n += 1
         self.current_page_ctrl(self.data).run()
 

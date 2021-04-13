@@ -40,7 +40,7 @@ class PlayersMenu(Menu):
         print('Player Search Results: ')
         print('========================')
         for player in players:
-            print(f'{player.identifier_pod}, {player.last_name}, {player.first_name},\n'
+            print(f'{player.identifier_pod}, {player.last_name}, {player.first_name}\n'
                   f'{player.birthdate_pod}, {player.gender_pod}, {player.ranking}')
         self.current_page_ctrl().run()
 
@@ -52,7 +52,7 @@ class PlayersMenu(Menu):
         print('All Players by last name: ')
         print('========================')
         for player in self.current_page_ctrl().sort_by_last_name():
-            print(f'- {player.last_name}, {player.first_name}, {player.identifier_pod},\n'
+            print(f'- {player.last_name}, {player.first_name}, {player.identifier_pod}\n'
                   f'{player.birthdate_pod}, {player.gender_pod}, {player.ranking}')
         self.current_page_ctrl().run()
 
