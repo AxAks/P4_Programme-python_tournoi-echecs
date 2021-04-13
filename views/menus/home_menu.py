@@ -39,7 +39,7 @@ class HomeMenu(Menu):
         aller sur la page du tournoi
         
         """
-        pass
+        PlayTournament().select_tournament()
 
     def manage_players(self) -> None:
         """
