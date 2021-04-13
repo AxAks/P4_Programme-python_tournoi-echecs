@@ -14,9 +14,9 @@ class TournamentInfosCtrl(Controller):
     Controller class for a specific Tournament Menu Page once the tournament is selected.
     """
 
-    def __init__(self, selected_tournament):
-        self.menu = TournamentInfosMenu(selected_tournament)
-        self.data = selected_tournament
+    def __init__(self, tournament):
+        self.menu = TournamentInfosMenu(tournament)
+        self.data = tournament
 
     # à rediger !
     def sort_players_by_last_name(self) -> list:

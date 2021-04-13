@@ -1,5 +1,6 @@
 # coding=utf-8
 from controllers import home_controller
+from controllers.play_tournament import PlayTournament
 from views.menus.menu import Menu
 
 
@@ -22,11 +23,21 @@ class HomeMenu(Menu):
         """
 
         """
-        pass
+        """
+        Create new tournament
+        envoyer sur la page de ce tournament
+        
+        """
+        PlayTournament().add_new_tournament()
 
     def resume_tournament(self):  # à faire !
         """
 
+        """
+        """
+        choisir le tournament
+        aller sur la page du tournoi
+        
         """
         pass
 

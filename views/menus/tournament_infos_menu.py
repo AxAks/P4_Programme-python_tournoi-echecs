@@ -46,7 +46,7 @@ class TournamentInfosMenu(Menu):
         """
         This method calls the controller to display the rounds of the selected tournament.
         """
-        rounds_list = self.current_page_ctrl(self.data).display_rounds()
+        rounds_list = self.current_page_ctrl(self.data).display_rounds_and_matches()
         print('========================')
         print(f'All Rounds and Matches for "{self.data.name}": ')
         print('========================')

@@ -3,8 +3,7 @@
 from datetime import date
 
 from constants import TOURNAMENT_PROPERTIES
-
-from models.models_utils import player_manager, data
+from models.models_utils.player_manager import PlayerManager
 from views.inputs.generic_inputs import ask_alphanumerical_string, ask_alphabetical_string, ask_iso_date
 from views.forms.form import Form
 
@@ -62,9 +61,9 @@ class NewTournamentForm(Form):
         n = 1
         print("Please, select players to add")
         while n < 9:
-            player_obj = player_manager.search_one_player()
+            player_obj = PlayerManager().search_one_player()
             if player_obj == {}:
-                player_obj = player_manager.search_one_player()
+                player_obj = PlayerManager().search_one_player()
             if player_obj.identifier_pod not in tournament_players_identifier:
                 tournament_players_identifier[player_obj.identifier_pod] = player_obj
                 print(f"Player {n}/8 added")
