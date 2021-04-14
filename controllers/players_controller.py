@@ -16,6 +16,7 @@ class PlayerCtrl(Controller):
     def __init__(self):
         self.menu = PlayersMenu()
 
+
     def add_player(self) -> Player:
         """
         this method creates a new player entry in the registry.

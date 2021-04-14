@@ -34,7 +34,7 @@ class NewTournamentForm(Form):
         """
         return ask_alphanumerical_string(input_info)
 
-    def ask_location(self, input_info = "Enter Location: ") -> str:
+    def ask_location(self, input_info="Enter Location: ") -> str:
         """
         This method asks for a location
         """
@@ -80,22 +80,24 @@ class NewTournamentForm(Form):
         This method asks for the time control format of a tournament using digits for choice
         and returns the matching formatted string
         """
-        valid_time_control = False
+        valid_entry = False
         choices_info = '(1: BULLET, 2: BLITZ, 3: RAPIDE)'
         input_info = f'Enter Time Control Format {choices_info}: '
         wrong_input = 'Invalid choice (1, 2 or 3), please retry...'
+        valid_choices = (1, 2, 3)
+
         _input = input(input_info)
-        while not valid_time_control:
+        while not valid_entry:
             try:
                 _input = int(_input)
-                if _input in (1, 2, 3):
+                if _input in valid_choices:
                     if _input == 1:
                         _input = 'BULLET'
                     elif _input == 2:
                         _input = 'BLITZ'
                     else:
                         _input = 'RAPIDE'
-                    valid_time_control = True
+                    valid_entry = True
                 else:
                     print(wrong_input)
                     _input = input(input_info)

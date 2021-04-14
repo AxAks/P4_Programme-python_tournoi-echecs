@@ -51,21 +51,22 @@ class NewPlayerForm(Form):
         This method asks for the player's gender using digits
         and returns a formatted string
         """
-        valid_gender = False
+        valid_entry = False
         choices_info = '(1: MALE, 2: FEMALE)'
         input_info = f'Enter Player Gender {choices_info}: '
         wrong_input = 'Invalid choice (1 or 2), please retry...'
+        valid_choices = (1, 2)
 
         _input = input(input_info)
-        while not valid_gender:
+        while not valid_entry:
             try:
                 _input = int(_input)
-                if _input in (1, 2):
+                if _input in valid_choices:
                     if _input == 1:
                         _input = 'MALE'
                     else:
                         _input = 'FEMALE'
-                    valid_gender = True
+                    valid_entry = True
                 else:
                     print(wrong_input)
                     _input = input(input_info)
@@ -78,14 +79,14 @@ class NewPlayerForm(Form):
         """
         This method asks a ranking between 100 and 3000
         """
-        valid_ranking = False
+        valid_entry = False
         input_info = "Enter Player Ranking: "
         wrong_input = 'Ranking must be a digit between 100 and 3000, please retry...'
-        while valid_ranking is False:
+        while valid_entry is False:
             try:
                 _input = int(input(input_info))
                 if _input in RANKING_RANGE:
-                    valid_ranking = True
+                    valid_entry = True
                 else:
                     print(wrong_input)
             except ValueError:
