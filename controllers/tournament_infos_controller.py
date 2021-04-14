@@ -2,9 +2,7 @@
 from uuid import UUID
 
 from models.models_utils.superfactory import super_factory as sf
-from models.models_utils.tournament_manager import TournamentManager
 from models.player import Player
-from models.tournament import Tournament
 from controllers.controller import Controller
 from views.menus.tournament_infos_menu import TournamentInfosMenu
 

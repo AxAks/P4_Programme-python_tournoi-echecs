@@ -92,7 +92,7 @@ class NewTournamentForm(Form):
                     if _input == 1:
                         _input = 'BULLET'
                     elif _input == 2:
-                        _input == 'BLITZ'
+                        _input = 'BLITZ'
                     else:
                         _input = 'RAPIDE'
                     valid_time_control = True
@@ -102,7 +102,7 @@ class NewTournamentForm(Form):
             except ValueError:
                 print(wrong_input)
                 _input = input(input_info)
-        return _input  # retourne "2" au lieu de BLITZ (l'int au lieu du str)
+        return _input
 
     def ask_description(self) -> str:
         """
@@ -114,4 +114,3 @@ class NewTournamentForm(Form):
             print('Description cannot be empty, please retry...')
             _input = input(input_info)
         return _input
-

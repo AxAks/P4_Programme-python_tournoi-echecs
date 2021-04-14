@@ -39,7 +39,7 @@ class Menu:
         """
         This method leads to the Home Menu via the Home controller
         """
-        home_controller.HomeCtrl.run()
+        home_controller.HomeCtrl().run()
 
     def back(self) -> None:
         """
@@ -66,7 +66,7 @@ class Menu:
         It then reloads the current menu screen
         """
         Controller().load()
-        self.current_page_ctrl().run()
+        self.current_page_ctrl(self.data).run()
 
     def save(self) -> None:
         """
@@ -74,4 +74,4 @@ class Menu:
         It then reloads the current menu screen.
         """
         Controller().save()
-        self.current_page_ctrl().run()
+        self.current_page_ctrl(self.data).run()
