@@ -37,3 +37,20 @@ class Factory:
             if search in EMPTY_SEARCH_STRINGS:
                 results = {}
         return results
+
+    def search_one(self, _input) -> Any:
+        print('========================')
+        results = self.search(_input)
+        while len(results) > 1:
+            print(f'{len(results)} matches returned:')
+            for identifier in results:
+                _obj = results[identifier]
+                print(_obj.to_str())
+            results = self.search(input(f'Please be more specific: '))
+            print('---')
+        if len(results) == 1:
+            for identifier in results:
+                _obj = results[identifier]
+                return _obj
+        if len(results) == 0:
+            return results

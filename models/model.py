@@ -34,3 +34,6 @@ class Model:
             properties = self.properties
         return {_property: getattr(self, f"{_property}_pod" if hasattr(self, f"{_property}_pod") else _property)
                 for _property in self.properties if _property in properties}
+
+    def to_str(self):
+        return 'must_be_implemented'

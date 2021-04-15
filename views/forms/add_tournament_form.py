@@ -63,9 +63,10 @@ class NewTournamentForm(Form):
         nb_players = ask_integer(input_info)
         print(f'Please, select player {n} of {nb_players}: ')
         while n <= nb_players:
-            player_obj = PlayerManager().search_one_player()
+            _input = input('Search a player by id : ')
+            player_obj = PlayerManager().search_one(_input)
             if player_obj == {}:
-                player_obj = PlayerManager().search_one_player()
+                player_obj = PlayerManager().search_one(_input)
             if player_obj.identifier_pod not in tournament_players:
                 tournament_players[player_obj.identifier_pod] = player_obj
                 print(f"Player added")

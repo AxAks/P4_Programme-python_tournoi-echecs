@@ -32,6 +32,10 @@ class Player(Model):
         """
         super().__init__(PLAYER_PROPERTIES, **data)
 
+    def to_str(self):
+        return f'{self.last_name}, {self.first_name}, {self.identifier}\n' \
+               f'-> {self.birthdate}, {self.gender_pod.title()}\n {self.ranking}'
+
     @property
     def identifier(self) -> UUID:
         """

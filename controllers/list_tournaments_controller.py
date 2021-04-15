@@ -54,4 +54,5 @@ class ListTournamentsCtrl(Controller):
         """
         This function enables to select a specific tournament in the registered tournaments list
         """
-        return TournamentManager().search_one_tournament()
+        _input = input('Search a tournament by name, location or dates: ')
+        return TournamentManager().search_one(_input)
