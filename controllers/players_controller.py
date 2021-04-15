@@ -25,7 +25,7 @@ class PlayerCtrl(Controller):
         new_player = sf.factories[Player].create(**new_player_dict)
         return new_player
 
-    def search_by_id(self, search) -> list:  # voir player manager : search_one_player
+    def search_by_id(self, search) -> list:
         """
         This method lists the player instances matching the given input (id)
         """

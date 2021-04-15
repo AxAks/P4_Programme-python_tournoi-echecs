@@ -38,7 +38,7 @@ class ListTournamentsCtrl(Controller):
         sorted_by_location = sorted(tournaments_list, key=lambda x: x.location)
         return sorted_by_location
 
-    def search_by_id(self, search) -> list:  # voir tournament manager : search_one_tournament
+    def search_by_id(self, search) -> list:
         """
         This function lists the tournament instances matching the given input
         (identifier: Name, Location, Start date, End date)

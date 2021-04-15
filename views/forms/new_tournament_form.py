@@ -41,10 +41,12 @@ class NewTournamentForm(Form):
         """
         return ask_iso_date(input_info)
 
-    def ask_identifiers_list(self) -> dict:
+    def ask_players_list(self) -> dict:
         # demande le nombre de joueurs et leurs UUID liste d'UUID de Players : mal nommée non explicite
         """
-        This method asks the number of players for the tournament and returns a dict of players
+        This method asks the number of players for the tournament
+        and enables to search them in the registry
+        It then returns a dict of players.
         """
         tournament_players = {}
         input_info = 'Please Enter Number of Players: '

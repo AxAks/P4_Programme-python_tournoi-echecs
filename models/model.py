@@ -21,8 +21,8 @@ class Model:
                 setattr(self, _property, data[_property] if _property in data else None)
             except AttributeError:
                 errors.append(_property)
-        if errors:
-            raise Exception(f'Error detected '  # il ne faut pas que le programme s'arrete mais plutot redirige au Home Menu
+        if errors:  # il ne faut pas que le programme s'arrete mais plutot redirige au Home Menu ex : daets de tournamenr debut/fin
+            raise Exception(f'Error detected '
                             f'in the following fields for {self.__class__.__name__}: {", ".join(errors)}')
 
     def serialize(self, properties=None):
@@ -36,4 +36,4 @@ class Model:
                 for _property in self.properties if _property in properties}
 
     def to_str(self):
-        return 'must_be_implemented'
+        return 'must_be_implemented in the subclasses'

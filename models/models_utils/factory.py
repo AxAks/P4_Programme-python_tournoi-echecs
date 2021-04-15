@@ -7,7 +7,7 @@ from typing import Any
 from constants import EMPTY_SEARCH_STRINGS
 
 
-class Factory:
+class Factory:  # renommer en Manager ?
     """
     The Factory class is set as a common/factorized Class that enable to instantiate any type of object from a dict.
     This Class creates specific Factories based on the object's type
