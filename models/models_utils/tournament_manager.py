@@ -21,7 +21,7 @@ class TournamentManager(Factory):
             print(f'{len(results)} Tournaments returned:')
             for identifier in results:
                 tournament_obj = results[identifier]
-                print(f'{tournament_obj.name}, '  #  les prints sont dans les views !!!
+                print(f'{tournament_obj.name}, '
                       f' {tournament_obj.location}, '
                       f' {tournament_obj.start_date}, '
                       f' {tournament_obj.end_date}\n'

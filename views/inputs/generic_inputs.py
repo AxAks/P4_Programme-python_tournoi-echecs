@@ -33,3 +33,16 @@ def ask_iso_date(input_info: str) -> date:
             print('Not in format YYYY-MM-DD, please retry...')
             _input = input(input_info)
     return _input
+
+
+def ask_integer(input_info: str) -> int:
+    valid_integer = False
+    _input = input(input_info)
+    while not valid_integer:
+        try:
+            _input = int(_input)
+            valid_integer = True
+        except ValueError:
+            print('Not a number, please retry...')
+            _input = input(input_info)
+    return _input

@@ -4,7 +4,7 @@ from datetime import date
 
 from constants import TOURNAMENT_PROPERTIES
 from models.models_utils.player_manager import PlayerManager
-from views.inputs.generic_inputs import ask_alphanumerical_string, ask_alphabetical_string, ask_iso_date
+from views.inputs.generic_inputs import ask_alphanumerical_string, ask_alphabetical_string, ask_iso_date, ask_integer
 from views.forms.form import Form
 
 
@@ -52,28 +52,30 @@ class NewTournamentForm(Form):
         """
         return ask_iso_date(input_info)
 
-    def ask_identifiers_list(self) -> dict: # pas generique actuellement...!
-        # liste d'UUID de Players et le nombre est fixé à 8 joueurs : mal nommée non explicite
+    def ask_identifiers_list(self) -> dict:
+        # demande le nombre de joueurs et leurs UUID liste d'UUID de Players : mal nommée non explicite
         """
-        This method asks for a list of 8 players for a tournament
+        This method asks the number of players for the tournament and returns a dict of players
         """
-        tournament_players_identifier = {}
+        tournament_players = {}
+        input_info = 'Please Enter Number of Players: '
         n = 1
-        print("Please, select players to add")
-        while n < 9:
+        nb_players = ask_integer(input_info)
+        print(f'Please, select player {n} of {nb_players}: ')
+        while n <= nb_players:
             player_obj = PlayerManager().search_one_player()
             if player_obj == {}:
                 player_obj = PlayerManager().search_one_player()
-            if player_obj.identifier_pod not in tournament_players_identifier:
-                tournament_players_identifier[player_obj.identifier_pod] = player_obj
-                print(f"Player {n}/8 added")
+            if player_obj.identifier_pod not in tournament_players:
+                tournament_players[player_obj.identifier_pod] = player_obj
+                print(f"Player added")
                 print(f"{player_obj.last_name}, "
                       f"{player_obj.first_name}: "
                       f"{player_obj.identifier_pod}")
                 n += 1
             else:
                 print('Player already entered in the list, please retry...')
-        return tournament_players_identifier
+        return tournament_players
 
     def ask_time_control(self) -> str:
         """
