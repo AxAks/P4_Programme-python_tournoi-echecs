@@ -66,7 +66,10 @@ class Menu:
         It then reloads the current menu screen
         """
         Controller().load()
-        self.current_page_ctrl(self.data).run()
+        if self.data is None:
+            self.current_page_ctrl().run()
+        else:
+            self.current_page_ctrl(self.data).run()
 
     def save(self) -> None:
         """
@@ -74,4 +77,7 @@ class Menu:
         It then reloads the current menu screen.
         """
         Controller().save()
-        self.current_page_ctrl(self.data).run()
+        if self.data is None:
+            self.current_page_ctrl().run()
+        else:
+            self.current_page_ctrl(self.data).run()
