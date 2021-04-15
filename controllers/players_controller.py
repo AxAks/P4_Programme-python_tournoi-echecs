@@ -5,7 +5,7 @@ from models.models_utils.superfactory import super_factory as sf
 from models.player import Player
 from controllers.controller import Controller
 from views.menus.players_menu import PlayersMenu
-from views.forms.add_player_form import NewPlayerForm
+from views.forms.new_player_form import NewPlayerForm
 
 
 class PlayerCtrl(Controller):
@@ -15,13 +15,13 @@ class PlayerCtrl(Controller):
 
     def __init__(self):
         self.menu = PlayersMenu()
-
+        self.not_asked_properties = ['identifier']
 
     def add_player(self) -> Player:
         """
         this method creates a new player entry in the registry.
         """
-        new_player_dict = NewPlayerForm().add_new_player()
+        new_player_dict = NewPlayerForm().add_new()
         new_player = sf.factories[Player].create(**new_player_dict)
         return new_player
 

@@ -15,18 +15,7 @@ class NewTournamentForm(Form):
     """
 
     def __init__(self):
-        super().__init__(properties=TOURNAMENT_PROPERTIES, cls=self)
-
-    def add_new_tournament(self) -> dict: #  à passer en tant que add_new dans Form ?
-        """
-        This method asks all the required info about a specific tournament.
-        It returns the info as a dict
-        """
-        new_tournament_dict = {}
-        for _property in self.properties:
-            if _property not in ('rounds_list', 'rounds'):
-                new_tournament_dict[_property] = self.ask_property(_property)
-        return new_tournament_dict
+        super().__init__(properties=TOURNAMENT_PROPERTIES, cls=self, not_asked_properties=['rounds_list', 'rounds'])
 
     def ask_name(self, input_info="Enter name: ") -> str:
         """

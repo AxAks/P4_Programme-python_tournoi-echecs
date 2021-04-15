@@ -8,9 +8,10 @@ class Form(Menu):
     It enables the user to enter data and return the data as dicts.
     """
 
-    def __init__(self, properties, cls):
+    def __init__(self, properties, cls, not_asked_properties):
         self.properties = properties
         self.cls = cls
+        self.not_asked_properties = not_asked_properties
 
     def ask_property(self, property_name):  # fonctionne un peu mais pas fini : comment est ce que je lui passe les args   # appelé par Form.add_new, doit etre generique et renvoyer vers une fonction particuliere selon l'objet
         """
@@ -45,3 +46,14 @@ class Form(Menu):
                 print(wrong_input)
 
         return attribute
+
+    def add_new(self) -> dict: #  à passer en tant que add_new dans Form ?
+        """
+        This method asks all the required info about a specific object.
+        It returns the info as a dict
+        """
+        new_dict = {}
+        for _property in self.properties:
+            if _property not in self.not_asked_properties:
+                new_dict[_property] = self.ask_property(_property)
+        return new_dict

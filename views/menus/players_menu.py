@@ -39,6 +39,8 @@ class PlayersMenu(Menu):
         print('========================')
         print('Player Search Results: ')
         print('========================')
+        if len(players) == 0:
+            print('No Player found for this request')
         for player in players:
             print(f'{player.identifier_pod}, {player.last_name}, {player.first_name}\n'
                   f'{player.birthdate_pod}, {player.gender_pod}, {player.ranking}')

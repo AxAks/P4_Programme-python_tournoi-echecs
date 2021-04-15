@@ -72,6 +72,8 @@ class ListTournamentsMenu(Menu):
         print('========================')
         print('Tournament Search Results: ')
         print('========================')
+        if len(tournaments) == 0:
+            print('No Tournament found for this request')
         for tournament in tournaments:
             print(f'- {tournament.location}, {tournament.name}\n'
                   f'-> from {tournament.start_date} to {tournament.end_date}')

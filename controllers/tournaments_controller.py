@@ -5,7 +5,7 @@ from models.tournament import Tournament
 from models.models_utils.superfactory import super_factory as sf
 from controllers import list_tournaments_controller
 from controllers.controller import Controller
-from views.forms.add_tournament_form import NewTournamentForm
+from views.forms.new_tournament_form import NewTournamentForm
 from views.menus.tournaments_menu import TournamentsMenu
 
 
@@ -21,7 +21,7 @@ class TournamentCtrl(Controller):
         """
         this method creates a new player entry in the registry.
         """
-        new_tournament_dict = NewTournamentForm().add_new_tournament()
+        new_tournament_dict = NewTournamentForm().add_new()
         new_tournament = sf.factories[Tournament].create(**new_tournament_dict)
         return new_tournament
 

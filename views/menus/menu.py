@@ -57,7 +57,7 @@ class Menu:
         It calls the save function before quitting to save the state of the program.
         """
         Controller().save()
-        print(f'{self.exiting_message}\n')
+        print(f'{self.exiting_message}')
         Controller().quit()
 
     def load(self) -> None:

@@ -15,14 +15,7 @@ class NewPlayerForm(Form):
     """
 
     def __init__(self):
-        super().__init__(properties=PLAYER_PROPERTIES, cls=self)
-
-    def add_new_player(self) -> dict:  # à passer en tant que add_new (générique) dans Form, si possible, si générique
-        new_player_dict = {}
-        for _property in self.properties:
-            if _property != 'identifier':
-                new_player_dict[_property] = self.ask_property(_property)
-        return new_player_dict
+        super().__init__(properties=PLAYER_PROPERTIES, cls=self, not_asked_properties=['identifier'])
 
     def ask_last_name(self, input_info="Enter Last Name: ") -> str:
         """

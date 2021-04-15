@@ -22,7 +22,7 @@ class Model:
             except AttributeError:
                 errors.append(_property)
         if errors:
-            raise Exception(f'Error detected '
+            raise Exception(f'Error detected '  # il ne faut pas que le programme s'arrete mais plutot redirige au Home Menu
                             f'in the following fields for {self.__class__.__name__}: {", ".join(errors)}')
 
     def serialize(self, properties=None):
