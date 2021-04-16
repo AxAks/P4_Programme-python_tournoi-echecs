@@ -21,7 +21,7 @@ class Match(Model):
 
     class Score(Enum):
         WIN = 1.0
-        LOSE = 0.0
+        LOSS = 0.0
         TIE = 0.5
 
     def __init__(self, **params: dict):

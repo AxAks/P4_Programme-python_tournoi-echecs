@@ -46,3 +46,7 @@ def ask_integer(input_info: str) -> int:
             print('Not a number, please retry...')
             _input = input(input_info)
     return _input
+
+
+def integer_to_float(_input: int) -> float:
+    return float(_input)
