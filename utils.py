@@ -24,7 +24,7 @@ def validate_input(value, method):
             _input = int(_input)
             if _input in valid_choices:
                 if _input == 2:
-                    value = method()  # pb ici variables à corriger/renommer
+                    value = method()
                 else:
                     valid_entry = True
             else:
