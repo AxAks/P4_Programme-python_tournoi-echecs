@@ -2,7 +2,7 @@
 
 from constants import MATCH_PROPERTIES
 from views.forms.form import Form
-from views.generic_inputs import integer_to_float, ask_integer
+from views.forms.generic_inputs import integer_to_float, ask_integer
 
 
 class NewMatchForm(Form):

@@ -5,7 +5,7 @@ from datetime import date
 from constants import PLAYER_PROPERTIES, RANKING_RANGE
 
 from views.forms.form import Form
-from views.generic_inputs import ask_alphabetical_string, ask_iso_date
+from views.forms.generic_inputs import ask_alphabetical_string, ask_iso_date
 
 
 class NewPlayerForm(Form):

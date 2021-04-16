@@ -2,7 +2,7 @@
 
 from constants import ROUND_PROPERTIES
 from views.forms.form import Form
-from views.generic_inputs import ask_alphanumerical_string
+from views.forms.generic_inputs import ask_alphanumerical_string
 
 
 class NewRoundForm(Form):
