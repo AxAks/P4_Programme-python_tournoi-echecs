@@ -4,6 +4,7 @@ from uuid import UUID
 from models.models_utils.superfactory import super_factory as sf
 from models.player import Player
 from controllers.controller import Controller
+from views.forms.new_match_form import NewMatchForm
 from views.menus.tournament_infos_menu import TournamentInfosMenu
 
 
@@ -56,6 +57,6 @@ class TournamentInfosCtrl(Controller):
     # pour ajouter un match à Round
     def add_match(self, tournament_identifier) -> None:
         """
-        This getter enables to add the information of a Match to the list of matches of the Round Object
+        This method enables to add the information of a Match to the list of matches of the Round Object
         """
         pass
