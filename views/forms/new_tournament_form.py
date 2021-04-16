@@ -4,6 +4,7 @@ from datetime import date
 
 from constants import TOURNAMENT_PROPERTIES
 from models.models_utils.player_manager import PlayerManager
+from models.player import Player
 from views.inputs.generic_inputs import ask_alphanumerical_string, ask_alphabetical_string, ask_iso_date, ask_integer
 from views.forms.form import Form
 
@@ -41,8 +42,7 @@ class NewTournamentForm(Form):
         """
         return ask_iso_date(input_info)
 
-    def ask_players_list(self) -> dict:
-        # demande le nombre de joueurs et leurs UUID liste d'UUID de Players : mal nommée non explicite
+    def ask_players_list(self) -> dict[Player]:
         """
         This method sets the number of players for the tournament to 8
         and enables to search them in the registry
