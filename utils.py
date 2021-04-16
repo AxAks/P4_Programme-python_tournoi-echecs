@@ -12,7 +12,7 @@ def clear_terminal():
 
 # à travailler, l'idée est d'extraire une méthode generale de verification des inputs:mais pb de attribute = method()
 # et à mettre dans generic_inputs en tant que fonction
-def validate_input(attribute, method):
+def validate_input(value, method):
     valid_entry = False
     choices_info = '1: YES, 2: NO'
     input_info = f'Please confirm this entry? ({choices_info}): '
@@ -24,11 +24,11 @@ def validate_input(attribute, method):
             _input = int(_input)
             if _input in valid_choices:
                 if _input == 2:
-                    attribute = method()  # pb ici variables à corriger/renommer
+                    value = method()  # pb ici variables à corriger/renommer
                 else:
                     valid_entry = True
             else:
                 print(wrong_input)
         except ValueError:
             print(wrong_input)
-    return attribute
+    return value
