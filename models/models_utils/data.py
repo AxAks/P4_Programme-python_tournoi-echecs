@@ -15,7 +15,7 @@ def save() -> None:
     It serializes the instances of Player et Tournament
     and create a db.json file to store them as dicts
     """
-    print(f'Saving current program state')
+    print('Saving current program state')
     serialized_player_instances = \
         [sf.factories[Player].registry[key].serialize() for key in sf.factories[Player].registry]
     serialized_tournament_instances = \
@@ -41,4 +41,4 @@ def load() -> None:
     [sf.factories[Player].create(**serialized_player) for serialized_player in serialized_players]
     serialized_tournaments = tournaments_table.all()
     [sf.factories[Tournament].create(**serialized_tournament) for serialized_tournament in serialized_tournaments]
-    print(f'Program state loaded from file')
+    print('Program state loaded from file')

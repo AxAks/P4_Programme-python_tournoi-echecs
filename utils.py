@@ -10,8 +10,8 @@ def clear_terminal():
     else:
         system('clear')
 
-# à travailler, l'idée est d'extraire une méthode generale de verification des inputs:mais pb de attribute = method()
-# et à mettre dans generic_inputs en tant que fonction
+
+# ajouter la possibilité de cancel, retour au menu precedent, en restant générique ...
 def validate_input(value, method):
     valid_entry = False
     choices_info = '1: YES, 2: NO'

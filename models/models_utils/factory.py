@@ -45,8 +45,8 @@ class Factory:  # renommer en Manager ?
             print(f'{len(results)} matches returned:')
             for identifier in results:
                 _obj = results[identifier]
-                print(_obj.to_str())
-            results = self.search(input(f'Please choose from the displayed results: '))
+                print(_obj)
+            results = self.search(input('Please choose from the displayed results: '))
             print('---')
         if len(results) == 1:
             for identifier in results:

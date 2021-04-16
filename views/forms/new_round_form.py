@@ -2,7 +2,7 @@
 
 from constants import ROUND_PROPERTIES
 from views.forms.form import Form
-from views.inputs.generic_inputs import ask_alphanumerical_string
+from views.generic_inputs import ask_alphanumerical_string
 
 
 class NewRoundForm(Form):
@@ -34,4 +34,3 @@ class NewRoundForm(Form):
 
     def ask_start_time(self):  # doit etre renseigné automatiquement en fait !
         pass
-

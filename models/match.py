@@ -35,6 +35,9 @@ class Match(Model):
         """
         super().__init__(MATCH_PROPERTIES, **params)
 
+    def __repr__(self):
+        return self.player1_id_pod, self.player1_score_pod, self.player2_id_pod, self.player2_score_pod
+
     @property
     def player1_id(self) -> UUID:
         """
@@ -162,7 +165,7 @@ class Match(Model):
         if value is None:
             raise AttributeError()
         if isinstance(value, int):
-            value =float(value)
+            value = float(value)
         if isinstance(value, float):
             try:
                 self.__player2_score = self.Score(value)
@@ -172,4 +175,3 @@ class Match(Model):
             self.__player2_score = value
         else:
             raise AttributeError()
-

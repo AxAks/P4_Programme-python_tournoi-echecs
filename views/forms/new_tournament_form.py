@@ -5,7 +5,7 @@ from datetime import date
 from constants import TOURNAMENT_PROPERTIES
 from models.models_utils.player_manager import PlayerManager
 from models.player import Player
-from views.inputs.generic_inputs import ask_alphanumerical_string, ask_alphabetical_string, ask_iso_date, ask_integer
+from views.generic_inputs import ask_alphanumerical_string, ask_alphabetical_string, ask_iso_date, ask_integer
 from views.forms.form import Form
 
 

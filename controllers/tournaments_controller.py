@@ -19,7 +19,7 @@ class TournamentCtrl(Controller):
 
     def add_tournament(self) -> Tournament:
         """
-        this method creates a new player entry in the registry.
+        this method creates a new tournament entry in the registry.
         """
         new_tournament_dict = NewTournamentForm().add_new()
         new_tournament = sf.factories[Tournament].create(**new_tournament_dict)  # gérer l'erreur de dates etc ici !

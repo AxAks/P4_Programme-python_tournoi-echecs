@@ -26,13 +26,13 @@ class PlayTournamentCtrl:  # à faire !
         tournament_controller.run()
 
     def select_tournament(self):
-        new_tournament = ListTournamentsCtrl().select_one()
-        tournament_controller = TournamentInfosCtrl(new_tournament)
+        selected_tournament = ListTournamentsCtrl().select_one()
+        tournament_controller = TournamentInfosCtrl(selected_tournament)
         tournament = tournament_controller.data
         while len(tournament.rounds_list) != tournament.rounds:
             self.generate_matchups()
-            NewRoundForm.add_new()
-            NewMatchForm.add_new()
+            NewRoundForm.add_new(tournament)
+            NewMatchForm.add_new(tournament)
             self.add_players_scores()
 
         tournament_controller.run()

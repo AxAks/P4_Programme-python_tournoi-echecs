@@ -27,6 +27,9 @@ class Round(Model):
         """
         super().__init__(ROUND_PROPERTIES, **params)
 
+    def __repr__(self):
+        return self.__name, self.start_time_pod, self.end_time_pod, self.matches_pod
+
     @property
     def name(self) -> str:
         """
