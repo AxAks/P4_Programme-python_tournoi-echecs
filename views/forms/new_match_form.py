@@ -11,8 +11,9 @@ class NewMatchForm(Form):
     and returns a dict.
     """
 
-    def __init__(self):
+    def __init__(self, tournament):
         super().__init__(properties=MATCH_PROPERTIES, cls=self, not_asked_properties=[])
+        self.tournament = tournament
 
     #  c'est la meme methode deux fois, seul le numero de joueur change (1 ou 2), pb pour la construction de la methode ...
     def ask_player_1_id(self):  # pour le player1, puis pour le player 2
@@ -29,7 +30,7 @@ class NewMatchForm(Form):
         player_nb = '1'
         return self.ask_player_score(player_nb)
 
-    def ask_player_2_id(self):  # pour le player1, puis pour le player 2
+    def ask_player_2_id(self):   # pour le player1, puis pour le player 2
         """
         This method asks for player2's ID at the beginning of a match/round
         """
@@ -43,7 +44,7 @@ class NewMatchForm(Form):
         player_nb = '2'
         return self.ask_player_score(player_nb)
 
-    def ask_player_score(self, player_nb):
+    def ask_player_score(self, player_nb):  # est ce que ca va pas le demander dans le formulaire ?
         choices_info = '(LOSS: 0, TIE: 0.5, WIN: 1)'
         input_info = f'Enter Player{player_nb} Score {choices_info}: '
         wrong_input = 'Invalid choice (0, 0.5 or 1), please retry...'

@@ -15,6 +15,7 @@ class PlayTournamentCtrl:  # à faire !
         tournament = TournamentCtrl().add_tournament()
         TournamentInfosCtrl(tournament).run()
 
+
     def select_tournament(self):
         tournament = ListTournamentsCtrl().select_one()
         TournamentInfosCtrl(tournament).run()

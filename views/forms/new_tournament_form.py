@@ -44,14 +44,13 @@ class NewTournamentForm(Form):
     def ask_players_list(self) -> dict:
         # demande le nombre de joueurs et leurs UUID liste d'UUID de Players : mal nommée non explicite
         """
-        This method asks the number of players for the tournament
+        This method sets the number of players for the tournament to 8
         and enables to search them in the registry
         It then returns a dict of players.
         """
         tournament_players = {}
-        input_info = 'Please Enter Number of Players: '
         n = 1
-        nb_players = ask_integer(input_info)
+        nb_players = 8
         print(f'Please, select player {n} of {nb_players}: ')
         while n <= nb_players:
             _input = input('Search a player by id : ')

@@ -55,7 +55,7 @@ class TournamentInfosCtrl(Controller):
         pass
 
     # pour ajouter un match à Round
-    def add_match(self, tournament_identifier) -> None:
+    def add_match(self, tournament) -> None:
         """
         This method enables to add the information of a Match to the list of matches of the Round Object
         """
