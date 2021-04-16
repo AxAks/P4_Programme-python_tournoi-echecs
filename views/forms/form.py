@@ -36,5 +36,5 @@ class Form(Menu):
         new_dict = {}
         for _property in self.properties:
             if _property not in self.not_asked_properties:
-                new_dict[_property] = self.ask_property(_property)
+                new_dict[_property] = self.ask_property(_property)  # gere l'erreur ici
         return new_dict

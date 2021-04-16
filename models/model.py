@@ -21,7 +21,7 @@ class Model:
                 setattr(self, _property, data[_property] if _property in data else None)
             except AttributeError:
                 errors.append(_property)
-        if errors:  # il ne faut pas que le programme s'arrete mais plutot redirige au Home Menu ex : daets de tournamenr debut/fin
+        if errors:  # il ne faut pas que le programme s'arrete mais plutot redirige au Home Menu ex : dates de tournamenr debut/fin
             raise Exception(f'Error detected '
                             f'in the following fields for {self.__class__.__name__}: {", ".join(errors)}')
 
