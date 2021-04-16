@@ -49,17 +49,17 @@ class NewTournamentForm(Form):
         It then returns a dict of players.
         """
         tournament_players = {}
-        n = 1
         nb_players = 8
-        print(f'Please, select player {n} of {nb_players}: ')
+        n = 1
         while n <= nb_players:
-            _input = input('Search a player by id : ')
+            _input = input(f'Please, search player {n} of {nb_players} by ID: ')
             player_obj = PlayerManager().search_one(_input)
-            if player_obj == {}:
+            while player_obj == {}:
+                _input = input(f'No Player found, please retry: ')
                 player_obj = PlayerManager().search_one(_input)
             if player_obj.identifier_pod not in tournament_players:
                 tournament_players[player_obj.identifier_pod] = player_obj
-                print(f"Player added")
+                print(f"Player {n} added")
                 print(f"{player_obj.last_name}, "
                       f"{player_obj.first_name}: "
                       f"{player_obj.identifier_pod}")
@@ -108,4 +108,12 @@ class NewTournamentForm(Form):
         while _input == '':
             print('Description cannot be empty, please retry...')
             _input = input(input_info)
+        return _input
+
+    def ask_rounds(self) -> str:
+        """
+        This method asks for the number of rounds for the tournament
+        """
+        input_info = "Enter Number of Rounds : "
+        _input = ask_integer(input_info)
         return _input

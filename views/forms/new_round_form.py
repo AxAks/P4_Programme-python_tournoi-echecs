@@ -12,14 +12,7 @@ class NewRoundForm(Form):
     """
 
     def __init__(self):
-        super().__init__(properties=ROUND_PROPERTIES, cls=self)
-
-    def add_new_round(self) -> dict:  # à passer en tant que add_new (générique) dans Form, si possible, si générique
-        new_round_dict = {}
-        for _property in self.properties:
-            # if _property != '':  # à voir!
-            new_round_dict[_property] = self.ask_property(_property)
-        return new_round_dict
+        super().__init__(properties=ROUND_PROPERTIES, cls=self, not_asked_properties=[])
 
     # à voir
     def ask_name(self, input_info="Enter name: "):
