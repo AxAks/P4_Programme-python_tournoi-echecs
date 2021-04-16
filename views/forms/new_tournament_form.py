@@ -42,7 +42,7 @@ class NewTournamentForm(Form):
         """
         return ask_iso_date(input_info)
 
-    def ask_players_list(self) -> dict[Player]:
+    def ask_identifiers_list(self) -> dict[Player]:
         """
         This method sets the number of players for the tournament to 8
         and enables to search them in the registry
