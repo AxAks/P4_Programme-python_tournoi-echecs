@@ -61,19 +61,19 @@ class TournamentInfosCtrl(Controller):
 
 
     # pour ajouter un match à Round
-    def add_match(self) -> None:
+    def add_match_to_round(self) -> None:
         """
         This method enables to add the informations of a Match to the list of matches of the Round Object
         """
         pass
 
-    def add_start_time(self):  # doit etre renseigné automatiquement en fait !
+    def add_start_time(self) -> datetime:  # doit etre renseigné automatiquement en fait !
         """
         This method autoamtically sets the start time of the Round Object
         """
         return datetime.now()
 
-    def add_end_time(self):  # doit etre renseigné automatiquement en fait !
+    def add_end_time(self) -> datetime:  # doit etre renseigné automatiquement en fait !
         """
         This method autoamtically sets the end time of the Round Object
         """

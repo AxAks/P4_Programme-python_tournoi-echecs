@@ -18,7 +18,7 @@ class TournamentInfosMenu(Menu):
                          exiting_message='Now Leaving Chess Tournament Manager')
         specific_menu_choices = [self.sort_players_by_last_name, self.sort_players_by_result,
                                  self.display_rounds_and_matches,
-                                 self.add_round, self.add_match]
+                                 self.add_round, self.add_match_to_round]
         [self.choices.append(choice) for choice in specific_menu_choices]
 
     def sort_players_by_last_name(self) -> None:  # for one selected tournament
@@ -51,7 +51,7 @@ class TournamentInfosMenu(Menu):
         print(f'All Rounds and Matches for "{self.data.name}": ')
         print('========================')
         if len(rounds_list) == 0:
-            print('No registered Matches for this Tournament yet')
+            print('No registered Rounds for this Tournament yet')
         else:
             for _round in rounds_list:
                 print(f'-> {_round.name}: from {_round.start_time} to {_round.end_time}')
@@ -77,10 +77,10 @@ class TournamentInfosMenu(Menu):
         print(new_round)
         self.current_page_ctrl(self.data).run()
 
-    def add_match(self) -> None:  # à faire !
+    def add_match_to_round(self) -> None:  # à faire !
         """
-
+        This method calls the controller to add a match to a round of the selected tournament.
         """
-        self.current_page_ctrl(self.data).add_match()
+        self.current_page_ctrl(self.data).add_match_to_round()
 
         self.current_page_ctrl(self.data).run()
