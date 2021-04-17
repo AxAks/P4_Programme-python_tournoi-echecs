@@ -25,7 +25,7 @@ class TournamentsMenu(Menu):
         print(f'New Tournament registered:\n'
               f'{tournament.name}, {tournament.location},\n'
               f'{tournament.start_date}, {tournament.end_date}, {tournament.identifiers_list},'
-              f' {tournament.time_control}, {tournament.description}')
+              f' {tournament.time_control}, {tournament.description}, {tournament.rounds}')
         self.current_page_ctrl().run()
 
     def to_tournaments_list(self) -> None:

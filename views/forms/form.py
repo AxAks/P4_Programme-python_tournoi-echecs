@@ -22,7 +22,7 @@ class Form(Menu):
         method = getattr(self.cls, method_name)
         attribute = method()
         try:
-            print(f'{property_name.replace("_", " ").title()} is :\n"{attribute}"') # un vieux print illisible pour identifier list de tournament ...
+            print(f'{property_name.replace("_", " ").title()} is :\n"{attribute}"')
         except AttributeError:
             raise Exception()  # doit ramener au Home Menu et non quitter le programme !
         attribute = validate_input(attribute, method)
