@@ -31,8 +31,8 @@ class PlayTournamentCtrl:  # à faire !
         tournament = tournament_controller.data
         while len(tournament.rounds_list) != tournament.rounds:
             self.generate_matchups()
-            NewRoundForm.add_new(tournament)
-            NewMatchForm.add_new(tournament)
+            NewRoundForm.add_new()
+            NewMatchForm.add_new()
             self.add_players_scores()
 
         tournament_controller.run()

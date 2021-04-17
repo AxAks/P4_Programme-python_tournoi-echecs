@@ -2,14 +2,14 @@
 
 import re
 
-from typing import Any
+from typing import Any, Union
 
 from constants import EMPTY_SEARCH_STRINGS
 
 
-class Factory:  # renommer en Manager ?
+class Manager:
     """
-    The Factory class is set as a common/factorized Class that enable to instantiate any type of object from a dict.
+    The Manager class is set as a common/factorized Class that enable to instantiate any type of object from a dict.
     This Class creates specific Factories based on the object's type
     The instances are registered in a registry and can be searched for.
     """
@@ -20,7 +20,7 @@ class Factory:  # renommer en Manager ?
 
     def create(self, **params) -> Any:
         """
-        This method creates new objects through the specific factory
+        This method creates new objects through the specific manager
         and adds them to a registry if the identifier is not already registered
         """
         obj = self.obj_type(**params)
@@ -38,7 +38,7 @@ class Factory:  # renommer en Manager ?
                 results = {}
         return results
 
-    def search_one(self, _input) -> Any:
+    def search_one(self, _input) -> Union[dict[Any], Any]:
         print('========================')
         results = self.search(_input)
         while len(results) > 1:

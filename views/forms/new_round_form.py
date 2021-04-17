@@ -1,6 +1,7 @@
 # coding=utf-8
 
 from constants import ROUND_PROPERTIES
+from controllers import tournament_infos_controller
 from views.forms.form import Form
 from views.forms.generic_inputs import ask_alphanumerical_string
 
@@ -11,8 +12,8 @@ class NewRoundForm(Form):
     and returns a dict.
     """
 
-    def __init__(self):
-        super().__init__(properties=ROUND_PROPERTIES, cls=self, not_asked_properties=[])
+    def __init__(self, tournament):
+        super().__init__(data=tournament, properties=ROUND_PROPERTIES, cls=self, not_asked_properties=[])
 
     # à voir
     def ask_name(self, input_info="Enter name: "):
@@ -27,10 +28,10 @@ class NewRoundForm(Form):
         """"
         This method asks for the list of match results for a round
         """
-        pass
-
-    def ask_end_time(self):  # doit etre renseigné automatiquement en fait !
-        pass
+        return tournament_infos_controller.TournamentInfosCtrl(self.data).add_match()
 
     def ask_start_time(self):  # doit etre renseigné automatiquement en fait !
-        pass
+        return tournament_infos_controller.TournamentInfosCtrl(self.data).add_start_time()
+
+    def ask_end_time(self):  # doit etre renseigné automatiquement en fait !
+        return tournament_infos_controller.TournamentInfosCtrl(self.data).add_end_time()

@@ -2,15 +2,15 @@
 from typing import Union
 from uuid import UUID
 
-from models.models_utils.superfactory import super_factory as sf
-from models.models_utils.factory import Factory
+from models.models_utils.supermanager import super_manager as sm
+from models.models_utils.manager import Manager
 from models.player import Player
 
 
-class PlayerManager(Factory):
+class PlayerManager(Manager):
 
     def __init__(self):
-        self.registry = sf.factories[Player].registry
+        self.registry = sm.managers[Player].registry
 
     def list_registered_players(self) -> list[Player]:
         players_list = []

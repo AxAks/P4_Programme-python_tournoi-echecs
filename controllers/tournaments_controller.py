@@ -2,7 +2,7 @@
 
 from utils import clear_terminal
 from models.tournament import Tournament
-from models.models_utils.superfactory import super_factory as sf
+from models.models_utils.supermanager import super_manager as sm
 from controllers import list_tournaments_controller
 from controllers.controller import Controller
 from views.forms.new_tournament_form import NewTournamentForm
@@ -22,7 +22,7 @@ class TournamentCtrl(Controller):
         this method creates a new tournament entry in the registry.
         """
         new_tournament_dict = NewTournamentForm().add_new()
-        new_tournament = sf.factories[Tournament].create(**new_tournament_dict)  # gérer l'erreur de dates etc ici !
+        new_tournament = sm.managers[Tournament].create(**new_tournament_dict)  # gérer l'erreur de dates etc ici !
         return new_tournament
 
     def to_tournaments_list(self) -> None:

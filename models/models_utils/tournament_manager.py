@@ -1,14 +1,14 @@
 # coding=utf-8
 
-from models.models_utils.superfactory import super_factory as sf
-from models.models_utils.factory import Factory
+from models.models_utils.supermanager import super_manager as sm
+from models.models_utils.manager import Manager
 from models.tournament import Tournament
 
 
-class TournamentManager(Factory):
+class TournamentManager(Manager):
 
     def __init__(self):
-        self.registry = sf.factories[Tournament].registry
+        self.registry = sm.managers[Tournament].registry
 
     def list_registered_tournaments(self) -> list[Tournament]:
         tournaments_list = []

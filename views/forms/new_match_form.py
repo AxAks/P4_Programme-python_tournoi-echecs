@@ -11,8 +11,8 @@ class NewMatchForm(Form):
     and returns a dict.
     """
 
-    def __init__(self):
-        super().__init__(properties=MATCH_PROPERTIES, cls=self, not_asked_properties=[])
+    def __init__(self, tournament):
+        super().__init__(data=tournament, properties=MATCH_PROPERTIES, cls=self, not_asked_properties=[])
 
     #  c'est la meme methode deux fois, seul le numero de joueur change (1 ou 2), pb pour la construction de la methode ...
     def ask_player_1_id(self):  # pour le player1, puis pour le player 2

@@ -9,12 +9,13 @@ class Form(Menu):
     It enables the user to enter data and return the data as dicts.
     """
 
-    def __init__(self, properties, cls, not_asked_properties):
+    def __init__(self, properties, cls, not_asked_properties, data=None):
         self.properties = properties
         self.cls = cls
         self.not_asked_properties = not_asked_properties
+        self.data = data
 
-    def ask_property(self, property_name):  # fonctionne un peu mais pas fini : # appelé par Form.add_new, doit etre generique et renvoyer vers une fonction particuliere selon l'objet
+    def ask_property(self, property_name):
         """
         This generic method is used to ask the properties of a object in the subclasses of Form.
         """
@@ -25,7 +26,7 @@ class Form(Menu):
             print(f'{property_name.replace("_", " ").title()} is :\n"{attribute}"')
         except AttributeError:
             raise Exception()  # doit ramener au Home Menu et non quitter le programme !
-        attribute = validate_input(attribute, method)
+        attribute = validate_input(attribute, method)  # ajouter la possibilité de sortir du formulaire
         return attribute
 
     def add_new(self) -> dict:
@@ -36,5 +37,5 @@ class Form(Menu):
         new_dict = {}
         for _property in self.properties:
             if _property not in self.not_asked_properties:
-                new_dict[_property] = self.ask_property(_property)  # gere l'erreur ici
+                new_dict[_property] = self.ask_property(_property)  # gere l'erreur ici !
         return new_dict

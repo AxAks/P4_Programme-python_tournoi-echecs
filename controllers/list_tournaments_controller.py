@@ -1,5 +1,5 @@
 # coding=utf-8
-from models.models_utils.superfactory import super_factory as sf
+from models.models_utils.supermanager import super_manager as sm
 from models.models_utils.tournament_manager import TournamentManager
 from models.tournament import Tournament
 from controllers.controller import Controller
@@ -43,10 +43,10 @@ class ListTournamentsCtrl(Controller):
         This function lists the tournament instances matching the given input
         (identifier: Name, Location, Start date, End date)
         """
-        results = sf.factories[Tournament].search(search)
+        results = sm.managers[Tournament].search(search)
         found_tournaments_list = []
         for identifier in results:
-            tournament_obj = sf.factories[Tournament].registry[identifier]
+            tournament_obj = sm.managers[Tournament].registry[identifier]
             found_tournaments_list.append(tournament_obj)
         return found_tournaments_list
 

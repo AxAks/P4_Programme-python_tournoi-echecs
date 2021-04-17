@@ -71,10 +71,10 @@ class TournamentInfosMenu(Menu):
 
     def add_round(self) -> None:  # à faire !
         """
-
+        This method calls the controller to add a round to the selected tournament.
         """
-        self.current_page_ctrl(self.data).add_round()
-
+        new_round = self.current_page_ctrl(self.data).add_round()
+        print(new_round)
         self.current_page_ctrl(self.data).run()
 
     def add_match(self) -> None:  # à faire !

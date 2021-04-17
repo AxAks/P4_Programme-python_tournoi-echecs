@@ -16,7 +16,7 @@ RANKING_RANGE = range(100, 3001)
 ALPHABETICAL_STRING_RULE = re.compile("^[A-ZÉÈÇÀa-zéèçà\- ']+$")
 ALPHA_NUMERICAL_STRING_RULE = re.compile("^[A-ZÉÈÇÀa-zéèçà0-9_\- ]+$")
 
-# Factory
+# Manager
 EMPTY_SEARCH_STRINGS = ['', ' ', '-', '_', '.', '()']
 
 TOURNAMENT_PROPERTIES = ['name', 'location', 'start_date', 'end_date', 'identifiers_list',

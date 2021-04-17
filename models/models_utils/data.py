@@ -1,7 +1,7 @@
 # coding=utf-8
 from tinydb import TinyDB
 
-from models.models_utils.superfactory import super_factory as sf
+from models.models_utils.supermanager import super_manager as sm
 from models.player import Player
 from models.tournament import Tournament
 
@@ -17,9 +17,9 @@ def save() -> None:
     """
     print('Saving current program state')
     serialized_player_instances = \
-        [sf.factories[Player].registry[key].serialize() for key in sf.factories[Player].registry]
+        [sm.managers[Player].registry[key].serialize() for key in sm.managers[Player].registry]
     serialized_tournament_instances = \
-        [sf.factories[Tournament].registry[key].serialize() for key in sf.factories[Tournament].registry]
+        [sm.managers[Tournament].registry[key].serialize() for key in sm.managers[Tournament].registry]
     players_table = db.table('players')
     tournaments_table = db.table('tournaments')
     players_table.truncate()
@@ -38,7 +38,7 @@ def load() -> None:
     players_table = db.table('players')
     tournaments_table = db.table('tournaments')
     serialized_players = players_table.all()
-    [sf.factories[Player].create(**serialized_player) for serialized_player in serialized_players]
+    [sm.managers[Player].create(**serialized_player) for serialized_player in serialized_players]
     serialized_tournaments = tournaments_table.all()
-    [sf.factories[Tournament].create(**serialized_tournament) for serialized_tournament in serialized_tournaments]
+    [sm.managers[Tournament].create(**serialized_tournament) for serialized_tournament in serialized_tournaments]
     print('Program state loaded from file')

@@ -1,7 +1,7 @@
 # coding=utf-8
 
 from models.models_utils.player_manager import PlayerManager
-from models.models_utils.superfactory import super_factory as sf
+from models.models_utils.supermanager import super_manager as sm
 from models.player import Player
 from controllers.controller import Controller
 from views.menus.players_menu import PlayersMenu
@@ -22,14 +22,14 @@ class PlayerCtrl(Controller):
         this method creates a new player entry in the registry.
         """
         new_player_dict = NewPlayerForm().add_new()
-        new_player = sf.factories[Player].create(**new_player_dict)
+        new_player = sm.managers[Player].create(**new_player_dict)
         return new_player
 
     def search_by_id(self, search) -> list:
         """
         This method lists the player instances matching the given input (id)
         """
-        results = sf.factories[Player].search(search)
+        results = sm.managers[Player].search(search)
         found_players_list = []
         for identifier in results:
             player_obj = PlayerManager().from_identifier_to_player_obj(identifier)

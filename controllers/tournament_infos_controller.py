@@ -1,10 +1,13 @@
 # coding=utf-8
+from datetime import datetime
 from uuid import UUID
 
-from models.models_utils.superfactory import super_factory as sf
+from models.models_utils.supermanager import super_manager as sm
 from models.player import Player
 from controllers.controller import Controller
+from models.round import Round
 from views.forms.new_match_form import NewMatchForm
+from views.forms.new_round_form import NewRoundForm
 from views.menus.tournament_infos_menu import TournamentInfosMenu
 
 
@@ -24,7 +27,7 @@ class TournamentInfosCtrl(Controller):
         """
         players_list = []
         for identifier in self.data.identifiers_list:
-            player_obj = sf.factories[Player].search(identifier)
+            player_obj = sm.managers[Player].search(identifier)
             players_list.append(player_obj[UUID(identifier)])
         sorted_by_last_name = sorted(players_list, key=lambda x: x.last_name)
         return sorted_by_last_name
@@ -48,15 +51,30 @@ class TournamentInfosCtrl(Controller):
     # // Le Match doit etre identifié dans Round ( dans la liste de matchs)
 
     # pour ajouter un round ou des rounds à Tournament
-    def add_round(self) -> None:  # voir si utile à un moment
+    def add_round(self) -> Round:  # voir si utile à un moment
         """
-        This method enables to add the list of Matches of a Round to the Tournament Object
+        This method enables to add a Round to the Tournament Object
+        """
+        new_round = NewRoundForm(self.data).add_new()
+        self.data.rounds_list.append(new_round)
+        return new_round
+
+
+    # pour ajouter un match à Round
+    def add_match(self) -> None:
+        """
+        This method enables to add the informations of a Match to the list of matches of the Round Object
         """
         pass
 
-    # pour ajouter un match à Round
-    def add_match(self, tournament) -> None:
+    def add_start_time(self):  # doit etre renseigné automatiquement en fait !
         """
-        This method enables to add the information of a Match to the list of matches of the Round Object
+        This method autoamtically sets the start time of the Round Object
         """
-        pass
+        return datetime.now()
+
+    def add_end_time(self):  # doit etre renseigné automatiquement en fait !
+        """
+        This method autoamtically sets the end time of the Round Object
+        """
+        return datetime.now()
