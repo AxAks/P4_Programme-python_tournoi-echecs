@@ -2,7 +2,6 @@
 
 from constants import MATCH_PROPERTIES
 from views.forms.form import Form
-from views.forms.generic_inputs import integer_to_float, ask_integer
 
 
 class NewMatchForm(Form):
@@ -15,49 +14,50 @@ class NewMatchForm(Form):
         super().__init__(data=tournament, properties=MATCH_PROPERTIES, cls=self, not_asked_properties=[])
 
     #  c'est la meme methode deux fois, seul le numero de joueur change (1 ou 2), pb pour la construction de la methode ...
-    def ask_player_1_id(self):  # pour le player1, puis pour le player 2
+    def ask_player1_id(self):  # pour le player1, puis pour le player 2
         """
         This method asks for player1's ID at the beginning of a match/round
         """
         player_nb = '1'
         return input(f'Select Player{player_nb}: ')
 
-    def ask_player_1_score(self):
+    def ask_player1_score(self):
         """
         This method asks for player1's score at the end of a match/round
         """
         player_nb = '1'
         return self.ask_player_score(player_nb)
 
-    def ask_player_2_id(self):   # pour le player1, puis pour le player 2
+    def ask_player2_id(self):   # pour le player1, puis pour le player 2
         """
         This method asks for player2's ID at the beginning of a match/round
         """
         player_nb = '2'
         return input(f'Select Player{player_nb}: ')
 
-    def ask_player_2_score(self):
+    def ask_player2_score(self):
         """
         This method asks for player2's score at the end of a match/round
         """
         player_nb = '2'
         return self.ask_player_score(player_nb)
 
-    def ask_player_score(self, player_nb):  # est ce que ca va pas le demander dans le formulaire ?
-        choices_info = '(LOSS: 0, TIE: 0.5, WIN: 1)'
+    def ask_player_score(self, player_nb):
+        choices_info = '(LOSS: 0, TIE: 1, WIN: 2)'
         input_info = f'Enter Player{player_nb} Score {choices_info}: '
-        wrong_input = 'Invalid choice (0, 0.5 or 1), please retry...'
+        wrong_input = 'Invalid choice (0, 1 or 2), please retry...'
         valid_choices = (0, 0.5, 1)
         valid_entry = False
         while not valid_entry:
             try:
-                int_input = ask_integer(input_info)
-                float_input = integer_to_float(int_input)
-                if float_input in valid_choices:
+                _input = float(input(input_info))
+                if _input in valid_choices:
                     if _input == 0:
                         _input = 'LOSS'
+                        valid_entry = True
                     elif _input == 0.5:
                         _input = 'TIE'
+                        valid_entry = True
                     else:
                         _input = 'WIN'
                     valid_entry = True

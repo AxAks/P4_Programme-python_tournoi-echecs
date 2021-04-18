@@ -64,7 +64,7 @@ class Round(Model):
         """
         This getter returns the list of matches for a round as a list of match dicts
         """
-        return [match_obj.serialize() for match_obj in self.__matches]
+        return [match_obj.serialize() for match_obj in self.__matches if match_obj]
 
     @matches.setter
     def matches(self, value: Union[list[dict], list[Match]]):
@@ -72,10 +72,10 @@ class Round(Model):
         This setter checks whether the entered value is a list of Match Objects or a list of dicts
         and sets the attribute as a list of Match objects
         """
-        matches_list = []
         if value is None or value == []:
-            self.matches_list = matches_list
+            self.matches = []
         else:
+            matches_list = []
             for match in value:
                 if isinstance(match, Match):
                     try:

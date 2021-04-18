@@ -28,7 +28,7 @@ class NewRoundForm(Form):
         """"
         This method asks for the list of match results for a round
         """
-        return tournament_infos_controller.TournamentInfosCtrl(self.data).add_match()
+        return tournament_infos_controller.TournamentInfosCtrl(self.data).add_match_to_round()
 
     def ask_start_time(self):  # doit etre renseigné automatiquement en fait !
         return tournament_infos_controller.TournamentInfosCtrl(self.data).add_start_time()
