@@ -20,6 +20,7 @@ class Model:
             try:
                 setattr(self, _property, data[_property] if _property in data else None)
             except AttributeError:
+                print(AttributeError())
                 errors.append(_property)
         if errors:  #  il ne faut pas que le programme s'arrete mais plutot redirige au Home Menu ex : dates de tournament debut/fin
             raise Exception(f'Error detected '

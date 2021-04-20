@@ -3,6 +3,7 @@ from datetime import datetime
 from typing import Union
 from uuid import UUID
 
+from models.match import Match
 from utils import split_even_list, lists_to_association_dict
 from models.models_utils.player_manager import PlayerManager
 from models.models_utils.supermanager import super_manager as sm
@@ -10,6 +11,7 @@ from models.player import Player
 from models.round import Round
 from controllers.controller import Controller
 from controllers import tournaments_controller, list_tournaments_controller
+from views.forms.new_match_form import NewMatchForm
 from views.forms.new_round_form import NewRoundForm
 from views.menus.tournament_infos_menu import TournamentInfosMenu
 
@@ -86,6 +88,7 @@ class TournamentInfosCtrl(Controller):
         tournament_controller.run()
 
     def select_tournament(self):  # à rediger !
+
         self.data = list_tournaments_controller.ListTournamentsCtrl().select_one()
         while len(self.data.rounds_list) < self.data.rounds:
             self.generate_round_1_matchups()
@@ -103,13 +106,19 @@ class TournamentInfosCtrl(Controller):
         sorted_by_ranking = self.sort_tournament_players_by_ranking()
         lower_ranking_players_list, upper_ranking_players_list = split_even_list(sorted_by_ranking)
         round_couples = lists_to_association_dict(lower_ranking_players_list, upper_ranking_players_list)
-        return round_couples
+        # return round_couples
         # on joue
         # on entre les resultats, comment ??
-        for key, value in couples_dict:
-            player1_id = key.identifier
-            player2_id = value.identifier
-            NewRoundForm(self.data).add_new() # ca va changer !
+        round_dict = NewRoundForm(self.data).add_new()
+        _round = Round(**round_dict)
+        for key in round_couples:
+            player1_id = PlayerManager().from_player_obj_to_identifier_str(key)
+            player2_id = PlayerManager().from_player_obj_to_identifier_str(round_couples[key])
+            match_dict = NewMatchForm(self.data, player1_id, player2_id).add_new()
+            match = Match(**match_dict)
+            _round.matches.append(match)
+        print(_round)
+        # NewRoundForm(self.data).add_new() # ca va changer !
         # on recupère les points
 
         pass
@@ -126,6 +135,13 @@ class TournamentInfosCtrl(Controller):
             tournament_players.append(player_obj)
         sorted_by_ranking = sorted(tournament_players, key=lambda x: x.ranking, reverse=True)
         return sorted_by_ranking
+
+    def list_tournament_players(self):
+        tournament_players = []
+        for uuid in self.data.identifiers_list:
+            player_obj = PlayerManager().from_identifier_to_player_obj(uuid)
+            tournament_players.append(player_obj)
+        return tournament_players
 
     def add_players_scores(self):
         """

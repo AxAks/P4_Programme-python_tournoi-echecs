@@ -14,7 +14,7 @@ class NewRoundForm(Form):
 
     def __init__(self, tournament):
         super().__init__(data=tournament, form_name='New Round Form',
-                         properties=ROUND_PROPERTIES, cls=self, not_asked_properties=[])
+                         properties=ROUND_PROPERTIES, cls=self, not_asked_properties=['matches'])
 
     # à voir
     def ask_name(self):

@@ -26,6 +26,9 @@ class HomeCtrl(Controller):
         """
         This method enables to resume an existing tournament
         """
+        print('========================')
+        print('Tournament Selection: ')
+        print('========================')
         tournament_infos_controller.TournamentInfosCtrl().select_tournament()
 
     def manage_tournaments(self) -> None:

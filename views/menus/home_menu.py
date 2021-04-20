@@ -38,6 +38,7 @@ class HomeMenu(Menu):
         aller sur la page du tournoi
         
         """
+
         self.current_page_ctrl().resume_tournament()
 
     def manage_players(self) -> None:

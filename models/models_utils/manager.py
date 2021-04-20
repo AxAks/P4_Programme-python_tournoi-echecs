@@ -53,4 +53,5 @@ class Manager:
                 _obj = results[identifier]
                 return _obj
         if len(results) == 0:
+            print('No Results Found')
             return results

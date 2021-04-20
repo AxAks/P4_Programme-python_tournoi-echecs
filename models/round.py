@@ -28,7 +28,10 @@ class Round(Model):
         super().__init__(ROUND_PROPERTIES, **params)
 
     def __repr__(self):
-        return f'{self.name}, {self.start_time_pod}, {self.end_time_pod},{self.matches_pod}'
+        if len(self.matches) == 0:
+            return 'No Matches in this Round yet'
+        else:
+            return f'{self.name}, {self.start_time_pod}, {self.end_time_pod},{self.matches_pod}'
 
     @property
     def name(self) -> str:
@@ -73,7 +76,7 @@ class Round(Model):
         and sets the attribute as a list of Match objects
         """
         if value is None or value == []:
-            self.matches = []
+            self.__matches = []
         else:
             matches_list = []
             for match in value:

@@ -29,6 +29,6 @@ class PlayerManager(Manager):
             raise AttributeError()
         return player_obj
 
-    def from_player_obj_to_identifier(self, player_obj: Player) -> UUID:
-        identifier = player_obj.identifier
+    def from_player_obj_to_identifier_str(self, player_obj: Player) -> str:
+        identifier = player_obj.identifier_pod
         return identifier
