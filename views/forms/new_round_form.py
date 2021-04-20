@@ -13,7 +13,8 @@ class NewRoundForm(Form):
     """
 
     def __init__(self, tournament):
-        super().__init__(data=tournament, form_name='New Round Form', properties=ROUND_PROPERTIES, cls=self, not_asked_properties=[])
+        super().__init__(data=tournament, form_name='New Round Form',
+                         properties=ROUND_PROPERTIES, cls=self, not_asked_properties=[])
 
     # à voir
     def ask_name(self):
