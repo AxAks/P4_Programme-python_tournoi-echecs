@@ -56,4 +56,4 @@ def split_even_list(_list) -> Union[tuple[list], str]:
         sublist2 = _list[middle_index:]
         return sublist1, sublist2
     else:
-        return 'This list does not ahve an even number of items'
+        return 'This list does not have an even number of items'
