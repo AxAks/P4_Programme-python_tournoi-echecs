@@ -3,7 +3,7 @@
 from controllers.controller import Controller
 from controllers import players_controller
 from controllers import tournaments_controller
-from controllers.play_tournament_controller import PlayTournamentCtrl
+from controllers import tournament_infos_controller
 from views.menus.home_menu import HomeMenu
 
 
@@ -20,13 +20,13 @@ class HomeCtrl(Controller):
         """
         This method enables to launch and run a new tournament
         """
-        PlayTournamentCtrl().add_new_tournament()
+        tournament_infos_controller.TournamentInfosCtrl().add_new_tournament()
 
     def resume_tournament(self):  # à faire !
         """
         This method enables to resume an existing tournament
         """
-        PlayTournamentCtrl().select_tournament()
+        tournament_infos_controller.TournamentInfosCtrl().select_tournament()
 
     def manage_tournaments(self) -> None:
         """

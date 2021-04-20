@@ -2,7 +2,7 @@
 from datetime import datetime
 from uuid import UUID
 
-from models.match import Match
+from controllers import list_tournaments_controller
 from models.models_utils.player_manager import PlayerManager
 from models.models_utils.supermanager import super_manager as sm
 from models.player import Player
@@ -46,38 +46,68 @@ class TournamentInfosCtrl(Controller):
         """
         return self.data.rounds_list
 
-    #  Comment gère t-on la reference à Tournament dans Round ? à voir -> Round n'existe pas hors de Tournament
-    #  -> Tournament = self.data donc Round = self.data.rounds_list
-    #  -> dans le controller TournamentInfos !? à voir
-    #  Le Match doit etre identifié dans Round (dans la liste de matchs)
-    #  Round.matches
-    # comment j'encastre le tout
-
-    # pour ajouter un round ou des rounds à Tournament
-    def add_round(self) -> Round:  # voir si utile à un moment
+    def add_round_and_matches(self) -> Round:
         """
-        This method enables to add a Round to the Tournament Object
+        This method enables to add a Round and the associasted Matches to the Tournament Object
         """
         new_round_dict = NewRoundForm(self.data).add_new()
         new_round = Round(**new_round_dict)
         self.data.rounds_list.append(new_round)
         return new_round
 
-    # pour ajouter un match à Round
-    def add_match_to_round(self) -> None:
+    def add_start_time(self) -> datetime:  # doit etre renseigné automatiquement en fait ! # à reflechir...
         """
-        This method enables to add the informations of a Match to the list of matches of the Round Object
+        This method automatically sets the start time of the Round Object
         """
+        return datetime.now()
+
+    def add_end_time(self) -> datetime:  # doit etre renseigné automatiquement en fait ! # à reflechir
+        """
+        This method automatically sets the end time of the Round Object
+        """
+        return datetime.now()
+
+
+
+
+
+
+    def add_new_tournament(self):
+        new_tournament = list_tournaments_controller.TournamentCtrl().add_tournament()
+        tournament_controller = TournamentInfosCtrl(new_tournament)
+        tournament = tournament_controller.data
+        while len(tournament.rounds_list) != tournament.rounds:
+            self.generate_matchups()
+            NewRoundForm.add_new()
+            NewMatchForm.add_new()
+            self.add_players_scores()
+
+        tournament_controller.run()
+
+    def select_tournament(self):
+        selected_tournament = list_tournaments_controller.ListTournamentsCtrl().select_one()
+        tournament_controller = TournamentInfosCtrl(selected_tournament)
+        tournament = tournament_controller.data
+        while len(tournament.rounds_list) != tournament.rounds:
+            self.generate_matchups(tournament)
+            NewRoundForm.add_new()
+            NewMatchForm.add_new()
+            self.add_players_scores()
+
+        tournament_controller.run()
+
+    def generate_matchups(self):
+        """
+        This method randomly generates the tournament match-ups between the Players for the different rounds
+        It takes into account the match-ups that have already been played in the previous rounds.
+        """
+        players = PlayerManager().from_identifier_to_player_obj(self.data.identifiers_list)
+        print(players)
         pass
 
-    def add_start_time(self) -> datetime:  # doit etre renseigné automatiquement en fait !
+    def add_players_scores(self):
         """
-        This method autoamtically sets the start time of the Round Object
+        This method enables to count the players points after a round
+        and caculate the scores and ranking inside the tournament
         """
-        return datetime.now()
-
-    def add_end_time(self) -> datetime:  # doit etre renseigné automatiquement en fait !
-        """
-        This method autoamtically sets the end time of the Round Object
-        """
-        return datetime.now()
+        pass

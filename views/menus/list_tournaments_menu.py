@@ -38,7 +38,7 @@ class ListTournamentsMenu(Menu):
 
     def display_by_name(self) -> None:
         print('========================')
-        print('List of all Tournaments by Start Date: ')
+        print('List of all Tournaments by Name: ')
         print('========================')
         tournaments_list = self.current_page_ctrl().sort_by_name()
         if len(tournaments_list) == 0:
@@ -67,6 +67,9 @@ class ListTournamentsMenu(Menu):
         This method calls the controller to find one or more Tournament instances in the registry
         """
         print('========================')
+        print('========================')
+        print('Tournament Search: ')
+        print('========================')
         search = input('Search a Tournament by Name, Location or dates : ')
         tournaments = self.current_page_ctrl().search_by_id(search)
         print('========================')
@@ -84,6 +87,9 @@ class ListTournamentsMenu(Menu):
         This method enables to pick a tournament
         and be redirected this the Menu for this specific tournament.
         """
+        print('========================')
+        print('Tournament Selection: ')
+        print('========================')
         selected_tournament = self.current_page_ctrl().select_one()
         if selected_tournament == {}:
             print("No Tournament found in Registry for this research")

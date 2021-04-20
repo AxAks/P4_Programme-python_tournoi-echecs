@@ -73,7 +73,7 @@ class NewPlayerForm(Form):
         This method asks a ranking between 100 and 3000
         """
         valid_entry = False
-        input_info = "Enter Player Ranking: "
+        input_info = "Enter Player Ranking (from 100 to 3000): "
         wrong_input = 'Ranking must be a digit between 100 and 3000, please retry...'
         while valid_entry is False:
             try:

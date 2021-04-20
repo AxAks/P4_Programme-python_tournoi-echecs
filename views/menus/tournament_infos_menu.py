@@ -18,7 +18,7 @@ class TournamentInfosMenu(Menu):
                          exiting_message='Now Leaving Chess Tournament Manager')
         specific_menu_choices = [self.sort_players_by_last_name, self.sort_players_by_result,
                                  self.display_rounds_and_matches,
-                                 self.add_round, self.add_match_to_round]
+                                 self.add_round_and_matches]
         [self.choices.append(choice) for choice in specific_menu_choices]
 
     def sort_players_by_last_name(self) -> None:  # for one selected tournament
@@ -35,14 +35,14 @@ class TournamentInfosMenu(Menu):
                   f'{player.birthdate_pod}, {player.gender_pod}, {player.ranking}')
         self.current_page_ctrl(self.data).run()
 
-    def sort_players_by_result(self) -> None:  # for one selected tournament
+    def sort_players_by_result(self) -> None:  # for one selected tournament, scores et classement à calculer dans le controller
         """
         This method calls the controller to display the players of the selected tournament
         sorted by results.
         """
         pass
 
-    def display_rounds_and_matches(self) -> None:  # for one selected tournament
+    def display_rounds_and_matches(self) -> None:
         """
         This method calls the controller to display the rounds of the selected tournament.
         """
@@ -57,7 +57,7 @@ class TournamentInfosMenu(Menu):
                 print(f'-> {_round.name}: from {_round.start_time} to {_round.end_time}')
                 n = 1
                 for match in _round.matches:
-                    player1_obj = PlayerManager().from_identifier_to_player_obj(match.player1_id) # pas dans les views normalement !
+                    player1_obj = PlayerManager().from_identifier_to_player_obj(match.player1_id)
                     player2_obj = PlayerManager().from_identifier_to_player_obj(match.player2_id)
                     print(f'\nMatch {n}:\n'
                           f'- {player1_obj.identifier_pod}\n'
@@ -69,18 +69,11 @@ class TournamentInfosMenu(Menu):
                     n += 1
         self.current_page_ctrl(self.data).run()
 
-    def add_round(self) -> None:  # à faire !
+    def add_round_and_matches(self) -> None:  # à faire !
         """
         This method calls the controller to add a round to the selected tournament.
         """
-        new_round = self.current_page_ctrl(self.data).add_round()
+        new_round = self.current_page_ctrl(self.data).add_round_and_matches()
         print(new_round)
         self.current_page_ctrl(self.data).run()
 
-    def add_match_to_round(self) -> None:  # à faire !
-        """
-        This method calls the controller to add a match to a round of the selected tournament.
-        """
-        self.current_page_ctrl(self.data).add_match_to_round()
-
-        self.current_page_ctrl(self.data).run()
