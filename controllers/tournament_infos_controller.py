@@ -46,10 +46,11 @@ class TournamentInfosCtrl(Controller):
         return self.data.rounds_list
 
     #  Comment gère t-on la reference à Tournament dans Round ? à voir -> Round n'existe pas hors de Tournament
-    #  -> dans le controller Tournament !? à voir
-
-    # Le Round doit etre identifié dans Tournament (dans la liste de Rounds)
-    # // Le Match doit etre identifié dans Round (dans la liste de matchs)
+    #  -> Tournament = self.data donc Round = self.data.rounds_list
+    #  -> dans le controller TournamentInfos !? à voir
+    #  Le Match doit etre identifié dans Round (dans la liste de matchs)
+    #  Round.matches
+    # comment j'encastre le tout
 
     # pour ajouter un round ou des rounds à Tournament
     def add_round(self) -> Round:  # voir si utile à un moment
