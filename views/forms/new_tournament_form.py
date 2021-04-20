@@ -16,7 +16,8 @@ class NewTournamentForm(Form):
     """
 
     def __init__(self):
-        super().__init__(form_name='New Tournament Form', properties=TOURNAMENT_PROPERTIES, cls=self, not_asked_properties=['rounds_list'])
+        super().__init__(form_name='New Tournament Form', properties=TOURNAMENT_PROPERTIES,
+                         cls=self, not_asked_properties=['rounds_list'])
 
     def ask_name(self, input_info="Enter name: ") -> str:
         """
@@ -41,6 +42,14 @@ class NewTournamentForm(Form):
         This method asks for an end date
         """
         return ask_iso_date(input_info)
+
+    def ask_rounds(self) -> str:
+        """
+        This method asks for the number of rounds for the tournament
+        """
+        input_info = "Enter Number of Rounds : "
+        _input = ask_integer(input_info)
+        return _input
 
     def ask_identifiers_list(self) -> dict[Player]:
         """
@@ -108,12 +117,4 @@ class NewTournamentForm(Form):
         while _input == '':
             print('Description cannot be empty, please retry...')
             _input = input(input_info)
-        return _input
-
-    def ask_rounds(self) -> str:
-        """
-        This method asks for the number of rounds for the tournament
-        """
-        input_info = "Enter Number of Rounds : "
-        _input = ask_integer(input_info)
         return _input

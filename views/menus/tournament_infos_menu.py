@@ -74,6 +74,6 @@ class TournamentInfosMenu(Menu):
         This method calls the controller to add a round to the selected tournament.
         """
         new_round = self.current_page_ctrl(self.data).add_round_and_matches()
-        print(new_round)
+        if new_round is None:
+            print('Cannot add a new round, this tournament is finished')
         self.current_page_ctrl(self.data).run()
-

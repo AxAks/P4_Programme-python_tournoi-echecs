@@ -22,7 +22,7 @@ class HomeCtrl(Controller):
         """
         tournament_infos_controller.TournamentInfosCtrl().add_new_tournament()
 
-    def resume_tournament(self):  # à faire !
+    def resume_tournament(self, ):  # à faire !
         """
         This method enables to resume an existing tournament
         """

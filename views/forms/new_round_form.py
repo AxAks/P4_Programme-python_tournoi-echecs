@@ -37,7 +37,7 @@ class NewRoundForm(Form):
             n += 1
         return round_matches
 
-    def ask_start_time(self):  # doit etre renseigné automatiquement en fait !   datetime.now() quand on le créé
+    def ask_start_time(self):  # doit etre renseigné automatiquement en fait !   datetime.now() quand on le créé, ou quand les joueurs ont commencé à jouer
         return tournament_infos_controller.TournamentInfosCtrl(self.data).add_start_time()
 
     def ask_end_time(self):  # doit etre renseigné automatiquement en fait ! datetime.now() quand on entre le resultat du dernier match

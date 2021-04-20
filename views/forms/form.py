@@ -3,7 +3,7 @@ from utils import validate_input
 from views.menus.menu import Menu
 
 
-class Form(Menu):
+class Form:
     """
     This class is a parent Class for all Forms
     It enables the user to enter data and return the data as dicts.
@@ -26,7 +26,8 @@ class Form(Menu):
         try:
             print(f'{property_name.replace("_", " ").title()} is :\n"{attribute}"')
         except AttributeError:
-            raise Exception()  # doit ramener au Home Menu et non quitter le programme !
+            print('An Error has occurred, back to home menu')
+            # doit ramener au Home Menu et non quitter le programme ! possible si heritage de Menu
         attribute = validate_input(attribute, method)  # ajouter la possibilité de sortir du formulaire
         return attribute
 
