@@ -125,6 +125,6 @@ class TournamentInfosCtrl(Controller):
     def add_players_scores(self):
         """
         This method enables to count the players points after a round
-        and caculate the scores and ranking inside the tournament
+        and calculate the scores and ranking inside the tournament
         """
         pass
