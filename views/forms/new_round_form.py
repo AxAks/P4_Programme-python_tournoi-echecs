@@ -4,6 +4,7 @@ from constants import ROUND_PROPERTIES
 from controllers import tournament_infos_controller
 from views.forms.form import Form
 from views.forms.generic_inputs import ask_alphanumerical_string
+from views.forms.new_match_form import NewMatchForm
 
 
 class NewRoundForm(Form):
@@ -13,25 +14,35 @@ class NewRoundForm(Form):
     """
 
     def __init__(self, tournament):
-        super().__init__(data=tournament, properties=ROUND_PROPERTIES, cls=self, not_asked_properties=[])
+        super().__init__(data=tournament, form_name='New Round Form', properties=ROUND_PROPERTIES, cls=self, not_asked_properties=[])
 
     # à voir
-    def ask_name(self, input_info="Enter name: "):
-        # Comme la methode de Tournament !!!! #  si le format est round+n, on peut incrementer au fur et à mesure
+    def ask_name(self):
+        # input_info="Enter name: " (plus pareil que tournament name)
+        # Comme la methode de Tournament !!!! #  si le format est round+n, on peut incrementer au fur et à mesure !!!!
         """
         This method asks for the round's name at the beginning of the round
         """
-        return ask_alphanumerical_string(input_info)
+        n = str(len(self.data.rounds_list) + 1)
+        round_name = f'Round {n}'
+        return round_name
+        # return ask_alphanumerical_string(input_info)
 
     def ask_matches(self):
-        # peut s'ajouter automatiquement lorsque les résultats des matches sont enregistrés //controller
+        # peut s'ajouter automatiquement lorsque les résultats des matches sont enregistrés //controller !!!!
         """"
         This method asks for the list of match results for a round
         """
-        return tournament_infos_controller.TournamentInfosCtrl(self.data).add_match_to_round()
+        round_matches = []
+        n = 1
+        while n <= 4:
+            match = NewMatchForm(self.data).add_new()
+            round_matches.append(match)
+            n += 1
+        return round_matches
 
-    def ask_start_time(self):  # doit etre renseigné automatiquement en fait !
+    def ask_start_time(self):  # doit etre renseigné automatiquement en fait !   datetime.now() quand on le créé
         return tournament_infos_controller.TournamentInfosCtrl(self.data).add_start_time()
 
-    def ask_end_time(self):  # doit etre renseigné automatiquement en fait !
+    def ask_end_time(self):  # doit etre renseigné automatiquement en fait ! datetime.now() quand on entre le resultat du dernier match
         return tournament_infos_controller.TournamentInfosCtrl(self.data).add_end_time()

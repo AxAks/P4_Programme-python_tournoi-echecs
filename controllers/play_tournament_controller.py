@@ -47,7 +47,6 @@ class PlayTournamentCtrl:  # à faire !
         print(players)
         pass
 
-
     def add_players_scores(self):
         """
         This method enables to count the players points after a round

@@ -1,6 +1,7 @@
 # coding=utf-8
 
 from constants import MATCH_PROPERTIES
+from models.models_utils.player_manager import PlayerManager
 from views.forms.form import Form
 
 
@@ -11,15 +12,26 @@ class NewMatchForm(Form):
     """
 
     def __init__(self, tournament):
-        super().__init__(data=tournament, properties=MATCH_PROPERTIES, cls=self, not_asked_properties=[])
+        super().__init__(data=tournament, form_name='New Match Form', properties=MATCH_PROPERTIES, cls=self, not_asked_properties=[])
 
-    #  c'est la meme methode deux fois, seul le numero de joueur change (1 ou 2), pb pour la construction de la methode ...
-    def ask_player1_id(self):  # pour le player1, puis pour le player 2
+    def ask_player1_id(self):
         """
-        This method asks for player1's ID at the beginning of a match/round
+        This method enables to search player1 of a match by ID at the beginning of a match/round
         """
+        tournament_players = self.list_tournament_players()
         player_nb = '1'
-        return input(f'Select Player{player_nb}: ')
+        message_info = f'Please, search player {player_nb}: '
+        valid_search = False
+        while not valid_search:
+            _input = input(message_info)
+            search = PlayerManager().search_one(_input)
+            if search in tournament_players:
+                valid_search = True
+                return search
+            else:
+                for player in tournament_players:
+                    print(player)
+                print("Player not found in this tournament, choose ID from above ...")
 
     def ask_player1_score(self):
         """
@@ -28,12 +40,22 @@ class NewMatchForm(Form):
         player_nb = '1'
         return self.ask_player_score(player_nb)
 
-    def ask_player2_id(self):   # pour le player1, puis pour le player 2
+    def ask_player2_id(self):
         """
-        This method asks for player2's ID at the beginning of a match/round
+        This method enables to search player2 of a match by ID at the beginning of a match/round
         """
+        tournament_players = self.list_tournament_players()
         player_nb = '2'
-        return input(f'Select Player{player_nb}: ')
+        message_info = f'Please, search player {player_nb}: '
+        valid_search = False
+        while not valid_search:
+            _input = input(message_info)
+            search = PlayerManager().search_one(_input)
+            if search in tournament_players:  # pas de verif que Player 2 != de player 1 !
+                valid_search = True
+                return search
+            else:
+                print("Player not found in this tournament, please retry ...")
 
     def ask_player2_score(self):
         """
@@ -42,10 +64,17 @@ class NewMatchForm(Form):
         player_nb = '2'
         return self.ask_player_score(player_nb)
 
+    def list_tournament_players(self):
+        tournament_players = []
+        for uuid in self.data.identifiers_list:
+            player_obj = PlayerManager().from_identifier_to_player_obj(uuid)
+            tournament_players.append(player_obj)
+        return tournament_players
+
     def ask_player_score(self, player_nb):
-        choices_info = '(LOSS: 0, TIE: 1, WIN: 2)'
+        choices_info = '(LOSS: 0, TIE: 0.5, WIN: 1)'
         input_info = f'Enter Player{player_nb} Score {choices_info}: '
-        wrong_input = 'Invalid choice (0, 1 or 2), please retry...'
+        wrong_input = 'Invalid choice (0, 0.5 or 1), please retry...'
         valid_choices = (0, 0.5, 1)
         valid_entry = False
         while not valid_entry:
@@ -63,8 +92,6 @@ class NewMatchForm(Form):
                     valid_entry = True
                 else:
                     print(wrong_input)
-                    _input = input(input_info)
             except ValueError:
                 print(wrong_input)
-                _input = input(input_info)
         return _input

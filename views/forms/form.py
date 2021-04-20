@@ -9,11 +9,12 @@ class Form(Menu):
     It enables the user to enter data and return the data as dicts.
     """
 
-    def __init__(self, properties, cls, not_asked_properties, data=None):
+    def __init__(self, properties, cls, not_asked_properties, data=None, form_name=None):
         self.properties = properties
         self.cls = cls
         self.not_asked_properties = not_asked_properties
         self.data = data
+        self.form_name = form_name
 
     def ask_property(self, property_name):
         """
@@ -34,6 +35,9 @@ class Form(Menu):
         This method asks all the required info about a specific object.
         It returns the info as a dict
         """
+        print('========================')
+        print(self.form_name)
+        print('========================')
         new_dict = {}
         for _property in self.properties:
             if _property not in self.not_asked_properties:

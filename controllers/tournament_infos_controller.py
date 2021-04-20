@@ -3,6 +3,7 @@ from datetime import datetime
 from uuid import UUID
 
 from models.match import Match
+from models.models_utils.player_manager import PlayerManager
 from models.models_utils.supermanager import super_manager as sm
 from models.player import Player
 from controllers.controller import Controller

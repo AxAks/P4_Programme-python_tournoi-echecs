@@ -15,7 +15,7 @@ class NewPlayerForm(Form):
     """
 
     def __init__(self):
-        super().__init__(properties=PLAYER_PROPERTIES, cls=self, not_asked_properties=['identifier'])
+        super().__init__(form_name='New Player Form', properties=PLAYER_PROPERTIES, cls=self, not_asked_properties=['identifier'])
 
     def ask_last_name(self, input_info="Enter Last Name: ") -> str:
         """
