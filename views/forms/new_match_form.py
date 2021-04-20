@@ -12,25 +12,30 @@ class NewMatchForm(Form):
     """
 
     def __init__(self, tournament):
-        super().__init__(data=tournament, form_name='New Match Form', properties=MATCH_PROPERTIES, cls=self, not_asked_properties=[])
+        super().__init__(data=tournament, form_name='New Match Form',
+                         properties=MATCH_PROPERTIES, cls=self, not_asked_properties=[])
 
     def ask_player1_id(self):
         """
         This method enables to search player1 of a match by ID at the beginning of a match/round
         """
-        tournament_players = self.list_tournament_players()
         player_nb = '1'
         message_info = f'Please, search player {player_nb}: '
         valid_search = False
         while not valid_search:
             _input = input(message_info)
-            search = PlayerManager().search_one(_input)
-            if search in tournament_players:
+            player_obj = PlayerManager().search_one(_input)
+            while player_obj == {}:
+                print('No match returned for your search, please retry ...')
+                _input = input(message_info)
+                player_obj = PlayerManager().search_one(_input)
+            identifier = player_obj.identifier_pod
+            if identifier in self.data.identifiers_list:
                 valid_search = True
-                return search
+                return identifier
             else:
-                for player in tournament_players:
-                    print(player)
+                for identifier in self.list_tournament_players():
+                    print(identifier)
                 print("Player not found in this tournament, choose ID from above ...")
 
     def ask_player1_score(self):
@@ -44,18 +49,24 @@ class NewMatchForm(Form):
         """
         This method enables to search player2 of a match by ID at the beginning of a match/round
         """
-        tournament_players = self.list_tournament_players()
         player_nb = '2'
         message_info = f'Please, search player {player_nb}: '
         valid_search = False
         while not valid_search:
             _input = input(message_info)
-            search = PlayerManager().search_one(_input)
-            if search in tournament_players:  # pas de verif que Player 2 != de player 1 !
+            player_obj = PlayerManager().search_one(_input)
+            while player_obj == {}:
+                print('No match returned for your search, please retry ...')
+                _input = input(message_info)
+                player_obj = PlayerManager().search_one(_input)
+            identifier = player_obj.identifier_pod
+            if identifier in self.data.identifiers_list:
                 valid_search = True
-                return search
+                return identifier
             else:
-                print("Player not found in this tournament, please retry ...")
+                for identifier in self.list_tournament_players():
+                    print(identifier)
+                print("Player not found in this tournament, choose ID from above ...")
 
     def ask_player2_score(self):
         """
@@ -81,14 +92,6 @@ class NewMatchForm(Form):
             try:
                 _input = float(input(input_info))
                 if _input in valid_choices:
-                    if _input == 0:
-                        _input = 'LOSS'
-                        valid_entry = True
-                    elif _input == 0.5:
-                        _input = 'TIE'
-                        valid_entry = True
-                    else:
-                        _input = 'WIN'
                     valid_entry = True
                 else:
                     print(wrong_input)
