@@ -3,7 +3,7 @@ from datetime import datetime
 from typing import Union
 from uuid import UUID
 
-
+from utils import split_even_list, lists_to_association_dict
 from models.models_utils.player_manager import PlayerManager
 from models.models_utils.supermanager import super_manager as sm
 from models.player import Player
@@ -101,8 +101,8 @@ class TournamentInfosCtrl(Controller):
         """
         # ROUND 1
         sorted_by_ranking = self.sort_tournament_players_by_ranking()
-        lower_ranking_players_list, upper_ranking_players_list = self.split_list(sorted_by_ranking)
-        round_couples = self.lists_to_dict_association(lower_ranking_players_list, upper_ranking_players_list)
+        lower_ranking_players_list, upper_ranking_players_list = split_even_list(sorted_by_ranking)
+        round_couples = lists_to_association_dict(lower_ranking_players_list, upper_ranking_players_list)
         return round_couples
         # on joue
         # on entre les resultats, comment ??
@@ -114,23 +114,6 @@ class TournamentInfosCtrl(Controller):
 
         pass
 
-    def lists_to_dict_association(self, list1, list2) -> dict[Player:Player]:
-        """
-        This method compares two lists
-        and associates their items though their indices in respective list
-        """
-        return {list2[i]: list1[i] for i in range(len(list1))}
-
-
-    def split_list(self, sorted_by_ranking):
-        """
-        This method splits a list in the midlle into two sub-lists
-        """
-        middle_index = len(sorted_by_ranking) // 2
-        # on fait des sous listes
-        upper_ranking_players_list = sorted_by_ranking[:middle_index]
-        lower_ranking_players_list = sorted_by_ranking[middle_index:]
-        return lower_ranking_players_list, upper_ranking_players_list
 
     def sort_tournament_players_by_ranking(self) -> list[Player]:
         """

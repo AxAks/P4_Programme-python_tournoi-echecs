@@ -1,6 +1,7 @@
 
 from os import system
 from sys import platform
+from typing import Union
 
 
 def clear_terminal():
@@ -32,3 +33,27 @@ def validate_input(value, method):
         except ValueError:
             print(wrong_input)
     return value
+
+
+def lists_to_association_dict(list1, list2) -> Union[dict, str]:
+    """
+    This function compares two lists
+    and associates their items though their indices in respective list
+    """
+    if len(list1) == len(list2):
+        return {list2[i]: list1[i] for i in range(len(list1))}
+    else:
+        return 'These lists do not have the same number of items'
+
+
+def split_even_list(_list) -> Union[tuple[list], str]:
+    """
+    This function splits a list in the middle into two sub-lists
+    """
+    if len(_list) % 2 == 0:
+        middle_index = len(_list) // 2
+        sublist1 = _list[:middle_index]
+        sublist2 = _list[middle_index:]
+        return sublist1, sublist2
+    else:
+        return 'This list does not ahve an even number of items'
