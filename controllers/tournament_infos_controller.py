@@ -21,9 +21,12 @@ class TournamentInfosCtrl(Controller):
     Controller class for a specific Tournament Menu Page once the tournament is selected.
     """
 
-    def __init__(self, tournament=None):
+    def __init__(self, tournament=None, players_results=None):
+        if players_results is None:
+            players_results = {}
         self.menu = TournamentInfosMenu(tournament)
         self.data = tournament
+        self.players_results = players_results
 
     def sort_players_by_last_name(self) -> list:
         """
@@ -37,15 +40,19 @@ class TournamentInfosCtrl(Controller):
         return sorted_by_last_name
 
     # à rediger !
-    def sort_players_by_result(self) -> list:
+    def sort_players_by_result(self) -> Union[list, str]:
         """
-        This function lists all the players of a given tournament by result
+        This method lists all the players of a given tournament by result
         """
-        pass
+        if self.players_results == {}:
+            return "There are no Results for this Tournament yet"
+        else:
+            print(sorted(self.players_results.items(), key=lambda x: x[1], reverse=True))
+            return sorted(self.players_results.items(), key=lambda x: x[1], reverse=True)
 
     def display_rounds_and_matches(self) -> list:
         """
-        This function lists all the rounds of a given tournament
+        This method lists all the rounds of a given tournament
         """
         return self.data.rounds_list
 
@@ -89,7 +96,11 @@ class TournamentInfosCtrl(Controller):
     def select_tournament(self):  # à rediger !
 
         self.data = list_tournaments_controller.ListTournamentsCtrl().select_one()
-        self.generate_round_1_matchups()
+        round_1 = self.generate_round_1_matchups()
+        self.get_round1_results(round_1)
+        self.generate_next_round_matchups()
+        self.sort_players_by_result()
+        self.get_next_round_results(self.players_results)
         # while len(self.data.rounds_list) < self.data.rounds:
         #    self.add_players_scores()
 
@@ -106,7 +117,7 @@ class TournamentInfosCtrl(Controller):
         round_couples = lists_to_association_dict(lower_ranking_players_list, upper_ranking_players_list)
         # return round_couples
         # on joue
-        # on entre les resultats, comment ??
+        # on créé le round et on entre les resultats des matchs
         round_dict = NewRoundForm(self.data).add_new()
         _round = Round(**round_dict)
         for key in round_couples:
@@ -115,11 +126,19 @@ class TournamentInfosCtrl(Controller):
             match_dict = NewMatchForm(self.data, player1_id, player2_id).add_new()
             match = Match(**match_dict)
             _round.matches.append(match)
-        print(_round)
         return _round
-        # on recupère les points
 
+        # on recupère les points du Round 1
+    def get_round1_results(self, _round: Round) -> dict:
+        for match in _round.matches:
+            self.players_results[match.player1_id_pod] = match.player1_score_pod
+            self.players_results[match.player2_id_pod] = match.player2_score_pod
+        print(self.players_results)
+        return self.players_results  # -> dict(id:score)
+        # il faut les stocker quelque part d'accessible ensuite pour pouvoir ajouter les points round apres round!
 
+    def generate_next_round_matchups(self):
+        pass
 
     def sort_tournament_players_by_ranking(self) -> list[Player]:
         """
