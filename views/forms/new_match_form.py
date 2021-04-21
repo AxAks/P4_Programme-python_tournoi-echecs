@@ -12,20 +12,32 @@ class NewMatchForm(Form):
 
     def __init__(self, tournament, player1_id, player2_id):
         super().__init__(data=tournament, form_name='New Match Form',
-                         properties=MATCH_PROPERTIES, cls=self, not_asked_properties=['player1_id', 'player2_id'])
+                         properties=MATCH_PROPERTIES, cls=self, not_asked_properties=[])
         self.player1_id = player1_id
         self.player2_id = player2_id
 
+    def ask_player1_id(self):
+        """
+        This method returns player1's id for a given match
+        """
+        return self.player1_id
+
     def ask_player1_score(self):
         """
-        This method asks for player1's score at the end of a match/round
+        This method asks for player1's score
         """
         player = self.player1_id
         return self.ask_player_score(player)
 
+    def ask_player2_id(self):
+        """
+        This method returns player2's id for a given match
+        """
+        return self.player2_id
+
     def ask_player2_score(self):
         """
-        This method asks for player2's score at the end of a match/round
+        This method asks for player2's score
         """
         player = self.player2_id
         return self.ask_player_score(player)

@@ -80,20 +80,18 @@ class TournamentInfosCtrl(Controller):
         new_tournament = tournaments_controller.TournamentCtrl().add_tournament()
         tournament_controller = TournamentInfosCtrl(new_tournament)
         tournament = tournament_controller.data
-        while len(tournament.rounds_list) < tournament.rounds:
-            self.generate_round_1_matchups()
-            NewRoundForm(self.data).add_new()
-            self.add_players_scores()
+        self.generate_round_1_matchups()
+        # while len(tournament.rounds_list) < tournament.rounds:
+        #     self.add_players_scores()
 
         tournament_controller.run()
 
     def select_tournament(self):  # à rediger !
 
         self.data = list_tournaments_controller.ListTournamentsCtrl().select_one()
-        while len(self.data.rounds_list) < self.data.rounds:
-            self.generate_round_1_matchups()
-            NewRoundForm(self.data).add_new()
-            self.add_players_scores()
+        self.generate_round_1_matchups()
+        # while len(self.data.rounds_list) < self.data.rounds:
+        #    self.add_players_scores()
 
         TournamentInfosCtrl(self.data).run()
 
@@ -118,10 +116,9 @@ class TournamentInfosCtrl(Controller):
             match = Match(**match_dict)
             _round.matches.append(match)
         print(_round)
-        # NewRoundForm(self.data).add_new() # ca va changer !
+        return _round
         # on recupère les points
 
-        pass
 
 
     def sort_tournament_players_by_ranking(self) -> list[Player]:
