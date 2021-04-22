@@ -45,10 +45,13 @@ class TournamentInfosCtrl(Controller):
         This method lists all the players of a given tournament by result
         """
         if self.players_results == {}:
-            return "There are no Results for this Tournament yet"
+            return self.players_results
         else:
-            print(sorted(self.players_results.items(), key=lambda x: x[1], reverse=True))
-            return sorted(self.players_results.items(), key=lambda x: x[1], reverse=True)
+            player_obj_result_dict = {}
+            for identifier in self.players_results:
+                player_obj = PlayerManager().from_identifier_to_player_obj(identifier)
+                player_obj_result_dict[player_obj] = self.players_results[identifier]
+            return sorted(player_obj_result_dict.items(), key=lambda x: x[1], reverse=True)  # on a l'identifier_str, pas le Player_obj
 
     def display_rounds_and_matches(self) -> list:
         """
@@ -98,9 +101,10 @@ class TournamentInfosCtrl(Controller):
         self.data = list_tournaments_controller.ListTournamentsCtrl().select_one()
         round_1 = self.generate_round_1_matchups()
         self.get_round1_results(round_1)
-        self.generate_next_round_matchups()
         self.sort_players_by_result()
-        self.get_next_round_results(self.players_results)
+        self.generate_next_round_matchups()
+
+        # self.get_next_round_results(self.players_results)
         # while len(self.data.rounds_list) < self.data.rounds:
         #    self.add_players_scores()
 
@@ -133,12 +137,12 @@ class TournamentInfosCtrl(Controller):
         for match in _round.matches:
             self.players_results[match.player1_id_pod] = match.player1_score_pod
             self.players_results[match.player2_id_pod] = match.player2_score_pod
-        print(self.players_results)
         return self.players_results  # -> dict(id:score)
         # il faut les stocker quelque part d'accessible ensuite pour pouvoir ajouter les points round apres round!
 
     def generate_next_round_matchups(self):
-        pass
+        player_results = self.players_results
+        print(player_results)
 
     def sort_tournament_players_by_ranking(self) -> list[Player]:
         """

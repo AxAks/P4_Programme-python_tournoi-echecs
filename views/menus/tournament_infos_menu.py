@@ -40,7 +40,16 @@ class TournamentInfosMenu(Menu):
         This method calls the controller to display the players of the selected tournament
         sorted by results.
         """
-        pass
+        print('========================')
+        print(f'Players by results for "{self.data.name}": ')
+        print('========================')
+        players_results_dict = self.current_page_ctrl(self.data).sort_players_by_result()
+        if players_results_dict == {}:
+            print("There are no Results for this Tournament yet")
+        else:
+            for player in players_results_dict:
+                print(player.last_name, player.first_name, player.identifier_pod, players_results_dict[player])
+        self.current_page_ctrl(self.data).run()
 
     def display_rounds_and_matches(self) -> None:
         """
