@@ -28,7 +28,3 @@ class PlayerManager(Manager):
         else:
             raise AttributeError()
         return player_obj
-
-    def from_player_obj_to_identifier_str(self, player_obj: Player) -> str:
-        identifier = player_obj.identifier_pod
-        return identifier

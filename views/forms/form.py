@@ -1,9 +1,9 @@
 # coding=utf-8
 from utils import validate_input
-from views.menus.menu import Menu
+from views.view import View
 
 
-class Form:
+class Form(View):
     """
     This class is a parent Class for all Forms
     It enables the user to enter data and return the data as dicts.

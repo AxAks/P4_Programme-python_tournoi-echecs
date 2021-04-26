@@ -43,7 +43,7 @@ class TournamentInfosMenu(Menu):
         print('========================')
         print(f'Players by results for "{self.data.name}": ')
         print('========================')
-        players_results_dict = self.current_page_ctrl(self.data).sort_players_by_result()
+        players_results_dict = self.current_page_ctrl(self.data).sort_players_by_result(self.data)
         if players_results_dict == {}:
             print("There are no Results for this Tournament yet")
         else:

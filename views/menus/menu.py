@@ -2,9 +2,10 @@
 
 from controllers import home_controller
 from controllers.controller import Controller
+from views.view import View
 
 
-class Menu:
+class Menu(View):
     """
     This class is a parent Class for all Menu screens
     It enables to navigate through the program.

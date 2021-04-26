@@ -17,7 +17,7 @@ class NewTournamentForm(Form):
 
     def __init__(self):
         super().__init__(form_name='New Tournament Form', properties=TOURNAMENT_PROPERTIES,
-                         cls=self, not_asked_properties=['rounds_list'])
+                         cls=self, not_asked_properties=['rounds_list', 'total_results'])
 
     def ask_name(self, input_info="Enter name: ") -> str:
         """
