@@ -26,6 +26,7 @@ class Round(Model):
         - start_time: datetime or string  # start_time = datetime.now() # end_time = datetime de la fin de round
         """
         super().__init__(ROUND_PROPERTIES, **params)
+        #  ajouter attribut points rounds player ici ou dans tournament
 
     def __repr__(self):
         if len(self.matches) == 0:
@@ -162,5 +163,25 @@ class Round(Model):
                 raise AttributeError()
         elif isinstance(value, datetime):
             self.__end_time = value
+        else:
+            raise AttributeError()
+
+    @property
+    def results(self):
+        """
+        This getter returns the Players results for this round
+        """
+        return self.__results
+
+    @results.setter
+    def results(self, value: dict):
+        """
+        This setter checks that the entered value is a dict
+        and sets the attribute as a datetime
+        """
+        if value is None or value == {}:
+            self.__results = {}
+        elif isinstance(value, dict):
+            self.__results = value
         else:
             raise AttributeError()

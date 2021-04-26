@@ -330,3 +330,16 @@ class Tournament(Model):
                 raise AttributeError()
         else:
             raise AttributeError()
+
+    @property
+    def total_results(self):
+        return self.__total_results
+
+    @total_results.setter
+    def total_results(self, value: dict):
+        if value is None or value == {}:
+            self.__total_results = {}
+        elif value == dict:
+            self.__total_results = value
+        else:
+            raise AttributeError()
