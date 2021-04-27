@@ -43,12 +43,15 @@ class TournamentInfosMenu(Menu):
         print('========================')
         print(f'Players by results for "{self.data.name}": ')
         print('========================')
-        players_results_dict = self.current_page_ctrl(self.data).sort_players_by_result(self.data)
-        if players_results_dict == {}:
+        players_results_list = self.current_page_ctrl(self.data).sort_players_by_result(self.data)  # liste de tuples
+        if players_results_list == {}:
             print("There are no Results for this Tournament yet")
         else:
-            for player in players_results_dict:
-                print(player.last_name, player.first_name, player.identifier_pod, players_results_dict[player])
+            for _tuple in players_results_list:
+                PLAYER = _tuple[0]
+                RESULT = _tuple[1]
+                print(f"Player: {PLAYER.last_name}, {PLAYER.first_name}, {PLAYER.identifier_pod}\n"
+                      f"Total: {RESULT}")
         self.current_page_ctrl(self.data).run()
 
     def display_rounds_and_matches(self) -> None:

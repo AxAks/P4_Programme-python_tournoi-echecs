@@ -339,7 +339,7 @@ class Tournament(Model):
     def total_results(self, value: dict):
         if value is None or value == {}:
             self.__total_results = {}
-        elif value == dict:
+        elif isinstance(value, dict):
             self.__total_results = value
         else:
             raise AttributeError()
