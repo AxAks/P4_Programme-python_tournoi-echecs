@@ -147,16 +147,17 @@ class TournamentInfosCtrl(Controller):
         if self.data.total_results == {}:
             total_pts_by_player = _round.results
         else:
-            #  pas bon !! je veux : prendre les values pour chaque player_id (key) dans les dicts et les additionner
             counter = collections.Counter()
-            total_pts_by_player = [self.data.total_results, _round.results]
-            for player in total_pts_by_player:
-                counter.update(player)
-        return total_pts_by_player
+            total_pts_by_player = self.data.total_results, _round.results
+            for player_id in total_pts_by_player:
+                counter.update(player_id)
+        new_totals = counter
+        self.data.total_results = new_totals
+        return new_totals
         # pour pouvoir ajouter les points round apres round au total_results de tournament
 
     def generate_next_round_matchups(self, _round: Round):
-        player_results = _round.results
+        player_results = self.data.total_results
         print(player_results)
 
     def sort_tournament_players_by_ranking(self) -> list[Player]:
