@@ -1,4 +1,5 @@
 # coding=utf-8
+from typing import Union
 
 from models.models_utils.player_manager import PlayerManager
 from models.models_utils.supermanager import super_manager as sm
@@ -25,7 +26,21 @@ class PlayerCtrl(Controller):
         new_player = sm.managers[Player].create(**new_player_dict)
         return new_player
 
-    def search_by_id(self, search) -> list:
+    def update_player_ranking(self, search: str) -> Union[list, Player]:
+        """
+        This method enables to manually update the ranking of a given player
+        """
+        result = PlayerManager().search_one(search)
+        if isinstance(result, list):
+            return result
+        elif isinstance(result, Player):
+            new_ranking = NewPlayerForm().ask_ranking()
+            result.ranking = new_ranking
+            return result
+        else:
+            raise AttributeError
+
+    def search_by_id(self, search: str) -> list:
         """
         This method lists the player instances matching the given input (id)
         """
