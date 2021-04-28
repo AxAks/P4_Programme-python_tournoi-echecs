@@ -99,7 +99,7 @@ class TournamentInfosCtrl(Controller):
 
         self.data = list_tournaments_controller.ListTournamentsCtrl().select_one()
         round_1 = self.generate_round_1_matchups()
-        self.get_round1_results(round_1)
+        self.get_round_results(round_1)
         self.add_players_points_to_tournament_totals(round_1)
         self.sort_players_by_result(self.data)
         self.generate_next_round_matchups(round_1)
@@ -112,14 +112,12 @@ class TournamentInfosCtrl(Controller):
 
     def generate_round_1_matchups(self):
         """
-        This method randomly generates the tournament match-ups between the Players for the different rounds
-        It takes into account the match-ups that have already been played in the previous rounds.
+        This method generates the tournament match-ups between the Players for the first round
         """
-        # ROUND 1
         sorted_by_ranking = self.sort_tournament_players_by_ranking()
         lower_ranking_players_list, upper_ranking_players_list = split_even_list(sorted_by_ranking)
         round_couples = lists_to_association_dict(lower_ranking_players_list, upper_ranking_players_list)
-        # return round_couples
+        # return round_couples # à diviser ici !!
         # on joue
         # on créé le round et on entre les resultats des matchs
         round_dict = NewRoundForm(self.data).add_new()
@@ -133,17 +131,21 @@ class TournamentInfosCtrl(Controller):
         self.data.rounds_list.append(_round)
         return _round
 
-        # on recupère les points du Round 1
-    def get_round1_results(self, _round: Round) -> dict:
+    def get_round_results(self, _round: Round) -> dict:
+        """
+        This method gets the match results of a round and adds those players by player to the round
+        """
         _round.results = {}
         for match in _round.matches:
             _round.results[match.player1_id_pod] = match.player1_score_pod
             _round.results[match.player2_id_pod] = match.player2_score_pod
         return _round.results  # -> dict(id:score)
-        # Je veux acceder à l'attribut 'results' du Round en question pour ajouter le dict des resultats
-        # il faut les stocker les resultats par player dans le Round
 
     def add_players_points_to_tournament_totals(self, _round: Round) -> dict:
+        """
+        This method enables to count the players points after a round
+        and add the scores to the tournament results
+        """
         if self.data.total_results == {}:
             new_totals = _round.results
         else:
@@ -151,14 +153,19 @@ class TournamentInfosCtrl(Controller):
             total_pts_by_player = self.data.total_results, _round.results
             for player_id in total_pts_by_player:
                 counter.update(player_id)
-            new_totals = counter
+            new_totals = dict(counter)
         self.data.total_results = new_totals
         return new_totals
-        # pour pouvoir ajouter les points round apres round au total_results de tournament
 
     def generate_next_round_matchups(self, _round: Round):
-        player_results = self.data.total_results
+        """
+        This method generates the tournament match-ups between the Players for a new round.
+        """
+        player_results = self.data.total_results  # dict id:float
         print(player_results)
+
+
+        # PlayerManager().from_identifier_to_player_obj()
 
     def sort_tournament_players_by_ranking(self) -> list[Player]:
         """
@@ -178,10 +185,3 @@ class TournamentInfosCtrl(Controller):
             player_obj = PlayerManager().from_identifier_to_player_obj(uuid)
             tournament_players.append(player_obj)
         return tournament_players
-
-    def add_players_scores(self):
-        """
-        This method enables to count the players points after a round
-        and calculate the scores and ranking inside the tournament
-        """
-        pass
