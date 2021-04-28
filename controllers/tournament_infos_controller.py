@@ -145,13 +145,13 @@ class TournamentInfosCtrl(Controller):
 
     def add_players_points_to_tournament_totals(self, _round: Round) -> dict:
         if self.data.total_results == {}:
-            total_pts_by_player = _round.results
+            new_totals = _round.results
         else:
             counter = collections.Counter()
             total_pts_by_player = self.data.total_results, _round.results
             for player_id in total_pts_by_player:
                 counter.update(player_id)
-        new_totals = counter
+            new_totals = counter
         self.data.total_results = new_totals
         return new_totals
         # pour pouvoir ajouter les points round apres round au total_results de tournament
