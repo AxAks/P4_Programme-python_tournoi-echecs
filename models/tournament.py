@@ -346,7 +346,9 @@ class Tournament(Model):
 
     @property
     def rounds_couples_pod(self) -> list[tuple]:
-        return [player.serialize() for round_couples in self.__rounds_couples for player in round_couples]
+        return [player.serialize() for round_couples in self.__rounds_couples
+                for players_tuple in round_couples
+                for player in players_tuple]
 
     @property
     def rounds_couples(self) -> list[tuple]:
