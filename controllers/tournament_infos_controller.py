@@ -4,13 +4,13 @@ from datetime import datetime
 from typing import Union, Any
 from uuid import UUID
 
-from models.match import Match
-from models.tournament import Tournament
 from utils import split_even_list, lists_to_tuples_list
 from models.models_utils.player_manager import PlayerManager
 from models.models_utils.supermanager import super_manager as sm
+from models.tournament import Tournament
 from models.player import Player
 from models.round import Round
+from models.match import Match
 from controllers.controller import Controller
 from controllers import tournaments_controller, list_tournaments_controller
 from views.forms.new_match_form import NewMatchForm
@@ -83,7 +83,7 @@ class TournamentInfosCtrl(Controller):
         self.data.rounds_list.append(new_round)
         return new_round
 
-    def add_start_time(self) -> datetime:  # datetime.now() quand on le créé, ou on entre le moemnt où les joueurs ont commencé à jouer
+    def add_start_time(self) -> datetime:  # datetime.now() quand on le créé, ou on entre le moment où les joueurs ont commencé à jouer
         """
         This method automatically sets the start time of the Round Object
         """
@@ -97,8 +97,6 @@ class TournamentInfosCtrl(Controller):
 
 
 
-
-
     def add_new_tournament(self):  # à rediger !
         new_tournament = tournaments_controller.TournamentCtrl().add_tournament()
         tournament_controller = TournamentInfosCtrl(new_tournament)
@@ -109,7 +107,7 @@ class TournamentInfosCtrl(Controller):
 
         tournament_controller.run()
 
-    def select_tournament(self):  # à rediger !
+    def select_tournament(self):  # à rediger ! et pour les tester
         self.data = list_tournaments_controller.ListTournamentsCtrl().select_one()
         # si on tape un mauvais identifier tournament, ca pete !
         matchups_round_1 = self.generate_round_matchups(is_first=True)
@@ -135,16 +133,13 @@ class TournamentInfosCtrl(Controller):
         """
         # It should also checks that the players have not already player together
         if is_first:
-            sorted_players = self.sort_tournament_players_by_ranking()
+            sorted_players_obj = self.sort_tournament_players_by_ranking()
         else:
             sorted_players_results = self.sort_players_by_result(self.data)
-            sorted_players = []
-            for _tuple in sorted_players_results:
-                player_obj = _tuple[0]
-                sorted_players.append(player_obj)
-        round_couples = self.get_round_couples(sorted_players)
-        # il faut enregistrer les round_couples sur tournament pour pouvoir verifier si les joueurs ont déjà joué ensemble
-        self.data.rounds_couples.append(round_couples) # à verifier -> dict (tuple) !
+            sorted_players_obj = [_tuple[0] for _tuple in sorted_players_results]
+        round_couples = self.get_round_couples(sorted_players_obj)
+        #  verifier vers ici dans self.data.rounds_couples si une association de joueurs est deja présente dans les rounds précédents (dans self.data.rounds_couples)
+        self.data.rounds_couples.append(round_couples) #  enregistre les round_couples du nouveau round sur tournament pour pouvoir verifier si les joueurs ont déjà joué ensemble
         return round_couples
 
     def get_round_couples(self, sorted_players: list) -> list[tuple]:
