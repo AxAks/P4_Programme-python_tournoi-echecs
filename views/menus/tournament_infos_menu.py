@@ -11,13 +11,13 @@ class TournamentInfosMenu(Menu):
     """
 
     def __init__(self, selected_tournament):
-        super().__init__(program_name='Chess Tournament Manager', menu_name='Tournaments Menu',
+        super().__init__(program_name='Chess Tournament Manager', menu_name='Tournament Info Menu',
                          data=selected_tournament,
                          root_page=False, previous_page_ctrl=list_tournaments_controller.ListTournamentsCtrl,
                          current_page_ctrl=tournament_infos_controller.TournamentInfosCtrl,
                          exiting_message='Now Leaving Chess Tournament Manager')
-        specific_menu_choices = [self.sort_players_by_last_name, self.sort_players_by_result,
-                                 self.display_rounds_and_matches,
+        specific_menu_choices = [self.sort_players_by_last_name,
+                                 self.sort_players_by_result, self.display_rounds_and_matches,
                                  self.add_round_and_matches]
         [self.choices.append(choice) for choice in specific_menu_choices]
 

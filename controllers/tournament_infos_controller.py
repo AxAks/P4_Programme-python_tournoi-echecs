@@ -12,7 +12,7 @@ from models.player import Player
 from models.round import Round
 from models.match import Match
 from controllers.controller import Controller
-from controllers import tournaments_controller, list_tournaments_controller
+from controllers import list_tournaments_controller
 from views.forms.new_match_form import NewMatchForm
 from views.forms.new_round_form import NewRoundForm
 from views.menus.tournament_infos_menu import TournamentInfosMenu
@@ -98,7 +98,7 @@ class TournamentInfosCtrl(Controller):
 
 
     def add_new_tournament(self):  # à rediger !
-        new_tournament = tournaments_controller.TournamentCtrl().add_tournament()
+        new_tournament = list_tournaments_controller.ListTournamentsCtrl().add_tournament()
         tournament_controller = TournamentInfosCtrl(new_tournament)
         tournament = tournament_controller.data
         self.generate_round_matchups(True)
@@ -142,7 +142,7 @@ class TournamentInfosCtrl(Controller):
         self.data.rounds_couples.append(round_couples) #  enregistre les round_couples du nouveau round sur tournament pour pouvoir verifier si les joueurs ont déjà joué ensemble
         return round_couples
 
-    def get_round_couples(self, sorted_players: list) -> list[tuple]:
+    def get_round_couples(self, sorted_players: list) -> Union[list[Player], list[tuple]]:
         upper_ranking_players_list, lower_ranking_players_list = split_even_list(sorted_players)
         round_couples = lists_to_tuples_list(upper_ranking_players_list, lower_ranking_players_list)
         return round_couples

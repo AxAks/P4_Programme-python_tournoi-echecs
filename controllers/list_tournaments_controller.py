@@ -3,6 +3,7 @@ from models.models_utils.supermanager import super_manager as sm
 from models.models_utils.tournament_manager import TournamentManager
 from models.tournament import Tournament
 from controllers.controller import Controller
+from views.forms.new_tournament_form import NewTournamentForm
 from views.menus.list_tournaments_menu import ListTournamentsMenu
 
 
@@ -13,6 +14,14 @@ class ListTournamentsCtrl(Controller):
 
     def __init__(self):
         self.menu = ListTournamentsMenu()
+
+    def add_tournament(self) -> Tournament:
+        """
+        this method creates a new tournament entry in the registry.
+        """
+        new_tournament_dict = NewTournamentForm().add_new()
+        new_tournament = sm.managers[Tournament].create(**new_tournament_dict)  # gérer l'erreur de dates etc ici !
+        return new_tournament
 
     def sort_by_start_date(self) -> list:
         """
