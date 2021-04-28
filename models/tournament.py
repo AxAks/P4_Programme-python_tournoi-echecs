@@ -332,7 +332,7 @@ class Tournament(Model):
             raise AttributeError()
 
     @property
-    def total_results(self):
+    def total_results(self) -> dict:
         return self.__total_results
 
     @total_results.setter
@@ -341,5 +341,22 @@ class Tournament(Model):
             self.__total_results = {}
         elif isinstance(value, dict):
             self.__total_results = value
+        else:
+            raise AttributeError()
+
+    @property
+    def rounds_couples_pod(self) -> list[tuple]:
+        return [player.serialize() for round_couples in self.__rounds_couples for player in round_couples]
+
+    @property
+    def rounds_couples(self) -> list[tuple]:
+        return self.__rounds_couples
+
+    @rounds_couples.setter
+    def rounds_couples(self, value: list[tuple]):
+        if value is None or value == []:
+            self.__rounds_couples = []
+        elif isinstance(value, list):
+            self.__rounds_couples = value
         else:
             raise AttributeError()

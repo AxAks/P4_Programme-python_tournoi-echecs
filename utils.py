@@ -35,13 +35,13 @@ def validate_input(value, method):
     return value
 
 
-def lists_to_association_dict(list1, list2) -> Union[dict, str]:
+def lists_to_tuples_list(list1, list2) -> Union[list[tuple], str]:
     """
     This function compares two lists
     and associates their items though their indices in respective list
     """
     if len(list1) == len(list2):
-        return {list2[i]: list1[i] for i in range(len(list1))}
+        return [(list1[i], list2[i]) for i in range(0, len(list1))]
     else:
         return 'These lists do not have the same number of items'
 

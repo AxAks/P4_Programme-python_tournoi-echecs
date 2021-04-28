@@ -6,7 +6,7 @@ from uuid import UUID
 
 from models.match import Match
 from models.tournament import Tournament
-from utils import split_even_list, lists_to_association_dict
+from utils import split_even_list, lists_to_tuples_list
 from models.models_utils.player_manager import PlayerManager
 from models.models_utils.supermanager import super_manager as sm
 from models.player import Player
@@ -44,7 +44,7 @@ class TournamentInfosCtrl(Controller):
         """
         tournament_players = []
         for identifier in self.data.identifiers_list:
-            player_obj = sm.managers[Player].search(identifier)
+            player_obj = PlayerManager().from_identifier_to_player_obj(identifier)
             tournament_players.append(player_obj)
         sorted_by_ranking = sorted(tournament_players, key=lambda x: x.ranking, reverse=True)
         return sorted_by_ranking
@@ -110,9 +110,9 @@ class TournamentInfosCtrl(Controller):
         tournament_controller.run()
 
     def select_tournament(self):  # à rediger !
-
         self.data = list_tournaments_controller.ListTournamentsCtrl().select_one()
-        matchups_round_1 = self.generate_round_matchups(True)
+        # si on tape un mauvais identifier tournament, ca pete !
+        matchups_round_1 = self.generate_round_matchups(is_first=True)
         round_1 = self.enter_new_round(matchups_round_1)
         self.get_round_results(round_1)
         self.add_players_points_to_tournament_totals(round_1)
@@ -127,7 +127,7 @@ class TournamentInfosCtrl(Controller):
 
         TournamentInfosCtrl(self.data).run()
 
-    def generate_round_matchups(self, is_first=False) -> dict:
+    def generate_round_matchups(self, is_first=False) -> Union[list[tuple], dict]:
         """
         This method generates the tournament match-ups between the Players for a new round.
         It takes into account the players general rankings and/or results in the tournament
@@ -137,21 +137,27 @@ class TournamentInfosCtrl(Controller):
         if is_first:
             sorted_players = self.sort_tournament_players_by_ranking()
         else:
-            sorted_players = self.sort_players_by_result(self.data)
+            sorted_players_results = self.sort_players_by_result(self.data)
+            sorted_players = []
+            for _tuple in sorted_players_results:
+                player_obj = _tuple[0]
+                sorted_players.append(player_obj)
         round_couples = self.get_round_couples(sorted_players)
+        # il faut enregistrer les round_couples sur tournament pour pouvoir verifier si les joueurs ont déjà joué ensemble
+        self.data.rounds_couples.append(round_couples) # à verifier -> dict (tuple) !
         return round_couples
 
-    def get_round_couples(self, sorted_by_results_ranking: dict) -> dict:
-        lower_ranking_players_list, upper_ranking_players_list = split_even_list(sorted_by_results_ranking)
-        round_couples = lists_to_association_dict(lower_ranking_players_list, upper_ranking_players_list)
+    def get_round_couples(self, sorted_players: list) -> list[tuple]:
+        upper_ranking_players_list, lower_ranking_players_list = split_even_list(sorted_players)
+        round_couples = lists_to_tuples_list(upper_ranking_players_list, lower_ranking_players_list)
         return round_couples
 
     def enter_new_round(self, round_couples):
         round_dict = NewRoundForm(self.data).add_new()
         _round = Round(**round_dict)
-        for key in round_couples:
-            player1_id = key.identifier_pod
-            player2_id = round_couples[key].identifier_pod
+        for _tuple in round_couples:
+            player1_id = _tuple[0].identifier_pod
+            player2_id = _tuple[1].identifier_pod
             match_dict = NewMatchForm(self.data, player1_id, player2_id).add_new()
             match = Match(**match_dict)
             _round.matches.append(match)
