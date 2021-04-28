@@ -1,7 +1,7 @@
 # coding=utf-8
 import collections
 from datetime import datetime
-from typing import Union
+from typing import Union, Any
 from uuid import UUID
 
 from models.match import Match
@@ -31,15 +31,25 @@ class TournamentInfosCtrl(Controller):
         """
         This method lists all the players of a given tournament by last name
         """
-        players_list = []
+        tournament_players = []
         for identifier in self.data.identifiers_list:
             player_obj = sm.managers[Player].search(identifier)
-            players_list.append(player_obj[UUID(identifier)])
-        sorted_by_last_name = sorted(players_list, key=lambda x: x.last_name)
+            tournament_players.append(player_obj[UUID(identifier)])
+        sorted_by_last_name = sorted(tournament_players, key=lambda x: x.last_name)
         return sorted_by_last_name
 
-    # à adapter avec tournament et total_results à la place de round results
-    def sort_players_by_result(self, tournament: Tournament) -> list:
+    def sort_tournament_players_by_ranking(self) -> list[Player]:
+        """
+        This method sorts the players of the tournament by ranking from high to low
+        """
+        tournament_players = []
+        for identifier in self.data.identifiers_list:
+            player_obj = sm.managers[Player].search(identifier)
+            tournament_players.append(player_obj)
+        sorted_by_ranking = sorted(tournament_players, key=lambda x: x.ranking, reverse=True)
+        return sorted_by_ranking
+
+    def sort_players_by_result(self, tournament: Tournament) -> Union[list[Player], Any]:
         """
         This method sorts all the players of a given tournament by result
         from highest to lowest
@@ -93,7 +103,7 @@ class TournamentInfosCtrl(Controller):
         new_tournament = tournaments_controller.TournamentCtrl().add_tournament()
         tournament_controller = TournamentInfosCtrl(new_tournament)
         tournament = tournament_controller.data
-        self.generate_round_1_matchups()
+        self.generate_round_matchups(True)
         # while len(tournament.rounds_list) < tournament.rounds:
         #     self.add_players_scores()
 
@@ -102,11 +112,14 @@ class TournamentInfosCtrl(Controller):
     def select_tournament(self):  # à rediger !
 
         self.data = list_tournaments_controller.ListTournamentsCtrl().select_one()
-        round_1 = self.generate_round_1_matchups()
+        matchups_round_1 = self.generate_round_matchups(True)
+        round_1 = self.enter_new_round(matchups_round_1)
         self.get_round_results(round_1)
         self.add_players_points_to_tournament_totals(round_1)
-        self.sort_players_by_result(self.data)
-        self.generate_next_round_matchups(round_1)
+        matchups_round_2 = self.generate_round_matchups()
+        round_2 = self.enter_new_round(matchups_round_2)
+        self.get_round_results(round_2)
+        self.add_players_points_to_tournament_totals(round_2)
 
         # self.get_next_round_results(_round)
         # while len(self.data.rounds_list) < self.data.rounds:
@@ -114,16 +127,26 @@ class TournamentInfosCtrl(Controller):
 
         TournamentInfosCtrl(self.data).run()
 
-    def generate_round_1_matchups(self):
+    def generate_round_matchups(self, is_first=False) -> dict:
         """
-        This method generates the tournament match-ups between the Players for the first round
+        This method generates the tournament match-ups between the Players for a new round.
+        It takes into account the players general rankings and/or results in the tournament
+        an whether it is the first round or another round
         """
-        sorted_by_ranking = self.sort_tournament_players_by_ranking()
-        lower_ranking_players_list, upper_ranking_players_list = split_even_list(sorted_by_ranking)
+        # It should also checks that the players have not already player together
+        if is_first:
+            sorted_players = self.sort_tournament_players_by_ranking()
+        else:
+            sorted_players = self.sort_players_by_result(self.data)
+        round_couples = self.get_round_couples(sorted_players)
+        return round_couples
+
+    def get_round_couples(self, sorted_by_results_ranking: dict) -> dict:
+        lower_ranking_players_list, upper_ranking_players_list = split_even_list(sorted_by_results_ranking)
         round_couples = lists_to_association_dict(lower_ranking_players_list, upper_ranking_players_list)
-        # return round_couples # à diviser ici !!
-        # on joue
-        # on créé le round et on entre les resultats des matchs
+        return round_couples
+
+    def enter_new_round(self, round_couples):
         round_dict = NewRoundForm(self.data).add_new()
         _round = Round(**round_dict)
         for key in round_couples:
@@ -135,7 +158,7 @@ class TournamentInfosCtrl(Controller):
         self.data.rounds_list.append(_round)
         return _round
 
-    def get_round_results(self, _round: Round) -> dict:
+    def get_round_results(self, _round: Round) -> Round:
         """
         This method gets the match results of a round and adds those players by player to the round
         """
@@ -143,7 +166,7 @@ class TournamentInfosCtrl(Controller):
         for match in _round.matches:
             _round.results[match.player1_id_pod] = match.player1_score_pod
             _round.results[match.player2_id_pod] = match.player2_score_pod
-        return _round.results  # -> dict(id:score)
+        return _round  # ->  Round  avec .result => dict(id:score)
 
     def add_players_points_to_tournament_totals(self, _round: Round) -> dict:
         """
@@ -160,33 +183,3 @@ class TournamentInfosCtrl(Controller):
             new_totals = dict(counter)
         self.data.total_results = new_totals
         return new_totals
-
-    def generate_next_round_matchups(self, _round: Round):
-        """
-        This method generates the tournament match-ups between the Players for a new round.
-        """
-        player_obj_results = self.sort_players_by_result(self.data)  # dict player_obj: float
-        print(player_obj_results)
-
-
-
-        # PlayerManager().from_identifier_to_player_obj()
-
-    def sort_tournament_players_by_ranking(self) -> list[Player]:
-        """
-        This method sorts the players of the tournament by ranking from high to low
-        """
-        tournament_players = []
-        players_identifiers = self.data.identifiers_list
-        for identifier in players_identifiers:
-            player_obj = PlayerManager().from_identifier_to_player_obj(identifier)
-            tournament_players.append(player_obj)
-        sorted_by_ranking = sorted(tournament_players, key=lambda x: x.ranking, reverse=True)
-        return sorted_by_ranking
-
-    def list_tournament_players(self):
-        tournament_players = []
-        for uuid in self.data.identifiers_list:
-            player_obj = PlayerManager().from_identifier_to_player_obj(uuid)
-            tournament_players.append(player_obj)
-        return tournament_players
