@@ -39,9 +39,11 @@ class TournamentInfosCtrl(Controller):
         return sorted_by_last_name
 
     # à adapter avec tournament et total_results à la place de round results
-    def sort_players_by_result(self, tournament: Tournament) -> Union[list, str]:
+    def sort_players_by_result(self, tournament: Tournament) -> list:
         """
-        This method lists all the players of a given tournament by result
+        This method sorts all the players of a given tournament by result
+        from highest to lowest
+        It also takes into account the general ranking of the players in case of tie result
         """
         if tournament.total_results == {}:
             return tournament.total_results
@@ -50,7 +52,9 @@ class TournamentInfosCtrl(Controller):
             for identifier in tournament.total_results:
                 player_obj = PlayerManager().from_identifier_to_player_obj(identifier)
                 player_obj_result_dict[player_obj] = tournament.total_results[identifier]
-            return sorted(player_obj_result_dict.items(), key=lambda x: x[1], reverse=True)
+            sorted_by_results_ranking = sorted(player_obj_result_dict.items(),
+                                               key=lambda x: (x[1], x[0].ranking), reverse=True)
+            return sorted_by_results_ranking
 
     def display_rounds_and_matches(self) -> list:
         """
@@ -161,8 +165,9 @@ class TournamentInfosCtrl(Controller):
         """
         This method generates the tournament match-ups between the Players for a new round.
         """
-        player_results = self.data.total_results  # dict id:float
-        print(player_results)
+        player_obj_results = self.sort_players_by_result(self.data)  # dict player_obj: float
+        print(player_obj_results)
+
 
 
         # PlayerManager().from_identifier_to_player_obj()

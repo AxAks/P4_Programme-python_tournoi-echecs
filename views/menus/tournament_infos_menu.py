@@ -51,6 +51,7 @@ class TournamentInfosMenu(Menu):
                 PLAYER = _tuple[0]
                 RESULT = _tuple[1]
                 print(f"Player: {PLAYER.last_name}, {PLAYER.first_name}, {PLAYER.identifier_pod}\n"
+                      f"Ranking: {PLAYER.ranking}\n"
                       f"Total: {RESULT}")
         self.current_page_ctrl(self.data).run()
 
