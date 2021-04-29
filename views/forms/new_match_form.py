@@ -1,6 +1,7 @@
 # coding=utf-8
 
 from constants import MATCH_PROPERTIES
+from controllers import tournament_infos_controller
 from views.forms.form import Form
 
 
@@ -11,7 +12,10 @@ class NewMatchForm(Form):
     """
 
     def __init__(self, tournament, player1_id, player2_id):
-        super().__init__(data=tournament, form_name='New Match Form',
+        super().__init__(program_name='Chess Tournament Manager', menu_name='New Match Form',
+                         previous_page_ctrl=tournament_infos_controller.TournamentInfosCtrl,
+                         exiting_message=f'Exiting Form',
+                         data=tournament,
                          properties=MATCH_PROPERTIES, cls=self, not_asked_properties=[])
         self.player1_id = player1_id
         self.player2_id = player2_id

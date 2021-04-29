@@ -14,13 +14,10 @@ class Menu(View):
     def __init__(self, program_name, menu_name, data=None,
                  previous_page_ctrl=None, current_page_ctrl=None,
                  root_page=False, exiting_message='Program Terminated'):
-        self.program_name = program_name
-        self.menu_name = f'-{menu_name}-'
-        self.data = data
-        self.previous_page_ctrl = previous_page_ctrl
+        super().__init__(program_name=program_name, menu_name=f'-{menu_name}-', data=data,
+                         previous_page_ctrl=previous_page_ctrl, exiting_message=exiting_message)
         self.current_page_ctrl = current_page_ctrl
         self.root_page = root_page
-        self.exiting_message = exiting_message
         self.choices = [self.quit, self.home, self.back,  self.load, self.save]
 
     def show(self) -> None:

@@ -3,6 +3,7 @@
 from datetime import date
 
 from constants import TOURNAMENT_PROPERTIES
+from controllers import list_tournaments_controller
 from models.models_utils.player_manager import PlayerManager
 from models.player import Player
 from views.forms.generic_inputs import ask_alphanumerical_string, ask_alphabetical_string, ask_iso_date, ask_integer
@@ -16,7 +17,9 @@ class NewTournamentForm(Form):
     """
 
     def __init__(self):
-        super().__init__(form_name='New Tournament Form', properties=TOURNAMENT_PROPERTIES,
+        super().__init__(program_name='Chess Tournament Manager', menu_name='New Tournament Form',
+                         previous_page_ctrl=list_tournaments_controller.ListTournamentCtrl,
+                         exiting_message=f'Exiting Form', properties=TOURNAMENT_PROPERTIES,
                          cls=self, not_asked_properties=['rounds_list', 'total_results'])
 
     def ask_name(self, input_info="Enter name: ") -> str:

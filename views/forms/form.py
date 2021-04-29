@@ -9,12 +9,14 @@ class Form(View):
     It enables the user to enter data and return the data as dicts.
     """
 
-    def __init__(self, properties, cls, not_asked_properties, data=None, form_name=None):
+    def __init__(self, program_name, menu_name, previous_page_ctrl, exiting_message,
+                 properties, cls, not_asked_properties, data=None,):
+        super().__init__(program_name=program_name, menu_name=f'-{menu_name}-', data=data,
+                         previous_page_ctrl=previous_page_ctrl, exiting_message=f'Exiting Form')
         self.properties = properties
         self.cls = cls
         self.not_asked_properties = not_asked_properties
         self.data = data
-        self.form_name = form_name
 
     def ask_property(self, property_name):
         """
@@ -37,7 +39,7 @@ class Form(View):
         It returns the info as a dict
         """
         print('========================')
-        print(self.form_name)
+        print(self.menu_name)
         print('========================')
         new_dict = {}
         for _property in self.properties:

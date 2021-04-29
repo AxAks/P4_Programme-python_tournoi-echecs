@@ -3,6 +3,7 @@
 from datetime import date
 
 from constants import PLAYER_PROPERTIES, RANKING_RANGE
+from controllers import players_controller
 
 from views.forms.form import Form
 from views.forms.generic_inputs import ask_alphabetical_string, ask_iso_date
@@ -14,8 +15,12 @@ class NewPlayerForm(Form):
     and returns a dict.
     """
 
-    def __init__(self):
-        super().__init__(form_name='New Player Form', properties=PLAYER_PROPERTIES, cls=self, not_asked_properties=['identifier'])
+    def __init__(self,):
+        super().__init__(program_name='Chess Tournament Manager', menu_name='New Player Form',
+                         previous_page_ctrl=players_controller.PlayerCtrl,
+                         exiting_message=f'Exiting Form',
+                         properties=PLAYER_PROPERTIES, cls=self,
+                         not_asked_properties=['identifier'])
 
     def ask_last_name(self, input_info="Enter Last Name: ") -> str:
         """

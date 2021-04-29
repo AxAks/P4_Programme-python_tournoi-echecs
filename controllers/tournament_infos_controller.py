@@ -142,7 +142,7 @@ class TournamentInfosCtrl(Controller):
         self.data.rounds_couples.append(round_couples) #  enregistre les round_couples du nouveau round sur tournament pour pouvoir verifier si les joueurs ont déjà joué ensemble
         return round_couples
 
-    def get_round_couples(self, sorted_players: list) -> Union[list[Player], list[tuple]]:
+    def get_round_couples(self, sorted_players: Union[list, dict]) -> Union[list[Player], list[tuple]]:
         upper_ranking_players_list, lower_ranking_players_list = split_even_list(sorted_players)
         round_couples = lists_to_tuples_list(upper_ranking_players_list, lower_ranking_players_list)
         return round_couples
