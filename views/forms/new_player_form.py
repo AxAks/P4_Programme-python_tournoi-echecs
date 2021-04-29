@@ -18,7 +18,6 @@ class NewPlayerForm(Form):
     def __init__(self):
         super().__init__(program_name='Chess Tournament Manager', menu_name='New Player Form',
                          previous_page_ctrl=players_controller.PlayerCtrl,
-                         exiting_message=f'Exiting Form',
                          properties=PLAYER_PROPERTIES, cls=self,
                          not_asked_properties=['identifier'])
 

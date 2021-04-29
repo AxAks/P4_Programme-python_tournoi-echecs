@@ -14,7 +14,6 @@ class NewMatchForm(Form):
     def __init__(self, tournament, player1_id, player2_id):
         super().__init__(program_name='Chess Tournament Manager', menu_name='New Match Form',
                          previous_page_ctrl=tournament_infos_controller.TournamentInfosCtrl,
-                         exiting_message=f'Exiting Form',
                          data=tournament,
                          properties=MATCH_PROPERTIES, cls=self, not_asked_properties=[])
         self.player1_id = player1_id

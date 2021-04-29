@@ -15,7 +15,6 @@ class NewRoundForm(Form):
     def __init__(self, tournament):
         super().__init__(program_name='Chess Tournament Manager', menu_name='New Round Form',
                          previous_page_ctrl=tournament_infos_controller.TournamentInfosCtrl,
-                         exiting_message=f'Exiting Form',
                          data=tournament,
                          properties=ROUND_PROPERTIES, cls=self, not_asked_properties=['matches', 'results'])
 

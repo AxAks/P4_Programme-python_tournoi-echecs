@@ -28,8 +28,9 @@ class Form(View):
         try:
             print(f'{property_name.replace("_", " ").title()} is :\n"{attribute}"')
         except AttributeError:
-            print('An Error has occurred, back to home menu')
-            # doit ramener au Home Menu et non quitter le programme ! possible si heritage de Menu
+            print('An Error has occurred, back to previous menu')
+            self.previous_page_ctrl().run()
+
         attribute = validate_input(attribute, method)  # ajouter la possibilité de sortir du formulaire
         return attribute
 

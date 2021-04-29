@@ -18,8 +18,8 @@ class NewTournamentForm(Form):
 
     def __init__(self):
         super().__init__(program_name='Chess Tournament Manager', menu_name='New Tournament Form',
-                         previous_page_ctrl=list_tournaments_controller.ListTournamentCtrl,
-                         exiting_message=f'Exiting Form', properties=TOURNAMENT_PROPERTIES,
+                         previous_page_ctrl=list_tournaments_controller.ListTournamentsCtrl,
+                         properties=TOURNAMENT_PROPERTIES,
                          cls=self, not_asked_properties=['rounds_list', 'total_results'])
 
     def ask_name(self, input_info="Enter name: ") -> str:
