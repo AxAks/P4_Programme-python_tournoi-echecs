@@ -13,6 +13,7 @@ def clear_terminal():
 
 
 # ajouter la possibilité de cancel via form qui herite de views, retour au menu precedent, en restant générique ...
+# remis dans Forms avec la possibilité de quitter mais pas réussi à mettre le CANCEL ici ( à supprimer ?)
 def validate_input(value, method):
     valid_entry = False
     choices_info = '1: YES, 2: NO'

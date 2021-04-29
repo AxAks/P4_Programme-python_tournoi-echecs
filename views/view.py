@@ -14,8 +14,12 @@ class View:
         self.previous_page_ctrl = previous_page_ctrl
         self.exiting_message = exiting_message
 
+    def menu_header(self):
+        print('========================')
+        print(self.program_name, '\n', self.menu_name)
+        print('========================')
 
-    #  pour pouvoir ajouter le cancel sur la navigation formulaire
+
     #  + pouvoir utiliser des fonctions de menu vers form : View -> Menu ; View -> Form
     # Lister tous les prints ici en fonction ?
 

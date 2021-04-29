@@ -76,12 +76,13 @@ class TournamentInfosCtrl(Controller):
         """
         This method enables to add a Round and the associasted Matches to the Tournament Object
         """
-        if self.data.rounds_list == self.data.rounds:
+        if len(self.data.rounds_list) >= self.data.rounds:
             return None
-        new_round_dict = NewRoundForm(self.data).add_new()
-        new_round = Round(**new_round_dict)
-        self.data.rounds_list.append(new_round)
-        return new_round
+        else:
+            new_round_dict = NewRoundForm(self.data).add_new()
+            new_round = Round(**new_round_dict)
+            self.data.rounds_list.append(new_round)
+            return new_round
 
     def add_start_time(self) -> datetime:  # datetime.now() quand on le créé, ou on entre le moment où les joueurs ont commencé à jouer
         """
