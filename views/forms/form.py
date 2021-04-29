@@ -9,7 +9,7 @@ class Form(View):
     It enables the user to enter data and return the data as dicts.
     """
 
-    def __init__(self, program_name, menu_name, previous_page_ctrl, exiting_message,
+    def __init__(self, program_name, menu_name, previous_page_ctrl,
                  properties, cls, not_asked_properties, data=None,):
         super().__init__(program_name=program_name, menu_name=f'-{menu_name}-', data=data,
                          previous_page_ctrl=previous_page_ctrl, exiting_message=f'Exiting Form')

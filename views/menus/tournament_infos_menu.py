@@ -10,9 +10,9 @@ class TournamentInfosMenu(Menu):
     It enables to display informations about this tournament or update it.
     """
 
-    def __init__(self, selected_tournament):
+    def __init__(self, tournament):
         super().__init__(program_name='Chess Tournament Manager', menu_name='Tournament Info Menu',
-                         data=selected_tournament,
+                         data=tournament,
                          root_page=False, previous_page_ctrl=list_tournaments_controller.ListTournamentsCtrl,
                          current_page_ctrl=tournament_infos_controller.TournamentInfosCtrl,
                          exiting_message='Now Leaving Chess Tournament Manager')

@@ -15,7 +15,7 @@ class NewPlayerForm(Form):
     and returns a dict.
     """
 
-    def __init__(self,):
+    def __init__(self):
         super().__init__(program_name='Chess Tournament Manager', menu_name='New Player Form',
                          previous_page_ctrl=players_controller.PlayerCtrl,
                          exiting_message=f'Exiting Form',
