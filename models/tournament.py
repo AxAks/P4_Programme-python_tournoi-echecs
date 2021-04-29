@@ -38,7 +38,7 @@ class Tournament(Model):
 
     def __repr__(self):
         return f'{self.name}, {self.location}, {self.start_date}, {self.end_date}\n' \
-               f'{self.rounds}\n' \
+               f'{self.rounds} Rounds\n' \
                f'{self.description}'
 
     @property

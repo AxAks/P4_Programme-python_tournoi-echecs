@@ -16,7 +16,7 @@ class TournamentInfosMenu(Menu):
                          root_page=False, previous_page_ctrl=list_tournaments_controller.ListTournamentsCtrl,
                          current_page_ctrl=tournament_infos_controller.TournamentInfosCtrl,
                          exiting_message='Now Leaving Chess Tournament Manager')
-        specific_menu_choices = [self.sort_players_by_last_name,
+        specific_menu_choices = [self.sort_players_by_last_name, self.sort_players_by_ranking,
                                  self.sort_players_by_result, self.display_rounds_and_matches,
                                  self.add_round_and_matches]
         [self.choices.append(choice) for choice in specific_menu_choices]
@@ -35,7 +35,21 @@ class TournamentInfosMenu(Menu):
                   f'{player.birthdate_pod}, {player.gender_pod}, {player.ranking}')
         self.current_page_ctrl(self.data).run()
 
-    def sort_players_by_result(self) -> None:  # for one selected tournament, scores et classement à calculer dans le controller
+    def sort_players_by_ranking(self) -> None:
+        """
+        This method calls the controller to display the players of the selected tournament
+        sorted by general ranking.
+        """
+        print('========================')
+        print(f'Players by ranking for "{self.data.name}": ')
+        print('========================')
+        sorted_players = self.current_page_ctrl(self.data).sort_tournament_players_by_ranking()
+        for player in sorted_players:
+            print(f'Player: {player.last_name}, {player.first_name}, {player.identifier_pod}\n'
+                  f'General Ranking: {player.ranking}')
+        self.current_page_ctrl(self.data).run()
+
+    def sort_players_by_result(self) -> None:
         """
         This method calls the controller to display the players of the selected tournament
         sorted by results.
@@ -51,8 +65,8 @@ class TournamentInfosMenu(Menu):
                 PLAYER = _tuple[0]
                 RESULT = _tuple[1]
                 print(f"Player: {PLAYER.last_name}, {PLAYER.first_name}, {PLAYER.identifier_pod}\n"
-                      f"Ranking: {PLAYER.ranking}\n"
-                      f"Total: {RESULT}")
+                      f"General Ranking: {PLAYER.ranking}\n"
+                      f"Total Points: {RESULT}")
         self.current_page_ctrl(self.data).run()
 
     def display_rounds_and_matches(self) -> None:

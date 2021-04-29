@@ -40,14 +40,32 @@ class TournamentInfosCtrl(Controller):
 
     def sort_tournament_players_by_ranking(self) -> list[Player]:
         """
-        This method sorts the players of the tournament by ranking from high to low
+        This method sorts the players of the tournament by general ranking from high to low
         """
         tournament_players = []
         for identifier in self.data.identifiers_list:
             player_obj = PlayerManager().from_identifier_to_player_obj(identifier)
             tournament_players.append(player_obj)
-        sorted_by_ranking = sorted(tournament_players, key=lambda x: x.ranking, reverse=True)
+        sorted_by_ranking = sorted(tournament_players, key=lambda x: (x.ranking, x.last_name, x.first_name),
+                                   reverse=True)
         return sorted_by_ranking
+
+    def sort_players_by_result(self, tournament: Tournament) -> Union[list[Player], Any]:
+        """
+        This method sorts all the players of a given tournament by result
+        from highest to lowest
+        It also takes into account the general ranking of the players in case of tie result
+        """
+        if tournament.total_results == {}:
+            return tournament.total_results
+        else:
+            player_obj_result_dict = {}
+            for identifier in tournament.total_results:
+                player_obj = PlayerManager().from_identifier_to_player_obj(identifier)
+                player_obj_result_dict[player_obj] = tournament.total_results[identifier]
+            sorted_by_results_ranking = sorted(player_obj_result_dict.items(),
+                                               key=lambda x: (x[1], x[0].ranking), reverse=True)
+            return sorted_by_results_ranking
 
     def sort_players_by_result(self, tournament: Tournament) -> Union[list[Player], Any]:
         """
