@@ -4,6 +4,7 @@ from datetime import datetime
 from typing import Union, Any
 from uuid import UUID
 
+from models.models_utils import data
 from utils import split_even_list, lists_to_tuples_list
 from models.models_utils.player_manager import PlayerManager
 from models.models_utils.supermanager import super_manager as sm
@@ -120,9 +121,17 @@ class TournamentInfosCtrl(Controller):
         new_tournament = list_tournaments_controller.ListTournamentsCtrl().add_tournament()
         tournament_controller = TournamentInfosCtrl(new_tournament)
         tournament = tournament_controller.data
-        self.generate_round_matchups(True)
+        matchups_round_1 = self.generate_round_matchups(is_first=True)
+        round_1 = self.enter_new_round(matchups_round_1)
+        self.get_round_results(round_1)
+        self.add_players_points_to_tournament_totals(round_1)
+        matchups_round_2 = self.generate_round_matchups()
+        round_2 = self.enter_new_round(matchups_round_2)
+        self.get_round_results(round_2)
+        self.add_players_points_to_tournament_totals(round_2)
+
         # while len(tournament.rounds_list) < tournament.rounds:
-        #     self.add_players_scores()
+        # PlayersMenu().update_player_ranking() # à la fin updater les ranking des players, mais ne pas appeler le PlayerMenu directement, passer par PlayerCtrl
 
         tournament_controller.run()
 
@@ -138,10 +147,9 @@ class TournamentInfosCtrl(Controller):
         self.get_round_results(round_2)
         self.add_players_points_to_tournament_totals(round_2)
 
-        # self.get_next_round_results(_round)
-        # while len(self.data.rounds_list) < self.data.rounds:
-        #    self.add_players_scores()
-
+        # while len(self.data.rounds_list) < self.data.rounds: # pour mettre fin au tournoi à un moment
+        # for identifier in self.data.identifiers_list:
+        #     new_ranking = PlayersMenu().update_player_ranking() # à la fin updater les ranking des players, mais ne pas appeler le PlayerMenu directement, passer par PlayerCtrl
         TournamentInfosCtrl(self.data).run()
 
     def generate_round_matchups(self, is_first=False) -> Union[list[tuple], dict]:
@@ -161,22 +169,35 @@ class TournamentInfosCtrl(Controller):
         self.data.rounds_couples.append(round_couples) #  enregistre les round_couples du nouveau round sur tournament pour pouvoir verifier si les joueurs ont déjà joué ensemble
         return round_couples
 
-    def get_round_couples(self, sorted_players: Union[list, dict]) -> Union[list[Player], list[tuple]]:
-        upper_ranking_players_list, lower_ranking_players_list = split_even_list(sorted_players)
-        round_couples = lists_to_tuples_list(upper_ranking_players_list, lower_ranking_players_list)
-        return round_couples
+    def get_round_couples(self, sorted_players: Union[list, dict]) -> Union[list[Player], list[tuple], str]:
+        if len(sorted_players) % 2 == 0:
+            middle_index = len(sorted_players) // 2
+            upper_ranking_players_list = sorted_players[middle_index:]
+            lower_ranking_players_list = sorted_players[:middle_index]
+        else:
+            return 'This list does not have an even number of items'
+        if len(upper_ranking_players_list) == len(lower_ranking_players_list):
+            round_couples = [(upper_ranking_players_list[i], lower_ranking_players_list[i])
+                             for i in range(0, len(upper_ranking_players_list))]
+            return round_couples
+        else:
+            return 'These lists do not have the same number of items'
 
-    def enter_new_round(self, round_couples):
-        round_dict = NewRoundForm(self.data).add_new()
-        _round = Round(**round_dict)
-        for _tuple in round_couples:
-            player1_id = _tuple[0].identifier_pod
-            player2_id = _tuple[1].identifier_pod
-            match_dict = NewMatchForm(self.data, player1_id, player2_id).add_new()
-            match = Match(**match_dict)
-            _round.matches.append(match)
-        self.data.rounds_list.append(_round)
-        return _round
+    def enter_new_round(self, round_couples: Union[list[Player], list[tuple] ,str]):
+        if isinstance(round_couples, str):
+            return None
+        else:
+            round_dict = NewRoundForm(self.data).add_new()
+            _round = Round(**round_dict)
+            for _tuple in round_couples:
+                player1_id = _tuple[0].identifier_pod
+                player2_id = _tuple[1].identifier_pod
+                match_dict = NewMatchForm(self.data, player1_id, player2_id).add_new()
+                match = Match(**match_dict)
+                _round.matches.append(match)
+            self.data.rounds_list.append(_round)
+            data.save()
+            return _round
 
     def get_round_results(self, _round: Round) -> Round:
         """

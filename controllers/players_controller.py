@@ -1,6 +1,7 @@
 # coding=utf-8
 from typing import Union
 
+from models.models_utils import data
 from models.models_utils.player_manager import PlayerManager
 from models.models_utils.supermanager import super_manager as sm
 from models.player import Player
@@ -24,6 +25,7 @@ class PlayerCtrl(Controller):
         """
         new_player_dict = NewPlayerForm().add_new()
         new_player = sm.managers[Player].create(**new_player_dict)
+        data.save()
         return new_player
 
     def update_player_ranking(self, search: str) -> Union[list, Player]:

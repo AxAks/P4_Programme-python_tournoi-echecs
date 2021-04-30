@@ -1,4 +1,5 @@
 # coding=utf-8
+from models.models_utils import data
 from models.models_utils.supermanager import super_manager as sm
 from models.models_utils.tournament_manager import TournamentManager
 from models.tournament import Tournament
@@ -20,7 +21,8 @@ class ListTournamentsCtrl(Controller):
         this method creates a new tournament entry in the registry.
         """
         new_tournament_dict = NewTournamentForm().add_new()
-        new_tournament = sm.managers[Tournament].create(**new_tournament_dict)  # gérer l'erreur de dates etc ici !
+        new_tournament = sm.managers[Tournament].create(**new_tournament_dict)
+        data.save()
         return new_tournament
 
     def sort_by_start_date(self) -> list:

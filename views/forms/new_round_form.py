@@ -3,7 +3,6 @@
 from constants import ROUND_PROPERTIES
 from controllers import tournament_infos_controller
 from views.forms.form import Form
-from views.forms.new_match_form import NewMatchForm
 
 
 class NewRoundForm(Form):
@@ -26,8 +25,8 @@ class NewRoundForm(Form):
         round_name = f'Round {n}'
         return round_name
 
-    def ask_start_time(self):  # datetime.now() quand on le créé, ou quand les joueurs ont commencé à jouer (actuellement le temps est trop court)
+    def ask_start_time(self):
         return tournament_infos_controller.TournamentInfosCtrl(self.data).add_start_time()
 
-    def ask_end_time(self):  # datetime.now() quand on entre le résultat du dernier match
+    def ask_end_time(self):
         return tournament_infos_controller.TournamentInfosCtrl(self.data).add_end_time()
