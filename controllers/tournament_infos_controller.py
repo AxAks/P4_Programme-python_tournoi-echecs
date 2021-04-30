@@ -5,7 +5,6 @@ from typing import Union, Any
 from uuid import UUID
 
 from models.models_utils import data
-from utils import split_even_list, lists_to_tuples_list
 from models.models_utils.player_manager import PlayerManager
 from models.models_utils.supermanager import super_manager as sm
 from models.tournament import Tournament
@@ -68,22 +67,11 @@ class TournamentInfosCtrl(Controller):
                                                key=lambda x: (x[1], x[0].ranking), reverse=True)
             return sorted_by_results_ranking
 
-    def sort_players_by_result(self, tournament: Tournament) -> Union[list[Player], Any]:
+    def display_rounds_couples(self) -> list[tuple]:
         """
-        This method sorts all the players of a given tournament by result
-        from highest to lowest
-        It also takes into account the general ranking of the players in case of tie result
+        This method lists the generated player matchups for the different rounds of a given tournament
         """
-        if tournament.total_results == {}:
-            return tournament.total_results
-        else:
-            player_obj_result_dict = {}
-            for identifier in tournament.total_results:
-                player_obj = PlayerManager().from_identifier_to_player_obj(identifier)
-                player_obj_result_dict[player_obj] = tournament.total_results[identifier]
-            sorted_by_results_ranking = sorted(player_obj_result_dict.items(),
-                                               key=lambda x: (x[1], x[0].ranking), reverse=True)
-            return sorted_by_results_ranking
+        return self.data.rounds_couples   # pb de savegarde des tuples dans serialize pas géré par json !!
 
     def display_rounds_and_matches(self) -> list:
         """
@@ -91,25 +79,14 @@ class TournamentInfosCtrl(Controller):
         """
         return self.data.rounds_list
 
-    def add_round_and_matches(self) -> Union[list[Round], None]:
-        """
-        This method enables to add a Round and the associasted Matches to the Tournament Object
-        """
-        if len(self.data.rounds_list) >= self.data.rounds:
-            return None
-        else:
-            new_round_dict = NewRoundForm(self.data).add_new()
-            new_round = Round(**new_round_dict)
-            self.data.rounds_list.append(new_round)
-            return new_round
 
-    def add_start_time(self) -> datetime:  # datetime.now() quand on le créé, ou on entre le moment où les joueurs ont commencé à jouer
+    def add_start_time(self) -> datetime:
         """
         This method automatically sets the start time of the Round Object
         """
         return datetime.now()
 
-    def add_end_time(self) -> datetime:  # doit etre renseigné automatiquement en fait à la fin de saisie ! # à reflechir
+    def add_end_time(self) -> datetime:
         """
         This method automatically sets the end time of the Round Object
         """
@@ -138,16 +115,16 @@ class TournamentInfosCtrl(Controller):
     def select_tournament(self):  # à rediger ! et pour les tester
         self.data = list_tournaments_controller.ListTournamentsCtrl().select_one()
         # si on tape un mauvais identifier tournament, ca pete !
-        matchups_round_1 = self.generate_round_matchups(is_first=True)
-        round_1 = self.enter_new_round(matchups_round_1)
-        self.get_round_results(round_1)
-        self.add_players_points_to_tournament_totals(round_1)
-        matchups_round_2 = self.generate_round_matchups()
-        round_2 = self.enter_new_round(matchups_round_2)
-        self.get_round_results(round_2)
-        self.add_players_points_to_tournament_totals(round_2)
+        while len(self.data.rounds_list) < self.data.rounds:  # pour mettre fin au tournoi quand il n'y a plus de round a faire
+            if len(self.data.rounds_list) == 0:
+                matchups_next_round = self.generate_round_matchups(is_first=True)
+            else:
+                matchups_next_round = self.generate_round_matchups()
+            next_round = self.enter_new_round(matchups_next_round)
+            self.get_round_results(next_round)
+            self.add_players_points_to_tournament_totals(next_round)
+            data.save()
 
-        # while len(self.data.rounds_list) < self.data.rounds: # pour mettre fin au tournoi à un moment
         # for identifier in self.data.identifiers_list:
         #     new_ranking = PlayersMenu().update_player_ranking() # à la fin updater les ranking des players, mais ne pas appeler le PlayerMenu directement, passer par PlayerCtrl
         TournamentInfosCtrl(self.data).run()
@@ -177,13 +154,14 @@ class TournamentInfosCtrl(Controller):
         else:
             return 'This list does not have an even number of items'
         if len(upper_ranking_players_list) == len(lower_ranking_players_list):
+            #   verifier durant la boucle dans self.data.rounds_couples si une association de joueurs est deja présente dans les rounds précédents (dans self.data.rounds_couples)
             round_couples = [(upper_ranking_players_list[i], lower_ranking_players_list[i])
                              for i in range(0, len(upper_ranking_players_list))]
             return round_couples
         else:
             return 'These lists do not have the same number of items'
 
-    def enter_new_round(self, round_couples: Union[list[Player], list[tuple] ,str]):
+    def enter_new_round(self, round_couples: Union[list[Player], list[tuple], str]):
         if isinstance(round_couples, str):
             return None
         else:
@@ -196,7 +174,7 @@ class TournamentInfosCtrl(Controller):
                 match = Match(**match_dict)
                 _round.matches.append(match)
             self.data.rounds_list.append(_round)
-            data.save()
+            data.save()  #  "TypeError: Object of type Player is not JSON serializable" (dans Tournament)
             return _round
 
     def get_round_results(self, _round: Round) -> Round:

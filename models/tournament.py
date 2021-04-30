@@ -27,12 +27,14 @@ class Tournament(Model):
         the types of data for Tournament are as follows :
         - name: string
         - location: string
+        - rounds: integer
         - dates: date or string
         - identifiers_list: list[str] or list[UUID]
         - time_control: string or Time_control
         - description: string
         - rounds_list: list[dict] or list[Round]
-        - rounds: integer
+        - total_results: dict
+        - rounds_couples: list[tuple]
         """
         super().__init__(TOURNAMENT_PROPERTIES, **data)
 

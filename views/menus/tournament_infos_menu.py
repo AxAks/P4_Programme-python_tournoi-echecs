@@ -17,8 +17,8 @@ class TournamentInfosMenu(Menu):
                          current_page_ctrl=tournament_infos_controller.TournamentInfosCtrl,
                          exiting_message='Now Leaving Chess Tournament Manager')
         specific_menu_choices = [self.sort_players_by_last_name, self.sort_players_by_ranking,
-                                 self.sort_players_by_result, self.display_rounds_and_matches,
-                                 self.add_round_and_matches]
+                                 self.sort_players_by_result, self.display_rounds_couples,
+                                 self.display_rounds_and_matches]
         [self.choices.append(choice) for choice in specific_menu_choices]
 
     def sort_players_by_last_name(self) -> None:  # for one selected tournament
@@ -69,9 +69,28 @@ class TournamentInfosMenu(Menu):
                       f"Total Points: {RESULT}")
         self.current_page_ctrl(self.data).run()
 
+    def display_rounds_couples(self) -> None:
+        """
+        This method calls the controller to display the generate player matchups
+        for the different rounds of the tournament
+        """
+        round_pairs = self.current_page_ctrl(self.data).display_rounds_couples()  # pb de savegarde des tuples dans serialize pas géré par json !!
+        r = 1
+        for pairs in round_pairs:
+            print(f'Round {str(r)}\n')
+            m = 1
+            for pair in pairs:
+                print(f'Match {str(m)}\n'
+                      f'Player 1: {pair[0].last_name}, {pair[0].first_name}, {pair[0].identifier_pod}\n'
+                      f'Player 2: {pair[1].last_name}, {pair[1].first_name}, {pair[1].identifier_pod}\n')
+                m += 1
+            r += 1
+        self.current_page_ctrl(self.data).run()
+
     def display_rounds_and_matches(self) -> None:
         """
-        This method calls the controller to display the rounds of the selected tournament.
+        This method calls the controller to display the match results
+        in the rounds played for the selected tournament.
         """
         rounds_list = self.current_page_ctrl(self.data).display_rounds_and_matches()
         print('========================')
@@ -94,13 +113,4 @@ class TournamentInfosMenu(Menu):
                           f'{player2_obj.last_name}, {player2_obj.first_name}: '
                           f'{match.player2_score_pod}\n')
                     n += 1
-        self.current_page_ctrl(self.data).run()
-
-    def add_round_and_matches(self) -> None:  # à faire !
-        """
-        This method calls the controller to add a round to the selected tournament.
-        """
-        new_round = self.current_page_ctrl(self.data).add_round_and_matches()
-        if new_round is None:
-            print('Cannot add a new round, this tournament is finished')
         self.current_page_ctrl(self.data).run()
