@@ -17,7 +17,7 @@ class TournamentInfosMenu(Menu):
                          current_page_ctrl=tournament_infos_controller.TournamentInfosCtrl,
                          exiting_message='Now Leaving Chess Tournament Manager')
         specific_menu_choices = [self.sort_players_by_last_name, self.sort_players_by_ranking,
-                                 self.sort_players_by_result, self.display_rounds_couples,
+                                 self.sort_players_by_result, self.display_already_played,
                                  self.display_rounds_and_matches]
         [self.choices.append(choice) for choice in specific_menu_choices]
 
@@ -69,22 +69,19 @@ class TournamentInfosMenu(Menu):
                       f"Total Points: {RESULT}")
         self.current_page_ctrl(self.data).run()
 
-    def display_rounds_couples(self) -> None:
+    def display_already_played(self) -> None:
         """
-        This method calls the controller to display the generate player matchups
-        for the different rounds of the tournament
+        This method calls the controller to display for each player
+        the opponents they already in the previous rounds of a given tournament
         """
-        round_pairs = self.current_page_ctrl(self.data).display_rounds_couples()  # pb de savegarde des tuples dans serialize pas géré par json !!
-        r = 1
-        for pairs in round_pairs:
-            print(f'Round {str(r)}\n')
-            m = 1
-            for pair in pairs:
-                print(f'Match {str(m)}\n'
-                      f'Player 1: {pair[0].last_name}, {pair[0].first_name}, {pair[0].identifier_pod}\n'
-                      f'Player 2: {pair[1].last_name}, {pair[1].first_name}, {pair[1].identifier_pod}\n')
-                m += 1
-            r += 1
+        already_played = self.current_page_ctrl(self.data).display_already_played()  # pb de savegarde des tuples dans serialize pas géré par json !!
+        if already_played == {}:
+            print('No registered Matches for this Tournament yet')
+        else:
+            for player in already_played:
+                print(f' {player} already played against:\n')
+                for opponent in already_played[player]:
+                    print(f'- {opponent}\n')
         self.current_page_ctrl(self.data).run()
 
     def display_rounds_and_matches(self) -> None:

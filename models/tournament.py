@@ -10,6 +10,7 @@ from uuid import UUID
 from constants import ALPHA_NUMERICAL_STRING_RULE, ALPHABETICAL_STRING_RULE, TOURNAMENT_PROPERTIES
 
 from models.model import Model
+from models.player import Player
 from models.round import Round
 
 
@@ -347,20 +348,21 @@ class Tournament(Model):
             raise AttributeError()
 
     @property
-    def already_played(self) -> list[tuple]:
-        return [player.serialize() for round_couples in self.__already_played
-                for players_tuple in round_couples
-                for player in players_tuple]
-
-    @property
-    def already_played(self) -> list[tuple]:
+    def already_played(self) -> dict[Player]:
         return self.__already_played
 
-    @played_with.setter
-    def already_played(self, value: list[tuple]):
-        if value is None or value == []:
-            self.__already_played = []
-        elif isinstance(value, list):
+    @property
+    def already_played_pod(self) -> dict[dict]:
+        serialized_values_already_played = [opponent.serialize() for opponent in opponent_list]
+        totally_serialized_already_played = {player.serialize(): opponent_list
+                                     for player, opponent_list in self.__already_played}
+        return totally_serialized_already_played
+
+    @already_played.setter
+    def already_played(self, value: dict[dict]):
+        if value is None or value == {}:
+            self.__already_played = {}
+        elif isinstance(value, dict):
             self.__already_played = value
         else:
             raise AttributeError()

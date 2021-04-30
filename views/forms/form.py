@@ -1,5 +1,4 @@
 # coding=utf-8
-from utils import validate_input
 from views.view import View
 
 

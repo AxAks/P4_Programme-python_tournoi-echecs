@@ -67,11 +67,11 @@ class TournamentInfosCtrl(Controller):
                                                key=lambda x: (x[1], x[0].ranking), reverse=True)
             return sorted_by_results_ranking
 
-    def display_rounds_couples(self) -> list[tuple]:
+    def display_already_played(self) -> dict[Player]:
         """
-        This method lists the generated player matchups for the different rounds of a given tournament
+        This method lists for each player the opponents they already in the previous rounds of a given tournament
         """
-        return self.data.rounds_couples   # pb de savegarde des tuples dans serialize pas géré par json !!
+        return self.data.already_played   # pb de savegarde des tuples dans serialize pas géré par json !!
 
     def display_rounds_and_matches(self) -> list:
         """
@@ -143,10 +143,9 @@ class TournamentInfosCtrl(Controller):
             sorted_players_obj = [_tuple[0] for _tuple in sorted_players_results]
         round_couples = self.get_round_couples(sorted_players_obj)
         #  verifier vers ici dans self.data.rounds_couples si une association de joueurs est deja présente dans les rounds précédents (dans self.data.rounds_couples)
-        self.data.rounds_couples.append(round_couples) #  enregistre les round_couples du nouveau round sur tournament pour pouvoir verifier si les joueurs ont déjà joué ensemble
         return round_couples
 
-    def get_round_couples(self, sorted_players: Union[list, dict]) -> Union[list[Player], list[tuple], str]:
+    def get_round_couples(self, sorted_players: Union[list, dict]) -> Union[list[Player], list[list], str]:
         if len(sorted_players) % 2 == 0:
             middle_index = len(sorted_players) // 2
             upper_ranking_players_list = sorted_players[middle_index:]
@@ -155,26 +154,31 @@ class TournamentInfosCtrl(Controller):
             return 'This list does not have an even number of items'
         if len(upper_ranking_players_list) == len(lower_ranking_players_list):
             #   verifier durant la boucle dans self.data.rounds_couples si une association de joueurs est deja présente dans les rounds précédents (dans self.data.rounds_couples)
-            round_couples = [(upper_ranking_players_list[i], lower_ranking_players_list[i])
+            round_couples = [[upper_ranking_players_list[i], lower_ranking_players_list[i]]
                              for i in range(0, len(upper_ranking_players_list))]
             return round_couples
         else:
             return 'These lists do not have the same number of items'
 
-    def enter_new_round(self, round_couples: Union[list[Player], list[tuple], str]):
+    def enter_new_round(self, round_couples: Union[list[list[Player]], str]) -> Round:
         if isinstance(round_couples, str):
             return None
         else:
             round_dict = NewRoundForm(self.data).add_new()
             _round = Round(**round_dict)
-            for _tuple in round_couples:
-                player1_id = _tuple[0].identifier_pod
-                player2_id = _tuple[1].identifier_pod
+            for _list in round_couples:
+                player1_id = _list[0].identifier_pod
+                player2_id = _list[1].identifier_pod
                 match_dict = NewMatchForm(self.data, player1_id, player2_id).add_new()
                 match = Match(**match_dict)
                 _round.matches.append(match)
+                #  enregistre les round_couples du nouveau round sur tournament pour pouvoir verifier si les joueurs ont déjà joué ensemble
+                player1_obj = PlayerManager().from_identifier_to_player_obj(player1_id)
+                player2_obj = PlayerManager().from_identifier_to_player_obj(player2_id)
+                self.data.already_played.setdefault(player1_obj, []).append(player2_obj)
+                self.data.already_played.setdefault(player2_obj, []).append(player1_obj)
             self.data.rounds_list.append(_round)
-            data.save()  #  "TypeError: Object of type Player is not JSON serializable" (dans Tournament)
+            data.save()  #  "TypeError: Object of type Player is not JSON serializable" si tuple (dans Tournament)
             return _round
 
     def get_round_results(self, _round: Round) -> Round:
@@ -185,7 +189,7 @@ class TournamentInfosCtrl(Controller):
         for match in _round.matches:
             _round.results[match.player1_id_pod] = match.player1_score_pod
             _round.results[match.player2_id_pod] = match.player2_score_pod
-        return _round  # ->  Round  avec .result => dict(id:score)
+        return _round
 
     def add_players_points_to_tournament_totals(self, _round: Round) -> dict:
         """
