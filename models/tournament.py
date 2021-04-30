@@ -34,7 +34,7 @@ class Tournament(Model):
         - description: string
         - rounds_list: list[dict] or list[Round]
         - total_results: dict
-        - rounds_couples: list[tuple]
+        - already_played: dict[Player] ?
         """
         super().__init__(TOURNAMENT_PROPERTIES, **data)
 
@@ -347,20 +347,20 @@ class Tournament(Model):
             raise AttributeError()
 
     @property
-    def rounds_couples_pod(self) -> list[tuple]:
-        return [player.serialize() for round_couples in self.__rounds_couples
+    def already_played(self) -> list[tuple]:
+        return [player.serialize() for round_couples in self.__already_played
                 for players_tuple in round_couples
                 for player in players_tuple]
 
     @property
-    def rounds_couples(self) -> list[tuple]:
-        return self.__rounds_couples
+    def already_played(self) -> list[tuple]:
+        return self.__already_played
 
-    @rounds_couples.setter
-    def rounds_couples(self, value: list[tuple]):
+    @played_with.setter
+    def already_played(self, value: list[tuple]):
         if value is None or value == []:
-            self.__rounds_couples = []
+            self.__already_played = []
         elif isinstance(value, list):
-            self.__rounds_couples = value
+            self.__already_played = value
         else:
             raise AttributeError()
