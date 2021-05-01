@@ -35,7 +35,7 @@ class Tournament(Model):
         - description: string
         - rounds_list: list[dict] or list[Round]
         - total_results: dict
-        - already_played: dict[Player] ?
+        - already_played: dict[Player] or dict[dict]
         """
         super().__init__(TOURNAMENT_PROPERTIES, **data)
 
@@ -353,16 +353,34 @@ class Tournament(Model):
 
     @property
     def already_played_pod(self) -> dict[dict]:
-        serialized_values_already_played = [opponent.serialize() for opponent in opponent_list]
-        totally_serialized_already_played = {player.serialize(): opponent_list
-                                     for player, opponent_list in self.__already_played}
-        return totally_serialized_already_played
+        serialized_already_played = {player.serialize(): [opponent.serialize() for opponent in opponent_list]
+                                     for player, opponent_list in self.__already_played.items()}
+        return serialized_already_played
 
     @already_played.setter
     def already_played(self, value: dict[dict]):
+        already_played = {}
         if value is None or value == {}:
-            self.__already_played = {}
+            try:
+                self.__already_played = already_played
+            except AttributeError:
+                raise AttributeError()
         elif isinstance(value, dict):
-            self.__already_played = value
+            for player, opponent_list in value:
+                if isinstance(player, Player) and isinstance(opponent_list, list):
+                    try:
+                        self.__already_played[player] = opponent_list
+                    except AttributeError:
+                        raise AttributeError()
+                elif isinstance(player, dict) and isinstance(opponent_list, list):
+                    try:
+                        player_obj = Player(**player)
+                        opponent_obj_list = [Player(**opponent) for opponent in opponent_list]
+                        already_played[player_obj] = opponent_obj_list
+                        self.__already_played = already_played
+                    except AttributeError:
+                        raise AttributeError()
+                else:
+                    raise AttributeError()
         else:
             raise AttributeError()

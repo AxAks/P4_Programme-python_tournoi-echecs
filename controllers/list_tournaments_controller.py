@@ -1,4 +1,5 @@
 # coding=utf-8
+from controllers import home_controller
 from models.models_utils import data
 from models.models_utils.supermanager import super_manager as sm
 from models.models_utils.tournament_manager import TournamentManager
@@ -67,4 +68,8 @@ class ListTournamentsCtrl(Controller):
         """
         _input = input('Search a tournament by name, location or dates: ')
         selected_tournament = TournamentManager().search_one(_input)
-        return selected_tournament
+        if selected_tournament == {}:
+            print('please retry: ')
+            home_controller.HomeCtrl().run()
+        else:
+            return selected_tournament
