@@ -47,7 +47,7 @@ class Form(View):
                         valid_entry = True
                     else:
                         print('Cancelled, back to previous menu page ...')
-                        self.previous_page_ctrl().run()
+                        self.previous_page_ctrl(self.data).run()
                 else:
                     print(wrong_input)
             except ValueError:

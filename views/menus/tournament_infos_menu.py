@@ -17,7 +17,7 @@ class TournamentInfosMenu(Menu):
                          current_page_ctrl=tournament_infos_controller.TournamentInfosCtrl,
                          exiting_message='Now Leaving Chess Tournament Manager')
         specific_menu_choices = [self.sort_players_by_last_name, self.sort_players_by_ranking,
-                                 self.sort_players_by_result, self.display_already_played,
+                                 self.sort_players_by_result, self.display_already_played_games,
                                  self.display_rounds_and_matches]
         [self.choices.append(choice) for choice in specific_menu_choices]
 
@@ -69,7 +69,7 @@ class TournamentInfosMenu(Menu):
                       f"Total Points: {RESULT}")
         self.current_page_ctrl(self.data).run()
 
-    def display_already_played(self) -> None:
+    def display_already_played_games(self) -> None:
         """
         This method calls the controller to display for each player
         the opponents they already in the previous rounds of a given tournament
@@ -79,9 +79,13 @@ class TournamentInfosMenu(Menu):
             print('No registered Matches for this Tournament yet')
         else:
             for player in already_played:
-                print(f' {player} already played against:\n')
+                player_obj = PlayerManager().from_identifier_to_player_obj(player)
+                print(f'{player_obj.last_name}, {player_obj.first_name}, {player_obj.identifier_pod}'
+                      f'has already played against:')
                 for opponent in already_played[player]:
-                    print(f'- {opponent}\n')
+                    opponent_obj = PlayerManager().from_identifier_to_player_obj(opponent)
+                    print(f' - {opponent_obj.last_name}, {opponent_obj.first_name}, {opponent_obj.identifier_pod}')
+                print('')
         self.current_page_ctrl(self.data).run()
 
     def display_rounds_and_matches(self) -> None:
@@ -102,12 +106,10 @@ class TournamentInfosMenu(Menu):
                 for match in _round.matches:
                     player1_obj = PlayerManager().from_identifier_to_player_obj(match.player1_id)
                     player2_obj = PlayerManager().from_identifier_to_player_obj(match.player2_id)
-                    print(f'\nMatch {n}:\n'
-                          f'- {player1_obj.identifier_pod}\n'
-                          f'{player1_obj.last_name}, {player1_obj.first_name}: '
+                    print(f'Match {n}:\n'
+                          f'{player1_obj.last_name}, {player1_obj.first_name}, {player1_obj.identifier_pod}\n'
                           f'{match.player1_score_pod}\n'
-                          f'- {player2_obj.identifier_pod}\n'
-                          f'{player2_obj.last_name}, {player2_obj.first_name}: '
+                          f'{player2_obj.last_name}, {player2_obj.first_name}, {player2_obj.identifier_pod}\n'
                           f'{match.player2_score_pod}\n')
                     n += 1
         self.current_page_ctrl(self.data).run()

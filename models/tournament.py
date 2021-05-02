@@ -348,17 +348,11 @@ class Tournament(Model):
             raise AttributeError()
 
     @property
-    def already_played(self) -> dict[Player]:
+    def already_played(self) -> dict[list]:
         return self.__already_played
 
-    @property
-    def already_played_pod(self) -> dict[dict]:
-        serialized_already_played = {player.serialize(): [opponent.serialize() for opponent in opponent_list]
-                                     for player, opponent_list in self.__already_played.items()}
-        return serialized_already_played
-
     @already_played.setter
-    def already_played(self, value: dict[dict]):
+    def already_played(self, value: dict[list]):
         already_played = {}
         if value is None or value == {}:
             try:
@@ -366,21 +360,10 @@ class Tournament(Model):
             except AttributeError:
                 raise AttributeError()
         elif isinstance(value, dict):
-            for player, opponent_list in value:
-                if isinstance(player, Player) and isinstance(opponent_list, list):
-                    try:
-                        self.__already_played[player] = opponent_list
-                    except AttributeError:
-                        raise AttributeError()
-                elif isinstance(player, dict) and isinstance(opponent_list, list):
-                    try:
-                        player_obj = Player(**player)
-                        opponent_obj_list = [Player(**opponent) for opponent in opponent_list]
-                        already_played[player_obj] = opponent_obj_list
-                        self.__already_played = already_played
-                    except AttributeError:
-                        raise AttributeError()
-                else:
-                    raise AttributeError()
+            try:
+                self.__already_played = value
+            except AttributeError:
+                raise AttributeError()
         else:
             raise AttributeError()
+

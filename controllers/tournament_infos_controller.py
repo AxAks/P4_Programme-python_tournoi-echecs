@@ -79,7 +79,6 @@ class TournamentInfosCtrl(Controller):
         """
         return self.data.rounds_list
 
-
     def add_start_time(self) -> datetime:
         """
         This method automatically sets the start time of the Round Object
@@ -91,8 +90,6 @@ class TournamentInfosCtrl(Controller):
         This method automatically sets the end time of the Round Object
         """
         return datetime.now()
-
-
 
     def add_new_tournament(self):  # à tester !!!!
         new_tournament = list_tournaments_controller.ListTournamentsCtrl().add_tournament()
@@ -107,7 +104,7 @@ class TournamentInfosCtrl(Controller):
             data.save()
 
         # while len(tournament.rounds_list) < tournament.rounds:
-        # PlayersMenu().update_player_ranking() # à la fin updater les ranking des players, mais ne pas appeler le PlayerMenu directement, passer par PlayerCtrl
+        #  PlayersMenu().update_player_ranking() # à la fin updater les ranking des players, mais ne pas appeler le PlayerMenu directement, passer par PlayerCtrl
 
         TournamentInfosCtrl.run()
 
@@ -123,8 +120,8 @@ class TournamentInfosCtrl(Controller):
             self.add_players_points_to_tournament_totals(next_round)
             data.save()
 
-        # for identifier in self.data.identifiers_list:
-        #     new_ranking = PlayersMenu().update_player_ranking() # à la fin updater les ranking des players, mais ne pas appeler le PlayerMenu directement, passer par PlayerCtrl
+        #  for identifier in self.data.identifiers_list:
+        #      new_ranking = PlayersMenu().update_player_ranking() # à la fin updater les ranking des players, mais ne pas appeler le PlayerMenu directement, passer par PlayerCtrl
         TournamentInfosCtrl(self.data).run()
 
     def generate_round_matchups(self, is_first=False) -> Union[list[Player], list[list], str]:
@@ -159,21 +156,20 @@ class TournamentInfosCtrl(Controller):
         else:
             return 'This list does not have an even number of items'
         if len(upper_ranking_players_list) == len(lower_ranking_players_list):
-            #   verifier durant la boucle dans self.data.rounds_couples si une association de joueurs est deja présente dans les rounds précédents (dans self.data.rounds_couples)
-            #### à revoir !!! finir
-            round_couples = [[upper_ranking_players_list[i], lower_ranking_players_list[i]]
-                             if [upper_ranking_players_list[i], lower_ranking_players_list[i]]
-                                not in self.data.already_played.items()
-                             else [upper_ranking_players_list[i], lower_ranking_players_list[i+1]]
-                             for i in range(0, len(upper_ranking_players_list))]
-            print(self.data.total_results)
-            print(round_couples)
-            print(self.data.already_played)
+            if self.data.already_played == {}:
+                round_couples = [[upper_ranking_players_list[i], lower_ranking_players_list[i]]
+                                 for i in range(0, len(upper_ranking_players_list))]
+            else:
+                round_couples = [[upper_ranking_players_list[i], lower_ranking_players_list[i]]
+                                 if lower_ranking_players_list[i].identifier_pod
+                                    not in self.data.already_played[upper_ranking_players_list[i].identifier_pod]
+                                 else [upper_ranking_players_list[i], lower_ranking_players_list[i-1]]  # pas fiable du tout !! ...
+                                 for i in range(0, len(upper_ranking_players_list))]
             return round_couples
         else:
             return 'These lists do not have the same number of items'
 
-    def enter_new_round(self, round_couples: Union[list[list[Player]], str]) -> Round:
+    def enter_new_round(self, round_couples: Union[list[list[Player]], str]) -> Union[Round, None]:
         """
         This method enables to register a new round with the matches results.
         It also saves the matchups to be checked in the next round to avoid two players to play together twice
@@ -189,10 +185,8 @@ class TournamentInfosCtrl(Controller):
                 match_dict = NewMatchForm(self.data, player1_id, player2_id).add_new()
                 match = Match(**match_dict)
                 _round.matches.append(match)
-                player1_obj = PlayerManager().from_identifier_to_player_obj(player1_id)
-                player2_obj = PlayerManager().from_identifier_to_player_obj(player2_id)
-                self.data.already_played.setdefault(player1_obj, []).append(player2_obj)
-                self.data.already_played.setdefault(player2_obj, []).append(player1_obj)
+                self.data.already_played.setdefault(player1_id, []).append(player2_id)
+                self.data.already_played.setdefault(player2_id, []).append(player1_id)
             self.data.rounds_list.append(_round)
             data.save()
             return _round
