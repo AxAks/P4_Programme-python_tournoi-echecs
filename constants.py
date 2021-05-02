@@ -24,4 +24,4 @@ TOURNAMENT_PROPERTIES = ['name', 'location', 'start_date', 'end_date', 'rounds',
 
 PLAYER_PROPERTIES = ['last_name', 'identifier', 'first_name', 'birthdate', 'gender', 'ranking']
 ROUND_PROPERTIES = ['name', 'matches', 'start_time', 'end_time', 'results']
-MATCH_PROPERTIES = ['player1_id', 'player1_score', 'player2_id', 'player2_score']
+MATCH_PROPERTIES = ['player1_id', 'player2_id', 'player1_score', 'player2_score']

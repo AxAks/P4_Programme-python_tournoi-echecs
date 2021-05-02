@@ -7,7 +7,7 @@ from views.menus.menu import Menu
 class TournamentInfosMenu(Menu):
     """
     This class is the Menu for the management of one selected Tournament.
-    It enables to display informations about this tournament or update it.
+    It enables to display information about this tournament or update it.
     """
 
     def __init__(self, tournament):
@@ -22,7 +22,7 @@ class TournamentInfosMenu(Menu):
         [self.choices.append(choice) for choice in specific_menu_choices]
 
     def resume_tournament(self) -> None:
-        if self.current_page_ctrl(self.data).resume_current_tournament() == None:
+        if self.current_page_ctrl(self.data).resume_current_tournament() is None:
             print('This tournament is finished, no more rounds to play')
         self.current_page_ctrl(self.data).run()
 

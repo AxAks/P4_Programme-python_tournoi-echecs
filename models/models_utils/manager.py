@@ -41,7 +41,7 @@ class Manager:
     def search_one(self, _input) -> Union[dict[Any], Any]:
         print('========================')
         results = self.search(_input)
-        while len(results) > 1: # voir aide afficher tous les joueurs du registre !!
+        while len(results) > 1:
             print(f'{len(results)} matches returned:')
             for identifier in results:
                 _obj = results[identifier]

@@ -1,6 +1,6 @@
 # coding=utf-8
 import collections
-from itertools import combinations, product
+from itertools import permutations
 from datetime import datetime
 from typing import Union, Any
 from uuid import UUID
@@ -160,9 +160,25 @@ class TournamentInfosCtrl(Controller):
                 round_couples = [[upper_ranking_players_list[i], lower_ranking_players_list[i]]
                                  for i in range(0, len(upper_ranking_players_list))]
             else:
-                test_round_couples = list(product(upper_ranking_players_list, lower_ranking_players_list))
-                print(test_round_couples)
-                # list(combinations('5713', 2))  voir comment utiliser combinations pour associer les joueurs n'ayant pas encore joué ensemble
+                all_possible_matchups = []
+                upper_list_permutations = permutations(upper_ranking_players_list, len(lower_ranking_players_list))
+                for each_permutation in upper_list_permutations:
+                    zipped = zip(each_permutation, lower_ranking_players_list)
+                    all_possible_matchups.append(list(zipped))
+                print(self.data.already_played)  # {identifier:[identifier,identifier...], identifier:[identifier,identifier...], ....}
+                print(all_possible_matchups)  # [(Player, Player), (Player, Player) ...]
+                test_round_couples = []
+                already_played_tuples_list = []
+
+                all_players_already_played_match = []
+                for identifier in self.data.already_played:
+                    for opponent in self.data.already_played[identifier]:
+                        already_played_match = (identifier, opponent)
+                        if already_played_match not in all_players_already_played_match:
+                            all_players_already_played_match.append(already_played_match)
+                print(all_players_already_played_match)
+                # for matchup in all_possible_matchups:
+
                 round_couples = [[upper_ranking_players_list[i], lower_ranking_players_list[i]]
                                  if lower_ranking_players_list[i].identifier_pod
                                     not in self.data.already_played[upper_ranking_players_list[i].identifier_pod]
