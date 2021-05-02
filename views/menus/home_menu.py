@@ -14,25 +14,25 @@ class HomeMenu(Menu):
         super().__init__(program_name='Chess Tournament Manager', menu_name='Home Menu',
                          root_page=True, current_page_ctrl=home_controller.HomeCtrl,
                          exiting_message='Now Leaving Chess Tournament Manager')
-        specific_menu_choices = [self.launch_new_tournament, self.resume_tournament,
+        specific_menu_choices = [self.launch_new_tournament, self.search_registered_tournament,
                                  self.manage_players, self.manage_tournaments]
         [self.choices.append(choice) for choice in specific_menu_choices]
 
-    def launch_new_tournament(self):  # à verifier
+    def launch_new_tournament(self):
         """
         This method calls the controller to create a new tournament
         and start it directly
         """
         self.current_page_ctrl().launch_new_tournament()
 
-    def resume_tournament(self):
+    def search_registered_tournament(self):
         """
         this method calls the controller to search a previously saved tournament
         """
         print('========================')
         print('Tournament Selection: ')
         print('========================')
-        self.current_page_ctrl().resume_tournament()
+        self.current_page_ctrl().search_registered_tournament()
 
     def manage_players(self) -> None:
         """

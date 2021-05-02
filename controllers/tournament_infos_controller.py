@@ -12,8 +12,8 @@ from models.player import Player
 from models.round import Round
 from models.match import Match
 from controllers.controller import Controller
-from controllers import list_tournaments_controller
 from views.forms.new_match_form import NewMatchForm
+from views.forms.new_player_form import NewPlayerForm
 from views.forms.new_round_form import NewRoundForm
 from views.menus.tournament_infos_menu import TournamentInfosMenu
 
@@ -26,6 +26,20 @@ class TournamentInfosCtrl(Controller):
     def __init__(self, tournament=None):
         self.menu = TournamentInfosMenu(tournament)
         self.data = tournament
+
+    def resume_current_tournament(self) -> Union[dict, None]:
+        """
+        This method enables to resume the current tournament
+        """
+        if len(self.data.rounds_list) == self.data.rounds:
+            new_rankings = self.update_tournaments_players_rankings()
+            return new_rankings
+        if len(self.data.rounds_list) >= self.data.rounds:
+            return None
+        else:
+            self.tournament_algorithm()
+            TournamentInfosCtrl(self.data).run()
+
 
     def sort_players_by_last_name(self) -> list:
         """
@@ -79,27 +93,6 @@ class TournamentInfosCtrl(Controller):
         """
         return self.data.rounds_list
 
-    def add_start_time(self) -> datetime:
-        """
-        This method automatically sets the start time of the Round Object
-        """
-        return datetime.now()
-
-    def add_end_time(self) -> datetime:
-        """
-        This method automatically sets the end time of the Round Object
-        """
-        return datetime.now()
-
-    def resume_current_tournament(self):
-        """
-        This method enables to resume the current tournament
-        """
-        if len(self.data.rounds_list) >= self.data.rounds:
-            return None
-        else:
-            self.tournament_algorithm()
-
     def tournament_algorithm(self):
         """
         This method is the main algorithm for the progression of a tournament
@@ -113,9 +106,21 @@ class TournamentInfosCtrl(Controller):
             self.get_round_results(next_round)
             self.add_players_points_to_tournament_totals(next_round)
             data.save()
-            #  for identifier in self.data.identifiers_list:
-            #      new_ranking = PlayersMenu().update_player_ranking() # à la fin updater les ranking des players, mais ne pas appeler le PlayerMenu directement, passer par PlayerCtrl
             TournamentInfosCtrl(self.data).run()
+
+    def update_tournaments_players_rankings(self) -> dict:
+        print('========================')
+        print('After Tournament New Player Rankings: ')
+        print('========================')
+        new_rankings = {}
+        for identifier in self.data.identifiers_list:
+            player = PlayerManager().from_identifier_to_player_obj(identifier)
+            print(player)
+            new_ranking = NewPlayerForm().ask_ranking()
+            player.ranking = new_ranking
+            print(f'New Ranking: {player.ranking}')
+            new_rankings[player] = new_ranking
+        return new_rankings
 
     def generate_round_matchups(self, is_first=False) -> Union[list[Player], list[list], str]:
         """
@@ -208,3 +213,15 @@ class TournamentInfosCtrl(Controller):
             new_totals = dict(counter)
         self.data.total_results = new_totals
         return new_totals
+
+    def add_start_time(self) -> datetime:
+        """
+        This method automatically sets the start time of the Round Object
+        """
+        return datetime.now()
+
+    def add_end_time(self) -> datetime:
+        """
+        This method automatically sets the end time of the Round Object
+        """
+        return datetime.now()

@@ -28,7 +28,7 @@ class ListTournamentsCtrl(Controller):
 
     def sort_by_start_date(self) -> list:
         """
-        This function lists the tournament instances sorted by start date
+        This method lists the tournament instances sorted by start date
         """
         tournaments_list = TournamentManager().list_registered_tournaments()
         sorted_by_start_date = sorted(tournaments_list, key=lambda x: x.start_date)
@@ -36,7 +36,7 @@ class ListTournamentsCtrl(Controller):
 
     def sort_by_name(self) -> list:
         """
-        This function lists the tournament instances alphabetically sorted by name
+        This method lists the tournament instances alphabetically sorted by name
         """
         tournaments_list = TournamentManager().list_registered_tournaments()
         sorted_by_name = sorted(tournaments_list, key=lambda x: x.name)
@@ -44,7 +44,7 @@ class ListTournamentsCtrl(Controller):
 
     def sort_by_location(self) -> list:
         """
-        This function lists the tournament instances alphabetically sorted by location
+        This method lists the tournament instances alphabetically sorted by location
         """
         tournaments_list = TournamentManager().list_registered_tournaments()
         sorted_by_location = sorted(tournaments_list, key=lambda x: x.location)
@@ -52,7 +52,7 @@ class ListTournamentsCtrl(Controller):
 
     def search_by_id(self, search) -> list:
         """
-        This function lists the tournament instances matching the given input
+        This method lists the tournament instances matching the given input
         (identifier: Name, Location, Start date, End date)
         """
         results = sm.managers[Tournament].search(search)
@@ -64,7 +64,7 @@ class ListTournamentsCtrl(Controller):
 
     def select_one(self):
         """
-        This function enables to select a specific tournament in the registered tournaments list
+        This method enables to select a specific tournament in the registered tournaments list
         """
         _input = input('Search a tournament by name, location or dates: ')
         selected_tournament = TournamentManager().search_one(_input)

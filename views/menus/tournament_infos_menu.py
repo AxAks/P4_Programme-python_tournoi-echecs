@@ -118,4 +118,3 @@ class TournamentInfosMenu(Menu):
                           f'{match.player2_score_pod}\n')
                     n += 1
         self.current_page_ctrl(self.data).run()
-

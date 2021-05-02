@@ -10,14 +10,13 @@ from views.menus.players_menu import PlayersMenu
 from views.forms.new_player_form import NewPlayerForm
 
 
-class PlayerCtrl(Controller):
+class PlayersCtrl(Controller):
     """
     Controller class for Player
     """
 
     def __init__(self):
         self.menu = PlayersMenu()
-        self.not_asked_properties = ['identifier']
 
     def add_player(self) -> Player:
         """

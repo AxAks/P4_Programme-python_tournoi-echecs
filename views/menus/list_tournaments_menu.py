@@ -18,7 +18,7 @@ class ListTournamentsMenu(Menu):
                          exiting_message='Now Leaving Chess Tournament Manager')
         specific_menu_choices = [self.add_tournament, self.display_by_start_date,
                                  self.display_by_name, self.display_by_location,
-                                 self.search_by_id, self.select_one]
+                                 self.search_a_tournament, self.select_one]
         [self.choices.append(choice) for choice in specific_menu_choices]
 
     def add_tournament(self) -> None:
@@ -74,7 +74,7 @@ class ListTournamentsMenu(Menu):
                       f'-> from {tournament.start_date} to {tournament.end_date}')
         self.current_page_ctrl().run()
 
-    def search_by_id(self) -> None:
+    def search_a_tournament(self) -> None:
         """
         This method calls the controller to find one or more Tournament instances in the registry
         """

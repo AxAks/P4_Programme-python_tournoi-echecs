@@ -129,6 +129,20 @@ $ python main.py
 
 ## 5. Usage <a name="usage"></a>
 
+To launch the Program:   
+python main.py
+
+Homepage Menu:   
+Main Menu to navigate through the program
+- Launch a new tournament or Resume a previously saved Tournament
+- Manage Players or registered Tournaments
+
+
+
+
+
+
+
 Homepage Menu
 - Players Menu
 -- Add player (OK)
