@@ -15,7 +15,7 @@ class NewMatchForm(Form):
         super().__init__(program_name='Chess Tournament Manager', menu_name='New Match Form',
                          previous_page_ctrl=tournament_infos_controller.TournamentInfosCtrl,
                          data=tournament,
-                         properties=MATCH_PROPERTIES, cls=self, not_asked_properties=[])
+                         properties=MATCH_PROPERTIES, cls=self, not_asked_properties=['player1_score'])
         self.player1_id = player1_id
         self.player2_id = player2_id
 
@@ -42,8 +42,9 @@ class NewMatchForm(Form):
         """
         This method asks for player2's score
         """
-        player = self.player2_id
-        return self.ask_player_score(player)
+        player1_score = self.ask_player1_score()
+        player2_score = 1 - player1_score
+        return player2_score
 
     def ask_player_score(self, player):
         choices_info = '(LOSS: 0, TIE: 0.5, WIN: 1)'

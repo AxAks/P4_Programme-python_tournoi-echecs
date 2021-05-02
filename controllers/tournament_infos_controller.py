@@ -1,5 +1,6 @@
 # coding=utf-8
 import collections
+from itertools import combinations, product
 from datetime import datetime
 from typing import Union, Any
 from uuid import UUID
@@ -27,19 +28,14 @@ class TournamentInfosCtrl(Controller):
         self.menu = TournamentInfosMenu(tournament)
         self.data = tournament
 
-    def resume_current_tournament(self) -> Union[dict, None]:
+    def resume_current_tournament(self) -> None:
         """
         This method enables to resume the current tournament
         """
-        if len(self.data.rounds_list) == self.data.rounds:
-            new_rankings = self.update_tournaments_players_rankings()
-            return new_rankings
-        if len(self.data.rounds_list) >= self.data.rounds:
+        if self.tournament_algorithm() is None:
             return None
         else:
-            self.tournament_algorithm()
             TournamentInfosCtrl(self.data).run()
-
 
     def sort_players_by_last_name(self) -> list:
         """
@@ -93,20 +89,26 @@ class TournamentInfosCtrl(Controller):
         """
         return self.data.rounds_list
 
-    def tournament_algorithm(self):
+    def tournament_algorithm(self) -> None:
         """
         This method is the main algorithm for the progression of a tournament
         """
-        while len(self.data.rounds_list) < self.data.rounds:
-            if len(self.data.rounds_list) == 0:
-                matchups_next_round = self.generate_round_matchups(is_first=True)
-            else:
-                matchups_next_round = self.generate_round_matchups()
-            next_round = self.enter_new_round(matchups_next_round)
-            self.get_round_results(next_round)
-            self.add_players_points_to_tournament_totals(next_round)
+        if len(self.data.rounds_list) >= self.data.rounds and not self.data.done:
+            self.update_tournaments_players_rankings()
+            self.data.done = True
             data.save()
-            TournamentInfosCtrl(self.data).run()
+            return None
+        else:
+            while len(self.data.rounds_list) < self.data.rounds:
+                if len(self.data.rounds_list) == 0:
+                    matchups_next_round = self.generate_round_matchups(is_first=True)
+                else:
+                    matchups_next_round = self.generate_round_matchups()
+                next_round = self.enter_new_round(matchups_next_round)
+                self.get_round_results(next_round)
+                self.add_players_points_to_tournament_totals(next_round)
+                data.save()
+                TournamentInfosCtrl(self.data).run()
 
     def update_tournaments_players_rankings(self) -> dict:
         print('========================')
@@ -158,6 +160,9 @@ class TournamentInfosCtrl(Controller):
                 round_couples = [[upper_ranking_players_list[i], lower_ranking_players_list[i]]
                                  for i in range(0, len(upper_ranking_players_list))]
             else:
+                test_round_couples = list(product(upper_ranking_players_list, lower_ranking_players_list))
+                print(test_round_couples)
+                # list(combinations('5713', 2))  voir comment utiliser combinations pour associer les joueurs n'ayant pas encore joué ensemble
                 round_couples = [[upper_ranking_players_list[i], lower_ranking_players_list[i]]
                                  if lower_ranking_players_list[i].identifier_pod
                                     not in self.data.already_played[upper_ranking_players_list[i].identifier_pod]

@@ -367,3 +367,21 @@ class Tournament(Model):
         else:
             raise AttributeError()
 
+    @property
+    def done(self):
+        """
+        This getter return whether the Tournament is done or not
+        """
+        return self.__done
+
+    @done.setter
+    def done(self, value: bool) -> bool:
+        """
+        this setter checks that the value is a boolean
+        """
+        if value is None:
+            self.__done = False
+        elif isinstance(value, bool):
+            self.__done = value
+        else:
+            raise AttributeError()
