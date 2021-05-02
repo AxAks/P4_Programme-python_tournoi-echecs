@@ -91,25 +91,19 @@ class TournamentInfosCtrl(Controller):
         """
         return datetime.now()
 
-    def add_new_tournament(self):  # à tester !!!!
-        new_tournament = list_tournaments_controller.ListTournamentsCtrl().add_tournament()
-        while len(new_tournament.rounds_list) < new_tournament.rounds:
-            if len(new_tournament.rounds_list) == 0:
-                matchups_next_round = self.generate_round_matchups(is_first=True)
-            else:
-                matchups_next_round = self.generate_round_matchups()
-            next_round = self.enter_new_round(matchups_next_round)
-            self.get_round_results(next_round)
-            self.add_players_points_to_tournament_totals(next_round)
-            data.save()
+    def resume_current_tournament(self):
+        """
+        This method enables to resume the current tournament
+        """
+        if len(self.data.rounds_list) >= self.data.rounds:
+            return None
+        else:
+            self.tournament_algorithm()
 
-        # while len(tournament.rounds_list) < tournament.rounds:
-        #  PlayersMenu().update_player_ranking() # à la fin updater les ranking des players, mais ne pas appeler le PlayerMenu directement, passer par PlayerCtrl
-
-        TournamentInfosCtrl.run()
-
-    def select_tournament(self):  # à rediger ! et pour les tester
-        self.data = list_tournaments_controller.ListTournamentsCtrl().select_one()
+    def tournament_algorithm(self):
+        """
+        This method is the main algorithm for the progression of a tournament
+        """
         while len(self.data.rounds_list) < self.data.rounds:
             if len(self.data.rounds_list) == 0:
                 matchups_next_round = self.generate_round_matchups(is_first=True)
@@ -119,10 +113,9 @@ class TournamentInfosCtrl(Controller):
             self.get_round_results(next_round)
             self.add_players_points_to_tournament_totals(next_round)
             data.save()
-
-        #  for identifier in self.data.identifiers_list:
-        #      new_ranking = PlayersMenu().update_player_ranking() # à la fin updater les ranking des players, mais ne pas appeler le PlayerMenu directement, passer par PlayerCtrl
-        TournamentInfosCtrl(self.data).run()
+            #  for identifier in self.data.identifiers_list:
+            #      new_ranking = PlayersMenu().update_player_ranking() # à la fin updater les ranking des players, mais ne pas appeler le PlayerMenu directement, passer par PlayerCtrl
+            TournamentInfosCtrl(self.data).run()
 
     def generate_round_matchups(self, is_first=False) -> Union[list[Player], list[list], str]:
         """
@@ -188,7 +181,6 @@ class TournamentInfosCtrl(Controller):
                 self.data.already_played.setdefault(player1_id, []).append(player2_id)
                 self.data.already_played.setdefault(player2_id, []).append(player1_id)
             self.data.rounds_list.append(_round)
-            data.save()
             return _round
 
     def get_round_results(self, _round: Round) -> Round:

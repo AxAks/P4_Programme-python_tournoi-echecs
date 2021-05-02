@@ -15,20 +15,19 @@ class HomeCtrl(Controller):
     def __init__(self):
         self.menu = HomeMenu()
 
-    def start_tournament(self):  # à faire !
+    def launch_new_tournament(self):
         """
         This method enables to launch and run a new tournament
         """
-        tournament_infos_controller.TournamentInfosCtrl().add_new_tournament()
+        self.data = list_tournaments_controller.ListTournamentsCtrl().add_tournament() #  pb si on cancel la form car self.data == None
+        tournament_infos_controller.TournamentInfosCtrl(self.data).run()
 
-    def resume_tournament(self, ):  # à faire !
+    def resume_tournament(self):  # à faire !
         """
         This method enables to resume an existing tournament
         """
-        print('========================')
-        print('Tournament Selection: ')
-        print('========================')
-        tournament_infos_controller.TournamentInfosCtrl().select_tournament()
+        self.data = list_tournaments_controller.ListTournamentsCtrl().select_one()
+        tournament_infos_controller.TournamentInfosCtrl(self.data).run()
 
     def manage_players(self) -> None:
         """

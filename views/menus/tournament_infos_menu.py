@@ -16,12 +16,17 @@ class TournamentInfosMenu(Menu):
                          root_page=False, previous_page_ctrl=list_tournaments_controller.ListTournamentsCtrl,
                          current_page_ctrl=tournament_infos_controller.TournamentInfosCtrl,
                          exiting_message='Now Leaving Chess Tournament Manager')
-        specific_menu_choices = [self.sort_players_by_last_name, self.sort_players_by_ranking,
+        specific_menu_choices = [self.resume_tournament, self.sort_players_by_last_name, self.sort_players_by_ranking,
                                  self.sort_players_by_result, self.display_already_played_games,
                                  self.display_rounds_and_matches]
         [self.choices.append(choice) for choice in specific_menu_choices]
 
-    def sort_players_by_last_name(self) -> None:  # for one selected tournament
+    def resume_tournament(self) -> None:
+        if self.current_page_ctrl(self.data).resume_current_tournament() == None:
+            print('This tournament is finished, no more rounds to play')
+        self.current_page_ctrl(self.data).run()
+
+    def sort_players_by_last_name(self) -> None:
         """
         This method calls the controller to display the players of the selected tournament
         sorted by last name.
@@ -31,7 +36,7 @@ class TournamentInfosMenu(Menu):
         print(f'Players by last name for "{self.data.name}": ')
         print('========================')
         for player in players_list:
-            print(f'- {player.last_name}, {player.first_name}, {player.identifier_pod},\n'
+            print(f'{player.last_name}, {player.first_name}, {player.identifier_pod},\n'
                   f'{player.birthdate_pod}, {player.gender_pod}, {player.ranking}')
         self.current_page_ctrl(self.data).run()
 
@@ -113,3 +118,4 @@ class TournamentInfosMenu(Menu):
                           f'{match.player2_score_pod}\n')
                     n += 1
         self.current_page_ctrl(self.data).run()
+

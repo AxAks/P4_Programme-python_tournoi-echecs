@@ -1,4 +1,5 @@
 # coding=utf-8
+from utils import clear_terminal
 from views.view import View
 
 
@@ -35,7 +36,7 @@ class Form(View):
         choices_info = '1: YES, 2: NO, 0: CANCEL'
         input_info = f'Please confirm this choice? ({choices_info}): '
         valid_choices = (0, 1, 2)
-        wrong_input = 'Invalid choice (1 or 2), please retry...'
+        wrong_input = 'Invalid choice (1, 2 or 0), please retry...'
         while not valid_entry:
             try:
                 _input = input(input_info)
@@ -47,7 +48,12 @@ class Form(View):
                         valid_entry = True
                     else:
                         print('Cancelled, back to previous menu page ...')
-                        self.previous_page_ctrl(self.data).run()
+                        if self.data:
+                            clear_terminal()
+                            self.previous_page_ctrl(self.data).run()
+                        else:
+                            clear_terminal()
+                            self.previous_page_ctrl().run()
                 else:
                     print(wrong_input)
             except ValueError:
