@@ -1,6 +1,15 @@
 # tournament_info_controller
 
 """
+round_couples = [[[sorted_players[i], sorted_players[i+1]]  # fiable ? pb out of range je pense !
+                 if sorted_players[i].identifier_pod
+                    in self.data.not_played_yet[sorted_players[i+1].identifier_pod]
+                 else[sorted_players[i], sorted_players[i+2]]  # fiable ? pb out of range je pense !
+                 for i in range(0, len(sorted_players))]]
+return round_couples
+"""
+
+"""
 sans tentative de verif de tounament already played matches
 round_couples = [[upper_ranking_players_list[i], lower_ranking_players_list[i]]
                  for i in range(0, len(upper_ranking_players_list))]

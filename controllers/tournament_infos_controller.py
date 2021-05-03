@@ -142,8 +142,6 @@ class TournamentInfosCtrl(Controller):
         This method calculates the rounds matchups.
         It checks that the players have not already played together in the previous rounds
         """
-        tournament_not_played_yet_matches = self.get_round_possible_matchups()  #  vérifier que le filtre se fait bien !! pas utilisé pour le moment
-
         if len(sorted_players) % 2 == 0:
             middle_index = len(sorted_players) // 2
             upper_ranking_players_list = sorted_players[middle_index:]
@@ -156,25 +154,17 @@ class TournamentInfosCtrl(Controller):
                              for i in range(0, len(upper_ranking_players_list))]
             return round_couples
         else:
-            round_couples = [[[sorted_players[i], sorted_players[i+1]]  # fiable ? pb out of range je pense !
-                             if sorted_players[i].identifier_pod
-                                in self.data.not_played_yet[sorted_players[i+1].identifier_pod]
-                             else[sorted_players[i], sorted_players[i+2]]  # fiable ? pb out of range je pense !
-                             for i in range(0, len(sorted_players))]]
+            round_couples = []
+            while len(sorted_players) > 0:
+                player1 = sorted_players[0]
+                player1_id = player1.identifier_pod
+                sorted_players.pop(0)
+                for player2 in sorted_players:
+                    if player2.identifier_pod in self.data.not_played_yet[player1_id]:
+                        round_couples.append([player1, player2])
+                        sorted_players.remove(player2)
+                        break
             return round_couples
-
-    def get_round_possible_matchups(self) -> list[tuple]:
-        """
-        this method formats the list of possible matches for next round
-        using the remaining possible players associations
-        """
-        tournament_not_played_yet_matches = []
-        for identifier in self.data.not_played_yet:
-            for opponent in self.data.not_played_yet[identifier]:
-                not_played_yet_match = (identifier, opponent)
-                if not_played_yet_match not in tournament_not_played_yet_matches:
-                    tournament_not_played_yet_matches.append(not_played_yet_match)
-        return tournament_not_played_yet_matches
 
     def enter_new_round(self, round_couples: Union[list[list[Player]], str]) -> Union[Round, None]:
         """
