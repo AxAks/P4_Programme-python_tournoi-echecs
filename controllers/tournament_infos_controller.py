@@ -1,6 +1,5 @@
 # coding=utf-8
 import collections
-from itertools import permutations
 from datetime import datetime
 from typing import Union, Any
 from uuid import UUID
@@ -152,16 +151,11 @@ class TournamentInfosCtrl(Controller):
         else:
             return 'This list does not have an even number of items'
 
-        if isinstance(sorted_players, list):  # lists # 1er round
+        if len(self.data.rounds_list) == 0:
             round_couples = [[upper_ranking_players_list[i], lower_ranking_players_list[i]]
                              for i in range(0, len(upper_ranking_players_list))]
             return round_couples
-        else: #sorted_players = dict # autres rounds
-            sorted_players_in_list = []
-            for key in sorted_players:
-                sorted_players_in_list.append(key)
-            print(sorted_players)
-            print(sorted_players_in_list)
+        else:
             round_couples = [[[sorted_players[i], sorted_players[i+1]]  # fiable ? pb out of range je pense !
                              if sorted_players[i].identifier_pod
                                 in self.data.not_played_yet[sorted_players[i+1].identifier_pod]
