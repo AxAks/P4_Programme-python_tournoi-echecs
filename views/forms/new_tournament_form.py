@@ -21,6 +21,7 @@ class NewTournamentForm(Form):
                          previous_page_ctrl=list_tournaments_controller.ListTournamentsCtrl,
                          properties=TOURNAMENT_PROPERTIES,
                          cls=self, not_asked_properties=['rounds_list', 'total_results', 'not_played_yet', 'done'])
+        self.start_date = None
 
     def ask_name(self, input_info="Enter name: ") -> str:
         """
@@ -38,13 +39,19 @@ class NewTournamentForm(Form):
         """
         This method asks for a start date
         """
-        return ask_iso_date(input_info)
+        _input = ask_iso_date(input_info)
+        self.start_date = _input
+        return _input
 
     def ask_end_date(self, input_info="Enter end date (YYYY-MM-DD): ") -> date:
         """
         This method asks for an end date
         """
-        return ask_iso_date(input_info)
+        _input = ask_iso_date(input_info)
+        while _input < self.start_date:
+            print(f"End Date cannot be prior to Start Date ({self.start_date}), please retry...")
+            _input = ask_iso_date(input_info)
+        return _input
 
     def ask_rounds(self) -> str:
         """

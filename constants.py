@@ -19,9 +19,8 @@ ALPHA_NUMERICAL_STRING_RULE = re.compile(r"^[A-ZÉÈÇÀa-zéèçà0-9_\- ]+$")
 # Manager
 EMPTY_SEARCH_STRINGS = ['', ' ', '-', '_', '.', '()']
 
-TOURNAMENT_PROPERTIES = ['name', 'location', 'rounds', 'identifiers_list',
-                         'time_control', 'description', 'rounds_list', 'total_results',
-                         'not_played_yet', 'start_date', 'end_date', 'done']
+TOURNAMENT_PROPERTIES = ['name', 'location', 'start_date', 'end_date', 'rounds', 'time_control', 'description',
+                         'identifiers_list', 'rounds_list', 'total_results', 'not_played_yet', 'done']
 
 PLAYER_PROPERTIES = ['last_name', 'identifier', 'first_name', 'birthdate', 'gender', 'ranking']
 ROUND_PROPERTIES = ['name', 'matches', 'start_time', 'end_time', 'results']
