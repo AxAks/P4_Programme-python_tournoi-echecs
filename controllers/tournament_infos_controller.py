@@ -163,7 +163,6 @@ class TournamentInfosCtrl(Controller):
                              for i in range(0, len(sorted_players))]]
             return round_couples
 
-
     def get_round_possible_matchups(self) -> list[tuple]:
         """
         this method formats the list of possible matches for next round
