@@ -27,7 +27,7 @@ class TournamentInfosCtrl(Controller):
         self.menu = TournamentInfosMenu(tournament)
         self.data = tournament
 
-    def resume_current_tournament(self) -> None:
+    def proceed_tournament(self) -> None:
         """
         This method enables to resume the current tournament
         """
@@ -76,9 +76,10 @@ class TournamentInfosCtrl(Controller):
                                                key=lambda x: (x[1], x[0].ranking), reverse=True)
             return sorted_by_results_ranking
 
-    def display_not_played_yet(self) -> dict[Player]:
+    def display_not_played_yet(self) -> dict[Player]:  # pour les tests ! est ce que je le laisse ?
         """
-        This method lists for each player the opponents they already in the previous rounds of a given tournament
+        This method lists for each player the opponents they have not played against
+         in the previous rounds of a given tournament
         """
         return self.data.not_played_yet
 
@@ -108,20 +109,6 @@ class TournamentInfosCtrl(Controller):
                 self.add_players_points_to_tournament_totals(next_round)
                 data.save()
                 TournamentInfosCtrl(self.data).run()
-
-    def update_tournaments_players_rankings(self) -> dict:
-        print('========================')
-        print('After Tournament New Player Rankings: ')
-        print('========================')
-        new_rankings = {}
-        for identifier in self.data.identifiers_list:
-            player = PlayerManager().from_identifier_to_player_obj(identifier)
-            print(player)
-            new_ranking = NewPlayerForm().ask_ranking()
-            player.ranking = new_ranking
-            print(f'New Ranking: {player.ranking}')
-            new_rankings[player] = new_ranking
-        return new_rankings
 
     def generate_round_matchups(self, is_first=False) -> Union[list[Player], list[list], str]:
         """
@@ -215,13 +202,27 @@ class TournamentInfosCtrl(Controller):
         self.data.total_results = new_totals
         return new_totals
 
-    def add_start_time(self) -> datetime:
+    def update_tournaments_players_rankings(self) -> dict:
+        print('========================')
+        print('After Tournament New Player Rankings: ')
+        print('========================')
+        new_rankings = {}
+        for identifier in self.data.identifiers_list:
+            player = PlayerManager().from_identifier_to_player_obj(identifier)
+            print(player)
+            new_ranking = NewPlayerForm().ask_ranking()
+            player.ranking = new_ranking
+            print(f'New Ranking: {player.ranking}')
+            new_rankings[player] = new_ranking
+        return new_rankings
+
+    def add_round_start_time(self) -> datetime:
         """
         This method automatically sets the start time of the Round Object
         """
         return datetime.now()
 
-    def add_end_time(self) -> datetime:
+    def add_round_end_time(self) -> datetime:
         """
         This method automatically sets the end time of the Round Object
         """

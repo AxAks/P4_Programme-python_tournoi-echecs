@@ -26,7 +26,7 @@ class NewRoundForm(Form):
         return round_name
 
     def ask_start_time(self):
-        return tournament_infos_controller.TournamentInfosCtrl(self.data).add_start_time()
+        return tournament_infos_controller.TournamentInfosCtrl(self.data).add_round_start_time()
 
     def ask_end_time(self):
-        return tournament_infos_controller.TournamentInfosCtrl(self.data).add_end_time()
+        return tournament_infos_controller.TournamentInfosCtrl(self.data).add_round_end_time()

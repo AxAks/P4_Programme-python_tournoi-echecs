@@ -12,7 +12,7 @@ class Form(View):
     def __init__(self, program_name, menu_name, previous_page_ctrl,
                  properties, cls, not_asked_properties, data=None,):
         super().__init__(program_name=program_name, menu_name=f'-{menu_name}-', data=data,
-                         previous_page_ctrl=previous_page_ctrl, exiting_message=f'Exiting Form')
+                         previous_page_ctrl=previous_page_ctrl, exiting_message='Exiting Form')
         self.properties = properties
         self.cls = cls
         self.not_asked_properties = not_asked_properties

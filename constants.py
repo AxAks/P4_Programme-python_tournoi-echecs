@@ -13,8 +13,8 @@ MINIMUM_RANKING = 100
 RANKING_RANGE = range(100, 3001)
 
 # Regex
-ALPHABETICAL_STRING_RULE = re.compile("^[A-ZÉÈÇÀa-zéèçà\- ']+$")
-ALPHA_NUMERICAL_STRING_RULE = re.compile("^[A-ZÉÈÇÀa-zéèçà0-9_\- ]+$")
+ALPHABETICAL_STRING_RULE = re.compile(r"^[A-ZÉÈÇÀa-zéèçà\- ']+$")
+ALPHA_NUMERICAL_STRING_RULE = re.compile(r"^[A-ZÉÈÇÀa-zéèçà0-9_\- ]+$")
 
 # Manager
 EMPTY_SEARCH_STRINGS = ['', ' ', '-', '_', '.', '()']

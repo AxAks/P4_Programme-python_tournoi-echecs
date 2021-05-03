@@ -16,13 +16,13 @@ class TournamentInfosMenu(Menu):
                          root_page=False, previous_page_ctrl=list_tournaments_controller.ListTournamentsCtrl,
                          current_page_ctrl=tournament_infos_controller.TournamentInfosCtrl,
                          exiting_message='Now Leaving Chess Tournament Manager')
-        specific_menu_choices = [self.resume_tournament, self.sort_players_by_last_name, self.sort_players_by_ranking,
-                                 self.sort_players_by_result, self.display_not_played_games,
-                                 self.display_rounds_and_matches]
+        specific_menu_choices = [self.proceed_tournament, self.sort_players_by_last_name,
+                                 self.sort_players_by_ranking, self.sort_players_by_result,
+                                 self.display_rounds_and_matches, self.display_not_played_matchups]
         [self.choices.append(choice) for choice in specific_menu_choices]
 
-    def resume_tournament(self) -> None:
-        if self.current_page_ctrl(self.data).resume_current_tournament() is None:
+    def proceed_tournament(self) -> None:
+        if self.current_page_ctrl(self.data).proceed_tournament() is None:
             print('This tournament is finished, no more rounds to play')
         self.current_page_ctrl(self.data).run()
 
@@ -62,7 +62,7 @@ class TournamentInfosMenu(Menu):
         print('========================')
         print(f'Players by results for "{self.data.name}": ')
         print('========================')
-        players_results_list = self.current_page_ctrl(self.data).sort_players_by_result(self.data)  # liste de tuples
+        players_results_list = self.current_page_ctrl(self.data).sort_players_by_result(self.data)
         if players_results_list == {}:
             print("There are no Results for this Tournament yet")
         else:
@@ -72,25 +72,6 @@ class TournamentInfosMenu(Menu):
                 print(f"Player: {PLAYER.last_name}, {PLAYER.first_name}, {PLAYER.identifier_pod}\n"
                       f"General Ranking: {PLAYER.ranking}\n"
                       f"Total Points: {RESULT}")
-        self.current_page_ctrl(self.data).run()
-
-    def display_not_played_games(self) -> None:
-        """
-        This method calls the controller to display for each player
-        the opponents they have not played with in the previous rounds of a given tournament
-        """
-        not_played_yet = self.current_page_ctrl(self.data).display_not_played_yet()
-        if not_played_yet == self.data.identifiers_list:
-            print('No registered Matches for this Tournament yet')
-        else:
-            for player in not_played_yet:
-                player_obj = PlayerManager().from_identifier_to_player_obj(player)
-                print(f'{player_obj.last_name}, {player_obj.first_name}, {player_obj.identifier_pod}'
-                      f' has never played against:')
-                for opponent in not_played_yet[player]:
-                    opponent_obj = PlayerManager().from_identifier_to_player_obj(opponent)
-                    print(f' - {opponent_obj.last_name}, {opponent_obj.first_name}, {opponent_obj.identifier_pod}')
-                print('')
         self.current_page_ctrl(self.data).run()
 
     def display_rounds_and_matches(self) -> None:
@@ -117,4 +98,23 @@ class TournamentInfosMenu(Menu):
                           f'{player2_obj.last_name}, {player2_obj.first_name}, {player2_obj.identifier_pod}\n'
                           f'{match.player2_score_pod}\n')
                     n += 1
+        self.current_page_ctrl(self.data).run()
+
+    def display_not_played_matchups(self) -> None:   # pour les tests ! est ce que je le laisse ?
+        """
+        This method calls the controller to display for each player
+        the opponents they have not played with in the previous rounds of a given tournament
+        """
+        not_played_yet = self.current_page_ctrl(self.data).display_not_played_yet()
+        if not_played_yet == self.data.identifiers_list:
+            print('No registered Matches for this Tournament yet')
+        else:
+            for player in not_played_yet:
+                player_obj = PlayerManager().from_identifier_to_player_obj(player)
+                print(f'{player_obj.last_name}, {player_obj.first_name}, {player_obj.identifier_pod}'
+                      f' has never played against:')
+                for opponent in not_played_yet[player]:
+                    opponent_obj = PlayerManager().from_identifier_to_player_obj(opponent)
+                    print(f' - {opponent_obj.last_name}, {opponent_obj.first_name}, {opponent_obj.identifier_pod}')
+                print('')
         self.current_page_ctrl(self.data).run()

@@ -67,7 +67,7 @@ class NewTournamentForm(Form):
             _input = input(f'Please, search player {n} of {nb_players} by ID: ')
             player_obj = PlayerManager().search_one(_input)
             while player_obj == {}:
-                _input = input(f'No Player found, please retry: ')
+                _input = input('No Player found, please retry: ')
                 player_obj = PlayerManager().search_one(_input)
             if player_obj.identifier_pod not in tournament_players:
                 tournament_players[player_obj.identifier_pod] = player_obj

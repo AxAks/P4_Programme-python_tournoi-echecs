@@ -15,8 +15,8 @@ class PlayersMenu(Menu):
                          root_page=False, previous_page_ctrl=home_controller.HomeCtrl,
                          current_page_ctrl=players_controller.PlayersCtrl,
                          exiting_message='Now Leaving Chess Tournament Manager')
-        specific_menu_choices = [self.add_player, self.update_player_ranking, self.search_by_id,
-                                 self.display_by_last_name, self.display_by_ranking]
+        specific_menu_choices = [self.add_player, self.update_player_ranking, self.display_by_last_name,
+                                 self.display_by_ranking, self.search_by_id]
         [self.choices.append(choice) for choice in specific_menu_choices]
 
     def add_player(self) -> None:
