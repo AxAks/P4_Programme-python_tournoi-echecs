@@ -27,9 +27,11 @@ class ListTournamentsMenu(Menu):
         """
         tournament = self.current_page_ctrl().add_tournament()
         print(f'New Tournament registered:\n'
-              f'{tournament.name}, {tournament.location},\n'
-              f'{tournament.start_date}, {tournament.end_date}, {tournament.identifiers_list},'
-              f' {tournament.time_control}, {tournament.description}, {tournament.rounds}')
+              f'Name: {tournament.name}, Location {tournament.location},\n'
+              f'Start Date: {tournament.start_date}, End Date: {tournament.end_date}, '
+              f'Identifiers List: {tournament.identifiers_list},'
+              f'Time Control: {tournament.time_control},Description: {tournament.description}, '
+              f'Number of Rounds: {tournament.rounds} Rounds')
         self.current_page_ctrl().run()
 
     def display_by_start_date(self) -> None:
