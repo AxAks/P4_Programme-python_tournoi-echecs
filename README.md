@@ -111,16 +111,16 @@ $ python main.py
 
 ## 5. Usage <a name="usage"></a>
 
-Homepage Menu:   
--> Navigate through the menu with digits to select a menu option.
-0: Quit the program (saves state before exiting) 
-1: Back to Home Menu
-2: Back to previous screen
-3: Load database
-4: Save to database
-n: Menu specific Choices 
+Homepage Menu
+- Navigate through the menu with digits to select a menu option.    
+0: Quit the program (saves state before exiting)     
+1: Back to Home Menu    
+2: Back to previous screen    
+3: Load database   
+4: Save to database    
+n: Menu specific Choices     
 
-From Home Menu
+From Home Menu   
 - Manage Players or registered Tournaments:      
 -> enables to display reports on players or saved tournaments (finished or not),
 
