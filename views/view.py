@@ -18,8 +18,3 @@ class View:
         print('========================')
         print(self.program_name, '\n', self.menu_name)
         print('========================')
-
-
-    #  + pouvoir utiliser des fonctions de menu vers form : View -> Menu ; View -> Form
-    # Lister tous les prints ici en fonction ?
-

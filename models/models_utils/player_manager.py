@@ -13,6 +13,9 @@ class PlayerManager(Manager):
         self.registry = sm.managers[Player].registry
 
     def list_registered_players(self) -> list[Player]:
+        """
+        this method enables to list all registered players
+        """
         players_list = []
         for identifier in self.registry:
             player_obj = self.from_identifier_to_player_obj(identifier)
@@ -20,6 +23,9 @@ class PlayerManager(Manager):
         return players_list
 
     def from_identifier_to_player_obj(self, identifier: Union[UUID, str]) -> Player:
+        """
+        this method enables switch from an identifier to a player object
+        """
         if isinstance(identifier, UUID):
             player_obj = self.registry[identifier]
         elif isinstance(identifier, str):

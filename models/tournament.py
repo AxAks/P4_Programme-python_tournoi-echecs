@@ -375,7 +375,6 @@ class Tournament(Model):
             except AttributeError:
                 raise AttributeError()
 
-
     @property
     def done(self):
         """

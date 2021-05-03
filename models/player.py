@@ -127,7 +127,7 @@ class Player(Model):
     @property
     def birthdate_pod(self) -> str:
         """
-        # This getter returns the birthdate as a string.
+        This getter returns the birthdate as a string.
         """
         return self.__birthdate.isoformat()
 
@@ -163,7 +163,7 @@ class Player(Model):
     @property
     def gender_pod(self) -> str:
         """
-        # This getter returns the gender as a string.
+        This getter returns the gender as a string.
         """
         return self.__gender.name
 

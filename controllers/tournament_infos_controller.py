@@ -183,7 +183,7 @@ class TournamentInfosCtrl(Controller):
                 match_dict = NewMatchForm(self.data, player1_id, player2_id).add_new()
                 match = Match(**match_dict)
                 _round.matches.append(match)
-                self.data.not_played_yet[player1_id].remove(player2_id) # on retire les joueurs de la liste des matches possibles : Round2 ValueError: list.remove(x): x not in list
+                self.data.not_played_yet[player1_id].remove(player2_id)
                 self.data.not_played_yet[player2_id].remove(player1_id)
             self.data.rounds_list.append(_round)
             data.save()

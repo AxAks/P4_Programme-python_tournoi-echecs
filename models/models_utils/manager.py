@@ -3,7 +3,6 @@
 import re
 
 from typing import Any, Union
-
 from constants import EMPTY_SEARCH_STRINGS
 
 

@@ -29,7 +29,7 @@ def ask_iso_date(input_info: str) -> date:
         try:
             _input = date.fromisoformat(_input)
             valid_date = True
-        except ValueError:  # ajouter UnicodeDecodeError:
+        except ValueError:
             print('Not in format YYYY-MM-DD, please retry...')
             _input = input(input_info)
     return _input

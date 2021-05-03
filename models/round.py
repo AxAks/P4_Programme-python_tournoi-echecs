@@ -22,11 +22,10 @@ class Round(Model):
         the types of data for Round are as follows :
         - name: string
         - matches: list[dict] or list[Match]
-        - end_time: datetime or string  # doit etre automatiquement enregisté lors de la fin de saisie des infos du round
-        - start_time: datetime or string  # start_time = datetime.now() # end_time = datetime de la fin de round
+        - end_time: datetime or string
+        - start_time: datetime or string
         """
         super().__init__(ROUND_PROPERTIES, **params)
-        #  ajouter attribut points rounds player ici ou dans tournament
 
     def __repr__(self):
         if len(self.matches) == 0:
@@ -117,7 +116,6 @@ class Round(Model):
         This setter checks whether the entered value is a string or a datetime object
         and sets the attribute as a datetime
         """
-        #  doit etre automatiquement enregisté lors de l'instanciation du round, voir comment et où on gère ca : use datetime.datetime.now()
         if value is None:
             raise AttributeError()
         if isinstance(value, str):
@@ -152,7 +150,6 @@ class Round(Model):
         This setter checks whether the entered value is a string or a datetime object
         and sets the attribute as a datetime
         """
-        #  doit etre automatiquement enregisté lors de la fin de saisie des infos du round : use datetime.datetime.now()
         if value is None:
             raise AttributeError()
         if isinstance(value, str):
