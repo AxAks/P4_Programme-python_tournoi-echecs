@@ -10,7 +10,6 @@ from uuid import UUID
 from constants import ALPHA_NUMERICAL_STRING_RULE, ALPHABETICAL_STRING_RULE, TOURNAMENT_PROPERTIES
 
 from models.model import Model
-from models.player import Player
 from models.round import Round
 
 
@@ -35,7 +34,7 @@ class Tournament(Model):
         - description: string
         - rounds_list: list[dict] or list[Round]
         - total_results: dict
-        - already_played: dict[Player] or dict[dict]
+        - not_played_yet: dict[list]
         """
         super().__init__(TOURNAMENT_PROPERTIES, **data)
 
@@ -348,24 +347,34 @@ class Tournament(Model):
             raise AttributeError()
 
     @property
-    def already_played(self) -> dict[list]:
-        return self.__already_played
+    def not_played_yet(self) -> dict[list]:
+        return self.__not_played_yet
 
-    @already_played.setter
-    def already_played(self, value: dict[list]):
-        already_played = {}
-        if value is None or value == {}:
+    @not_played_yet.setter
+    def not_played_yet(self, value: dict[list]):
+        if value is None:
             try:
-                self.__already_played = already_played
+                not_played_yet = {}
+                for identifier in self.identifiers_list:
+                    opponents_list = self.identifiers_list.copy()
+                    opponents_list.remove(identifier)
+                    not_played_yet[identifier] = opponents_list
+                self.__not_played_yet = not_played_yet
             except AttributeError:
                 raise AttributeError()
         elif isinstance(value, dict):
             try:
-                self.__already_played = value
+                self.__not_played_yet = value
             except AttributeError:
                 raise AttributeError()
         else:
             raise AttributeError()
+        if value == {}:
+            try:
+                self.__not_played_yet = {}
+            except AttributeError:
+                raise AttributeError()
+
 
     @property
     def done(self):

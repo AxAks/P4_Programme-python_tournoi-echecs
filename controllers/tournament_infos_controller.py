@@ -77,11 +77,11 @@ class TournamentInfosCtrl(Controller):
                                                key=lambda x: (x[1], x[0].ranking), reverse=True)
             return sorted_by_results_ranking
 
-    def display_already_played(self) -> dict[Player]:
+    def display_not_played_yet(self) -> dict[Player]:
         """
         This method lists for each player the opponents they already in the previous rounds of a given tournament
         """
-        return self.data.already_played
+        return self.data.not_played_yet
 
     def display_rounds_and_matches(self) -> list:
         """
@@ -138,60 +138,56 @@ class TournamentInfosCtrl(Controller):
         round_couples = self.get_round_couples(sorted_players_obj)
         return round_couples
 
-    def get_round_couples(self, sorted_players: Union[list, dict]) -> Union[list[Player], list[list], str]:
+    def get_round_couples(self, sorted_players: Union[list, dict]) -> Union[list[list[Player]], str]:
         """
         This method calculates the rounds matchups.
         It checks that the players have not already played together in the previous rounds
         """
-        #
-        """
-        sans tentative de verif de tounament already played matches 
-        round_couples = [[upper_ranking_players_list[i], lower_ranking_players_list[i]]
-                         for i in range(0, len(upper_ranking_players_list))]
-        """
+        tournament_not_played_yet_matches = self.get_round_possible_matchups()  #  vérifier que le filtre se fait bien !! pas utilisé pour le moment
+
         if len(sorted_players) % 2 == 0:
             middle_index = len(sorted_players) // 2
             upper_ranking_players_list = sorted_players[middle_index:]
             lower_ranking_players_list = sorted_players[:middle_index]
         else:
             return 'This list does not have an even number of items'
-        if len(upper_ranking_players_list) == len(lower_ranking_players_list):
-            if self.data.already_played == {}:
-                round_couples = [[upper_ranking_players_list[i], lower_ranking_players_list[i]]
-                                 for i in range(0, len(upper_ranking_players_list))]
-            else:
-                all_possible_matchups = []
-                upper_list_permutations = permutations(upper_ranking_players_list, len(lower_ranking_players_list))
-                for each_permutation in upper_list_permutations:
-                    zipped = zip(each_permutation, lower_ranking_players_list)
-                    all_possible_matchups.append(list(zipped))
-                print(self.data.already_played)  # {identifier:[identifier,identifier...], identifier:[identifier,identifier...], ....}
-                print(all_possible_matchups)  # [(Player, Player), (Player, Player) ...]
-                test_round_couples = []
-                already_played_tuples_list = []
 
-                all_players_already_played_match = []
-                for identifier in self.data.already_played:
-                    for opponent in self.data.already_played[identifier]:
-                        already_played_match = (identifier, opponent)
-                        if already_played_match not in all_players_already_played_match:
-                            all_players_already_played_match.append(already_played_match)
-                print(all_players_already_played_match)
-                # for matchup in all_possible_matchups:
-
-                round_couples = [[upper_ranking_players_list[i], lower_ranking_players_list[i]]
-                                 if lower_ranking_players_list[i].identifier_pod
-                                    not in self.data.already_played[upper_ranking_players_list[i].identifier_pod]
-                                 else [upper_ranking_players_list[i], lower_ranking_players_list[i-1]]  # pas fiable du tout !! ...
-                                 for i in range(0, len(upper_ranking_players_list))]
+        if isinstance(sorted_players, list):  # lists # 1er round
+            round_couples = [[upper_ranking_players_list[i], lower_ranking_players_list[i]]
+                             for i in range(0, len(upper_ranking_players_list))]
             return round_couples
-        else:
-            return 'These lists do not have the same number of items'
+        else: #sorted_players = dict # autres rounds
+            sorted_players_in_list = []
+            for key in sorted_players:
+                sorted_players_in_list.append(key)
+            print(sorted_players)
+            print(sorted_players_in_list)
+            round_couples = [[[sorted_players[i], sorted_players[i+1]]  # fiable ? pb out of range je pense !
+                             if sorted_players[i].identifier_pod
+                                in self.data.not_played_yet[sorted_players[i+1].identifier_pod]
+                             else[sorted_players[i], sorted_players[i+2]]  # fiable ? pb out of range je pense !
+                             for i in range(0, len(sorted_players))]]
+            return round_couples
+
+
+    def get_round_possible_matchups(self) -> list[tuple]:
+        """
+        this method formats the list of possible matches for next round
+        using the remaining possible players associations
+        """
+        tournament_not_played_yet_matches = []
+        for identifier in self.data.not_played_yet:
+            for opponent in self.data.not_played_yet[identifier]:
+                not_played_yet_match = (identifier, opponent)
+                if not_played_yet_match not in tournament_not_played_yet_matches:
+                    tournament_not_played_yet_matches.append(not_played_yet_match)
+        return tournament_not_played_yet_matches
 
     def enter_new_round(self, round_couples: Union[list[list[Player]], str]) -> Union[Round, None]:
         """
         This method enables to register a new round with the matches results.
-        It also saves the matchups to be checked in the next round to avoid two players to play together twice
+        It also removes the matchups from the potential matchups for next rounds
+        in order to avoid two players to play together twice
         """
         if isinstance(round_couples, str):
             return None
@@ -204,9 +200,10 @@ class TournamentInfosCtrl(Controller):
                 match_dict = NewMatchForm(self.data, player1_id, player2_id).add_new()
                 match = Match(**match_dict)
                 _round.matches.append(match)
-                self.data.already_played.setdefault(player1_id, []).append(player2_id)
-                self.data.already_played.setdefault(player2_id, []).append(player1_id)
+                self.data.not_played_yet[player1_id].remove(player2_id) # on retire les joueurs de la liste des matches possibles : Round2 ValueError: list.remove(x): x not in list
+                self.data.not_played_yet[player2_id].remove(player1_id)
             self.data.rounds_list.append(_round)
+            data.save()
             return _round
 
     def get_round_results(self, _round: Round) -> Round:

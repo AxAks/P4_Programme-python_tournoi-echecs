@@ -17,7 +17,7 @@ class TournamentInfosMenu(Menu):
                          current_page_ctrl=tournament_infos_controller.TournamentInfosCtrl,
                          exiting_message='Now Leaving Chess Tournament Manager')
         specific_menu_choices = [self.resume_tournament, self.sort_players_by_last_name, self.sort_players_by_ranking,
-                                 self.sort_players_by_result, self.display_already_played_games,
+                                 self.sort_players_by_result, self.display_not_played_games,
                                  self.display_rounds_and_matches]
         [self.choices.append(choice) for choice in specific_menu_choices]
 
@@ -74,20 +74,20 @@ class TournamentInfosMenu(Menu):
                       f"Total Points: {RESULT}")
         self.current_page_ctrl(self.data).run()
 
-    def display_already_played_games(self) -> None:
+    def display_not_played_games(self) -> None:
         """
         This method calls the controller to display for each player
-        the opponents they already in the previous rounds of a given tournament
+        the opponents they have not played with in the previous rounds of a given tournament
         """
-        already_played = self.current_page_ctrl(self.data).display_already_played()  # pb de savegarde des tuples dans serialize pas géré par json !!
-        if already_played == {}:
+        not_played_yet = self.current_page_ctrl(self.data).display_not_played_yet()
+        if not_played_yet == self.data.identifiers_list:
             print('No registered Matches for this Tournament yet')
         else:
-            for player in already_played:
+            for player in not_played_yet:
                 player_obj = PlayerManager().from_identifier_to_player_obj(player)
                 print(f'{player_obj.last_name}, {player_obj.first_name}, {player_obj.identifier_pod}'
-                      f'has already played against:')
-                for opponent in already_played[player]:
+                      f' has never played against:')
+                for opponent in not_played_yet[player]:
                     opponent_obj = PlayerManager().from_identifier_to_player_obj(opponent)
                     print(f' - {opponent_obj.last_name}, {opponent_obj.first_name}, {opponent_obj.identifier_pod}')
                 print('')

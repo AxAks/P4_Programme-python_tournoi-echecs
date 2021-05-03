@@ -34,7 +34,7 @@ class Form(View):
 
         valid_entry = False
         choices_info = '1: YES, 2: NO, 0: CANCEL'
-        input_info = f'Please confirm this choice? ({choices_info}): '
+        input_info = f'Please confirm this information: ({choices_info}): '
         valid_choices = (0, 1, 2)
         wrong_input = 'Invalid choice (1, 2 or 0), please retry...'
         while not valid_entry:
