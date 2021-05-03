@@ -118,6 +118,7 @@ Homepage Menu:
 2: Back to previous screen
 3: Load database
 4: Save to database
+n: Menu specific Choices 
 
 From Home Menu
 - Manage Players or registered Tournaments:      
