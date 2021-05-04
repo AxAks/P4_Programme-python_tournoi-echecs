@@ -24,9 +24,8 @@ class HomeMenu(Menu):
         and start it directly
         """
         tournament = self.current_page_ctrl().launch_new_tournament()
-        print(f'New Tournament registered: ')
+        print('New Tournament registered: ')
         self.print_tournament_general_infos(tournament)  # on ne passe pas dedans, je pense ...
-
 
     def search_registered_tournament_to_resume(self):
         """

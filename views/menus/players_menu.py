@@ -24,7 +24,7 @@ class PlayersMenu(Menu):
         This method calls the controller to create a player instance
         """
         player = self.current_page_ctrl().add_player()
-        print(f'New Player registered: ')
+        print('New Player registered: ')
         self.print_player_general_infos(player)
         self.current_page_ctrl().run()
 
@@ -40,7 +40,7 @@ class PlayersMenu(Menu):
             self.print_no_player_found()
             self.print_please_retry()
         else:
-            print(f'Ranking Updated for')
+            print('Ranking Updated for')
             self.print_player_infos_simple(result)
             print(f'New Ranking: {result.ranking}')
         self.current_page_ctrl().run()
@@ -64,7 +64,7 @@ class PlayersMenu(Menu):
         """
         This method calls the controller to sort all player instances by last name
         """
-        self.header_by_last_name()
+        self.header_players_by_last_name()
         players_list = self.current_page_ctrl().sort_by_last_name()
         if len(players_list) == 0:
             self.print_no_player_found()
@@ -77,7 +77,7 @@ class PlayersMenu(Menu):
         """
         This method calls the controller to sort all player instances by ranking
         """
-        self.header_by_ranking()
+        self.header_players_by_ranking()
         players_list = self.current_page_ctrl().sort_by_ranking()
         if len(players_list) == 0:
             self.print_no_player_found()

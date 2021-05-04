@@ -49,7 +49,8 @@ class NewTournamentForm(Form):
         """
         _input = ask_iso_date(input_info)
         while _input < self.start_date:
-            print(f"End Date cannot be prior to Start Date ({self.start_date}), {self.print_please_retry()}")
+            print(f"End Date cannot be prior to Start Date ({self.start_date})")
+            self.print_please_retry()
             _input = ask_iso_date(input_info)
         return _input
 
@@ -84,7 +85,8 @@ class NewTournamentForm(Form):
                       f"{player_obj.identifier_pod}")
                 n += 1
             else:
-                print(f'Player already entered in the list, {self.print_please_retry()}')
+                print('Player already entered in the list')
+                self.print_please_retry()
         return tournament_players
 
     def ask_time_control(self) -> str:
@@ -95,7 +97,7 @@ class NewTournamentForm(Form):
         valid_entry = False
         choices_info = '(1: BULLET, 2: BLITZ, 3: RAPIDE)'
         input_info = f'Enter Time Control Format {choices_info}: '
-        wrong_input = f'Invalid choice (1, 2 or 3), {self.print_please_retry()}'
+        wrong_input = 'Invalid choice (1, 2 or 3)}'
         valid_choices = (1, 2, 3)
 
         _input = input(input_info)
@@ -112,9 +114,11 @@ class NewTournamentForm(Form):
                     valid_entry = True
                 else:
                     print(wrong_input)
+                    self.print_please_retry()
                     _input = input(input_info)
             except ValueError:
                 print(wrong_input)
+                self.print_please_retry()
                 _input = input(input_info)
         return _input
 
@@ -125,6 +129,7 @@ class NewTournamentForm(Form):
         input_info = "Enter Description: "
         _input = input(input_info)
         while _input == '':
-            print(f'Description cannot be empty, {self.print_please_retry()}')
+            self.print_please_retry()
+            print('Description cannot be empty')
             _input = input(input_info)
         return _input

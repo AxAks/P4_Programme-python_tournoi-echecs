@@ -26,7 +26,7 @@ class ListTournamentsMenu(Menu):
         This method calls the controller to create a new Tournament instance.
         """
         tournament = self.current_page_ctrl().add_tournament()
-        print(f'New Tournament registered: ')
+        print('New Tournament registered: ')
         self.print_tournament_general_infos(tournament)
         self.current_page_ctrl().run()
 
@@ -34,9 +34,7 @@ class ListTournamentsMenu(Menu):
         """
         This method calls the controller to display all registered tournament instances by start date
         """
-        print('========================')
-        print('List of all Tournaments sorted by Start Date: ')
-        print('========================')
+        self.header_tournament_by_start_date()
         tournaments_list = self.current_page_ctrl().sort_by_start_date()
         if len(tournaments_list) == 0:
             self.print_no_tournament_found()
@@ -47,16 +45,13 @@ class ListTournamentsMenu(Menu):
         self.current_page_ctrl().run()
 
     def display_by_name(self) -> None:
-        print('========================')
-        print('List of all Tournaments by Name: ')
-        print('========================')
+        self.header_tournament_by_name()
         tournaments_list = self.current_page_ctrl().sort_by_name()
         if len(tournaments_list) == 0:
             self.print_no_tournament_found()
         else:
             for tournament in tournaments_list:
-                print(f'- {tournament.name} in {tournament.location}\n '
-                      f'-> from {tournament.start_date} to {tournament.end_date}')
+                self.print_tournament_infos_simple(tournament)
         self.current_page_ctrl().run()
 
     def display_by_location(self) -> None:
@@ -77,19 +72,14 @@ class ListTournamentsMenu(Menu):
         This method calls the controller to find one or more Tournament instances in the registry
         """
         self.print_hard_separator()
-        print('========================')
-        print('Tournament Search: ')
-        print('========================')
-        search = input('Search a Tournament by Name, Location or dates : ')
+        self.header_tournaments_search()
+        search = self.input_search_a_tournament_by_name_location_dates()
         tournaments = self.current_page_ctrl().search_by_id(search)
-        print('========================')
-        print('Tournament Search Results: ')
-        print('========================')
+        self.header_tournaments_search_results()
         if len(tournaments) == 0:
             self.print_no_tournament_found()
         for tournament in tournaments:
-            print(f'- {tournament.location}, {tournament.name}\n'
-                  f'-> from {tournament.start_date} to {tournament.end_date}')
+            self.print_tournament_infos_simple(tournament)
         self.current_page_ctrl().run()
 
     def select_one(self) -> None:
@@ -97,9 +87,7 @@ class ListTournamentsMenu(Menu):
         This method enables to pick a tournament
         and be redirected this the Menu for this specific tournament.
         """
-        print('========================')
-        print('Tournament Selection: ')
-        print('========================')
+
         selected_tournament = self.current_page_ctrl().select_one()
         if selected_tournament == {}:
             self.print_no_tournament_found()

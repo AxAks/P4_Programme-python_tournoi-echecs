@@ -4,6 +4,7 @@ class View:
     """
     This class is a parent Class for Menu and Form screens
     It enables them to  shared some common properties
+    It also groups several prints used in the child classes
     """
     def __init__(self, program_name, menu_name, data=None,
                  previous_page_ctrl=None, exiting_message='Program Terminated'):
@@ -14,38 +15,67 @@ class View:
         self.previous_page_ctrl = previous_page_ctrl
         self.exiting_message = exiting_message
 
-    def general_header_menu(self):
-        print('========================')
-        print(self.program_name, '\n', self.menu_name)
-        print('========================')
-
-    def header_by_ranking(self):
-        print(f'========================\n'
-              f'All Players by ranking: \n'
-              f'========================')
-    def header_by_last_name(self):
-        print(f'========================\n'
-              f'All Players by last name: \n'
-              f'========================')
-
     def print_hard_separator(self):
         print('========================')
 
     def print_soft_separator(self):
         print('')
 
+    def general_header_menu(self):
+        self.print_hard_separator()
+        print(self.program_name, '\n', self.menu_name)
+        self.print_hard_separator()
+
+    def header_player_search(self):
+        self.print_hard_separator()
+        print('Player Search Results: ')
+        self.print_hard_separator()
+
+    def header_tournaments_search(self):
+        self.print_hard_separator()
+        print('Tournaments Search: ')
+        self.print_hard_separator()
+
+    def header_tournaments_search_results(self):
+        self.print_hard_separator()
+        print('Tournaments Search Results: ')
+        self.print_hard_separator()
+
+    def header_tournament_selection(self):
+        self.print_hard_separator()
+        print('Tournament Selection: ')
+        self.print_hard_separator()
+
+    def header_tournament_by_name(self):
+        self.print_hard_separator()
+        print('List of all Tournaments by Name: ')
+        self.print_hard_separator()
+
+    def header_tournament_by_start_date(self):
+        self.print_hard_separator()
+        print('List of all Tournaments sorted by Start Date: ')
+        self.print_hard_separator()
+
+    def header_ranking_update(self):
+        self.print_hard_separator()
+        print('Player Ranking Update: ')
+        self.print_hard_separator()
+
+    def header_players_by_ranking(self):
+        self.print_hard_separator()
+        print('All Players by ranking: ')
+        self.print_hard_separator()
+
+    def header_players_by_last_name(self):
+        self.print_hard_separator()
+        print('All Players by last name: ')
+        self.print_hard_separator()
+
     def input_search_a_player_by_id(self):
         input('search a player by ID: ')
 
-    def header_player_search(self):
-        print(f'========================\n'
-              f'Player Search Results: \n'
-              f'========================')
-
-    def header_ranking_update(self):
-        print(f'========================\n'
-              f'Player Ranking Update: \n'
-              f'========================')
+    def input_search_a_tournament_by_name_location_dates(self):
+        input('Search a Tournament by Name, Location or dates : ')
 
     def print_player_general_infos(self, player):
         print(f'Player: {player.last_name}, {player.first_name}, {player.identifier_pod}\n'
@@ -66,6 +96,10 @@ class View:
               f'{tournament_obj.rounds} Rounds, Time Control: {tournament_obj.time_control}\n'
               f'Description: {tournament_obj.description}')
 
+    def print_tournament_infos_simple(self, tournament_obj):
+        print(f'Name: {tournament_obj.name}, Location {tournament_obj.location}\n'
+              f'From {tournament_obj.start_date} to {tournament_obj.end_date}')
+
     def print_round_infos_simple(self, round_obj):
         print(f'{round_obj.name}: from {round_obj.start_time} to {round_obj.end_time}')
 
@@ -85,5 +119,17 @@ class View:
               f'{player2_obj.last_name}, {player2_obj.first_name}, {player2_obj.identifier_pod}\n'
               f'{match.player2_score_pod}\n')
 
+    def print_please_confirm(self):
+        print('Please confirm this information: ')
+
     def print_please_retry(self):
-        print('please retry...: ')
+        print('Please retry...')
+
+    def print_to_previous_menu(self):
+        print('Back to previous menu page ...')
+
+    def print_error_occured(self):
+        print('An Error has occurred')
+
+    def print_cancelled(self):
+        print('Cancelled')

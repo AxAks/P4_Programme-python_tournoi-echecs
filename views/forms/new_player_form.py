@@ -51,7 +51,7 @@ class NewPlayerForm(Form):
         valid_entry = False
         choices_info = '(1: MALE, 2: FEMALE)'
         input_info = f'Enter Player Gender {choices_info}: '
-        wrong_input = f'Invalid choice (1 or 2), {self.print_please_retry()}'
+        wrong_input = 'Invalid choice (1 or 2)'
         valid_choices = (1, 2)
 
         _input = input(input_info)
@@ -66,9 +66,11 @@ class NewPlayerForm(Form):
                     valid_entry = True
                 else:
                     print(wrong_input)
+                    self.print_please_retry()
                     _input = input(input_info)
             except ValueError:
                 print(wrong_input)
+                self.print_please_retry()
                 _input = input(input_info)
         return _input
 
@@ -78,7 +80,7 @@ class NewPlayerForm(Form):
         """
         valid_entry = False
         input_info = 'Enter Player Ranking (from 100 to 3000): '
-        wrong_input = f'Ranking must be a digit between 100 and 3000, {self.print_please_retry()}'
+        wrong_input = 'Ranking must be a digit between 100 and 3000'
         while valid_entry is False:
             try:
                 _input = int(input(input_info))
@@ -86,6 +88,8 @@ class NewPlayerForm(Form):
                     valid_entry = True
                 else:
                     print(wrong_input)
+                    self.print_please_retry()
             except ValueError:
                 print(wrong_input)
+                self.print_please_retry()
         return _input

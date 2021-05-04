@@ -29,14 +29,15 @@ class Form(View):
         try:
             print(f'{property_name.replace("_", " ").title()} is :\n"{attribute}"')
         except AttributeError:
-            print('An Error has occurred, back to previous menu')
+            self.print_error_occured()
+            self.print_to_previous_menu()
             self.previous_page_ctrl().run()
 
         valid_entry = False
         choices_info = '1: YES, 2: NO, 0: CANCEL'
         input_info = f'Please confirm this information: ({choices_info}): '
         valid_choices = (0, 1, 2)
-        wrong_input = f'Invalid choice (1, 2 or 0), {self.print_please_retry()}'
+        wrong_input = 'Invalid choice (1, 2 or 0)'
         while not valid_entry:
             try:
                 _input = input(input_info)
@@ -47,7 +48,8 @@ class Form(View):
                     elif _input == 1:
                         valid_entry = True
                     else:
-                        print('Cancelled, back to previous menu page ...')
+                        self.print_cancelled()
+                        self.print_to_previous_menu()
                         if self.data:
                             clear_terminal()
                             self.previous_page_ctrl(self.data).run()
