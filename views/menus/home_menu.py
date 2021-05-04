@@ -29,9 +29,7 @@ class HomeMenu(Menu):
         """
         this method calls the controller to search a previously saved tournament
         """
-        print('========================')
-        print('Tournament Selection: ')
-        print('========================')
+        self.header_tournament_selection()
         self.current_page_ctrl().search_registered_tournament()
 
     def manage_players(self) -> None:
