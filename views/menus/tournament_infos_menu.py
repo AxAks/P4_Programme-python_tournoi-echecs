@@ -69,8 +69,8 @@ class TournamentInfosMenu(Menu):
                 player = _tuple[0]
                 result = _tuple[1]
                 self.print_player_infos_simple(player)
+                self.print_player_result(result)
                 self.print_player_ranking_only(player)
-                print(f"Total Points: {result}")
         self.current_page_ctrl(self.data).run()
 
     def display_rounds_and_matches(self) -> None:
@@ -106,8 +106,8 @@ class TournamentInfosMenu(Menu):
         else:
             for player in not_played_yet:
                 player_obj = PlayerManager().from_identifier_to_player_obj(player)
+                self.header_possible_next_matchups()
                 self.print_player_infos_simple(player_obj)
-                print('has never played against: ')
                 for opponent in not_played_yet[player]:
                     opponent_obj = PlayerManager().from_identifier_to_player_obj(opponent)
                     self.print_opponent_infos_simple(opponent_obj)

@@ -14,12 +14,13 @@ class HomeCtrl(Controller):
 
     def __init__(self):
         self.menu = HomeMenu()
+        self.data = None
 
     def launch_new_tournament(self) -> None:
         """
         This method enables to create and launch a new tournament
         """
-        list_tournaments_controller.ListTournamentsCtrl().add_tournament()
+        self.data = list_tournaments_controller.ListTournamentsCtrl().add_tournament()
         tournament_infos_controller.TournamentInfosCtrl(self.data).run()
 
     def search_registered_tournament(self) -> None:

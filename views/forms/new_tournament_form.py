@@ -69,24 +69,30 @@ class NewTournamentForm(Form):
         It then returns a dict of players.
         """
         tournament_players = {}
+        available_players = len(PlayerManager().list_registered_players())
         nb_players = 8
-        n = 1
-        while n <= nb_players:
-            _input = input(f'Please, search player {n} of {nb_players} by ID: ')
-            player_obj = PlayerManager().search_one(_input)
-            while player_obj == {}:
-                _input = input('No Player found, please retry: ')
+        if available_players < nb_players:
+            self.print_insufficient_registered_players_for_tournament()
+            self.print_to_previous_menu()
+            self.previous_page_ctrl().run()
+        else:
+            n = 1
+            while n <= nb_players:
+                _input = input(f'Please, search player {n} of {nb_players} by ID: ')
                 player_obj = PlayerManager().search_one(_input)
-            if player_obj.identifier_pod not in tournament_players:
-                tournament_players[player_obj.identifier_pod] = player_obj
-                print(f"Player {n} added")
-                print(f"{player_obj.last_name}, "
-                      f"{player_obj.first_name}: "
-                      f"{player_obj.identifier_pod}")
-                n += 1
-            else:
-                print('Player already entered in the list')
-                self.print_please_retry()
+                while player_obj == {}:
+                    _input = input('No Player found, please retry: ')
+                    player_obj = PlayerManager().search_one(_input)
+                if player_obj.identifier_pod not in tournament_players:
+                    tournament_players[player_obj.identifier_pod] = player_obj
+                    print(f"Player {n} added")
+                    print(f"{player_obj.last_name}, "
+                          f"{player_obj.first_name}: "
+                          f"{player_obj.identifier_pod}")
+                    n += 1
+                else:
+                    self.print_player_already_entered()
+                    self.print_please_retry()
         return tournament_players
 
     def ask_time_control(self) -> str:

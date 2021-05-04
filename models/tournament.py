@@ -192,7 +192,7 @@ class Tournament(Model):
         This setter checks whether the entered value is list of Player UUIDs or a list of strings
         and sets the attribute as a list of Player UUIDs
         """
-        if value is None:
+        if value is None or value == []:
             raise AttributeError()
         players_identifiers_list = []
         for player_id in value:
@@ -202,18 +202,20 @@ class Tournament(Model):
                 try:
                     player_id = UUID(player_id)
                     players_identifiers_list.append(player_id)
-                    self.__identifiers_list = players_identifiers_list
                 except AttributeError:
                     raise AttributeError()
-
             elif isinstance(player_id, UUID):
                 try:
                     players_identifiers_list.append(player_id)
-                    self.__identifiers_list = players_identifiers_list
                 except AttributeError:
                     raise AttributeError()
             else:
                 raise AttributeError()
+
+        if len(players_identifiers_list) % 2 != 0:
+            raise AttributeError()
+        else:
+            self.__identifiers_list = players_identifiers_list
 
     @property
     def time_control(self) -> Time_control:

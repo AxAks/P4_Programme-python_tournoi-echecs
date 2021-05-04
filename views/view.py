@@ -16,7 +16,15 @@ class View:
         self.exiting_message = exiting_message
 
     def print_hard_separator(self):
-        print('========================')
+        print('========================'
+              '========================'
+              '========================'
+              '========================'
+              '========================'
+              '========================'
+              '========================'
+              '========================'
+              '========================')
 
     def print_soft_separator(self):
         print('')
@@ -26,9 +34,19 @@ class View:
         print(self.program_name, '\n', self.menu_name)
         self.print_hard_separator()
 
+    def specific_header(self, header_name):
+        self.print_hard_separator()
+        print(header_name)
+        self.print_hard_separator()
+
     def header_player_search(self):
         self.print_hard_separator()
-        print('Player Search Results: ')
+        print('Players Search: ')
+        self.print_hard_separator()
+
+    def header_player_search_results(self, header_name: str = 'Player Search Results: '):
+        self.print_hard_separator()
+        print(header_name)
         self.print_hard_separator()
 
     def header_tournaments_search(self):
@@ -61,7 +79,17 @@ class View:
         print('List of all Tournaments by Location: ')
         self.print_hard_separator()
 
-    def header_ranking_update(self):
+    def header_tournament_player_ranking_update(self):
+        self.print_hard_separator()
+        print('After Tournament New Player Rankings: ')
+        self.print_hard_separator()
+
+    def header_possible_next_matchups(self):
+        self.print_hard_separator()
+        print('Possible Next Matchups: ')
+        self.print_hard_separator()
+
+    def header_general_player_ranking_update(self):
         self.print_hard_separator()
         print('Player Ranking Update: ')
         self.print_hard_separator()
@@ -77,7 +105,7 @@ class View:
         self.print_hard_separator()
 
     def input_search_a_player_by_id(self):
-        _input =input('search a player by ID: ')
+        _input =input('Search a player by ID: ')
         return _input
 
     def input_search_a_tournament_by_name_location_dates(self):
@@ -89,13 +117,16 @@ class View:
 
     def print_player_general_infos(self, player):
         print(f'Player: {player.last_name}, {player.first_name}, {player.identifier_pod}\n'
-              f'More infos: {player.birthdate_pod}, {player.gender_pod}, {player.ranking}')
+              f'- birthdate: {player.birthdate_pod}, gender: {player.gender_pod}, ranking: {player.ranking}')
 
     def print_player_infos_simple(self, player_obj):
         print(f'Player: {player_obj.last_name}, {player_obj.first_name}, {player_obj.identifier_pod}')
 
     def print_player_ranking_only(self, player_obj):
         print(f'General Ranking: {player_obj.ranking}')
+
+    def print_player_result(self, result):
+        print(f"Total Points in Tournament: {result}")
 
     def print_opponent_infos_simple(self, opponent_obj):
         print(f'Opponent: {opponent_obj.last_name}, {opponent_obj.first_name}, {opponent_obj.identifier_pod}')
@@ -117,10 +148,17 @@ class View:
         print(f'{round_obj.name}: from {round_obj.start_time} to {round_obj.end_time}')
 
     def print_no_tournament_found(self):
-        print('No tournament in the registry')
+        print('No tournament found')
 
     def print_no_player_found(self):
-        print('No player in the registry')
+        print('No player found')
+
+    def print_insufficient_registered_players_for_tournament(self):
+        print('Not enough players in the registry')
+        print('Please create new players before')
+
+    def print_player_already_entered(self):
+        print('Player already entered')
 
     def print_one_tournament_found(self):
         print('1 Tournament found in Registry for this research:')
@@ -130,10 +168,10 @@ class View:
 
     def print_match_result(self, match, player1_obj, player2_obj, match_n):
         print(f'Match {match_n}:\n'
-              f'{player1_obj.last_name}, {player1_obj.first_name}, {player1_obj.identifier_pod}\n'
-              f'{match.player1_score_pod}\n'
-              f'{player2_obj.last_name}, {player2_obj.first_name}, {player2_obj.identifier_pod}\n'
-              f'{match.player2_score_pod}\n')
+              f'- Score: {match.player1_score_pod}, {player1_obj.last_name}, {player1_obj.first_name},'
+              f' {player1_obj.identifier_pod}\n'
+              f'- Score: {match.player2_score_pod}, {player2_obj.last_name}, {player2_obj.first_name},'
+              f' {player2_obj.identifier_pod}')
 
     def print_please_confirm(self):
         print('Please confirm this information: ')

@@ -32,10 +32,10 @@ class PlayersMenu(Menu):
         """
         This method calls the controller to manually update a player's ranking
         """
-        self.print_hard_separator()
+        self.header_general_player_ranking_update()
         search = self.input_search_a_player_by_id()
         result = self.current_page_ctrl().update_player_ranking(search)
-        self.header_ranking_update()
+        self.header_general_player_ranking_update()
         if isinstance(result, list):
             self.print_no_player_found()
             self.print_please_retry()
@@ -49,10 +49,10 @@ class PlayersMenu(Menu):
         """
         This method calls the controller to find one or more player instances in the registry
         """
-        self.print_hard_separator()
+        self.header_player_search()
         search = self.input_search_a_player_by_id()
         players = self.current_page_ctrl().search_by_id(search)
-        self.header_player_search()
+        self.header_player_search_results()
         if len(players) == 0:
             self.print_no_player_found()
         else:
@@ -82,6 +82,6 @@ class PlayersMenu(Menu):
         if len(players_list) == 0:
             self.print_no_player_found()
         else:
-            for player in players_list():
+            for player in players_list:
                 self.print_player_general_infos(player)
         self.current_page_ctrl().run()

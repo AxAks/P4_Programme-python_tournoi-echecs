@@ -24,6 +24,7 @@ class Controller:
         while choice not in valid_choices:
             self.menu.show()
             _input = input('Enter an option: ')
+            clear_terminal()
             try:
                 choice = int(_input)
                 if choice not in valid_choices:

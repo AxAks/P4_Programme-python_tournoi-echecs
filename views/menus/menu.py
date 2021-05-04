@@ -29,7 +29,7 @@ class Menu(View):
         for choice in self.choices:
             reformatted_choice_str = choice.__name__.replace('_', ' ').title()
             print(f"{self.choices.index(choice)}: {reformatted_choice_str}")
-        print('========================')
+        self.print_hard_separator()
 
     def home(self) -> None:
         """

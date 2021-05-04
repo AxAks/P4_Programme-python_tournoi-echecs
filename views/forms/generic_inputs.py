@@ -48,5 +48,20 @@ def ask_integer(input_info: str) -> int:
     return _input
 
 
-def integer_to_float(_input: int) -> float:
-    return float(_input)
+def ask_even_integer(input_info: str) -> int:
+    valid_even_integer = False
+    _input = input(input_info)
+    while not valid_even_integer:
+        try:
+            _input = int(_input)
+            if _input % 2 == 0:
+                valid_even_integer = True
+            else:
+                print('Not an even number, please retry...')
+                print('Please retry ...')
+                _input = input(input_info)
+        except ValueError:
+            print('Not an even number, please retry...')
+            print('Please retry ...')
+            _input = input(input_info)
+    return _input

@@ -203,9 +203,7 @@ class TournamentInfosCtrl(Controller):
         return new_totals
 
     def update_tournaments_players_rankings(self) -> dict:
-        print('========================')
-        print('After Tournament New Player Rankings: ')
-        print('========================')
+        self.menu.header_tournament_player_ranking_update()
         new_rankings = {}
         for identifier in self.data.identifiers_list:
             player = PlayerManager().from_identifier_to_player_obj(identifier)
