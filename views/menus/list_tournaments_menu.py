@@ -76,7 +76,7 @@ class ListTournamentsMenu(Menu):
         """
         This method calls the controller to find one or more Tournament instances in the registry
         """
-        print('========================')
+        self.print_hard_separator()
         print('========================')
         print('Tournament Search: ')
         print('========================')

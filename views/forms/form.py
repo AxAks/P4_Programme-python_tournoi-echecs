@@ -36,7 +36,7 @@ class Form(View):
         choices_info = '1: YES, 2: NO, 0: CANCEL'
         input_info = f'Please confirm this information: ({choices_info}): '
         valid_choices = (0, 1, 2)
-        wrong_input = 'Invalid choice (1, 2 or 0), please retry...'
+        wrong_input = f'Invalid choice (1, 2 or 0), {self.print_please_retry()}'
         while not valid_entry:
             try:
                 _input = input(input_info)
@@ -65,7 +65,7 @@ class Form(View):
         This method asks all the required info about a specific object.
         It returns the info as a dict
         """
-        self.general_menu_header()
+        self.general_header_menu()
         new_dict = {}
         for _property in self.properties:
             if _property not in self.not_asked_properties:

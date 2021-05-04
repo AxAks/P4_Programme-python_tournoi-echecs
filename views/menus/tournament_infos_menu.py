@@ -50,7 +50,7 @@ class TournamentInfosMenu(Menu):
         sorted_players = self.current_page_ctrl(self.data).sort_tournament_players_by_ranking()
         for player in sorted_players:
             self.print_player_infos_simple(player)
-            print(f'General Ranking: {player.ranking}')
+            self.print_player_ranking_only(player)
         self.current_page_ctrl(self.data).run()
 
     def sort_players_by_result(self) -> None:
@@ -66,11 +66,11 @@ class TournamentInfosMenu(Menu):
             self.print_no_results_yet()
         else:
             for _tuple in players_result_list:
-                PLAYER = _tuple[0]
-                RESULT = _tuple[1]
-                print(f"Player: {PLAYER.last_name}, {PLAYER.first_name}, {PLAYER.identifier_pod}\n"
-                      f"General Ranking: {PLAYER.ranking}\n"
-                      f"Total Points: {RESULT}")
+                player = _tuple[0]
+                result = _tuple[1]
+                self.print_player_infos_simple(player)
+                self.print_player_ranking_only(player)
+                print(f"Total Points: {result}")
         self.current_page_ctrl(self.data).run()
 
     def display_rounds_and_matches(self) -> None:
@@ -86,7 +86,7 @@ class TournamentInfosMenu(Menu):
             self.print_no_results_yet()
         else:
             for _round in rounds_list:
-                print(f'-> {_round.name}: from {_round.start_time} to {_round.end_time}')
+                self.print_round_infos_simple(_round)
                 match_n = 1
                 for match in _round.matches:
                     player1_obj = PlayerManager().from_identifier_to_player_obj(match.player1_id)
@@ -106,10 +106,10 @@ class TournamentInfosMenu(Menu):
         else:
             for player in not_played_yet:
                 player_obj = PlayerManager().from_identifier_to_player_obj(player)
-                print(f'{player_obj.last_name}, {player_obj.first_name}, {player_obj.identifier_pod}'
-                      f' has never played against:')
+                self.print_player_infos_simple(player_obj)
+                print('has never played against: ')
                 for opponent in not_played_yet[player]:
                     opponent_obj = PlayerManager().from_identifier_to_player_obj(opponent)
-                    print(f' - {opponent_obj.last_name}, {opponent_obj.first_name}, {opponent_obj.identifier_pod}')
-                print('')
+                    self.print_opponent_infos_simple(opponent_obj)
+                self.print_soft_separator()
         self.current_page_ctrl(self.data).run()

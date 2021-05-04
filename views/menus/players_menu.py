@@ -32,16 +32,16 @@ class PlayersMenu(Menu):
         """
         This method calls the controller to manually update a player's ranking
         """
-        print('========================')
-        search = input('search a player by ID: ')
+        self.print_hard_separator()
+        search = self.input_search_a_player_by_id()
         result = self.current_page_ctrl().update_player_ranking(search)
-        self.ranking_update_header()
+        self.header_ranking_update()
         if isinstance(result, list):
             self.print_no_player_found()
             self.print_please_retry()
         else:
             print(f'Ranking Updated for')
-            self.print_player_infos_simple()
+            self.print_player_infos_simple(result)
             print(f'New Ranking: {result.ranking}')
         self.current_page_ctrl().run()
 
@@ -49,10 +49,10 @@ class PlayersMenu(Menu):
         """
         This method calls the controller to find one or more player instances in the registry
         """
-        print('========================')
-        search = input('search a player by ID: ')
+        self.print_hard_separator()
+        search = self.input_search_a_player_by_id()
         players = self.current_page_ctrl().search_by_id(search)
-        self.player_search_header()
+        self.header_player_search()
         if len(players) == 0:
             self.print_no_player_found()
         else:
@@ -64,7 +64,7 @@ class PlayersMenu(Menu):
         """
         This method calls the controller to sort all player instances by last name
         """
-        self.by_last_name_header()
+        self.header_by_last_name()
         players_list = self.current_page_ctrl().sort_by_last_name()
         if len(players_list) == 0:
             self.print_no_player_found()
@@ -77,7 +77,7 @@ class PlayersMenu(Menu):
         """
         This method calls the controller to sort all player instances by ranking
         """
-        self.by_ranking_header()
+        self.header_by_ranking()
         players_list = self.current_page_ctrl().sort_by_ranking()
         if len(players_list) == 0:
             self.print_no_player_found()

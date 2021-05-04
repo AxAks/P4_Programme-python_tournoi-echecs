@@ -14,26 +14,35 @@ class View:
         self.previous_page_ctrl = previous_page_ctrl
         self.exiting_message = exiting_message
 
-    def general_menu_header(self):
+    def general_header_menu(self):
         print('========================')
         print(self.program_name, '\n', self.menu_name)
         print('========================')
 
-    def by_ranking_header(self):
+    def header_by_ranking(self):
         print(f'========================\n'
               f'All Players by ranking: \n'
               f'========================')
-    def by_last_name_header(self):
+    def header_by_last_name(self):
         print(f'========================\n'
               f'All Players by last name: \n'
               f'========================')
 
-    def player_search_header(self):
+    def print_hard_separator(self):
+        print('========================')
+
+    def print_soft_separator(self):
+        print('')
+
+    def input_search_a_player_by_id(self):
+        input('search a player by ID: ')
+
+    def header_player_search(self):
         print(f'========================\n'
               f'Player Search Results: \n'
               f'========================')
 
-    def ranking_update_header(self):
+    def header_ranking_update(self):
         print(f'========================\n'
               f'Player Ranking Update: \n'
               f'========================')
@@ -42,14 +51,23 @@ class View:
         print(f'Player: {player.last_name}, {player.first_name}, {player.identifier_pod}\n'
               f'More infos: {player.birthdate_pod}, {player.gender_pod}, {player.ranking}')
 
-    def print_player_infos_simple(self, player):
-        print(f'Player: {player.last_name}, {player.first_name}, {player.identifier_pod}')
+    def print_player_infos_simple(self, player_obj):
+        print(f'Player: {player_obj.last_name}, {player_obj.first_name}, {player_obj.identifier_pod}')
 
-    def print_tournament_general_infos(self, tournament):
-        print(f'Name: {tournament.name}, Location {tournament.location},\n'
-              f'From {tournament.start_date} to {tournament.end_date},\n '
-              f'{tournament.rounds} Rounds, Time Control: {tournament.time_control}\n'
-              f'Description: {tournament.description}')
+    def print_player_ranking_only(self, player_obj):
+        print(f'General Ranking: {player_obj.ranking}')
+
+    def print_opponent_infos_simple(self, opponent_obj):
+        print(f'Opponent: {opponent_obj.last_name}, {opponent_obj.first_name}, {opponent_obj.identifier_pod}')
+
+    def print_tournament_general_infos(self, tournament_obj):
+        print(f'Name: {tournament_obj.name}, Location {tournament_obj.location},\n'
+              f'From {tournament_obj.start_date} to {tournament_obj.end_date},\n '
+              f'{tournament_obj.rounds} Rounds, Time Control: {tournament_obj.time_control}\n'
+              f'Description: {tournament_obj.description}')
+
+    def print_round_infos_simple(self, round_obj):
+        print(f'{round_obj.name}: from {round_obj.start_time} to {round_obj.end_time}')
 
     def print_no_tournament_found(self):
         print('No tournament in the registry')

@@ -50,7 +50,7 @@ class NewMatchForm(Form):
     def ask_players_scores(self):
         choices_info = '(LOSS: 0, TIE: 0.5, WIN: 1)'
         input_info = f'Enter Score for Player1 ({self.player1_id}) {choices_info}: '
-        wrong_input = 'Invalid choice (0, 0.5 or 1), please retry...'
+        wrong_input = f'Invalid choice (0, 0.5 or 1), {self.print_please_retry()}'
         valid_choices = (0, 0.5, 1)
         valid_entry = False
         while not valid_entry:
