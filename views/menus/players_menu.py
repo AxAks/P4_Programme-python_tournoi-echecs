@@ -24,9 +24,8 @@ class PlayersMenu(Menu):
         This method calls the controller to create a player instance
         """
         player = self.current_page_ctrl().add_player()
-        print(f'New Player registered:\n'
-              f'{player.last_name}, {player.first_name},\n'
-              f'{player.birthdate_pod}, {player.gender_pod}, {player.ranking}, {player.identifier_pod}')
+        print(f'New Player registered: ')
+        self.print_player_infos(player)
         self.current_page_ctrl().run()
 
     def update_player_ranking(self) -> None:
@@ -43,7 +42,7 @@ class PlayersMenu(Menu):
             print('No Player found for this request, please retry')
         else:
             print(f'Ranking Updated for\n'
-                  f'{result.identifier_pod}, {result.last_name}, {result.first_name}\n'
+                  f'{result.last_name}, {result.first_name}, {result.identifier_pod}\n'
                   f'New Ranking: {result.ranking}')
         self.current_page_ctrl().run()
 
@@ -61,8 +60,7 @@ class PlayersMenu(Menu):
             print('No Player found for this request')
         else:
             for player in players:
-                print(f'{player.identifier_pod}, {player.last_name}, {player.first_name}\n'
-                      f'{player.birthdate_pod}, {player.gender_pod}, {player.ranking}')
+                self.print_player_infos(player)
         self.current_page_ctrl().run()
 
     def display_by_last_name(self) -> None:
@@ -73,8 +71,7 @@ class PlayersMenu(Menu):
         print('All Players by last name: ')
         print('========================')
         for player in self.current_page_ctrl().sort_by_last_name():
-            print(f'- {player.last_name}, {player.first_name}, {player.identifier_pod}\n'
-                  f'{player.birthdate_pod}, {player.gender_pod}, {player.ranking}')
+            self.print_player_infos(player)
         self.current_page_ctrl().run()
 
     def display_by_ranking(self) -> None:
@@ -85,8 +82,5 @@ class PlayersMenu(Menu):
         print('All Players by ranking: ')
         print('========================')
         for player in self.current_page_ctrl().sort_by_ranking():
-            print(f'- {player.last_name}, {player.first_name}, {player.identifier_pod},'
-                  f' {player.birthdate_pod}, {player.gender_pod}\n'
-                  f'-> {player.ranking}'
-                  )
+            self.print_player_infos(player)
         self.current_page_ctrl().run()
