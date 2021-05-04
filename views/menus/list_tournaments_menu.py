@@ -87,8 +87,9 @@ class ListTournamentsMenu(Menu):
         selected_tournament = self.current_page_ctrl().select_one()
         if selected_tournament == {}:
             self.print_no_tournament_found()
+            self.print_please_retry()
             self.current_page_ctrl().run()
         else:
             self.print_one_tournament_found()
             self.print_tournament_general_infos(selected_tournament)
-        TournamentInfosCtrl(selected_tournament).run()
+            TournamentInfosCtrl(selected_tournament).run()

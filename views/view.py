@@ -77,10 +77,12 @@ class View:
         self.print_hard_separator()
 
     def input_search_a_player_by_id(self):
-        input('search a player by ID: ')
+        _input =input('search a player by ID: ')
+        return _input
 
     def input_search_a_tournament_by_name_location_dates(self):
-        input('Search a Tournament by Name, Location or dates : ')
+        _input = input('Search a Tournament by Name, Location or dates : ')
+        return _input
 
     def print_new_player_registered(self):
         print('New Player registered: ')
