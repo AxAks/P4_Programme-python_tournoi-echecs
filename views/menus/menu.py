@@ -18,7 +18,7 @@ class Menu(View):
                          previous_page_ctrl=previous_page_ctrl, exiting_message=exiting_message)
         self.current_page_ctrl = current_page_ctrl
         self.root_page = root_page
-        self.choices = [self.quit, self.home, self.back,  self.load, self.save]
+        self.choices = [self.quit, self.home, self.back, self.load, self.save]
 
     def show(self) -> None:
         """
