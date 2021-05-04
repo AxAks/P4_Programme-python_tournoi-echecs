@@ -56,6 +56,11 @@ class View:
         print('List of all Tournaments sorted by Start Date: ')
         self.print_hard_separator()
 
+    def header_tournament_by_location(self):
+        self.print_hard_separator()
+        print('List of all Tournaments by Location: ')
+        self.print_hard_separator()
+
     def header_ranking_update(self):
         self.print_hard_separator()
         print('Player Ranking Update: ')
@@ -77,6 +82,9 @@ class View:
     def input_search_a_tournament_by_name_location_dates(self):
         input('Search a Tournament by Name, Location or dates : ')
 
+    def print_new_player_registered(self):
+        print('New Player registered: ')
+
     def print_player_general_infos(self, player):
         print(f'Player: {player.last_name}, {player.first_name}, {player.identifier_pod}\n'
               f'More infos: {player.birthdate_pod}, {player.gender_pod}, {player.ranking}')
@@ -96,6 +104,9 @@ class View:
               f'{tournament_obj.rounds} Rounds, Time Control: {tournament_obj.time_control}\n'
               f'Description: {tournament_obj.description}')
 
+    def print_new_tournament_registered(self):
+        print('New Tournament registered: ')
+
     def print_tournament_infos_simple(self, tournament_obj):
         print(f'Name: {tournament_obj.name}, Location {tournament_obj.location}\n'
               f'From {tournament_obj.start_date} to {tournament_obj.end_date}')
@@ -108,6 +119,9 @@ class View:
 
     def print_no_player_found(self):
         print('No player in the registry')
+
+    def print_one_tournament_found(self):
+        print('1 Tournament found in Registry for this research:')
 
     def print_no_results_yet(self):
         print('There are no Results for this Tournament yet')

@@ -26,7 +26,7 @@ class ListTournamentsMenu(Menu):
         This method calls the controller to create a new Tournament instance.
         """
         tournament = self.current_page_ctrl().add_tournament()
-        print('New Tournament registered: ')
+        self.print_new_tournament_registered()
         self.print_tournament_general_infos(tournament)
         self.current_page_ctrl().run()
 
@@ -40,8 +40,7 @@ class ListTournamentsMenu(Menu):
             self.print_no_tournament_found()
         else:
             for tournament in tournaments_list:
-                print(f'from {tournament.start_date} to {tournament.end_date}\n'
-                      f'-> {tournament.name} in {tournament.location}')
+                self.print_tournament_infos_simple(tournament)
         self.current_page_ctrl().run()
 
     def display_by_name(self) -> None:
@@ -55,16 +54,13 @@ class ListTournamentsMenu(Menu):
         self.current_page_ctrl().run()
 
     def display_by_location(self) -> None:
-        print('========================')
-        print('List of all Tournaments by Location: ')
-        print('========================')
+        self.header_tournament_by_location()
         tournaments_list = self.current_page_ctrl().sort_by_location()
         if len(tournaments_list) == 0:
             self.print_no_tournament_found()
         else:
             for tournament in tournaments_list:
-                print(f'- {tournament.location}, {tournament.name}\n '
-                      f'-> from {tournament.start_date} to {tournament.end_date}')
+                self.print_tournament_infos_simple(tournament)
         self.current_page_ctrl().run()
 
     def search_tournaments(self) -> None:
@@ -93,10 +89,6 @@ class ListTournamentsMenu(Menu):
             self.print_no_tournament_found()
             self.current_page_ctrl().run()
         else:
-            print('1 Tournament found in Registry for this research:')
-            print(f'- {selected_tournament.name}, '
-                  f'{selected_tournament.location}, '
-                  f'{selected_tournament.start_date}, '
-                  f'{selected_tournament.end_date}\n'
-                  f'-> {selected_tournament.description}')
+            self.print_one_tournament_found()
+            self.print_tournament_general_infos(selected_tournament)
         TournamentInfosCtrl(selected_tournament).run()

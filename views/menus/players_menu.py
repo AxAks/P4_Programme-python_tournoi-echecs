@@ -24,7 +24,7 @@ class PlayersMenu(Menu):
         This method calls the controller to create a player instance
         """
         player = self.current_page_ctrl().add_player()
-        print('New Player registered: ')
+        self.print_new_player_registered()
         self.print_player_general_infos(player)
         self.current_page_ctrl().run()
 
