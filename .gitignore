@@ -2,3 +2,4 @@ venv_P4-tournoi-echecs
 venv-test
 .idea
 *.pyc
+flake-report
