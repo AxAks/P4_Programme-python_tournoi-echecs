@@ -25,7 +25,7 @@ class PlayersMenu(Menu):
         """
         player = self.current_page_ctrl().add_player()
         print(f'New Player registered: ')
-        self.print_player_infos(player)
+        self.print_player_general_infos(player)
         self.current_page_ctrl().run()
 
     def update_player_ranking(self) -> None:
@@ -35,15 +35,14 @@ class PlayersMenu(Menu):
         print('========================')
         search = input('search a player by ID: ')
         result = self.current_page_ctrl().update_player_ranking(search)
-        print('========================')
-        print('Player Ranking Update: ')
-        print('========================')
+        self.ranking_update_header()
         if isinstance(result, list):
-            print('No Player found for this request, please retry')
+            self.print_no_player_found()
+            self.print_please_retry()
         else:
-            print(f'Ranking Updated for\n'
-                  f'{result.last_name}, {result.first_name}, {result.identifier_pod}\n'
-                  f'New Ranking: {result.ranking}')
+            print(f'Ranking Updated for')
+            self.print_player_infos_simple()
+            print(f'New Ranking: {result.ranking}')
         self.current_page_ctrl().run()
 
     def search_by_id(self) -> None:
@@ -53,34 +52,36 @@ class PlayersMenu(Menu):
         print('========================')
         search = input('search a player by ID: ')
         players = self.current_page_ctrl().search_by_id(search)
-        print('========================')
-        print('Player Search Results: ')
-        print('========================')
+        self.player_search_header()
         if len(players) == 0:
-            print('No Player found for this request')
+            self.print_no_player_found()
         else:
             for player in players:
-                self.print_player_infos(player)
+                self.print_player_general_infos(player)
         self.current_page_ctrl().run()
 
     def display_by_last_name(self) -> None:
         """
         This method calls the controller to sort all player instances by last name
         """
-        print('========================')
-        print('All Players by last name: ')
-        print('========================')
-        for player in self.current_page_ctrl().sort_by_last_name():
-            self.print_player_infos(player)
-        self.current_page_ctrl().run()
+        self.by_last_name_header()
+        players_list = self.current_page_ctrl().sort_by_last_name()
+        if len(players_list) == 0:
+            self.print_no_player_found()
+        else:
+            for player in players_list:
+                self.print_player_general_infos(player)
+            self.current_page_ctrl().run()
 
     def display_by_ranking(self) -> None:
         """
         This method calls the controller to sort all player instances by ranking
         """
-        print('========================')
-        print('All Players by ranking: ')
-        print('========================')
-        for player in self.current_page_ctrl().sort_by_ranking():
-            self.print_player_infos(player)
+        self.by_ranking_header()
+        players_list = self.current_page_ctrl().sort_by_ranking()
+        if len(players_list) == 0:
+            self.print_no_player_found()
+        else:
+            for player in players_list():
+                self.print_player_general_infos(player)
         self.current_page_ctrl().run()

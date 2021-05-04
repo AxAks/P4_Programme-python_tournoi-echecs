@@ -23,7 +23,10 @@ class HomeMenu(Menu):
         This method calls the controller to create a new tournament
         and start it directly
         """
-        self.current_page_ctrl().launch_new_tournament()
+        tournament = self.current_page_ctrl().launch_new_tournament()
+        print(f'New Tournament registered: ')
+        self.print_tournament_general_infos(tournament)  # on ne passe pas dedans, je pense ...
+
 
     def search_registered_tournament_to_resume(self):
         """

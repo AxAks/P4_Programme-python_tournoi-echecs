@@ -36,8 +36,7 @@ class TournamentInfosMenu(Menu):
         print(f'Players by last name for "{self.data.name}": ')
         print('========================')
         for player in players_list:
-            print(f'{player.last_name}, {player.first_name}, {player.identifier_pod},\n'
-                  f'{player.birthdate_pod}, {player.gender_pod}, {player.ranking}')
+            self.print_player_general_infos(player)
         self.current_page_ctrl(self.data).run()
 
     def sort_players_by_ranking(self) -> None:
@@ -50,8 +49,8 @@ class TournamentInfosMenu(Menu):
         print('========================')
         sorted_players = self.current_page_ctrl(self.data).sort_tournament_players_by_ranking()
         for player in sorted_players:
-            print(f'Player: {player.last_name}, {player.first_name}, {player.identifier_pod}\n'
-                  f'General Ranking: {player.ranking}')
+            self.print_player_infos_simple(player)
+            print(f'General Ranking: {player.ranking}')
         self.current_page_ctrl(self.data).run()
 
     def sort_players_by_result(self) -> None:
@@ -60,13 +59,13 @@ class TournamentInfosMenu(Menu):
         sorted by results.
         """
         print('========================')
-        print(f'Players by results for "{self.data.name}": ')
+        print(f'Players by result for "{self.data.name}": ')
         print('========================')
-        players_results_list = self.current_page_ctrl(self.data).sort_players_by_result(self.data)
-        if players_results_list == {}:
-            print("There are no Results for this Tournament yet")
+        players_result_list = self.current_page_ctrl(self.data).sort_players_by_result(self.data)
+        if players_result_list == {}:
+            self.print_no_results_yet()
         else:
-            for _tuple in players_results_list:
+            for _tuple in players_result_list:
                 PLAYER = _tuple[0]
                 RESULT = _tuple[1]
                 print(f"Player: {PLAYER.last_name}, {PLAYER.first_name}, {PLAYER.identifier_pod}\n"
@@ -84,20 +83,16 @@ class TournamentInfosMenu(Menu):
         print(f'All Rounds and Matches for "{self.data.name}": ')
         print('========================')
         if len(rounds_list) == 0:
-            print('No registered Rounds for this Tournament yet')
+            self.print_no_results_yet()
         else:
             for _round in rounds_list:
                 print(f'-> {_round.name}: from {_round.start_time} to {_round.end_time}')
-                n = 1
+                match_n = 1
                 for match in _round.matches:
                     player1_obj = PlayerManager().from_identifier_to_player_obj(match.player1_id)
                     player2_obj = PlayerManager().from_identifier_to_player_obj(match.player2_id)
-                    print(f'Match {n}:\n'
-                          f'{player1_obj.last_name}, {player1_obj.first_name}, {player1_obj.identifier_pod}\n'
-                          f'{match.player1_score_pod}\n'
-                          f'{player2_obj.last_name}, {player2_obj.first_name}, {player2_obj.identifier_pod}\n'
-                          f'{match.player2_score_pod}\n')
-                    n += 1
+                    self.print_match_result(match, player1_obj, player2_obj, match_n)
+                    match_n += 1
         self.current_page_ctrl(self.data).run()
 
     def display_not_played_matchups(self) -> None:   # pour les tests ! est ce que je le laisse ?
@@ -107,7 +102,7 @@ class TournamentInfosMenu(Menu):
         """
         not_played_yet = self.current_page_ctrl(self.data).display_not_played_yet()
         if not_played_yet == self.data.identifiers_list:
-            print('No registered Matches for this Tournament yet')
+            self.print_no_results_yet()
         else:
             for player in not_played_yet:
                 player_obj = PlayerManager().from_identifier_to_player_obj(player)

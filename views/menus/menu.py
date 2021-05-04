@@ -25,7 +25,7 @@ class Menu(View):
         This method displays the different options of the menu.
         The options are set in the attributes of the class ("choices" and "specific_menu_choices")
         """
-        self.menu_header()
+        self.general_menu_header()
         for choice in self.choices:
             reformatted_choice_str = choice.__name__.replace('_', ' ').title()
             print(f"{self.choices.index(choice)}: {reformatted_choice_str}")

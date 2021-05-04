@@ -26,12 +26,8 @@ class ListTournamentsMenu(Menu):
         This method calls the controller to create a new Tournament instance.
         """
         tournament = self.current_page_ctrl().add_tournament()
-        print(f'New Tournament registered:\n'
-              f'Name: {tournament.name}, Location {tournament.location},\n'
-              f'Start Date: {tournament.start_date}, End Date: {tournament.end_date}, '
-              f'Identifiers List: {tournament.identifiers_list},'
-              f'Time Control: {tournament.time_control},Description: {tournament.description}, '
-              f'Number of Rounds: {tournament.rounds} Rounds')
+        print(f'New Tournament registered: ')
+        self.print_tournament_general_infos(tournament)
         self.current_page_ctrl().run()
 
     def display_by_start_date(self) -> None:
@@ -43,10 +39,10 @@ class ListTournamentsMenu(Menu):
         print('========================')
         tournaments_list = self.current_page_ctrl().sort_by_start_date()
         if len(tournaments_list) == 0:
-            print('No tournament in the registry')
+            self.print_no_tournament_found()
         else:
             for tournament in tournaments_list:
-                print(f'- from {tournament.start_date} to {tournament.end_date}\n'
+                print(f'from {tournament.start_date} to {tournament.end_date}\n'
                       f'-> {tournament.name} in {tournament.location}')
         self.current_page_ctrl().run()
 
@@ -56,7 +52,7 @@ class ListTournamentsMenu(Menu):
         print('========================')
         tournaments_list = self.current_page_ctrl().sort_by_name()
         if len(tournaments_list) == 0:
-            print('No tournament in the registry')
+            self.print_no_tournament_found()
         else:
             for tournament in tournaments_list:
                 print(f'- {tournament.name} in {tournament.location}\n '
@@ -69,7 +65,7 @@ class ListTournamentsMenu(Menu):
         print('========================')
         tournaments_list = self.current_page_ctrl().sort_by_location()
         if len(tournaments_list) == 0:
-            print('No tournament in the registry')
+            self.print_no_tournament_found()
         else:
             for tournament in tournaments_list:
                 print(f'- {tournament.location}, {tournament.name}\n '
@@ -90,7 +86,7 @@ class ListTournamentsMenu(Menu):
         print('Tournament Search Results: ')
         print('========================')
         if len(tournaments) == 0:
-            print('No Tournament found for this request')
+            self.print_no_tournament_found()
         for tournament in tournaments:
             print(f'- {tournament.location}, {tournament.name}\n'
                   f'-> from {tournament.start_date} to {tournament.end_date}')
@@ -106,7 +102,7 @@ class ListTournamentsMenu(Menu):
         print('========================')
         selected_tournament = self.current_page_ctrl().select_one()
         if selected_tournament == {}:
-            print("No Tournament found in Registry for this research")
+            self.print_no_tournament_found()
             self.current_page_ctrl().run()
         else:
             print('1 Tournament found in Registry for this research:')

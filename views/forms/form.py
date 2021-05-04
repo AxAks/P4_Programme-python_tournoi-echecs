@@ -65,7 +65,7 @@ class Form(View):
         This method asks all the required info about a specific object.
         It returns the info as a dict
         """
-        self.menu_header()
+        self.general_menu_header()
         new_dict = {}
         for _property in self.properties:
             if _property not in self.not_asked_properties:

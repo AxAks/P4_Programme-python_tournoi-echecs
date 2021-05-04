@@ -17,9 +17,9 @@ class HomeCtrl(Controller):
 
     def launch_new_tournament(self) -> None:
         """
-        This method enables to launch and run a new tournament
+        This method enables to create and launch a new tournament
         """
-        self.data = list_tournaments_controller.ListTournamentsCtrl().add_tournament()
+        list_tournaments_controller.ListTournamentsCtrl().add_tournament()
         tournament_infos_controller.TournamentInfosCtrl(self.data).run()
 
     def search_registered_tournament(self) -> None:
