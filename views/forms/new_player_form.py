@@ -1,8 +1,8 @@
 # coding=utf-8
 
-from datetime import date
+from datetime import date, timedelta
 
-from constants import PLAYER_PROPERTIES, RANKING_RANGE
+from constants import PLAYER_PROPERTIES, RANKING_RANGE, MINIMUM_AGE
 from controllers import players_controller
 
 from views.forms.form import Form
@@ -26,6 +26,7 @@ class NewPlayerForm(Form):
         This method asks for the player's last name
         and checks the formatting of the string
         """
+        self.print_hard_separator()
         return ask_alphabetical_string(input_info)
 
     def ask_first_name(self, input_info="Enter First Name: ") -> str:
@@ -33,6 +34,7 @@ class NewPlayerForm(Form):
         This method asks for the player's first name
         and checks the formatting of the string
         """
+        self.print_hard_separator()
         return ask_alphabetical_string(input_info)
 
     def ask_birthdate(self, input_info="Enter Player Birthdate(YYYY-MM-DD): ") -> date:
@@ -40,8 +42,23 @@ class NewPlayerForm(Form):
         This method asks for the player's birthdate,
         checks the format of the string entered
         and forces it into a date format
+        It also checks that the player is over 12
         """
-        return ask_iso_date(input_info)
+        valid_entry = False
+        wrong_input = 'Players must be at least 12 year old'
+
+        self.print_hard_separator()
+        _input = ask_iso_date(input_info)
+        while not valid_entry:
+            if date.today() - _input < timedelta(days=MINIMUM_AGE * 365):
+                print(wrong_input)
+                self.print_please_retry()
+                self.print_hard_separator()
+                _input = ask_iso_date(input_info)
+            else:
+                valid_entry = True
+
+        return _input
 
     def ask_gender(self) -> str:
         """
@@ -54,6 +71,7 @@ class NewPlayerForm(Form):
         wrong_input = 'Invalid choice (1 or 2)'
         valid_choices = (1, 2)
 
+        self.print_hard_separator()
         _input = input(input_info)
         while not valid_entry:
             try:
@@ -67,10 +85,12 @@ class NewPlayerForm(Form):
                 else:
                     print(wrong_input)
                     self.print_please_retry()
+                    self.print_hard_separator()
                     _input = input(input_info)
             except ValueError:
                 print(wrong_input)
                 self.print_please_retry()
+                self.print_hard_separator()
                 _input = input(input_info)
         return _input
 
@@ -81,8 +101,9 @@ class NewPlayerForm(Form):
         valid_entry = False
         input_info = 'Enter Player Ranking (from 100 to 3000): '
         wrong_input = 'Ranking must be a digit between 100 and 3000'
-        while valid_entry is False:
+        while not valid_entry:
             try:
+                self.print_hard_separator()
                 _input = int(input(input_info))
                 if _input in RANKING_RANGE:
                     valid_entry = True
