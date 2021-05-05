@@ -33,8 +33,8 @@ class Player(Model):
         super().__init__(PLAYER_PROPERTIES, **data)
 
     def __repr__(self):
-        return f'{self.last_name}, {self.first_name}, {self.identifier}\n' \
-               f'-> {self.birthdate}, {self.gender_pod.title()}\n {self.ranking}'
+        return f'Player: {self.last_name}, {self.first_name}, {self.identifier}\n' \
+               f'- birthdate: {self.birthdate}, gender: {self.gender_pod.title()}, ranking: {self.ranking}'
 
     @property
     def identifier(self) -> UUID:

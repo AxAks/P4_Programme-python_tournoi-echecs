@@ -39,9 +39,10 @@ class Tournament(Model):
         super().__init__(TOURNAMENT_PROPERTIES, **data)
 
     def __repr__(self):
-        return f'{self.name}, {self.location}, {self.start_date}, {self.end_date}\n' \
+        return f'Name: {self.name}, Location: {self.location}\n' \
+               f'From {self.start_date} To {self.end_date}\n' \
                f'{self.rounds} Rounds\n' \
-               f'{self.description}'
+               f'Description: {self.description}'
 
     @property
     def identifier(self) -> str:

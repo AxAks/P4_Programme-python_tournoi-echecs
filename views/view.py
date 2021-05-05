@@ -168,7 +168,7 @@ class View:
         print(f'Opponent: {opponent_obj.last_name}, {opponent_obj.first_name}, {opponent_obj.identifier_pod}')
 
     def print_tournament_general_infos(self, tournament_obj):
-        print(f'Name: {tournament_obj.name}, Location {tournament_obj.location},\n'
+        print(f'Name: {tournament_obj.name}, Location: {tournament_obj.location},\n'
               f'From {tournament_obj.start_date} to {tournament_obj.end_date},\n '
               f'{tournament_obj.rounds} Rounds, Time Control: {tournament_obj.time_control}\n'
               f'Description: {tournament_obj.description}')

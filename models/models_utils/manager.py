@@ -41,9 +41,11 @@ class Manager:
         results = self.search(_input)
         while len(results) > 1:
             print(f'{len(results)} matches returned:')
+            print('---')
             for identifier in results:
                 _obj = results[identifier]
                 print(_obj)
+                print('---')
             results = self.search(input('Please choose from the displayed results: '))
             print('---')
         if len(results) == 1:

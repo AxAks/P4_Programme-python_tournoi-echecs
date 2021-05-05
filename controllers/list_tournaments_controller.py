@@ -66,6 +66,7 @@ class ListTournamentsCtrl(Controller):
         """
         This method enables to select a specific tournament in the registered tournaments list
         """
+        self.menu.header_tournaments_search()
         _input = self.menu.input_search_a_tournament_by_name_location_dates()
         selected_tournament = TournamentManager().search_one(_input)
         if selected_tournament == {}:

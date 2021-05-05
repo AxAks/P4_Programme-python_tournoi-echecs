@@ -31,6 +31,7 @@ class PlayersCtrl(Controller):
         """
         This method enables to manually update the ranking of a given player
         """
+        self.menu.header_player_search()
         result = PlayerManager().search_one(search)
         if isinstance(result, list):
             return result
