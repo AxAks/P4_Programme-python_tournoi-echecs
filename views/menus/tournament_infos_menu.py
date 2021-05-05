@@ -101,15 +101,12 @@ class TournamentInfosMenu(Menu):
         the opponents they have not played with in the previous rounds of a given tournament
         """
         not_played_yet = self.current_page_ctrl(self.data).display_not_played_yet()
-        if not_played_yet == self.data.identifiers_list:
-            self.print_no_results_yet()
-        else:
-            for player in not_played_yet:
-                player_obj = PlayerManager().from_identifier_to_player_obj(player)
-                self.header_possible_next_matchups()
-                self.print_player_infos_simple(player_obj)
-                for opponent in not_played_yet[player]:
-                    opponent_obj = PlayerManager().from_identifier_to_player_obj(opponent)
-                    self.print_opponent_infos_simple(opponent_obj)
-                self.print_soft_separator()
+        for player in not_played_yet:
+            player_obj = PlayerManager().from_identifier_to_player_obj(player)
+            self.header_possible_next_matchups()
+            self.print_player_infos_simple(player_obj)
+            for opponent in not_played_yet[player]:
+                opponent_obj = PlayerManager().from_identifier_to_player_obj(opponent)
+                self.print_opponent_infos_simple(opponent_obj)
+            self.print_soft_separator()
         self.current_page_ctrl(self.data).run()
