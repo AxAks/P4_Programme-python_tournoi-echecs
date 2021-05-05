@@ -32,9 +32,9 @@ class TournamentInfosMenu(Menu):
         sorted by last name.
         """
         players_list = self.current_page_ctrl(self.data).sort_players_by_last_name()
-        print('========================')
+        self.print_hard_separator()
         print(f'Players by last name for "{self.data.name}": ')
-        print('========================')
+        self.print_hard_separator()
         for player in players_list:
             self.print_player_general_infos(player)
         self.current_page_ctrl(self.data).run()
@@ -44,9 +44,9 @@ class TournamentInfosMenu(Menu):
         This method calls the controller to display the players of the selected tournament
         sorted by general ranking.
         """
-        print('========================')
+        self.print_hard_separator()
         print(f'Players by ranking for "{self.data.name}": ')
-        print('========================')
+        self.print_hard_separator()
         sorted_players = self.current_page_ctrl(self.data).sort_tournament_players_by_ranking()
         for player in sorted_players:
             self.print_player_infos_simple(player)
@@ -58,9 +58,9 @@ class TournamentInfosMenu(Menu):
         This method calls the controller to display the players of the selected tournament
         sorted by results.
         """
-        print('========================')
+        self.print_hard_separator()
         print(f'Players by result for "{self.data.name}": ')
-        print('========================')
+        self.print_hard_separator()
         players_result_list = self.current_page_ctrl(self.data).sort_players_by_result(self.data)
         if players_result_list == {}:
             self.print_no_results_yet()
@@ -79,9 +79,9 @@ class TournamentInfosMenu(Menu):
         in the rounds played for the selected tournament.
         """
         rounds_list = self.current_page_ctrl(self.data).display_rounds_and_matches()
-        print('========================')
+        self.print_hard_separator()
         print(f'All Rounds and Matches for "{self.data.name}": ')
-        print('========================')
+        self.print_hard_separator()
         if len(rounds_list) == 0:
             self.print_no_results_yet()
         else:

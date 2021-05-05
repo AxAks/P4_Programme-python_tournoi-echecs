@@ -55,6 +55,7 @@ class NewMatchForm(Form):
         valid_entry = False
         while not valid_entry:
             try:
+                self.print_hard_separator()
                 _input = float(input(input_info))
                 if _input in valid_choices:
                     valid_entry = True

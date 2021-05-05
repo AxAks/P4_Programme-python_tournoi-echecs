@@ -46,18 +46,14 @@ class NewPlayerForm(Form):
         """
         valid_entry = False
         wrong_input = 'Players must be at least 12 year old'
-
-        self.print_hard_separator()
-        _input = ask_iso_date(input_info)
         while not valid_entry:
-            if date.today() - _input < timedelta(days=MINIMUM_AGE * 365):
+            self.print_hard_separator()
+            _input = ask_iso_date(input_info)
+            if date.today() - _input >= timedelta(days=MINIMUM_AGE * 365):
+                valid_entry = True
+            else:
                 print(wrong_input)
                 self.print_please_retry()
-                self.print_hard_separator()
-                _input = ask_iso_date(input_info)
-            else:
-                valid_entry = True
-
         return _input
 
     def ask_gender(self) -> str:
