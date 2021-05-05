@@ -6,7 +6,8 @@ from constants import TOURNAMENT_PROPERTIES
 from controllers import list_tournaments_controller
 from models.models_utils.player_manager import PlayerManager
 from models.player import Player
-from views.forms.generic_inputs import ask_alphanumerical_string, ask_alphabetical_string, ask_iso_date, ask_integer
+from views.forms.generic_inputs import ask_alphanumerical_string, ask_alphabetical_string, ask_iso_date, \
+    ask_integer, ask_even_integer
 from views.forms.form import Form
 
 
@@ -27,18 +28,21 @@ class NewTournamentForm(Form):
         """
         This method asks for a name
         """
+        self.print_hard_separator()
         return ask_alphanumerical_string(input_info)
 
     def ask_location(self, input_info="Enter Location: ") -> str:
         """
         This method asks for a location
         """
+        self.print_hard_separator()
         return ask_alphabetical_string(input_info)
 
     def ask_start_date(self, input_info="Enter start date (YYYY-MM-DD): ") -> date:
         """
         This method asks for a start date
         """
+        self.print_hard_separator()
         _input = ask_iso_date(input_info)
         self.start_date = _input
         return _input
@@ -47,6 +51,7 @@ class NewTournamentForm(Form):
         """
         This method asks for an end date
         """
+        self.print_hard_separator()
         _input = ask_iso_date(input_info)
         while _input < self.start_date:
             print(f"End Date cannot be prior to Start Date ({self.start_date})")
@@ -58,42 +63,10 @@ class NewTournamentForm(Form):
         """
         This method asks for the number of rounds for the tournament
         """
+        self.print_hard_separator()
         input_info = "Enter Number of Rounds : "
         _input = ask_integer(input_info)
         return _input
-
-    def ask_identifiers_list(self) -> dict[Player]:
-        """
-        This method sets the number of players for the tournament to 8
-        and enables to search them in the registry
-        It then returns a dict of players.
-        """
-        tournament_players = {}
-        available_players = len(PlayerManager().list_registered_players())
-        nb_players = 8
-        if available_players < nb_players:
-            self.print_insufficient_registered_players_for_tournament()
-            self.print_to_previous_menu()
-            self.previous_page_ctrl().run()
-        else:
-            n = 1
-            while n <= nb_players:
-                _input = input(f'Please, search player {n} of {nb_players} by ID: ')
-                player_obj = PlayerManager().search_one(_input)
-                while player_obj == {}:
-                    _input = input('No Player found, please retry: ')
-                    player_obj = PlayerManager().search_one(_input)
-                if player_obj.identifier_pod not in tournament_players:
-                    tournament_players[player_obj.identifier_pod] = player_obj
-                    print(f"Player {n} added")
-                    print(f"{player_obj.last_name}, "
-                          f"{player_obj.first_name}: "
-                          f"{player_obj.identifier_pod}")
-                    n += 1
-                else:
-                    self.print_player_already_entered()
-                    self.print_please_retry()
-        return tournament_players
 
     def ask_time_control(self) -> str:
         """
@@ -106,9 +79,11 @@ class NewTournamentForm(Form):
         wrong_input = 'Invalid choice (1, 2 or 3)}'
         valid_choices = (1, 2, 3)
 
+        self.print_hard_separator()
         _input = input(input_info)
         while not valid_entry:
             try:
+                self.print_hard_separator()
                 _input = int(_input)
                 if _input in valid_choices:
                     if _input == 1:
@@ -132,6 +107,7 @@ class NewTournamentForm(Form):
         """
         This method asks for a description text
         """
+        self.print_hard_separator()
         input_info = "Enter Description: "
         _input = input(input_info)
         while _input == '':
@@ -139,3 +115,45 @@ class NewTournamentForm(Form):
             print('Description cannot be empty')
             _input = input(input_info)
         return _input
+
+    def ask_identifiers_list(self) -> dict[Player]:
+        """
+        This method ask for the number of players for this tournament
+        and enables to search them in the registry
+        It then returns a dict of players.
+        It also checks that there is enough players in the registry
+        The number of players is set to a minimum of 4 and has to be even
+        """
+        tournament_players = {}  # pourquoi un dict et pas une liste ??? à revoir
+
+        available_players = len(PlayerManager().list_registered_players())
+        self.print_hard_separator()
+        input_info = 'Please provide an even number of players: '
+        nb_players = ask_even_integer(input_info)
+        self.print_hard_separator()
+        while nb_players < 4:
+            print('The number of players must be at least 4 (try 4, 6, 8, ...)')
+            nb_players = ask_even_integer(input_info)
+            self.print_hard_separator()
+        if available_players < nb_players:
+            self.print_insufficient_registered_players_for_tournament()
+            self.print_to_previous_menu()
+            self.previous_page_ctrl().run()
+        else:
+            n = 1
+            while n <= nb_players:
+                self.print_hard_separator()
+                _input = input(f'Please, search player {n} of {nb_players} by ID: ')
+                player_obj = PlayerManager().search_one(_input)
+                while player_obj == {}:
+                    _input = input('No Player found, please retry: ')
+                    player_obj = PlayerManager().search_one(_input)
+                if player_obj.identifier_pod not in tournament_players:
+                    tournament_players[player_obj.identifier_pod] = player_obj
+                    print(f"Player {n} added")
+                    self.print_player_infos_simple(player_obj)
+                    n += 1
+                else:
+                    self.print_player_already_entered()
+                    self.print_please_retry()
+        return tournament_players

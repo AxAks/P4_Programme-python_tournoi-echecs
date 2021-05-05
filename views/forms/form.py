@@ -27,6 +27,7 @@ class Form(View):
         method = getattr(self.cls, method_name)
         attribute = method()
         try:
+            self.print_hard_separator()
             print(f'{property_name.replace("_", " ").title()} is :\n"{attribute}"')
         except AttributeError:
             self.print_error_occured()
@@ -40,6 +41,7 @@ class Form(View):
         wrong_input = 'Invalid choice (1, 2 or 0)'
         while not valid_entry:
             try:
+                self.print_hard_separator()
                 _input = input(input_info)
                 _input = int(_input)
                 if _input in valid_choices:

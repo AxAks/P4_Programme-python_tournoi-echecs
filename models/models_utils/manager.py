@@ -40,14 +40,15 @@ class Manager:
     def search_one(self, _input) -> Union[dict[Any], Any]:
         results = self.search(_input)
         while len(results) > 1:
-            print(f'{len(results)} matches returned:')
-            print('---')
+            self.little_print_that_shouldnt_be_here()
+            print(f'Returned Matches: {len(results)}')
+            self.little_print_that_shouldnt_be_here()
             for identifier in results:
                 _obj = results[identifier]
                 print(_obj)
-                print('---')
+            self.little_print_that_shouldnt_be_here()
             results = self.search(input('Please choose from the displayed results: '))
-            print('---')
+            self.little_print_that_shouldnt_be_here()
         if len(results) == 1:
             for identifier in results:
                 _obj = results[identifier]
@@ -55,3 +56,14 @@ class Manager:
         if len(results) == 0:
             print('No Results Found')
             return results
+
+    def little_print_that_shouldnt_be_here(self):
+        print('========================'
+              '========================'
+              '========================'
+              '========================'
+              '========================'
+              '========================'
+              '========================'
+              '========================'
+              '========================')

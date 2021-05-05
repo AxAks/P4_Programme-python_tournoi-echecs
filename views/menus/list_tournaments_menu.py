@@ -18,7 +18,7 @@ class ListTournamentsMenu(Menu):
                          exiting_message='Now Leaving Chess Tournament Manager')
         specific_menu_choices = [self.add_tournament, self.display_by_start_date,
                                  self.display_by_name, self.display_by_location,
-                                 self.search_tournaments, self.select_one]
+                                 self.search_tournaments, self.select_one_tournament]
         [self.choices.append(choice) for choice in specific_menu_choices]
 
     def add_tournament(self) -> None:
@@ -26,6 +26,7 @@ class ListTournamentsMenu(Menu):
         This method calls the controller to create a new Tournament instance.
         """
         tournament = self.current_page_ctrl().add_tournament()
+        self.print_hard_separator()
         self.print_new_tournament_registered()
         self.print_tournament_general_infos(tournament)
         self.current_page_ctrl().run()
@@ -78,7 +79,7 @@ class ListTournamentsMenu(Menu):
             self.print_tournament_infos_simple(tournament)
         self.current_page_ctrl().run()
 
-    def select_one(self) -> None:
+    def select_one_tournament(self) -> None:
         """
         This method enables to pick a tournament
         and be redirected this the Menu for this specific tournament.

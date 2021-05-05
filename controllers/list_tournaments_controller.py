@@ -1,5 +1,6 @@
 # coding=utf-8
-from controllers import home_controller
+import utils
+
 from models.models_utils import data
 from models.models_utils.supermanager import super_manager as sm
 from models.models_utils.tournament_manager import TournamentManager
@@ -21,6 +22,7 @@ class ListTournamentsCtrl(Controller):
         """
         this method creates a new tournament entry in the registry.
         """
+        utils.clear_terminal()
         new_tournament_dict = NewTournamentForm().add_new()
         new_tournament = sm.managers[Tournament].create(**new_tournament_dict)
         data.save()
@@ -71,6 +73,6 @@ class ListTournamentsCtrl(Controller):
         selected_tournament = TournamentManager().search_one(_input)
         if selected_tournament == {}:
             self.menu.print_please_retry()
-            home_controller.HomeCtrl().run()
+            self.run()
         else:
             return selected_tournament
