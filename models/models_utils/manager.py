@@ -38,7 +38,6 @@ class Manager:
         return results
 
     def search_one(self, _input) -> Union[dict[Any], Any]:
-        print('========================')
         results = self.search(_input)
         while len(results) > 1:
             print(f'{len(results)} matches returned:')

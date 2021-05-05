@@ -34,14 +34,14 @@ class View:
         print(self.program_name, '\n', self.menu_name)
         self.print_hard_separator()
 
-    def specific_header(self, header_name):
+    def specific_header_menu(self, header_name: str):
         self.print_hard_separator()
         print(header_name)
         self.print_hard_separator()
 
-    def header_player_search(self):
+    def header_player_search(self, header_name: str = 'Players Search: '):
         self.print_hard_separator()
-        print('Players Search: ')
+        print(header_name)
         self.print_hard_separator()
 
     def header_player_search_results(self, header_name: str = 'Player Search Results: '):
@@ -49,71 +49,107 @@ class View:
         print(header_name)
         self.print_hard_separator()
 
-    def header_tournaments_search(self):
+    def header_tournaments_search(self, header_name: str = 'Tournaments Search: '):
         self.print_hard_separator()
-        print('Tournaments Search: ')
-        self.print_hard_separator()
-
-    def header_tournaments_search_results(self):
-        self.print_hard_separator()
-        print('Tournaments Search Results: ')
+        print(header_name)
         self.print_hard_separator()
 
-    def header_tournament_selection(self):
+    def header_tournaments_search_results(self, header_name: str = 'Tournaments Search Results: '):
         self.print_hard_separator()
-        print('Tournament Selection: ')
-        self.print_hard_separator()
-
-    def header_tournament_by_name(self):
-        self.print_hard_separator()
-        print('List of all Tournaments by Name: ')
+        print(header_name)
         self.print_hard_separator()
 
-    def header_tournament_by_start_date(self):
+    def header_tournament_selection(self, header_name: str = 'Tournament Selection: '):
         self.print_hard_separator()
-        print('List of all Tournaments sorted by Start Date: ')
-        self.print_hard_separator()
-
-    def header_tournament_by_location(self):
-        self.print_hard_separator()
-        print('List of all Tournaments by Location: ')
+        print(header_name)
         self.print_hard_separator()
 
-    def header_tournament_player_ranking_update(self):
+    def header_tournament_by_name(self, header_name: str = 'List of all Tournaments by Name: '):
         self.print_hard_separator()
-        print('After Tournament New Player Rankings: ')
-        self.print_hard_separator()
-
-    def header_possible_next_matchups(self):
-        self.print_hard_separator()
-        print('Possible Next Matchups: ')
+        print(header_name)
         self.print_hard_separator()
 
-    def header_general_player_ranking_update(self):
+    def header_tournament_by_start_date(self, header_name: str = 'List of all Tournaments sorted by Start Date: '):
         self.print_hard_separator()
-        print('Player Ranking Update: ')
-        self.print_hard_separator()
-
-    def header_players_by_ranking(self):
-        self.print_hard_separator()
-        print('All Players by ranking: ')
+        print(header_name)
         self.print_hard_separator()
 
-    def header_players_by_last_name(self):
+    def header_tournament_by_location(self, header_name: str = 'List of all Tournaments by Location: '):
         self.print_hard_separator()
-        print('All Players by last name: ')
+        print(header_name)
         self.print_hard_separator()
 
-    def input_search_a_player_by_id(self):
-        _input =input('Search a player by ID: ')
-        return _input
+    def header_tournament_player_ranking_update(self, header_name: str = 'After Tournament New Player Rankings: '):
+        self.print_hard_separator()
+        print(header_name)
+        self.print_hard_separator()
 
-    def input_search_a_tournament_by_name_location_dates(self):
-        _input = input('Search a Tournament by Name, Location or dates : ')
-        return _input
+    def header_possible_next_matchups(self, header_name: str = 'Remaining Possible Matchups: '):
+        self.print_hard_separator()
+        print(header_name)
+        self.print_hard_separator()
 
-    def print_new_player_registered(self):
-        print('New Player registered: ')
+    def header_general_player_ranking_update(self, header_name: str = 'Player Ranking Update: '):
+        self.print_hard_separator()
+        print(header_name)
+        self.print_hard_separator()
+
+    def header_players_by_ranking(self, header_name: str = 'All Players by ranking: '):
+        self.print_hard_separator()
+        print(header_name)
+        self.print_hard_separator()
+
+    def header_players_by_last_name(self, header_name: str = 'All Players by last name: '):
+        self.print_hard_separator()
+        print(header_name)
+        self.print_hard_separator()
+
+    def print_new_player_registered(self, info: str = 'New Player registered: '):
+        print(info)
+
+    def print_update_rankings(self, info: str = 'Please update Players Rankings'):
+        print(info)
+
+    def print_new_tournament_registered(self, info: str = 'New Tournament registered: '):
+        print(info)
+
+    def print_no_tournament_found(self, info: str = 'No tournament found'):
+        print(info)
+
+    def print_no_player_found(self, info: str = 'No player found'):
+        print(info)
+
+    def print_player_already_entered(self, info: str = 'Player already entered'):
+        print(info)
+
+    def print_all_players_have_played(self, info: str = 'All players have played together'):
+        print(info)
+
+    def print_one_tournament_found(self, info: str = '1 Tournament found in Registry for this research:'):
+        print(info)
+
+    def print_no_results_yet(self, info: str = 'There are no Results for this Tournament yet'):
+        print(info)
+
+    def print_please_confirm(self, info: str = 'Please confirm this information: '):
+        print(info)
+
+    def print_please_retry(self, info: str = 'Please retry...'):
+        print(info)
+
+    def print_to_previous_menu(self, info: str = 'Back to previous menu page ...'):
+        print(info)
+
+    def print_error_occured(self, info: str = 'An Error has occurred'):
+        print(info)
+
+    def print_cancelled(self, info: str = 'Cancelled'):
+        print(info)
+
+
+    def print_insufficient_registered_players_for_tournament(self):
+        print('Not enough players in the registry')
+        print('Please create more players players')
 
     def print_player_general_infos(self, player):
         print(f'Player: {player.last_name}, {player.first_name}, {player.identifier_pod}\n'
@@ -137,34 +173,12 @@ class View:
               f'{tournament_obj.rounds} Rounds, Time Control: {tournament_obj.time_control}\n'
               f'Description: {tournament_obj.description}')
 
-    def print_new_tournament_registered(self):
-        print('New Tournament registered: ')
-
     def print_tournament_infos_simple(self, tournament_obj):
         print(f'Name: {tournament_obj.name}, Location {tournament_obj.location}\n'
               f'From {tournament_obj.start_date} to {tournament_obj.end_date}')
 
     def print_round_infos_simple(self, round_obj):
         print(f'{round_obj.name}: from {round_obj.start_time} to {round_obj.end_time}')
-
-    def print_no_tournament_found(self):
-        print('No tournament found')
-
-    def print_no_player_found(self):
-        print('No player found')
-
-    def print_insufficient_registered_players_for_tournament(self):
-        print('Not enough players in the registry')
-        print('Please create new players before')
-
-    def print_player_already_entered(self):
-        print('Player already entered')
-
-    def print_one_tournament_found(self):
-        print('1 Tournament found in Registry for this research:')
-
-    def print_no_results_yet(self):
-        print('There are no Results for this Tournament yet')
 
     def print_match_result(self, match, player1_obj, player2_obj, match_n):
         print(f'Match {match_n}:\n'
@@ -173,17 +187,11 @@ class View:
               f'- Score: {match.player2_score_pod}, {player2_obj.last_name}, {player2_obj.first_name},'
               f' {player2_obj.identifier_pod}')
 
-    def print_please_confirm(self):
-        print('Please confirm this information: ')
 
-    def print_please_retry(self):
-        print('Please retry...')
+    def input_search_a_player_by_id(self):
+        _input =input('Search a player by ID: ')
+        return _input
 
-    def print_to_previous_menu(self):
-        print('Back to previous menu page ...')
-
-    def print_error_occured(self):
-        print('An Error has occurred')
-
-    def print_cancelled(self):
-        print('Cancelled')
+    def input_search_a_tournament_by_name_location_dates(self):
+        _input = input('Search a Tournament by Name, Location or dates : ')
+        return _input

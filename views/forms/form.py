@@ -34,7 +34,7 @@ class Form(View):
             self.previous_page_ctrl().run()
 
         valid_entry = False
-        choices_info = '1: YES, 2: NO, 0: CANCEL'
+        choices_info = '1: YES, 2: NO, 0: CANCEL FORM'
         input_info = f'Please confirm this information: ({choices_info}): '
         valid_choices = (0, 1, 2)
         wrong_input = 'Invalid choice (1, 2 or 0)'

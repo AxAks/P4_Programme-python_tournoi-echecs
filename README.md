@@ -122,8 +122,8 @@ __Tournament process__
 -> Select Proceed Tournament to enter results of the matches of Round one       
 -> the round is saved and you are redirected to the Tournament's page     
 -> Select Proceed Tournament to enter the next rounds results     
--> Until all the rounds are played       
--> When all the rounds are played, select Proceed Tournament once more to update players rankings     
+-> The tournament is over when all the rounds have been played or when all Players have played together.     
+-> When the tournament is over, select Proceed Tournament once more to update players rankings and close the tournament    
  
 _A tournament can be paused at the end of each round and resumed_    
 - Search Registered Tournament To Resume(from Home Menu)     

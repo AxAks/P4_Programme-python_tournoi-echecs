@@ -94,6 +94,11 @@ class TournamentInfosCtrl(Controller):
         This method is the main algorithm for the progression of a tournament
         """
         if len(self.data.rounds_list) >= self.data.rounds and not self.data.done:
+            tmp_list = []
+            [tmp_list.append(self.data.not_played_yet[player]) for player in self.data.not_played_yet if len(self.data.not_played_yet[player]) != 0]
+            if len(tmp_list) == 0:
+                self.menu.print_all_players_have_played()
+            self.menu.print_update_rankings()
             self.update_tournaments_players_rankings()
             self.data.done = True
             data.save()
