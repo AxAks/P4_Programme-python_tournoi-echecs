@@ -44,17 +44,16 @@ class NewPlayerForm(Form):
         and forces it into a date format
         It also checks that the player is over 12
         """
-        valid_entry = False
         wrong_input = 'Players must be at least 12 year old'
-        while not valid_entry:
+        self.print_hard_separator()
+        _input = ask_iso_date(input_info)
+        while date.today() - _input < timedelta(days=MINIMUM_AGE * 365):
+            print(wrong_input)
+            self.print_please_retry()
             self.print_hard_separator()
             _input = ask_iso_date(input_info)
-            if date.today() - _input >= timedelta(days=MINIMUM_AGE * 365):
-                valid_entry = True
-            else:
-                print(wrong_input)
-                self.print_please_retry()
         return _input
+
 
     def ask_gender(self) -> str:
         """
