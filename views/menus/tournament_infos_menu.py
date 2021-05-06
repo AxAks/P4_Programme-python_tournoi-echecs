@@ -86,6 +86,7 @@ class TournamentInfosMenu(Menu):
             self.print_no_results_yet()
         else:
             for _round in rounds_list:
+                self.print_soft_separator()
                 self.print_round_infos_simple(_round)
                 match_n = 1
                 for match in _round.matches:

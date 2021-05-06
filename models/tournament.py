@@ -40,7 +40,7 @@ class Tournament(Model):
 
     def __repr__(self):
         return f'Name: "{self.name}", from {self.start_date} to {self.end_date} in {self.location} '\
-               f'({self.time_control_pod}: {self.rounds} Rounds)\n'\
+               f'({self.time_control_pod}: {self.rounds} Rounds, {len(self.identifiers_list)} Players)\n'\
                f'- Description: "{self.description}"'
 
     @property

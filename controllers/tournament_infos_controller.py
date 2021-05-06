@@ -187,6 +187,7 @@ class TournamentInfosCtrl(Controller):
                 clear_terminal()
                 self.menu.print_new_match_registered()
                 print(match)
+                self.menu.print_hard_separator()
                 _round.matches.append(match)
                 self.data.not_played_yet[player1_id].remove(player2_id)
                 self.data.not_played_yet[player2_id].remove(player1_id)

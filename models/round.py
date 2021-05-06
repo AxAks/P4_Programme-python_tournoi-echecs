@@ -35,7 +35,7 @@ class Round(Model):
         else:
             return f'{self.name}, from {self.start_time_pod.replace("T", " at ")} ' \
                    f'to {self.end_time_pod.replace("T", " at ")}\n'\
-                   f'{[print(f"Match: {match}") for match in self.matches_pod]}'
+                   f'{[print(f"Match: {match}") for match in self.matches]}'  # cette ligne print une [None, None, None, None]
 
     @property
     def name(self) -> str:

@@ -176,13 +176,15 @@ class View:
     def print_tournament_with_descr(self, tournament_obj):
         print(f'Name: "{tournament_obj.name}" '
               f'from {tournament_obj.start_date} to {tournament_obj.end_date} in {tournament_obj.location} '
-              f'({tournament_obj.time_control_pod}: {tournament_obj.rounds} Rounds)\n'
+              f'({tournament_obj.time_control_pod}: {tournament_obj.rounds} Rounds, '
+              f'{len(tournament_obj.identifiers_list)} Players)\n'
               f'- Description: "{tournament_obj.description}"')
 
     def print_tournament_no_descr(self, tournament_obj):
         print(f'Name: "{tournament_obj.name}" '
               f'from {tournament_obj.start_date} to {tournament_obj.end_date} in {tournament_obj.location} '
-              f'({tournament_obj.time_control_pod}: {tournament_obj.rounds} Rounds)')
+              f'({tournament_obj.time_control_pod}: {tournament_obj.rounds} Rounds, '
+              f'{len(tournament_obj.identifiers_list)} Players)')
 
     def print_round_infos_simple(self, round_obj):
         print(f'{round_obj.name}: from {round_obj.start_time} to {round_obj.end_time}')

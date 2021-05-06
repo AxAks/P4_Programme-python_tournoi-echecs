@@ -36,7 +36,8 @@ class Match(Model):
         super().__init__(MATCH_PROPERTIES, **params)
 
     def __repr__(self):
-        return f'{self.player1_id_pod}, {self.player1_score_pod}, {self.player2_id_pod}, {self.player2_score_pod}'
+        return f'Player 1 "{self.player1_id_pod}" Score: {self.player1_score_pod}\n'\
+               f'Player 2 "{self.player2_id_pod}" Score: {self.player2_score_pod}'
 
     @property
     def player1_id(self) -> UUID:
