@@ -12,6 +12,7 @@ from models.player import Player
 from models.round import Round
 from models.match import Match
 from controllers.controller import Controller
+from utils import clear_terminal
 from views.forms.new_match_form import NewMatchForm
 from views.forms.new_player_form import NewPlayerForm
 from views.forms.new_round_form import NewRoundForm
@@ -169,15 +170,23 @@ class TournamentInfosCtrl(Controller):
         else:
             round_dict = NewRoundForm(self.data).add_new()
             _round = Round(**round_dict)
+            clear_terminal()
+            self.menu.print_new_round_registered()
+            print(_round)
             for _list in round_couples:
                 player1_id = _list[0].identifier_pod
                 player2_id = _list[1].identifier_pod
                 match_dict = NewMatchForm(self.data, player1_id, player2_id).add_new()
                 match = Match(**match_dict)
+                clear_terminal()
+                self.menu.print_new_match_registered()
+                print(match)
                 _round.matches.append(match)
                 self.data.not_played_yet[player1_id].remove(player2_id)
                 self.data.not_played_yet[player2_id].remove(player1_id)
             self.data.rounds_list.append(_round)
+            clear_terminal()
+            print(_round)
             data.save()
             return _round
 

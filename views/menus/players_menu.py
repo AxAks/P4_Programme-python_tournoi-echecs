@@ -1,6 +1,7 @@
 # coding=utf-8
 
 from controllers import players_controller, home_controller
+from utils import clear_terminal
 from views.menus.menu import Menu
 
 
@@ -24,6 +25,7 @@ class PlayersMenu(Menu):
         This method calls the controller to create a player instance
         """
         player = self.current_page_ctrl().add_player()
+        clear_terminal()
         self.print_new_player_registered()
         self.print_player_general_infos(player)
         self.current_page_ctrl().run()

@@ -28,7 +28,7 @@ class ListTournamentsMenu(Menu):
         tournament = self.current_page_ctrl().add_tournament()
         self.print_hard_separator()
         self.print_new_tournament_registered()
-        self.print_tournament_general_infos(tournament)
+        self.print_tournament_with_descr(tournament)
         self.current_page_ctrl().run()
 
     def display_by_start_date(self) -> None:
@@ -41,7 +41,7 @@ class ListTournamentsMenu(Menu):
             self.print_no_tournament_found()
         else:
             for tournament in tournaments_list:
-                self.print_tournament_infos_simple(tournament)
+                self.print_tournament_no_descr(tournament)
         self.current_page_ctrl().run()
 
     def display_by_name(self) -> None:
@@ -51,7 +51,7 @@ class ListTournamentsMenu(Menu):
             self.print_no_tournament_found()
         else:
             for tournament in tournaments_list:
-                self.print_tournament_infos_simple(tournament)
+                self.print_tournament_no_descr(tournament)
         self.current_page_ctrl().run()
 
     def display_by_location(self) -> None:
@@ -61,7 +61,7 @@ class ListTournamentsMenu(Menu):
             self.print_no_tournament_found()
         else:
             for tournament in tournaments_list:
-                self.print_tournament_infos_simple(tournament)
+                self.print_tournament_no_descr(tournament)
         self.current_page_ctrl().run()
 
     def search_tournaments(self) -> None:
@@ -76,7 +76,7 @@ class ListTournamentsMenu(Menu):
         if len(tournaments) == 0:
             self.print_no_tournament_found()
         for tournament in tournaments:
-            self.print_tournament_infos_simple(tournament)
+            self.print_tournament_no_descr(tournament)
         self.current_page_ctrl().run()
 
     def select_one_tournament(self) -> None:
@@ -87,10 +87,12 @@ class ListTournamentsMenu(Menu):
 
         selected_tournament = self.current_page_ctrl().select_one()
         if selected_tournament == {}:
+            self.print_hard_separator()
             self.print_no_tournament_found()
             self.print_please_retry()
             self.current_page_ctrl().run()
         else:
+            self.print_hard_separator()
             self.print_one_tournament_found()
-            self.print_tournament_general_infos(selected_tournament)
+            self.print_tournament_with_descr(selected_tournament)
             TournamentInfosCtrl(selected_tournament).run()

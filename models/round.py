@@ -29,9 +29,13 @@ class Round(Model):
 
     def __repr__(self):
         if len(self.matches) == 0:
-            return 'No Matches in this Round yet'
+            return f'{self.name}, from {self.start_time_pod.replace("T", " at ")} ' \
+                   f'to {self.end_time_pod.replace("T", " at ")}\n'\
+                   f'No Matches in this Round yet'
         else:
-            return f'{self.name}, {self.start_time_pod}, {self.end_time_pod},{self.matches_pod}'
+            return f'{self.name}, from {self.start_time_pod.replace("T", " at ")} ' \
+                   f'to {self.end_time_pod.replace("T", " at ")}\n'\
+                   f'{[print(f"Match: {match}") for match in self.matches_pod]}'
 
     @property
     def name(self) -> str:

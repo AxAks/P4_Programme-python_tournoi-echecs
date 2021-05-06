@@ -72,6 +72,8 @@ class ListTournamentsCtrl(Controller):
         _input = self.menu.input_search_a_tournament_by_name_location_dates()
         selected_tournament = TournamentManager().search_one(_input)
         if selected_tournament == {}:
+            utils.clear_terminal()
+            self.menu.print_no_tournament_found()
             self.menu.print_please_retry()
             self.run()
         else:

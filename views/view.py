@@ -113,6 +113,12 @@ class View:
     def print_new_tournament_registered(self, info: str = 'New Tournament registered: '):
         print(info)
 
+    def print_new_round_registered(self, info: str = 'New Round registered: '):
+        print(info)
+
+    def print_new_match_registered(self, info: str = 'New Match registered: '):
+        print(info)
+
     def print_no_tournament_found(self, info: str = 'No tournament found'):
         print(info)
 
@@ -167,15 +173,16 @@ class View:
     def print_opponent_infos_simple(self, opponent_obj):
         print(f'Opponent: {opponent_obj.last_name}, {opponent_obj.first_name}, {opponent_obj.identifier_pod}')
 
-    def print_tournament_general_infos(self, tournament_obj):
-        print(f'Name: {tournament_obj.name}, Location: {tournament_obj.location},\n'
-              f'From {tournament_obj.start_date} to {tournament_obj.end_date},\n '
-              f'{tournament_obj.rounds} Rounds, Time Control: {tournament_obj.time_control}\n'
-              f'Description: {tournament_obj.description}')
+    def print_tournament_with_descr(self, tournament_obj):
+        print(f'Name: "{tournament_obj.name}" '
+              f'from {tournament_obj.start_date} to {tournament_obj.end_date} in {tournament_obj.location} '
+              f'({tournament_obj.time_control_pod}: {tournament_obj.rounds} Rounds)\n'
+              f'- Description: "{tournament_obj.description}"')
 
-    def print_tournament_infos_simple(self, tournament_obj):
-        print(f'Name: {tournament_obj.name}, Location {tournament_obj.location}\n'
-              f'From {tournament_obj.start_date} to {tournament_obj.end_date}')
+    def print_tournament_no_descr(self, tournament_obj):
+        print(f'Name: "{tournament_obj.name}" '
+              f'from {tournament_obj.start_date} to {tournament_obj.end_date} in {tournament_obj.location} '
+              f'({tournament_obj.time_control_pod}: {tournament_obj.rounds} Rounds)')
 
     def print_round_infos_simple(self, round_obj):
         print(f'{round_obj.name}: from {round_obj.start_time} to {round_obj.end_time}')

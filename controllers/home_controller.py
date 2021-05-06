@@ -28,6 +28,8 @@ class HomeCtrl(Controller):
         This method enables to search an existing tournament and go to its menu
         """
         self.data = list_tournaments_controller.ListTournamentsCtrl().select_one()
+        self.menu.print_one_tournament_found()
+        self.menu.print_tournament_with_descr(self.data)
         tournament_infos_controller.TournamentInfosCtrl(self.data).run()
 
     def manage_players(self) -> None:
