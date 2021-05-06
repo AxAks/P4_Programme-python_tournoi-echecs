@@ -39,67 +39,67 @@ class View:
         print(header_name)
         self.print_hard_separator()
 
-    def header_player_search(self, header_name: str = 'Players Search: '):
+    def header_player_search(self, header_name: str = 'Players Search '):
         self.print_hard_separator()
         print(header_name)
         self.print_hard_separator()
 
-    def header_player_search_results(self, header_name: str = 'Player Search Results: '):
+    def header_player_search_results(self, header_name: str = 'Player Search Results'):
         self.print_hard_separator()
         print(header_name)
         self.print_hard_separator()
 
-    def header_tournaments_search(self, header_name: str = 'Tournaments Search: '):
+    def header_tournaments_search(self, header_name: str = 'Tournaments Search'):
         self.print_hard_separator()
         print(header_name)
         self.print_hard_separator()
 
-    def header_tournaments_search_results(self, header_name: str = 'Tournaments Search Results: '):
+    def header_tournaments_search_results(self, header_name: str = 'Tournaments Search Results'):
         self.print_hard_separator()
         print(header_name)
         self.print_hard_separator()
 
-    def header_tournament_selection(self, header_name: str = 'Tournament Selection: '):
+    def header_tournament_selection(self, header_name: str = 'Tournament Selection'):
         self.print_hard_separator()
         print(header_name)
         self.print_hard_separator()
 
-    def header_tournament_by_name(self, header_name: str = 'List of all Tournaments by Name: '):
+    def header_tournament_by_name(self, header_name: str = 'List of all Tournaments by Name'):
         self.print_hard_separator()
         print(header_name)
         self.print_hard_separator()
 
-    def header_tournament_by_start_date(self, header_name: str = 'List of all Tournaments sorted by Start Date: '):
+    def header_tournament_by_start_date(self, header_name: str = 'List of all Tournaments sorted by Start Date'):
         self.print_hard_separator()
         print(header_name)
         self.print_hard_separator()
 
-    def header_tournament_by_location(self, header_name: str = 'List of all Tournaments by Location: '):
+    def header_tournament_by_location(self, header_name: str = 'List of all Tournaments by Location'):
         self.print_hard_separator()
         print(header_name)
         self.print_hard_separator()
 
-    def header_tournament_player_ranking_update(self, header_name: str = 'After Tournament New Player Rankings: '):
+    def header_tournament_player_ranking_update(self, header_name: str = 'After Tournament New Player Rankings'):
         self.print_hard_separator()
         print(header_name)
         self.print_hard_separator()
 
-    def header_possible_next_matchups(self, header_name: str = 'Remaining Possible Matchups: '):
+    def header_possible_next_matchups(self, header_name: str = 'Remaining Possible Matchups'):
         self.print_hard_separator()
         print(header_name)
         self.print_hard_separator()
 
-    def header_general_player_ranking_update(self, header_name: str = 'Player Ranking Update: '):
+    def header_general_player_ranking_update(self, header_name: str = 'Player Ranking Update'):
         self.print_hard_separator()
         print(header_name)
         self.print_hard_separator()
 
-    def header_players_by_ranking(self, header_name: str = 'All Players by ranking: '):
+    def header_players_by_ranking(self, header_name: str = 'All Players by ranking'):
         self.print_hard_separator()
         print(header_name)
         self.print_hard_separator()
 
-    def header_players_by_last_name(self, header_name: str = 'All Players by last name: '):
+    def header_players_by_last_name(self, header_name: str = 'All Players by last name'):
         self.print_hard_separator()
         print(header_name)
         self.print_hard_separator()
