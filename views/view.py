@@ -15,20 +15,6 @@ class View:
         self.previous_page_ctrl = previous_page_ctrl
         self.exiting_message = exiting_message
 
-    def print_hard_separator(self):
-        print('========================'
-              '========================'
-              '========================'
-              '========================'
-              '========================'
-              '========================'
-              '========================'
-              '========================'
-              '========================')
-
-    def print_soft_separator(self):
-        print('')
-
     def general_header_menu(self):
         self.print_hard_separator()
         print(self.program_name, '\n', self.menu_name)
@@ -104,103 +90,145 @@ class View:
         print(header_name)
         self.print_hard_separator()
 
-    def print_new_player_registered(self, info: str = 'New Player registered: '):
+    @staticmethod
+    def print_hard_separator():
+        print('========================'
+              '========================'
+              '========================'
+              '========================'
+              '========================'
+              '========================'
+              '========================'
+              '========================'
+              '========================')
+
+    @staticmethod
+    def print_soft_separator():
+        print('')
+
+    @staticmethod
+    def print_new_player_registered(info: str = 'New Player registered: '):
         print(info)
 
-    def print_update_rankings(self, info: str = 'Please update Players Rankings'):
+    @staticmethod
+    def print_update_rankings(info: str = 'Please update Players Rankings'):
         print(info)
 
-    def print_new_tournament_registered(self, info: str = 'New Tournament registered: '):
+    @staticmethod
+    def print_new_tournament_registered(info: str = 'New Tournament registered: '):
         print(info)
 
-    def print_new_round_registered(self, info: str = 'New Round registered: '):
+    @staticmethod
+    def print_new_round_registered(info: str = 'New Round registered: '):
         print(info)
 
-    def print_new_match_registered(self, info: str = 'New Match registered: '):
+    @staticmethod
+    def print_new_match_registered(info: str = 'New Match registered: '):
         print(info)
 
-    def print_no_tournament_found(self, info: str = 'No tournament found'):
+    @staticmethod
+    def print_no_tournament_found(info: str = 'No tournament found'):
         print(info)
 
-    def print_no_player_found(self, info: str = 'No player found'):
+    @staticmethod
+    def print_no_player_found(info: str = 'No player found'):
         print(info)
 
-    def print_player_already_entered(self, info: str = 'Player already entered'):
+    @staticmethod
+    def print_player_already_entered(info: str = 'Player already entered'):
         print(info)
 
-    def print_all_players_have_played(self, info: str = 'All players have played together'):
+    @staticmethod
+    def print_all_players_have_played(info: str = 'All players have played together'):
         print(info)
 
-    def print_one_tournament_found(self, info: str = '1 Tournament found in Registry for this research:'):
+    @staticmethod
+    def print_one_tournament_found(info: str = '1 Tournament found in Registry for this research:'):
         print(info)
 
-    def print_no_results_yet(self, info: str = 'There are no Results for this Tournament yet'):
+    @staticmethod
+    def print_no_results_yet(info: str = 'There are no Results for this Tournament yet'):
         print(info)
 
-    def print_please_confirm(self, info: str = 'Please confirm this information: '):
+    @staticmethod
+    def print_please_confirm(info: str = 'Please confirm this information: '):
         print(info)
 
-    def print_please_retry(self, info: str = 'Please retry...'):
+    @staticmethod
+    def print_please_retry(info: str = 'Please retry...'):
         print(info)
 
-    def print_to_previous_menu(self, info: str = 'Back to previous menu page ...'):
+    @staticmethod
+    def print_to_previous_menu(info: str = 'Back to previous menu page ...'):
         print(info)
 
-    def print_error_occured(self, info: str = 'An Error has occurred'):
+    @staticmethod
+    def print_error_occurred(info: str = 'An Error has occurred'):
         print(info)
 
-    def print_cancelled(self, info: str = 'Cancelled'):
+    @staticmethod
+    def print_cancelled(info: str = 'Cancelled'):
         print(info)
 
-
-    def print_insufficient_registered_players_for_tournament(self):
+    @staticmethod
+    def print_insufficient_registered_players_for_tournament():
         print('Not enough players in the registry')
         print('Please create more players players')
 
-    def print_player_general_infos(self, player):
+    @staticmethod
+    def print_player_general_infos(player):
         print(f'Player: {player.last_name}, {player.first_name}, {player.identifier_pod}\n'
               f'- birthdate: {player.birthdate_pod}, gender: {player.gender_pod}, ranking: {player.ranking}')
 
-    def print_player_infos_simple(self, player_obj):
+    @staticmethod
+    def print_player_infos_simple(player_obj):
         print(f'Player: {player_obj.last_name}, {player_obj.first_name}, {player_obj.identifier_pod}')
 
-    def print_player_ranking_only(self, player_obj):
+    @staticmethod
+    def print_player_ranking_only(player_obj):
         print(f'General Ranking: {player_obj.ranking}')
 
-    def print_player_result(self, result):
+    @staticmethod
+    def print_player_result(result):
         print(f"Total Points in Tournament: {result}")
 
-    def print_opponent_infos_simple(self, opponent_obj):
+    @staticmethod
+    def print_opponent_infos_simple(opponent_obj):
         print(f'Opponent: {opponent_obj.last_name}, {opponent_obj.first_name}, {opponent_obj.identifier_pod}')
 
-    def print_tournament_with_descr(self, tournament_obj):
+    @staticmethod
+    def print_tournament_with_descr(tournament_obj):
         print(f'Name: "{tournament_obj.name}" '
               f'from {tournament_obj.start_date} to {tournament_obj.end_date} in {tournament_obj.location} '
               f'({tournament_obj.time_control_pod}: {tournament_obj.rounds} Rounds, '
               f'{len(tournament_obj.identifiers_list)} Players)\n'
               f'- Description: "{tournament_obj.description}"')
 
-    def print_tournament_no_descr(self, tournament_obj):
+    @staticmethod
+    def print_tournament_no_descr(tournament_obj):
         print(f'Name: "{tournament_obj.name}" '
               f'from {tournament_obj.start_date} to {tournament_obj.end_date} in {tournament_obj.location} '
               f'({tournament_obj.time_control_pod}: {tournament_obj.rounds} Rounds, '
               f'{len(tournament_obj.identifiers_list)} Players)')
 
-    def print_round_infos_simple(self, round_obj):
+    @staticmethod
+    def print_round_infos_simple(round_obj):
         print(f'{round_obj.name}: from {round_obj.start_time} to {round_obj.end_time}')
 
-    def print_match_result(self, match, player1_obj, player2_obj, match_n):
+    @staticmethod
+    def print_match_result(match, player1_obj, player2_obj, match_n):
         print(f'Match {match_n}:\n'
               f'- Score: {match.player1_score_pod}, {player1_obj.last_name}, {player1_obj.first_name},'
               f' {player1_obj.identifier_pod}\n'
               f'- Score: {match.player2_score_pod}, {player2_obj.last_name}, {player2_obj.first_name},'
               f' {player2_obj.identifier_pod}')
 
-
-    def input_search_a_player_by_id(self):
-        _input =input('Search a player by ID: ')
+    @staticmethod
+    def input_search_a_player_by_id():
+        _input = input('Search a player by ID: ')
         return _input
 
-    def input_search_a_tournament_by_name_location_dates(self):
+    @staticmethod
+    def input_search_a_tournament_by_name_location_dates():
         _input = input('Search a Tournament by Name, Location or dates : ')
         return _input

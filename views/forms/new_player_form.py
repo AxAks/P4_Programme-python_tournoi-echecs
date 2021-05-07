@@ -54,7 +54,6 @@ class NewPlayerForm(Form):
             _input = ask_iso_date(input_info)
         return _input
 
-
     def ask_gender(self) -> str:
         """
         This method asks for the player's gender using digits

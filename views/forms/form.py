@@ -30,7 +30,7 @@ class Form(View):
             self.print_hard_separator()
             print(f'{property_name.replace("_", " ").title()} is :\n"{attribute}"')
         except AttributeError:
-            self.print_error_occured()
+            self.print_error_occurred()
             self.print_to_previous_menu()
             self.previous_page_ctrl().run()
 
