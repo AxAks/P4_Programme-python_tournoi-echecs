@@ -102,7 +102,7 @@ _Navigate through the menu with digits to select a menu option_
 2: Back to previous screen    
 3: Load database   
 4: Save to database    
-n: Menu specific Choices     
+n: Menu specific choices     
 
 __From Home Menu__   
 _Launch a new tournament or search a previously saved Tournament_   
@@ -112,8 +112,8 @@ _Launch a new tournament or search a previously saved Tournament_
 
 _Manage Players or registered Tournaments_      
 - enables to:
-1. display reports on players
-2. display reports on saved tournaments (finished or not),      
+1. add players / display reports on registered players
+2. add tournaments for later / display reports on saved tournaments (finished or not),      
 
 __Tournament process__    
 - Launch New Tournament (from Home Menu)        
@@ -129,7 +129,7 @@ _A tournament can be paused at the end of each round and resumed_
 - Search Registered Tournament To Resume(from Home Menu)     
 - Select One (from Tournaments Management Page)   
 -> Select Proceed Tournament to enter the next results of next round       
- 
+     
 __Specific Tournament's Page__   
 _Reach the page_    
 - Search Registered Tournament To Resume(from Home Menu)   
@@ -139,8 +139,10 @@ _Reach the page_
 -> enter next step of the Tournament    
 - Sort Players by Last Name, Ranking, Result    
 -> displays all the players of the tournament by the selected criteria   
+- Display Number of Rounds Played
+-> displays the number of rounds already played and the total number of rounds   
 - Display Rounds and Matches   
--> displays all matches of all previous rounds   
+-> displays the results of all matches of all previous rounds   
 - Display Not Played Matchups    
 -> lists for all players the possible next opponents    
 
