@@ -18,7 +18,8 @@ class TournamentInfosMenu(Menu):
                          exiting_message='Now Leaving Chess Tournament Manager')
         specific_menu_choices = [self.proceed_tournament, self.sort_players_by_last_name,
                                  self.sort_players_by_ranking, self.sort_players_by_result,
-                                 self.display_rounds_and_matches, self.display_not_played_matchups]
+                                 self.display_number_of_rounds_played, self.display_rounds_and_matches,
+                                 self.display_not_played_matchups]
         [self.choices.append(choice) for choice in specific_menu_choices]
 
     def proceed_tournament(self) -> None:
@@ -71,6 +72,16 @@ class TournamentInfosMenu(Menu):
                 self.print_player_infos_simple(player)
                 self.print_player_result(result)
                 self.print_player_ranking_only(player)
+        self.current_page_ctrl(self.data).run()
+
+    def display_number_of_rounds_played(self) -> None:
+        """
+        this method calls the controller to display the number of rounds played
+        on the total number of rounds for the given tournament
+        """
+        nb_rounds_played = self.current_page_ctrl(self.data).display_number_of_rounds_played()
+        self.print_hard_separator()
+        print(nb_rounds_played)
         self.current_page_ctrl(self.data).run()
 
     def display_rounds_and_matches(self) -> None:

@@ -37,7 +37,10 @@ class PlayersCtrl(Controller):
         if isinstance(result, list):
             return result
         elif isinstance(result, Player):
+            self.menu.print_hard_separator()
+            self.menu.print_player_general_infos(result)
             new_ranking = NewPlayerForm().ask_ranking()
+            self.menu.print_hard_separator()
             result.ranking = new_ranking
             return result
         else:

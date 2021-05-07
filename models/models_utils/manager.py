@@ -4,6 +4,7 @@ import re
 
 from typing import Any, Union
 from constants import EMPTY_SEARCH_STRINGS
+from utils import clear_terminal
 
 
 class Manager:
@@ -40,6 +41,7 @@ class Manager:
     def search_one(self, _input) -> Union[dict[Any], Any]:
         results = self.search(_input)
         while len(results) > 1:
+            clear_terminal()
             self.little_print_that_shouldnt_be_here()
             print(f'Returned Matches: {len(results)}')
             self.little_print_that_shouldnt_be_here()
@@ -50,6 +52,7 @@ class Manager:
             results = self.search(input('Please choose from the displayed results: '))
             self.little_print_that_shouldnt_be_here()
         if len(results) == 1:
+            clear_terminal()
             for identifier in results:
                 _obj = results[identifier]
                 return _obj

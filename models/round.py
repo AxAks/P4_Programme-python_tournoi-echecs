@@ -33,9 +33,10 @@ class Round(Model):
                    f'to {self.end_time_pod.replace("T", " at ")}\n'\
                    f'No Matches in this Round yet'
         else:
+            line_break = '\n'
             return f'{self.name}, from {self.start_time_pod.replace("T", " at ")} ' \
                    f'to {self.end_time_pod.replace("T", " at ")}\n'\
-                   f'{[print(f"Match: {match}") for match in self.matches]}'  # cette ligne print une [None, None, None, None]
+                   f'Matches:{line_break}\n{f"{line_break}---{line_break}".join(repr(match) for match in [match for match in self.matches])}'
 
     @property
     def name(self) -> str:

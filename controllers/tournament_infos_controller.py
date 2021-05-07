@@ -85,6 +85,15 @@ class TournamentInfosCtrl(Controller):
         """
         return self.data.not_played_yet
 
+    def display_number_of_rounds_played(self) -> str:
+        """
+        This method returns the number of rounds already played
+        on the total number of rounds for a given tournament
+        """
+        nb_rounds_played = len(self.data.rounds_list)
+        nb_rounds_total = self.data.rounds
+        return f'{nb_rounds_played} rounds played on a total of {nb_rounds_total} rounds'
+
     def display_rounds_and_matches(self) -> list:
         """
         This method lists all the rounds of a given tournament
@@ -229,11 +238,13 @@ class TournamentInfosCtrl(Controller):
         self.menu.header_tournament_player_ranking_update()
         new_rankings = {}
         for identifier in self.data.identifiers_list:
+            clear_terminal()
             player = PlayerManager().from_identifier_to_player_obj(identifier)
             print(player)
             new_ranking = NewPlayerForm().ask_ranking()
             player.ranking = new_ranking
             print(f'New Ranking: {player.ranking}')
+            self.menu.print_hard_separator()
             new_rankings[player] = new_ranking
         return new_rankings
 
