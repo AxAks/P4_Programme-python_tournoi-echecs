@@ -31,7 +31,8 @@ class Menu(View):
             print(f"{self.choices.index(choice)}: {reformatted_choice_str}")
         self.print_hard_separator()
 
-    def home(self) -> None:
+    @staticmethod
+    def home() -> None:
         """
         This method leads to the Home Menu via the Home controller
         """

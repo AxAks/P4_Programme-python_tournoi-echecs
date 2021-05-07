@@ -57,7 +57,8 @@ class Manager:
             print('No Results Found')
             return results
 
-    def little_print_that_shouldnt_be_here(self):
+    @staticmethod
+    def little_print_that_shouldnt_be_here():
         print('========================'
               '========================'
               '========================'

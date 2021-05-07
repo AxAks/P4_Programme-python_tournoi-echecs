@@ -18,7 +18,8 @@ class PlayersCtrl(Controller):
     def __init__(self):
         self.menu = PlayersMenu()
 
-    def add_player(self) -> Player:
+    @staticmethod
+    def add_player() -> Player:
         """
         this method creates a new player entry in the registry.
         """
@@ -42,7 +43,8 @@ class PlayersCtrl(Controller):
         else:
             raise AttributeError
 
-    def search_by_id(self, search: str) -> list:
+    @staticmethod
+    def search_by_id(search: str) -> list:
         """
         This method lists the player instances matching the given input (id)
         """
@@ -54,7 +56,8 @@ class PlayersCtrl(Controller):
         ordered_by_id = sorted(found_players_list, key=lambda x: x.identifier)
         return ordered_by_id
 
-    def sort_by_last_name(self) -> list:
+    @staticmethod
+    def sort_by_last_name() -> list:
         """
         This method returns a list of all players in the registry sorted by last name
         """
@@ -62,7 +65,8 @@ class PlayersCtrl(Controller):
         sorted_by_last_name = sorted(players_list, key=lambda x: x.last_name)
         return sorted_by_last_name
 
-    def sort_by_ranking(self) -> list:
+    @staticmethod
+    def sort_by_ranking() -> list:
         """
         This method returns a list of all players in the registry sorted by ranking
         """

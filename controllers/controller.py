@@ -11,9 +11,9 @@ class Controller:
     General parent class for all controllers.
     """
 
-    def __init__(self, menu=None, data=None):
+    def __init__(self, menu=None):
         self.menu = menu
-        self.data = data
+        self.data = None
 
     def run(self) -> None:
         """
@@ -35,19 +35,22 @@ class Controller:
         action = self.menu.choices[choice]
         action()
 
-    def quit(self) -> None:
+    @staticmethod
+    def quit() -> None:
         """
         This method quits the program
         """
         sys.exit(0)
 
-    def load(self) -> None:
+    @staticmethod
+    def load() -> None:
         """
         This method loads a database file
         """
         data.load()
 
-    def save(self) -> None:
+    @staticmethod
+    def save() -> None:
         """
         This method saves data in a database file
         """

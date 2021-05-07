@@ -18,7 +18,8 @@ class ListTournamentsCtrl(Controller):
     def __init__(self):
         self.menu = ListTournamentsMenu()
 
-    def add_tournament(self) -> Tournament:
+    @staticmethod
+    def add_tournament() -> Tournament:
         """
         this method creates a new tournament entry in the registry.
         """
@@ -28,7 +29,8 @@ class ListTournamentsCtrl(Controller):
         data.save()
         return new_tournament
 
-    def sort_by_start_date(self) -> list:
+    @staticmethod
+    def sort_by_start_date() -> list:
         """
         This method lists the tournament instances sorted by start date
         """
@@ -36,7 +38,8 @@ class ListTournamentsCtrl(Controller):
         sorted_by_start_date = sorted(tournaments_list, key=lambda x: x.start_date)
         return sorted_by_start_date
 
-    def sort_by_name(self) -> list:
+    @staticmethod
+    def sort_by_name() -> list:
         """
         This method lists the tournament instances alphabetically sorted by name
         """
@@ -44,7 +47,8 @@ class ListTournamentsCtrl(Controller):
         sorted_by_name = sorted(tournaments_list, key=lambda x: x.name)
         return sorted_by_name
 
-    def sort_by_location(self) -> list:
+    @staticmethod
+    def sort_by_location() -> list:
         """
         This method lists the tournament instances alphabetically sorted by location
         """
@@ -52,7 +56,8 @@ class ListTournamentsCtrl(Controller):
         sorted_by_location = sorted(tournaments_list, key=lambda x: x.location)
         return sorted_by_location
 
-    def search_by_id(self, search) -> list:
+    @staticmethod
+    def search_by_id(search) -> list:
         """
         This method lists the tournament instances matching the given input
         (identifier: Name, Location, Start date, End date)

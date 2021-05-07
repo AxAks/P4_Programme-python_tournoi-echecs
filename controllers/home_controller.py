@@ -32,13 +32,15 @@ class HomeCtrl(Controller):
         self.menu.print_tournament_with_descr(self.data)
         tournament_infos_controller.TournamentInfosCtrl(self.data).run()
 
-    def manage_players(self) -> None:
+    @staticmethod
+    def manage_players() -> None:
         """
         This method directs to the Players Menu via the player controller
         """
         players_controller.PlayersCtrl().run()
 
-    def manage_tournaments(self) -> None:
+    @staticmethod
+    def manage_tournaments() -> None:
         """
         This method directs to the Tournaments Menu via the Tournament controller
         """

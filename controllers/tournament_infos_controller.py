@@ -60,7 +60,8 @@ class TournamentInfosCtrl(Controller):
                                    reverse=True)
         return sorted_by_ranking
 
-    def sort_players_by_result(self, tournament: Tournament) -> Union[list[Player], Any]:
+    @staticmethod
+    def sort_players_by_result(tournament: Tournament) -> Union[list[Player], Any]:
         """
         This method sorts all the players of a given tournament by result
         from highest to lowest
@@ -197,7 +198,8 @@ class TournamentInfosCtrl(Controller):
             data.save()
             return _round
 
-    def get_round_results(self, _round: Round) -> Round:
+    @staticmethod
+    def get_round_results(_round: Round) -> Round:
         """
         This method gets the matches results of a round and adds those players by player to the round
         """
@@ -235,13 +237,15 @@ class TournamentInfosCtrl(Controller):
             new_rankings[player] = new_ranking
         return new_rankings
 
-    def add_round_start_time(self) -> datetime:
+    @staticmethod
+    def add_round_start_time() -> datetime:
         """
         This method automatically sets the start time of the Round Object
         """
         return datetime.now()
 
-    def add_round_end_time(self) -> datetime:
+    @staticmethod
+    def add_round_end_time() -> datetime:
         """
         This method automatically sets the end time of the Round Object
         """
