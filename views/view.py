@@ -147,6 +147,14 @@ class View:
         print(info)
 
     @staticmethod
+    def print_nb_rounds_tournament(nb_rounds_total: int):
+        print(f'This is a tournament in {nb_rounds_total} rounds')
+
+    @staticmethod
+    def print_nb_rounds_played(nb_rounds_played: int):
+        print(f'Latest round played is round {nb_rounds_played}')
+
+    @staticmethod
     def print_no_results_yet(info: str = 'There are no Results for this Tournament yet'):
         print(info)
 

@@ -79,9 +79,11 @@ class TournamentInfosMenu(Menu):
         this method calls the controller to display the number of rounds played
         on the total number of rounds for the given tournament
         """
-        nb_rounds_played = self.current_page_ctrl(self.data).display_number_of_rounds_played()
+        nb_rounds_played = self.current_page_ctrl(self.data).get_nb_rounds_played()
+        nb_rounds_total = self.current_page_ctrl(self.data).get_total_nb_rounds()
         self.print_hard_separator()
-        print(nb_rounds_played)
+        self.print_nb_rounds_tournament(nb_rounds_total)
+        self.print_nb_rounds_played(nb_rounds_played)
         self.current_page_ctrl(self.data).run()
 
     def display_rounds_and_matches(self) -> None:

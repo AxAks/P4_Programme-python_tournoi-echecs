@@ -85,14 +85,18 @@ class TournamentInfosCtrl(Controller):
         """
         return self.data.not_played_yet
 
-    def display_number_of_rounds_played(self) -> str:
+    def get_nb_rounds_played(self) -> int:
         """
-        This method returns the number of rounds already played
-        on the total number of rounds for a given tournament
+        This method returns the number of rounds
+        already played for a given tournament
         """
-        nb_rounds_played = len(self.data.rounds_list)
-        nb_rounds_total = self.data.rounds
-        return f'{nb_rounds_played} rounds played on a total of {nb_rounds_total} rounds'
+        return len(self.data.rounds_list)
+
+    def get_total_nb_rounds(self) -> int:
+        """
+        this method returns the total number of rounds for a given tournament
+        """
+        return self.data.rounds
 
     def display_rounds_and_matches(self) -> list:
         """
@@ -102,7 +106,7 @@ class TournamentInfosCtrl(Controller):
 
     def tournament_algorithm(self) -> None:
         """
-        This method is the main algorithm for thself.not_asked_properties e progression of a tournament.
+        This method is the main algorithm for the progression of a tournament.
         It checks at which step the tournament is
         and enables to proceed next steps
         """
