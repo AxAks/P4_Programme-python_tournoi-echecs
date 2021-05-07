@@ -105,15 +105,15 @@ _Navigate through the menu with digits to select a menu option_
 n: Menu specific Choices     
 
 __From Home Menu__   
-_Launch a new tournament or search a previously saved Tournament_
--enables to:         
-  1. directly launch a new tournament      
-  2. search an ongoing tournament to land on its managing page. You can resume it from there.
+_Launch a new tournament or search a previously saved Tournament_   
+- enables to:
+1. directly launch a new tournament      
+2. search an ongoing tournament to land on its managing page. You can resume it from there.
 
 _Manage Players or registered Tournaments_      
 - enables to:
-  1. display reports on players 
-  2. display reports on saved tournaments (finished or not),
+1. display reports on players
+2. display reports on saved tournaments (finished or not),      
 
 __Tournament process__    
 - Launch New Tournament (from Home Menu)        
@@ -122,7 +122,7 @@ __Tournament process__
 -> Select Proceed Tournament to enter results of the matches of Round one       
 -> the round is saved and you are redirected to the Tournament's page     
 -> Select Proceed Tournament to enter the next rounds results     
--> The tournament is over when all the rounds have been played or when all Players have played together.
+-> The tournament is over when all the rounds have been played or when all Players have played together.      
 -> When the tournament is over, select Proceed Tournament once more to update players rankings and close the tournament    
  
 _A tournament can be paused at the end of each round and resumed_    
@@ -147,7 +147,7 @@ _Reach the page_
 __Player Management Menu__  
 _Player Creation_
 - Add player   
--> fill the form and validate each field: the player is created;
+-> fill the form and validate each field: the player is created;    
 -> if cancelled the player is not created and you land back to the Player Management page
   
 _Player Ranking Update (anytime)_
@@ -175,16 +175,16 @@ _Tournament Creation_
 -> fill the form and validate each field: the tournament is created    
 -> if cancelled the tournament is not created and you land back to the Tournament Management page   
 
-__Display By Start Date, Name, or Location__   
+_Display By Start Date, Name, or Location_   
 - Display By Start Date, Name or Location    
 -> All Tournament in the registry are returned sorted by the selected criteria   
   
-__Search Tournaments__    
+_Search Tournaments_    
 - Search Tournaments    
 -> enter a date or name or location or part of them     
 -> all matching tournaments are returned    
   
-__Select One Tournament__   
+_Select One Tournament_   
 - Select One    
 -> enter a date or name or location or part of them     
 -> When only one result returns, you are redirect to this Tournament Page     
