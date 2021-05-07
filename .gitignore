@@ -1,5 +1,6 @@
 venv_P4-tournoi-echecs
 venv-test
 .idea
+__pycache__
 *.pyc
 flake-report
