@@ -215,5 +215,5 @@ and setting te limit to 119 characters per line
 
 to read the reports:  
 - browse files to the 'flake-report' directory
-- open the file index.html in a webbrowser
+- open the file index.html in a web-browser
 ***
