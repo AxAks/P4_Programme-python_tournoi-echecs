@@ -196,11 +196,16 @@ _Select One Tournament_
 __flake8_html__    
 _Launch the Analysis_
 (at the project root level)    
-$ flake8 --format=html --htmldir=flake-report . -v      
+$ flake8 --format=html --htmldir=flake-report . -v   
 
-htmldir = name of the directory to be created to store the report (mandatory)  
--v = verbose (optional)   
+format = format of the report (html)
+htmldir = name of the directory to be created to store the report (mandatory)
 . = current directory
+-v = verbose (optional)
+
+(from anywhere in the system)       
+$ flake8 --format=html --htmldir=flake-report --config [path/to/config/file] [path/to/project/root/] -v          
+config = the file is named 'setup.cfg and is located at the root of the project (mandatory if not in the working directory)     
 
 see more options here:  
 https://flake8.pycqa.org/en/latest/user/options.html  
