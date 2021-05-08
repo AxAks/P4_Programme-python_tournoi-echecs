@@ -3,4 +3,3 @@ venv-test
 .idea
 __pycache__
 *.pyc
-flake-report
