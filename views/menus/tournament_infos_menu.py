@@ -84,7 +84,15 @@ class TournamentInfosMenu(Menu):
         self.print_hard_separator()
         print(f'Next Round Matchups for "{self.data.name}" ')
         self.print_hard_separator()
-        [print(matchup) for matchup in next_round_matchups]
+        n = 1
+        for matchup in next_round_matchups:
+            player_obj_1 = matchup[0]
+            player_obj_2 = matchup[1]
+            print(f'Matchup {n}:\n'
+                  f'- Player 1: {player_obj_1.last_name}, {player_obj_1.first_name}, {player_obj_1.identifier_pod}\n'
+                  f'- Player 2: {player_obj_2.last_name}, {player_obj_2.first_name}, {player_obj_2.identifier_pod}')
+            self.print_soft_separator()
+            n += 1
 
         self.current_page_ctrl(self.data).run()
 
