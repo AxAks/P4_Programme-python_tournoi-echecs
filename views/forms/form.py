@@ -34,7 +34,7 @@ class Form(View):
                     players_list.append(attribute[identifier])
                 print(f'Tournament Players List is:')
                 for player in players_list:
-                    print(player)
+                    self.print_player_general_infos(player)
             else:
                 print(f'{property_name.replace("_", " ").title()} is:\n"{attribute}"')
         except AttributeError:
