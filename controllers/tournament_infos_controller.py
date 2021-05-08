@@ -175,17 +175,6 @@ class TournamentInfosCtrl(Controller):
                         sorted_players.remove(player2)
                         break
             return round_couples
-    """
-    def get_next_round_matchups(self) -> list:
-        #
-        # this method returns the matchups for the next rounds
-        #
-        if len(self.data.rounds_list) == 0:
-            matchups_next_round = self.generate_round_matchups(is_first=True)
-        else:
-            matchups_next_round = self.generate_round_matchups()
-    """
-
 
     def enter_new_round(self, round_couples: Union[list[list[Player]], str]) -> Union[Round, None]:
         """
