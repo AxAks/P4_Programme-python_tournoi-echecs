@@ -124,7 +124,7 @@ class NewTournamentForm(Form):
         It also checks that there is enough players in the registry
         The number of players is set to a minimum of 4 and has to be even
         """
-        tournament_players = {}  # pourquoi un dict et pas une liste ??? à revoir
+        tournament_players = {}
 
         available_players = len(PlayerManager().list_registered_players())
         self.print_hard_separator()

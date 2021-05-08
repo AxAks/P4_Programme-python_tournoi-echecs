@@ -28,7 +28,15 @@ class Form(View):
         attribute = method()
         try:
             self.print_hard_separator()
-            print(f'{property_name.replace("_", " ").title()} is :\n"{attribute}"')
+            if method_name == 'ask_identifiers_list':
+                players_list = []
+                for identifier in attribute:
+                    players_list.append(attribute[identifier])
+                print(f'Tournament Players List is:')
+                for player in players_list:
+                    print(player)
+            else:
+                print(f'{property_name.replace("_", " ").title()} is:\n"{attribute}"')
         except AttributeError:
             self.print_error_occurred()
             self.print_to_previous_menu()
