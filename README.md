@@ -138,7 +138,9 @@ _Reach the page_
 - Proceed Tournament    
 -> enter next step of the Tournament    
 - Sort Players by Last Name, Ranking, Result    
--> displays all the players of the tournament by the selected criteria   
+-> displays all the players of the tournament by the selected criteria
+- Display Next Round Matchups
+-> displays the matchups for the next round to be played  
 - Display Number of Rounds Played
 -> displays the number of rounds already played and the total number of rounds   
 - Display Rounds and Matches   
