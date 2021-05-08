@@ -80,7 +80,6 @@ class TournamentInfosMenu(Menu):
         This method calls the controller to display the matchups
         for the round to be played next
         """
-        self.print_hard_separator()
         next_round_matchups = self.current_page_ctrl(self.data).get_next_round_matchups()
         self.print_hard_separator()
         print(f'Next Round Matchups for "{self.data.name}" ')
