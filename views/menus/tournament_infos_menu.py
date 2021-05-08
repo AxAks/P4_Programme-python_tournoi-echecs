@@ -35,7 +35,7 @@ class TournamentInfosMenu(Menu):
         """
         players_list = self.current_page_ctrl(self.data).sort_players_by_last_name()
         self.print_hard_separator()
-        print(f'Players by last name for "{self.data.name}": ')
+        print(f'Players by last name for "{self.data.name}" ')
         self.print_hard_separator()
         for player in players_list:
             self.print_player_general_infos(player)
@@ -47,7 +47,7 @@ class TournamentInfosMenu(Menu):
         sorted by general ranking.
         """
         self.print_hard_separator()
-        print(f'Players by ranking for "{self.data.name}": ')
+        print(f'Players by ranking for "{self.data.name}" ')
         self.print_hard_separator()
         sorted_players = self.current_page_ctrl(self.data).sort_tournament_players_by_ranking()
         for player in sorted_players:
@@ -61,7 +61,7 @@ class TournamentInfosMenu(Menu):
         sorted by results.
         """
         self.print_hard_separator()
-        print(f'Players by result for "{self.data.name}": ')
+        print(f'Players by result for "{self.data.name}" ')
         self.print_hard_separator()
         players_result_list = self.current_page_ctrl(self.data).sort_players_by_result(self.data)
         if players_result_list == {}:
@@ -82,6 +82,9 @@ class TournamentInfosMenu(Menu):
         """
         self.print_hard_separator()
         next_round_matchups = self.current_page_ctrl(self.data).get_next_round_matchups()
+        self.print_hard_separator()
+        print(f'Next Round Matchups for "{self.data.name}" ')
+        self.print_hard_separator()
         [print(matchup) for matchup in next_round_matchups]
 
         self.current_page_ctrl(self.data).run()
@@ -108,7 +111,7 @@ class TournamentInfosMenu(Menu):
         """
         rounds_list = self.current_page_ctrl(self.data).display_rounds_and_matches()
         self.print_hard_separator()
-        print(f'All Rounds and Matches for "{self.data.name}": ')
+        print(f'All Rounds and Matches for "{self.data.name}" ')
         self.print_hard_separator()
         if len(rounds_list) == 0:
             self.print_no_results_yet()
