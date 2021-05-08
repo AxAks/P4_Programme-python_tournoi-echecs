@@ -32,7 +32,7 @@ class Form(View):
                 players_list = []
                 for identifier in attribute:
                     players_list.append(attribute[identifier])
-                print(f'Tournament Players List is:')
+                print('Tournament Players List is:')
                 self.print_soft_separator()
                 for player in players_list:
                     self.print_player_general_infos(player)

@@ -156,7 +156,7 @@ class View:
 
     @staticmethod
     def print_no_rounds_played_yet():
-        print(f'No round have been played yet')
+        print('No round have been played yet')
 
     @staticmethod
     def print_no_results_yet(info: str = 'There are no Results for this Tournament yet'):
