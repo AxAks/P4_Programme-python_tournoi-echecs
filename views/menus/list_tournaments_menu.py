@@ -16,9 +16,10 @@ class ListTournamentsMenu(Menu):
                          root_page=False, previous_page_ctrl=home_controller.HomeCtrl,
                          current_page_ctrl=list_tournaments_controller.ListTournamentsCtrl,
                          exiting_message='Now Leaving Chess Tournament Manager')
-        specific_menu_choices = [self.add_tournament, self.display_by_start_date,
-                                 self.display_by_name, self.display_by_location,
-                                 self.search_tournaments, self.select_one_tournament]
+        specific_menu_choices = [self.add_tournament, self.select_one_tournament,
+                                 self.search_tournaments, self.display_by_start_date,
+                                 self.display_by_name, self.display_by_location]
+
         [self.choices.append(choice) for choice in specific_menu_choices]
 
     def add_tournament(self) -> None:

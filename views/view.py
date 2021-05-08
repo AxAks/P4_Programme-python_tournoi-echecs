@@ -206,7 +206,7 @@ class View:
 
     @staticmethod
     def print_opponent_infos_simple(opponent_obj):
-        print(f'Opponent: {opponent_obj.last_name}, {opponent_obj.first_name}, {opponent_obj.identifier_pod}')
+        print(f'- Opponent: {opponent_obj.last_name}, {opponent_obj.first_name}, {opponent_obj.identifier_pod}')
 
     @staticmethod
     def print_tournament_with_descr(tournament_obj):
@@ -225,7 +225,7 @@ class View:
 
     @staticmethod
     def print_round_infos_simple(round_obj):
-        print(f'{round_obj.name}: from {round_obj.start_time} to {round_obj.end_time}')
+        print(f'-> {round_obj.name}: from {round_obj.start_time} to {round_obj.end_time} <-')
 
     @staticmethod
     def print_matchup(player_obj_1, player_obj_2, matchup_n):

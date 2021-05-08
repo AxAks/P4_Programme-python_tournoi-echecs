@@ -16,11 +16,11 @@ class TournamentInfosMenu(Menu):
                          root_page=False, previous_page_ctrl=list_tournaments_controller.ListTournamentsCtrl,
                          current_page_ctrl=tournament_infos_controller.TournamentInfosCtrl,
                          exiting_message='Now Leaving Chess Tournament Manager')
-        specific_menu_choices = [self.proceed_tournament, self.sort_players_by_last_name,
-                                 self.sort_players_by_ranking, self.sort_players_by_result,
-                                 self.display_next_round_matchups,
+        specific_menu_choices = [self.proceed_tournament, self.display_next_round_matchups,
                                  self.display_number_of_rounds_played, self.display_rounds_and_matches,
-                                 self.display_not_played_matchups]
+                                 self.display_not_played_matchups, self.sort_players_by_result,
+                                 self.sort_players_by_ranking, self.sort_players_by_last_name]
+
         [self.choices.append(choice) for choice in specific_menu_choices]
 
     def proceed_tournament(self) -> None:
@@ -137,10 +137,10 @@ class TournamentInfosMenu(Menu):
         This method calls the controller to display for each player
         the opponents they have not played with in the previous rounds of a given tournament
         """
+        self.header_possible_next_matchups()
         not_played_yet = self.current_page_ctrl(self.data).display_not_played_yet()
         for player in not_played_yet:
             player_obj = PlayerManager().from_identifier_to_player_obj(player)
-            self.header_possible_next_matchups()
             self.print_player_infos_simple(player_obj)
             for opponent in not_played_yet[player]:
                 opponent_obj = PlayerManager().from_identifier_to_player_obj(opponent)
