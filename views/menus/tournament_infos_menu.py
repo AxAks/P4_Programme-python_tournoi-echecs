@@ -18,6 +18,7 @@ class TournamentInfosMenu(Menu):
                          exiting_message='Now Leaving Chess Tournament Manager')
         specific_menu_choices = [self.proceed_tournament, self.sort_players_by_last_name,
                                  self.sort_players_by_ranking, self.sort_players_by_result,
+                                 self.display_next_round_matchups,
                                  self.display_number_of_rounds_played, self.display_rounds_and_matches,
                                  self.display_not_played_matchups]
         [self.choices.append(choice) for choice in specific_menu_choices]
@@ -74,6 +75,17 @@ class TournamentInfosMenu(Menu):
                 self.print_player_ranking_only(player)
         self.current_page_ctrl(self.data).run()
 
+    def display_next_round_matchups(self) -> None:
+        """
+        This method calls the controller to display the matchups
+        for the round to be played next
+        """
+        self.print_hard_separator()
+        next_round_matchups = self.current_page_ctrl(self.data).get_next_round_matchups()
+        [print(matchup) for matchup in next_round_matchups]
+
+        self.current_page_ctrl(self.data).run()
+
     def display_number_of_rounds_played(self) -> None:
         """
         this method calls the controller to display the number of rounds played
@@ -83,7 +95,10 @@ class TournamentInfosMenu(Menu):
         nb_rounds_total = self.current_page_ctrl(self.data).get_total_nb_rounds()
         self.print_hard_separator()
         self.print_nb_rounds_tournament(nb_rounds_total)
-        self.print_nb_rounds_played(nb_rounds_played)
+        if len(self.data.rounds_list) == 0:
+            self.print_no_rounds_played_yet()
+        else:
+            self.print_nb_rounds_played(nb_rounds_played)
         self.current_page_ctrl(self.data).run()
 
     def display_rounds_and_matches(self) -> None:

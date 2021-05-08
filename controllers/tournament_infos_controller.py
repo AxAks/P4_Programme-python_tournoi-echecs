@@ -126,23 +126,20 @@ class TournamentInfosCtrl(Controller):
 
         else:
             while len(self.data.rounds_list) < self.data.rounds:
-                if len(self.data.rounds_list) == 0:
-                    matchups_next_round = self.generate_round_matchups(is_first=True)
-                else:
-                    matchups_next_round = self.generate_round_matchups()
+                matchups_next_round = self.get_next_round_matchups()
                 next_round = self.enter_new_round(matchups_next_round)
                 self.get_round_results(next_round)
                 self.add_players_points_to_tournament_totals(next_round)
                 data.save()
                 TournamentInfosCtrl(self.data).run()
 
-    def generate_round_matchups(self, is_first=False) -> Union[list[Player], list[list], str]:
+    def get_next_round_matchups(self) -> Union[list[Player], list[list], str]:
         """
         This method generates the tournament match-ups between the Players for a new round.
         It takes into account the players general rankings and/or results in the tournament
-        an whether it is the first round or another round
+        and whether it is the first round or another round
         """
-        if is_first:
+        if len(self.data.rounds_list) == 0:
             sorted_players_obj = self.sort_tournament_players_by_ranking()
         else:
             sorted_players_results = self.sort_players_by_result(self.data)
@@ -157,8 +154,8 @@ class TournamentInfosCtrl(Controller):
         """
         if len(sorted_players) % 2 == 0:
             middle_index = len(sorted_players) // 2
-            upper_ranking_players_list = sorted_players[middle_index:]
-            lower_ranking_players_list = sorted_players[:middle_index]
+            upper_ranking_players_list = sorted_players[:middle_index]
+            lower_ranking_players_list = sorted_players[middle_index:]
         else:
             return 'This list does not have an even number of items'
 
@@ -178,6 +175,17 @@ class TournamentInfosCtrl(Controller):
                         sorted_players.remove(player2)
                         break
             return round_couples
+    """
+    def get_next_round_matchups(self) -> list:
+        #
+        # this method returns the matchups for the next rounds
+        #
+        if len(self.data.rounds_list) == 0:
+            matchups_next_round = self.generate_round_matchups(is_first=True)
+        else:
+            matchups_next_round = self.generate_round_matchups()
+    """
+
 
     def enter_new_round(self, round_couples: Union[list[list[Player]], str]) -> Union[Round, None]:
         """
