@@ -78,7 +78,7 @@ class TournamentInfosCtrl(Controller):
                                                key=lambda x: (x[1], x[0].ranking), reverse=True)
             return sorted_by_results_ranking
 
-    def display_not_played_yet(self) -> dict[Player]:  # pour les tests ! est ce que je le laisse ?
+    def display_not_played_yet(self) -> dict[Player]:
         """
         This method lists for each player the opponents they have not played against
          in the previous rounds of a given tournament

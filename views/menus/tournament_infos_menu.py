@@ -132,7 +132,7 @@ class TournamentInfosMenu(Menu):
                     match_n += 1
         self.current_page_ctrl(self.data).run()
 
-    def display_not_played_matchups(self) -> None:   # pour les tests ! est ce que je le laisse ?
+    def display_not_played_matchups(self) -> None:
         """
         This method calls the controller to display for each player
         the opponents they have not played with in the previous rounds of a given tournament
