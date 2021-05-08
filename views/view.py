@@ -228,6 +228,12 @@ class View:
         print(f'{round_obj.name}: from {round_obj.start_time} to {round_obj.end_time}')
 
     @staticmethod
+    def print_matchup(player_obj_1, player_obj_2, matchup_n):
+        print(f'Matchup {matchup_n}:\n'
+              f'- Player 1: {player_obj_1.last_name}, {player_obj_1.first_name}, {player_obj_1.identifier_pod}\n'
+              f'- Player 2: {player_obj_2.last_name}, {player_obj_2.first_name}, {player_obj_2.identifier_pod}')
+
+    @staticmethod
     def print_match_result(match, player1_obj, player2_obj, match_n):
         print(f'Match {match_n}:\n'
               f'- Score: {match.player1_score_pod}, {player1_obj.last_name}, {player1_obj.first_name},'
