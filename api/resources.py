@@ -1,7 +1,8 @@
 # coding=utf-8
-
+from flask import request
 from flask_restful import Resource
 
+from api.normalizer import player_normalizer
 from controllers.players_controller import PlayersCtrl
 from controllers.list_tournaments_controller import ListTournamentsCtrl
 
@@ -15,9 +16,14 @@ class Player(Resource):
         serialized_player_list = [player_obj.serialize() for player_obj in registered_players_obj]
         return {'players': serialized_player_list}
 
-    def post(self, **kwargs):
-        new_player = PlayersCtrl.add_player()
-        return {'new_player': new_player}
+    def post(self):
+        """
+        Adds a new player
+        """
+        request_data = request.values
+        new_player = player_normalizer(request_data)
+        serialized_new_player = new_player.serialize()
+        return {'new_player': serialized_new_player}
 
 
 class Tournament(Resource):
@@ -30,4 +36,6 @@ class Tournament(Resource):
         return {'tournaments': serialized_tournaments_list}
 
     def post(self):
-        pass
+        """
+        adds a new tournament
+        """

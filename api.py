@@ -19,9 +19,9 @@ sm.create_manager(BaseTournament)
 data.load()
 
 
-api.add_resource(ApiPlayer, '/players/')
-api.add_resource(ApiTournament, '/tournaments/')
+api.add_resource(ApiPlayer, '/api/v1/players/')
+api.add_resource(ApiTournament, '/api/v1/tournaments/')
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
