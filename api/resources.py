@@ -2,11 +2,12 @@
 from flask import request
 from flask_restful import Resource
 
-from api.normalizer import player_normalizer
+from api.normalizer import player_normalizer, tournament_normalizer
 from controllers.players_controller import PlayersCtrl
 from controllers.list_tournaments_controller import ListTournamentsCtrl
 from models.models_utils import data
 from models.player import Player as BasePlayer
+from models.tournament import Tournament as BaseTournament
 
 
 class Player(Resource):
@@ -45,3 +46,11 @@ class Tournament(Resource):
         """
         adds a new tournament
         """
+        request_data = request.values
+        new_tournament = tournament_normalizer(request_data)
+        if isinstance(new_tournament, BaseTournament):
+            serialized_new_tournament = new_tournament.serialize()
+            data.save()
+            return {'new_tournament': serialized_new_tournament}
+        else:
+            return {'error': new_tournament}
