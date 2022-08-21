@@ -134,8 +134,11 @@ def tournament_normalizer(request_data):
                     new_tournament_dict[field] = request_data[field]
 
             elif field in ['identifiers_list']:
-                split_list_of_players = request_data[field].split(',')
-                # trick because as string in postman (input must be a list)
+                if isinstance(request_data[field], str):
+                    # trick because as string in postman (input must be a list)
+                    split_list_of_players = request_data[field].split(',')
+                else:
+                    split_list_of_players = request_data[field]
                 if (not isinstance(split_list_of_players, List)) \
                         or (len(split_list_of_players) < 4) \
                         or (len(split_list_of_players) % 2 != 0):
