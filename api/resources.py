@@ -3,7 +3,7 @@ from flask import request
 from flask_restful import Resource
 
 from api.normalizer import player_normalizer, tournament_normalizer
-from controllers.players_controller import PlayersCtrl
+from api.serializer import players_list_serializer, tournaments_list_serializer
 from controllers.list_tournaments_controller import ListTournamentsCtrl
 from models.models_utils import data
 from models.player import Player as BasePlayer
@@ -15,9 +15,17 @@ class Player(Resource):
         """
         lists all registered players as dict for the api
         """
-        registered_players_obj = PlayersCtrl.sort_by_last_name()  #  + sort_by_ranking, via args ?
-        serialized_player_list = [player_obj.serialize() for player_obj in registered_players_obj]
-        return {'players': serialized_player_list}
+        request_data = request.values
+        serialized_players_list_by_last_name = players_list_serializer()
+        if request_data and 'sort_by' in request_data:
+            if request_data['sort_by'] == 'ranking':
+                serialized_players_list_by_ranking = sorted(serialized_players_list_by_last_name,
+                                                            key=lambda x: x['ranking'], reverse=True)
+                return {'players': serialized_players_list_by_ranking}
+            else:
+                return {'sort_by_error': 'wrong input for sort by argument'}
+        else:
+            return {'players': serialized_players_list_by_last_name}
 
     def post(self):
         """
@@ -33,14 +41,38 @@ class Player(Resource):
             return {'error': new_player}
 
 
+    def put(self):
+        """
+        Updates a given player (ex: ranking)
+        """
+        pass
+
+    """
+    def search_one_player # = get (//retrieve)  by ID
+    """
+
+
 class Tournament(Resource):
     def get(self):
         """
         lists all registered tournaments as dict for the api
         """
-        registered_tournaments_obj = ListTournamentsCtrl.sort_by_name()  #  + autres sort_by, via args ?
-        serialized_tournaments_list = [tournament_obj.serialize() for tournament_obj in registered_tournaments_obj]
-        return {'tournaments': serialized_tournaments_list}
+        request_data = request.values
+        serialized_tournaments_list_by_name = tournaments_list_serializer()
+
+        if request_data and 'sort_by' in request_data:
+            if request_data['sort_by'] == 'start_date':
+                serialized_tournaments_list_by_start_date = sorted(serialized_tournaments_list_by_name,
+                                                                   key=lambda x: x['start_date'], reverse=True)
+                return {'players': serialized_tournaments_list_by_start_date}
+            elif request_data['sort_by'] == 'location':
+                serialized_tournaments_list_by_location = sorted(serialized_tournaments_list_by_name,
+                                                                 key=lambda x: x['location'])
+                return {'players': serialized_tournaments_list_by_location}
+            else:
+                return {'sort_by_error': 'wrong input for sort by argument'}
+        else:
+            return {'tournaments': serialized_tournaments_list_by_name}
 
     def post(self):
         """
