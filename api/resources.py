@@ -4,8 +4,8 @@ from flask_restful import Resource
 
 from api.normalizer import player_normalizer, tournament_normalizer
 from api.serializer import players_list_serializer, tournaments_list_serializer
-from controllers.list_tournaments_controller import ListTournamentsCtrl
 from models.models_utils import data
+from models.models_utils.player_manager import PlayerManager
 from models.player import Player as BasePlayer
 from models.tournament import Tournament as BaseTournament
 
@@ -16,16 +16,30 @@ class Player(Resource):
         lists all registered players as dict for the api
         """
         request_data = request.values
-        serialized_players_list_by_last_name = players_list_serializer()
-        if request_data and 'sort_by' in request_data:
-            if request_data['sort_by'] == 'ranking':
-                serialized_players_list_by_ranking = sorted(serialized_players_list_by_last_name,
-                                                            key=lambda x: x['ranking'], reverse=True)
-                return {'players': serialized_players_list_by_ranking}
+        if 'identifier' in request_data:
+            identifier = request_data['identifier']
+            player = PlayerManager().search_one(identifier)
+            if isinstance(player, list):
+                return {'not_unique_error':
+                            {{'results': player},
+                             {'message': 'you need to provide the exact identifier'}}
+                        }
+            elif isinstance(player, BasePlayer):
+                serialized_player = player.serialize()
+                return {'found_player': serialized_player}
             else:
-                return {'sort_by_error': 'wrong input for sort by argument'}
+                return {'error': 'the identifier does not match a registered player'}
         else:
-            return {'players': serialized_players_list_by_last_name}
+            serialized_players_list_by_last_name = players_list_serializer()
+            if request_data and 'sort_by' in request_data:
+                if request_data['sort_by'] == 'ranking':
+                    serialized_players_list_by_ranking = sorted(serialized_players_list_by_last_name,
+                                                                key=lambda x: x['ranking'], reverse=True)
+                    return {'players': serialized_players_list_by_ranking}
+                else:
+                    return {'sort_by_error': 'wrong input for sort by argument'}
+            else:
+                return {'players': serialized_players_list_by_last_name}
 
     def post(self):
         """
@@ -40,16 +54,33 @@ class Player(Resource):
         else:
             return {'error': new_player}
 
-
     def put(self):
         """
         Updates a given player (ex: ranking)
         """
-        pass
-
-    """
-    def search_one_player # = get (//retrieve)  by ID
-    """
+        request_data = request.values
+        if not request_data:
+            return {'input_error': 'you need to provide an identifier and a new ranking'}
+        else:
+            if 'identifier' in request_data:
+                identifier = request_data['identifier']
+                player_to_update = PlayerManager().search_one(identifier)
+                if isinstance(player_to_update, list):
+                    return {'not_unique_error':
+                                {{'results': player_to_update},
+                                 {'message': 'you need to provide the exact identifier'}}
+                            }
+                elif isinstance(player_to_update, Player):
+                    if 'new_ranking' in request_data:
+                        new_ranking = request_data['new_ranking']
+                        player_to_update.ranking = new_ranking
+                        data.save()
+                    else:
+                        return {'field_error': 'only ranking can be updated'}
+                else:
+                    return {'error': 'the identifier does not match a registered player'}
+            else:
+                return {'error': 'you must provide an identifier as parameter'}
 
 
 class Tournament(Resource):
