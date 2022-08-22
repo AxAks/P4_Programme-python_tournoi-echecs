@@ -10,13 +10,6 @@ from models.models_utils.supermanager import super_manager as sm
 from models.player import Player
 from models.tournament import Tournament
 
-"""
-TOURNAMENT_PROPERTIES = ['name', 'location', 'start_date', 'end_date', 'rounds', 'time_control', 'description',
-                         'identifiers_list', 'rounds_list', 'total_results', 'not_played_yet', 'done']
-
-PLAYER_PROPERTIES = ['last_name', 'identifier', 'first_name', 'birthdate', 'gender', 'ranking']
-"""
-
 
 def player_normalizer(request_data):
     not_asked_properties = ['identifier']
