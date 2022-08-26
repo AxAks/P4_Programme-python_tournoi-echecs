@@ -21,9 +21,8 @@ class Player(Resource):
             player = PlayerManager().search_one(identifier)
             if isinstance(player, list):
                 return {'not_unique_error':
-                            {{'results': player},
-                             {'message': 'you need to provide the exact identifier'}}
-                        }
+                        {{'results': player},
+                         {'message': 'you need to provide the exact identifier'}}}
             elif isinstance(player, BasePlayer):
                 serialized_player = player.serialize()
                 return {'found_player': serialized_player}
@@ -64,21 +63,20 @@ class Player(Resource):
         else:
             if 'identifier' in request_data:
                 identifier = request_data['identifier']
-                player_to_update = PlayerManager().search_one(identifier)
-                if isinstance(player_to_update, list):
-                    return {'not_unique_error':
-                                {{'results': player_to_update},
-                                 {'message': 'you need to provide the exact identifier'}}
-                            }
-                elif isinstance(player_to_update, Player):
-                    if 'new_ranking' in request_data:
-                        new_ranking = request_data['new_ranking']
-                        player_to_update.ranking = new_ranking
-                        data.save()
-                    else:
-                        return {'field_error': 'only ranking can be updated'}
+                try:
+                    player_to_update = PlayerManager().from_identifier_to_player_obj(identifier)
+                except AttributeError as e :
+                    return {'error': 'the identifier does not match a registered player,'
+                                     ' you need to provide the exact identifier'}
+                if 'new_ranking' in request_data:
+                    new_ranking = int(request_data['new_ranking'])
+                    player_to_update.ranking = new_ranking
+                    data.save()
+                    serialized_updated_player = player_to_update.serialize()
+                    return {'updated_player': serialized_updated_player}
                 else:
-                    return {'error': 'the identifier does not match a registered player'}
+                    return {'field_error': 'only ranking can be updated'}
+
             else:
                 return {'error': 'you must provide an identifier as parameter'}
 
