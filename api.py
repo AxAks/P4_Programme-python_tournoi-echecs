@@ -1,4 +1,7 @@
+# coding=utf-8
+
 from flask import Flask
+from flask_cors import CORS
 from flask_restful import Api
 
 from models.models_utils import data
@@ -12,6 +15,7 @@ from api.resources import Tournament as ApiTournament
 
 
 app = Flask(__name__)
+CORS(app)
 api = Api(app)
 
 sm.create_manager(BasePlayer)
