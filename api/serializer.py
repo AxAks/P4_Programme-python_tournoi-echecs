@@ -1,3 +1,4 @@
+# coding=utf-8
 from controllers.list_tournaments_controller import ListTournamentsCtrl
 from controllers.players_controller import PlayersCtrl
 
