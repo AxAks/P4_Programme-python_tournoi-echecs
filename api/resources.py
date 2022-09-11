@@ -12,10 +12,10 @@ from models.tournament import Tournament as BaseTournament
 
 class Data(Resource):
     def get(self):
-        return {'status': data.save()}
+        return {'status': data.load()}
 
     def post(self):
-        return {'status': data.load()}
+        return {'status': data.save()}
 
 
 class Player(Resource):
