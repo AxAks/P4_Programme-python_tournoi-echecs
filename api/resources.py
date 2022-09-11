@@ -10,6 +10,14 @@ from models.player import Player as BasePlayer
 from models.tournament import Tournament as BaseTournament
 
 
+class Data(Resource):
+    def get(self):
+        return {'status': data.save()}
+
+    def post(self):
+        return {'status': data.load()}
+
+
 class Player(Resource):
     def get(self):
         """

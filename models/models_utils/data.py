@@ -1,4 +1,6 @@
 # coding=utf-8
+from typing import Dict
+
 from tinydb import TinyDB
 
 from models.models_utils.supermanager import super_manager as sm
@@ -9,7 +11,7 @@ from models.tournament import Tournament
 db = TinyDB('db.json', ensure_ascii=False)
 
 
-def save() -> None:
+def save() -> str:
     """
     This function saves the state of the program state using tinyDB.
     It serializes the instances of Player et Tournament
@@ -27,9 +29,10 @@ def save() -> None:
     players_table.insert_multiple(serialized_player_instances)
     tournaments_table.insert_multiple(serialized_tournament_instances)
     print('Program state saved')
+    return 'Program state saved'
 
 
-def load() -> None:
+def load() -> str:
     """
     This method loads dicts for players and tournaments previously saved state of the program
     through a json file database using tinyDB.
@@ -42,3 +45,4 @@ def load() -> None:
     serialized_tournaments = tournaments_table.all()
     [sm.managers[Tournament].create(**serialized_tournament) for serialized_tournament in serialized_tournaments]
     print('Program state loaded from file')
+    return 'Program state loaded from file'
