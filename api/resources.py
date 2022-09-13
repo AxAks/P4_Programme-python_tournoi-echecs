@@ -101,11 +101,11 @@ class Tournament(Resource):
             if request_data['sort_by'] == 'start_date':
                 serialized_tournaments_list_by_start_date = sorted(serialized_tournaments_list_by_name,
                                                                    key=lambda x: x['start_date'], reverse=True)
-                return {'players': serialized_tournaments_list_by_start_date}
+                return {'tournaments': serialized_tournaments_list_by_start_date}
             elif request_data['sort_by'] == 'location':
                 serialized_tournaments_list_by_location = sorted(serialized_tournaments_list_by_name,
                                                                  key=lambda x: x['location'])
-                return {'players': serialized_tournaments_list_by_location}
+                return {'tournaments': serialized_tournaments_list_by_location}
             else:
                 return {'sort_by_error': 'wrong input for sort by argument'}
         else:
