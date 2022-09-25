@@ -1,4 +1,6 @@
 # coding=utf-8
+import json
+
 from flask import request
 from flask_restful import Resource
 
@@ -52,7 +54,7 @@ class Player(Resource):
         """
         Adds a new player
         """
-        request_data = request.values
+        request_data = json.loads(request.data)
         new_player = player_normalizer(request_data)
         if isinstance(new_player, BasePlayer):
             serialized_new_player = new_player.serialize()
